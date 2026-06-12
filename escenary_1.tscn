@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b658ag64yscoo"]
+
+[ext_resource type="Script" uid="uid://dkjnhkgt6exl7" path="res://escenary_1.gd" id="1_led7y"]
+[ext_resource type="PackedScene" uid="uid://fvqsyu1mfxi7" path="res://enemy.tscn" id="2_l7hbl"]
+
+[node name="escenary1" type="Node2D"]
+script = ExtResource("1_led7y")
+
+[node name="Enemy" parent="." instance=ExtResource("2_l7hbl")]
+enemy = "Goomba"
+
+[node name="Enemy2" parent="." instance=ExtResource("2_l7hbl")]
+position = Vector2(640, 0)
+enemy = "Boo"

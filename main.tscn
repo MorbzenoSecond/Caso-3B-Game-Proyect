@@ -1,0 +1,104 @@
+[gd_scene load_steps=9 format=3 uid="uid://bh38ky3nosg1n"]
+
+[ext_resource type="Script" uid="uid://ngsy3j5wnxdx" path="res://main.gd" id="1_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://b658ag64yscoo" path="res://escenary_1.tscn" id="1_h2yge"]
+[ext_resource type="Script" uid="uid://drh74b55vys5o" path="res://character_body_2d.gd" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://iahwovsn3vuv" path="res://icon.svg" id="2_0xm2m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(128, 128)
+
+[sub_resource type="Animation" id="Animation_lquwl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NodoDePersonaje:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NodoDeMundo:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1bvp3"]
+resource_name = "new_animation"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NodoDePersonaje:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NodoDeMundo:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7mycd"]
+_data = {
+&"RESET": SubResource("Animation_lquwl"),
+&"new_animation": SubResource("Animation_1bvp3")
+}
+
+[node name="Main" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_1bvp3")
+
+[node name="NodoDePelea" type="Node2D" parent="."]
+process_mode = 2
+
+[node name="NodoDeMundo" type="Node2D" parent="."]
+process_mode = 1
+
+[node name="escenary1" parent="NodoDeMundo" instance=ExtResource("1_h2yge")]
+
+[node name="NodoDePersonaje" type="Area2D" parent="."]
+process_mode = 1
+position = Vector2(696, 336)
+script = ExtResource("1_ig7tw")
+
+[node name="Icon" type="Sprite2D" parent="NodoDePersonaje"]
+texture = ExtResource("2_0xm2m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NodoDePersonaje"]
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7mycd")
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
