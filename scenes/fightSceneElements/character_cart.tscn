@@ -1,0 +1,93 @@
+[gd_scene load_steps=13 format=3 uid="uid://52mmwlkmw6q"]
+
+[ext_resource type="Texture2D" uid="uid://clgb5n5808x2m" path="res://assets/sprites/carta.png" id="1_phu0y"]
+[ext_resource type="Texture2D" uid="uid://dky76ahnggjoi" path="res://assets/sprites/deviljHead.png" id="2_icv7u"]
+[ext_resource type="Texture2D" uid="uid://5i1c54gp4nfy" path="res://assets/sprites/Goomba_exportable.png" id="2_x1uut"]
+[ext_resource type="Texture2D" uid="uid://cwxru8cmum51r" path="res://assets/sprites/godot lol.png" id="3_icv7u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4l3w"]
+atlas = ExtResource("1_phu0y")
+region = Rect2(110, 0, 22, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dt3f"]
+atlas = ExtResource("1_phu0y")
+region = Rect2(44, 0, 22, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_waq4j"]
+atlas = ExtResource("1_phu0y")
+region = Rect2(22, 0, 22, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v4l3w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4l3w")
+}],
+"loop": true,
+"name": &"Deviljho",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dt3f")
+}],
+"loop": false,
+"name": &"Goomba",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_waq4j")
+}],
+"loop": false,
+"name": &"player",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktahu"]
+atlas = ExtResource("2_icv7u")
+region = Rect2(0, 0, 22, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whg5k"]
+atlas = ExtResource("2_x1uut")
+region = Rect2(1, 81, 18, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yln6e"]
+atlas = ExtResource("3_icv7u")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ktahu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ktahu")
+}],
+"loop": true,
+"name": &"Deviljho",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whg5k")
+}],
+"loop": true,
+"name": &"Goomba",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yln6e")
+}],
+"loop": true,
+"name": &"player",
+"speed": 5.0
+}]
+
+[node name="characterCart" type="AnimatedSprite2D"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_v4l3w")
+animation = &"Deviljho"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ktahu")
+animation = &"Deviljho"

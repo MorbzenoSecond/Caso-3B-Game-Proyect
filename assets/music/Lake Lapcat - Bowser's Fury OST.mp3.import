@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b2j262be6h8qt"
+path="res://.godot/imported/Lake Lapcat - Bowser's Fury OST.mp3-06ede88766eb69256969dbcb61c2e76b.mp3str"
+
+[deps]
+
+source_file="res://assets/music/Lake Lapcat - Bowser's Fury OST.mp3"
+dest_files=["res://.godot/imported/Lake Lapcat - Bowser's Fury OST.mp3-06ede88766eb69256969dbcb61c2e76b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

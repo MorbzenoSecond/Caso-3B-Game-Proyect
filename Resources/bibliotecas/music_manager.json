@@ -1,0 +1,11 @@
+{ 
+	"boss_theme_deviljho":{
+		"Song_path" : "res://assets/music/Monster Hunter World - Deviljho Theme.wav"
+	},
+	"map_theme_fight_zone1":{
+		"Song_path" : "res://assets/music/Feral Monster Battle Theme - Monster Hunter Stories 3 [OST].wav"
+	},
+	"map_theme_zone1":{
+		"Song_path" : "res://assets/music/Lake Lapcat - Bowser's Fury OST.mp3"
+	}
+}
