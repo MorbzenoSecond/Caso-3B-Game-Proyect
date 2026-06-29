@@ -5,7 +5,10 @@
 	"map_theme_fight_zone1":{
 		"Song_path" : "res://assets/music/Feral Monster Battle Theme - Monster Hunter Stories 3 [OST].wav"
 	},
-	"map_theme_zone1":{
+	"map_theme_escenary1":{
 		"Song_path" : "res://assets/music/Lake Lapcat - Bowser's Fury OST.mp3"
+	},
+	"map_theme_zone1":{
+		"Song_path" : "res://assets/music/012. Home (UNDERTALE Soundtrack) - Toby Fox.wav"
 	}
 }

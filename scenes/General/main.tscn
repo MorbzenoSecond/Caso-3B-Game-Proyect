@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bh38ky3nosg1n"]
+[gd_scene load_steps=9 format=3 uid="uid://bh38ky3nosg1n"]
 
 [ext_resource type="Script" uid="uid://ngsy3j5wnxdx" path="res://scenes/General/main.gd" id="1_sky5n"]
-[ext_resource type="PackedScene" uid="uid://b658ag64yscoo" path="res://scenes/maps/escenary_1.tscn" id="2_2qvkg"]
+[ext_resource type="PackedScene" uid="uid://b658ag64yscoo" path="res://scenes/maps/Scenaries/escenary1.tscn" id="2_2qvkg"]
+[ext_resource type="PackedScene" uid="uid://bysj0u1af7cya" path="res://scenes/maps/Scenaries/zone1.tscn" id="3_2qvkg"]
 [ext_resource type="PackedScene" uid="uid://bvs4i5thex2gf" path="res://scenes/characters/inMap/main_character_world.tscn" id="3_jt1gu"]
 [ext_resource type="AudioStream" uid="uid://cf4hacgijsfn5" path="res://assets/music/Feral Monster Battle Theme - Monster Hunter Stories 3 [OST].wav" id="4_sky5n"]
 
@@ -10,7 +11,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("NodoDeMundo:modulate")
+tracks/0/path = NodePath("WorldNode:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -38,7 +39,7 @@ length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("NodoDeMundo:modulate")
+tracks/0/path = NodePath("WorldNode:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -66,21 +67,19 @@ _data = {
 &"new_animation": SubResource("Animation_1bvp3")
 }
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" groups=["MAIN"]]
 process_mode = 3
 script = ExtResource("1_sky5n")
 
 [node name="NodoDePelea" type="Node2D" parent="."]
 process_mode = 2
 
-[node name="NodoDeMundo" type="Node2D" parent="."]
+[node name="WorldNode" type="Node2D" parent="." groups=["WorldNode"]]
 process_mode = 1
 
-[node name="escenary1" parent="NodoDeMundo" instance=ExtResource("2_2qvkg")]
-position = Vector2(-64, 16)
-scenary_fight_background = "lol"
-scenary_music = "map_theme_zone1"
-scenary_fight_music = "map_theme_fight_zone1"
+[node name="escenary1" parent="WorldNode" instance=ExtResource("2_2qvkg")]
+
+[node name="zone1" parent="WorldNode" instance=ExtResource("3_2qvkg")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -91,16 +90,24 @@ libraries = {
 wait_time = 0.6
 one_shot = true
 
-[node name="MainCharacterWorld" parent="." instance=ExtResource("3_jt1gu")]
+[node name="MainCharacterWorld" parent="." groups=["PLAYER"] instance=ExtResource("3_jt1gu")]
 process_mode = 1
 position = Vector2(592, 328)
 scale = Vector2(5, 5)
 
-[node name="Camera2D" type="Camera2D" parent="MainCharacterWorld"]
+[node name="Camera2D" type="Camera2D" parent="MainCharacterWorld" groups=["CAMERA"]]
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 
 [node name="MusicAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_sky5n")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer" groups=["ZONASLABEL"]]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 60
+text = "ZONA: "
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

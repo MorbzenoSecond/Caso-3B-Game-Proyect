@@ -8,9 +8,10 @@ var characters := {
 	"enemies": {},
 }
 
-
 func _ready() -> void:
-	$NodoDeMundo.get_child(0).set_camera_limits(camera)
+	GameDataManager.cargar_y_conectar($WorldNode.get_child(0), $WorldNode.get_child(0).name, $WorldNode.get_child(0).next_rooms)
+
+	$WorldNode.get_child(0).set_camera_limits()
 
 func start_fight(enemy_data, scenary_fight_background, scenary_fight_music):
 	music_selector(scenary_fight_music)
@@ -22,22 +23,17 @@ func instanciate_fight(enemy_data : Dictionary, scenary_fight_background):
 	var scene = FIGHT_SCENE.instantiate()
 	var enemigos 
 	
-	characters["players"]["morb"] = { "speed": 40 }
+	characters["players"]["morb"] = { "speed": 35 }
 	
 	for enemy in enemy_data.keys():
 		enemigos = enemy
-		characters["enemies"][enemy] = { "speed": enemy_data[enemy]["speed"] }
-		scene.get_node("AnimatedSprite2D").play(enemy)
-
-	
+		characters["enemies"][enemy] = { "speed": enemy_data[enemy]["speed"],  "level": enemy_data[enemy]["level"],  "life": enemy_data[enemy]["life"]  }
 	scene.charactersInBattleArray.merge(characters)
-
 
 	$NodoDePelea.add_child(scene)
 	$NodoDePelea.global_position = $MainCharacterWorld.global_position
 	scene.chooseBackgroundScenary(scenary_fight_background)
 	if str(enemigos) == "Deviljho":
-		scene.get_node("AnimatedSprite2D").offset = Vector2(80,-20)
 		music_selector("boss_theme_deviljho")
 	camera.reparent($NodoDePelea)
 	camera.position = Vector2.ZERO
@@ -45,7 +41,7 @@ func instanciate_fight(enemy_data : Dictionary, scenary_fight_background):
 func finish_fight():
 	characters["players"].clear()
 	characters["enemies"].clear()
-	music_selector($NodoDeMundo.get_child(0).scenary_music)
+	music_selector($WorldNode.get_child(0).scenary_music)
 	$NodoDePelea.global_position = $MainCharacterWorld.global_position
 	camera.reparent($MainCharacterWorld)
 	$AnimationPlayer.play_backwards("new_animation")
@@ -57,6 +53,7 @@ func _on_timer_timeout() -> void:
 
 #region Music Manager Region
 @onready var audio : AudioStreamPlayer = self.get_node_or_null("MusicAudio") as AudioStreamPlayer
+var current_music: String = ""
 
 func music_selector(_new_music : String):
 	if !audio:
@@ -72,6 +69,10 @@ func music_selector(_new_music : String):
 		print_rich("[color=red][b]Error en nodo:[/b][/color] [color=yellow]" + self.name + "[/color], musica no encontrada")
 		return
 	
+	print(str(current_music) + "       " + _new_music)
+	if current_music == _new_music:
+		return
 	audio.stream = load(data["Song_path"])
+	current_music =_new_music
 	audio.play()
 #endregion

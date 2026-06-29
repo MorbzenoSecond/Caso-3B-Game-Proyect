@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://52mmwlkmw6q"]
+[gd_scene load_steps=16 format=3 uid="uid://52mmwlkmw6q"]
 
 [ext_resource type="Texture2D" uid="uid://clgb5n5808x2m" path="res://assets/sprites/carta.png" id="1_phu0y"]
 [ext_resource type="Texture2D" uid="uid://dky76ahnggjoi" path="res://assets/sprites/deviljHead.png" id="2_icv7u"]
+[ext_resource type="Script" uid="uid://dxo4og1vtp227" path="res://scenes/fightSceneElements/character_cart.gd" id="2_ktahu"]
 [ext_resource type="Texture2D" uid="uid://5i1c54gp4nfy" path="res://assets/sprites/Goomba_exportable.png" id="2_x1uut"]
-[ext_resource type="Texture2D" uid="uid://cwxru8cmum51r" path="res://assets/sprites/godot lol.png" id="3_icv7u"]
+[ext_resource type="Texture2D" uid="uid://csvpiywu82e27" path="res://assets/sprites/greek face.png" id="5_ktahu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v4l3w"]
 atlas = ExtResource("1_phu0y")
@@ -44,6 +45,74 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Shader" id="Shader_icv7u"]
+code = "shader_type canvas_item;
+
+// License: CC0
+// Author: Ultipuk, https://ultipuk.xyz
+// Link: https://godotshaders.com/shader/desaturated-and-darkened-texture-progress
+
+#define USE_TERMINATOR
+ //#define USE_UV_BASED_TERMINATOR_SIZE
+ //#define USE_SAMPLER_TEXTURE
+
+/** Use this from the editor for interpolation. */
+uniform float progress: hint_range(-1.0, 1.0) = 0.5;
+uniform float progress2: hint_range(-1.0, 1.0) = 0.5;
+#ifdef USE_SAMPLER_TEXTURE
+/** Just a texture. */
+uniform sampler2D albedo_texture : source_color;
+#endif
+
+#ifdef USE_TERMINATOR
+group_uniforms terminator;
+/** Terminator color. */
+uniform vec4 terminator_color: source_color = vec4(1.0);
+	#ifdef USE_UV_BASED_TERMINATOR_SIZE
+	/** Terminator size in UV coords. */
+	uniform float terminator_size: hint_range(0.0, 1.0) = 0.012;
+	#else
+	/** Terminator size in pixels. */
+	uniform float terminator_size_px: hint_range(0.0, 64.0, 1.0) = 4.0;
+	#endif
+#endif
+
+void fragment() {
+	#ifdef USE_SAMPLER_TEXTURE
+	vec4 color = texture(albedo_texture, UV);
+	#else
+	vec4 color = COLOR;
+	#endif
+
+	float cutoff = SCREEN_UV.x;
+	float cutoff2 = -SCREEN_UV.x;
+
+	#ifdef USE_TERMINATOR
+
+	float terminator_size_uv;
+
+
+
+
+	#endif
+	if (progress < cutoff) {
+		color.a = 0.0; // Hide outside the progress limit
+	}
+	// Right-to-left progressive cutoff
+	else if (progress2 < cutoff2) {
+		color.a = 0.0; // Hide outside the second progress limit
+	}
+
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r004s"]
+shader = SubResource("Shader_icv7u")
+shader_parameter/progress = 1.0
+shader_parameter/progress2 = 1.0
+shader_parameter/terminator_color = Color(1, 1, 1, 1)
+shader_parameter/terminator_size_px = 4.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ktahu"]
 atlas = ExtResource("2_icv7u")
 region = Rect2(0, 0, 22, 34)
@@ -52,9 +121,9 @@ region = Rect2(0, 0, 22, 34)
 atlas = ExtResource("2_x1uut")
 region = Rect2(1, 81, 18, 20)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yln6e"]
-atlas = ExtResource("3_icv7u")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2oqs"]
+atlas = ExtResource("5_ktahu")
+region = Rect2(0, 0, 29, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ktahu"]
 animations = [{
@@ -76,7 +145,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yln6e")
+"texture": SubResource("AtlasTexture_f2oqs")
 }],
 "loop": true,
 "name": &"player",
@@ -86,8 +155,10 @@ animations = [{
 [node name="characterCart" type="AnimatedSprite2D"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_v4l3w")
-animation = &"Deviljho"
+animation = &"player"
+script = ExtResource("2_ktahu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_r004s")
 sprite_frames = SubResource("SpriteFrames_ktahu")
-animation = &"Deviljho"
+animation = &"player"

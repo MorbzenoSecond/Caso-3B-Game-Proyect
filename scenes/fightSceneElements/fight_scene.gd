@@ -5,19 +5,18 @@ var charactersInBattleArray : Dictionary = {}
 var turnDictionary : = {}
 
 
-@onready var sprite = $AnimatedSprite2D
 func _ready() -> void:
+	$Icon.play("default")
+	set_keys()
 	enterExitAnimation()
 	$AnimationPlayer.play("ingrese")
-	$AnimatedSprite2D.play()
 	turnArray.clear()
 	turns()         
 
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func finish_fight():
 	$AnimationPlayer.play_backwards("ingrese")
 	get_parent().get_parent().finish_fight()
 	enterExitAnimation()
-	$Area2D/CollisionShape2D.disabled = true
 	$Timer.start()      
 
 var current_player_dist = 0
@@ -27,7 +26,7 @@ var enemy_data
 var player_name
 var enemy_name
 
-func nextTurns():
+func set_keys():
 	for key in charactersInBattleArray.keys():
 		if key == "players":
 			for player in charactersInBattleArray[key]:
@@ -35,8 +34,13 @@ func nextTurns():
 				player_data = charactersInBattleArray[key][player]
 		if key == "enemies":
 			for enemy in charactersInBattleArray[key]:
+				$enemyInFight.set_enemy_data(charactersInBattleArray[key], enemy)
 				enemy_name = enemy
 				enemy_data = charactersInBattleArray[key][enemy]
+	
+	nextTurns()
+
+func nextTurns():
 	var turn_threshold = 100
 
 	print("Fight | original enemy speed: " + str(current_enemy_dist) + ", original player speed: " + str(current_player_dist))
@@ -83,9 +87,15 @@ func turn():
 	var i = 0
 	for node in $Node2D.get_children():
 		if node is AnimatedSprite2D:
-			if turnArray.get(i) == "player_turn": 
+			if i < turnArray.size() and turnArray[i] == "player_turn": 
 				node.animation = "player"
 				node.get_node("AnimatedSprite2D").animation = "player"
+				
+				if node.material:
+					var unique_material = node.get_node("AnimatedSprite2D").material.duplicate() as ShaderMaterial
+					unique_material.set_shader_parameter("progress", 0.845)
+					unique_material.set_shader_parameter("progress2", 0.845)
+					node.material = unique_material
 			else:
 				node.animation = enemy_name
 				node.get_node("AnimatedSprite2D").animation = enemy_name
@@ -106,25 +116,15 @@ func enterExitAnimation():
 
 func enemy_turn():
 	var tween := create_tween()
-	tween.tween_property($AnimatedSprite2D, "modulate", Color("000000"), 1.5)\
+	tween.tween_property($enemyInFight, "modulate", Color("000000"), 1.5)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_OUT)
 
-	tween.tween_property($AnimatedSprite2D, "modulate", Color("ffffff"), 1.5)\
+	tween.tween_property($enemyInFight, "modulate", Color("ffffff"), 1.5)\
 		.set_trans(Tween.TRANS_CUBIC)\
 		.set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(turns)
 
 
 func player_turn():
-	var tween := create_tween()
-	tween.tween_property($Icon, "modulate", Color("000000"), 1.5)\
-		.set_trans(Tween.TRANS_SINE)\
-		.set_ease(Tween.EASE_OUT)
-
-	tween.tween_property($Icon, "modulate", Color("ffffff"), 1.5)\
-		.set_trans(Tween.TRANS_CUBIC)\
-		.set_ease(Tween.EASE_IN_OUT)
-	tween.tween_callback(turns)
-
-	
+	$Icon/playerInterface._activate_turn()

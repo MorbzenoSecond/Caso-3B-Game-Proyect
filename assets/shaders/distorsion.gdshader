@@ -20,7 +20,7 @@ void fragment() {
     vec2 direction = texture(noise_tex_normal, pixel_uv).xy;
     direction = (direction - 0.5) * 2.0;
     direction *= strength * progress;
-    
+
     // Usamos SCREEN_UV para mapear la posición exacta de la pantalla
     vec2 distorted_uv = SCREEN_UV - direction;
 

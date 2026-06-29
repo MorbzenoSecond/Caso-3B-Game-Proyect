@@ -1,12 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://cn6cyqbunqh41"]
+[gd_scene load_steps=18 format=3 uid="uid://cn6cyqbunqh41"]
 
 [ext_resource type="Script" uid="uid://dhau6buv704jc" path="res://scenes/fightSceneElements/fight_scene.gd" id="1_llpdw"]
-[ext_resource type="Texture2D" uid="uid://iahwovsn3vuv" path="res://assets/sprites/icon.svg" id="2_uva1d"]
-[ext_resource type="Texture2D" uid="uid://bkkw6slkpmt30" path="res://assets/sprites/boo.png" id="3_hfdjw"]
-[ext_resource type="Texture2D" uid="uid://5i1c54gp4nfy" path="res://assets/sprites/Goomba_exportable.png" id="4_5b1w7"]
-[ext_resource type="Texture2D" uid="uid://bsyg7brcp0d4j" path="res://assets/sprites/deviljho.png" id="4_srhpj"]
+[ext_resource type="Texture2D" uid="uid://cm3tswj0oxc1q" path="res://assets/sprites/spritesheet.png" id="2_5b1w7"]
+[ext_resource type="PackedScene" uid="uid://cg8d24tthjgo7" path="res://scenes/fightSceneElements/player_interface.tscn" id="3_8aimp"]
 [ext_resource type="PackedScene" uid="uid://52mmwlkmw6q" path="res://scenes/fightSceneElements/character_cart.tscn" id="6_srhpj"]
 [ext_resource type="Shader" uid="uid://cxeef6cbmbbdu" path="res://assets/shaders/distorsion.gdshader" id="7_5b1w7"]
+[ext_resource type="PackedScene" uid="uid://b7gqbwv4oolhh" path="res://scenes/enemies/enemy_in_fight.tscn" id="7_8aimp"]
 [ext_resource type="Texture2D" uid="uid://cwiaaje0rltyp" path="res://assets/shaders/Captura de pantalla 2026-06-18 143344.png" id="8_srhpj"]
 [ext_resource type="Texture2D" uid="uid://bcpwv0rgpm584" path="res://assets/shaders/Captura de pantalla 2026-06-18 143335.png" id="9_mehbm"]
 
@@ -51,86 +50,74 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AnimatedSprite2D:position")
+tracks/3/path = NodePath("Node2D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0.001),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(280, -516)]
+"values": [Vector2(-576, -324)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Node2D:position")
+tracks/4/path = NodePath("ProgressBar:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0.001),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-576, -324)]
+"values": [Vector2(-176, -244)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Area2D:position")
+tracks/5/path = NodePath("level:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0.001),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-576, -324)]
+"values": [Vector2(184, -292)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("ProgressBar:position")
+tracks/6/path = NodePath("name:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0.001),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-176, -244)]
+"values": [Vector2(-88, -292)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("level:position")
+tracks/7/path = NodePath("BackBufferCopy:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0.001),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(184, -292)]
+"values": [Vector2(0, 0)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("name:position")
+tracks/8/path = NodePath("enemyInFight:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0.001),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-88, -292)]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("BackBufferCopy:position")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0.001),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(288, -512)]
 }
 
 [sub_resource type="Animation" id="Animation_1v880"]
@@ -199,38 +186,38 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AnimatedSprite2D:position")
+tracks/5/path = NodePath("Node2D:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0.7, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(280, -516), Vector2(280, 101)]
+"values": [Vector2(-576, -324), Vector2(-576, 176)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Node2D:position")
+tracks/6/path = NodePath("ColorRect3:color")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0.7, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-576, -324), Vector2(-576, 176)]
+"values": [Color(1, 1, 1, 0.105882), Color(1, 1, 1, 1)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("ColorRect3:color")
+tracks/7/path = NodePath("enemyInFight:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0.7, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.105882), Color(1, 1, 1, 1)]
+"values": [Vector2(288, -512), Vector2(288, 80)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tmx0f"]
@@ -239,103 +226,41 @@ _data = {
 &"ingrese": SubResource("Animation_1v880")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tmx0f"]
-atlas = ExtResource("3_hfdjw")
-region = Rect2(0, 0, 27, 24)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8aimp"]
+atlas = ExtResource("2_5b1w7")
+region = Rect2(0, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_oupg2"]
-atlas = ExtResource("3_hfdjw")
-region = Rect2(27, 0, 27, 24)
+[sub_resource type="AtlasTexture" id="AtlasTexture_srhpj"]
+atlas = ExtResource("2_5b1w7")
+region = Rect2(48, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_asair"]
-atlas = ExtResource("3_hfdjw")
-region = Rect2(54, 0, 27, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s7jgs"]
-atlas = ExtResource("3_hfdjw")
-region = Rect2(81, 0, 27, 24)
+[sub_resource type="AtlasTexture" id="AtlasTexture_mehbm"]
+atlas = ExtResource("2_5b1w7")
+region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_decov"]
-atlas = ExtResource("4_srhpj")
-region = Rect2(0, 0, 285, 135)
+atlas = ExtResource("2_5b1w7")
+region = Rect2(144, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iwotu"]
-atlas = ExtResource("4_5b1w7")
-region = Rect2(1, 61, 18, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3ewl6"]
-atlas = ExtResource("4_5b1w7")
-region = Rect2(19, 61, 18, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_acpyq"]
-atlas = ExtResource("4_5b1w7")
-region = Rect2(37, 61, 18, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_abfpn"]
-atlas = ExtResource("4_5b1w7")
-region = Rect2(55, 61, 18, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rctke"]
-atlas = ExtResource("4_5b1w7")
-region = Rect2(73, 61, 18, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ogwn6"]
-atlas = ExtResource("4_5b1w7")
-region = Rect2(91, 61, 18, 20)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_s7jgs"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_1dt3f"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tmx0f")
+"texture": SubResource("AtlasTexture_8aimp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_oupg2")
+"texture": SubResource("AtlasTexture_srhpj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_asair")
+"texture": SubResource("AtlasTexture_mehbm")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s7jgs")
-}],
-"loop": true,
-"name": &"Boo",
-"speed": 5.0
-}, {
-"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_decov")
 }],
-"loop": false,
-"name": &"Deviljho",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iwotu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3ewl6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_acpyq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_abfpn")
-}, {
-"duration": 0.7,
-"texture": SubResource("AtlasTexture_rctke")
-}, {
-"duration": 0.7,
-"texture": SubResource("AtlasTexture_ogwn6")
-}],
 "loop": true,
-"name": &"Goomba",
+"name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tmx0f"]
-size = Vector2(258, 114)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8aimp"]
 shader = ExtResource("7_5b1w7")
@@ -350,29 +275,30 @@ shader_parameter/alpha_threshold = 0.1
 script = ExtResource("1_llpdw")
 
 [node name="ColorRect3" type="ColorRect" parent="."]
+visible = false
 offset_left = -576.0
 offset_top = -328.0
 offset_right = 576.0
 offset_bottom = 320.0
 mouse_filter = 2
-color = Color(1, 1, 1, 0.105882)
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -832.0
+offset_left = -576.0
 offset_top = -348.0
-offset_right = -640.0
+offset_right = -384.0
 offset_bottom = 348.0
-color = Color(0, 0, 0, 0.415686)
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect2" type="ColorRect" parent="."]
-offset_left = 584.0
+offset_left = 392.0
 offset_top = -348.0
-offset_right = 768.0
+offset_right = 576.0
 offset_bottom = 348.0
 size_flags_horizontal = 4
-color = Color(0, 0, 0, 0.415686)
+color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -380,41 +306,16 @@ libraries = {
 &"": SubResource("AnimationLibrary_tmx0f")
 }
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(-256, -516)
-texture = ExtResource("2_uva1d")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Icon" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(280, -516)
-scale = Vector2(5, 5)
-sprite_frames = SubResource("SpriteFrames_s7jgs")
-animation = &"Deviljho"
+position = Vector2(-256, -516)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_1dt3f")
+frame_progress = 0.501619
+flip_h = true
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(-576, -324)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(560, 568)
-shape = SubResource("RectangleShape2D_tmx0f")
-
-[node name="ColorRect" type="ColorRect" parent="Area2D"]
-offset_left = 432.0
-offset_top = 512.0
-offset_right = 688.0
-offset_bottom = 624.0
-mouse_filter = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="Area2D"]
-offset_left = 432.0
-offset_top = 552.0
-offset_right = 719.0
-offset_bottom = 597.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 28
-text = "Terminar combate"
-metadata/_edit_use_anchors_ = true
+[node name="playerInterface" parent="Icon" instance=ExtResource("3_8aimp")]
+position = Vector2(0, 1)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.6
@@ -487,6 +388,7 @@ scale = Vector2(2, 2)
 metadata/_edit_use_anchors_ = true
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+visible = false
 scale = Vector2(5.76, 3.24)
 copy_mode = 2
 
@@ -503,5 +405,7 @@ offset_bottom = 100.0
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[node name="enemyInFight" parent="." instance=ExtResource("7_8aimp")]
+position = Vector2(288, -512)
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
