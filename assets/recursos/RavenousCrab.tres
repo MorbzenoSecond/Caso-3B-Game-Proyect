@@ -1,0 +1,54 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://3u7qeexoci1h"]
+
+[ext_resource type="Texture2D" uid="uid://bncwcjw8ra730" path="res://assets/sprites/ravenous.png" id="1_uqify"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqify"]
+atlas = ExtResource("1_uqify")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58vhv"]
+atlas = ExtResource("1_uqify")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcwqw"]
+atlas = ExtResource("1_uqify")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17txb"]
+atlas = ExtResource("1_uqify")
+region = Rect2(0, 0, 128, 128)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqify")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_58vhv")
+}],
+"loop": true,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcwqw")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17txb")
+}],
+"loop": true,
+"name": &"Punch",
+"speed": 5.0
+}]

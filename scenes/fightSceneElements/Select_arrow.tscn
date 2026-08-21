@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://75dvnndh6850"]
+
+[ext_resource type="Texture2D" uid="uid://r567o2w3830f" path="res://assets/sprites/flecha.png" id="1_ykn1f"]
+[ext_resource type="Script" uid="uid://bnh7qyschxb55" path="res://scenes/fightSceneElements/select_arrow.gd" id="2_dv8ft"]
+
+[node name="SelectArrow" type="Sprite3D" groups=["SELECTARROW"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.032628, 0)
+texture_filter = 0
+texture = ExtResource("1_ykn1f")
+script = ExtResource("2_dv8ft")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.002)
+light_color = Color(0.637276, 0.636768, 1.92523e-07, 1)
+omni_range = 1.0

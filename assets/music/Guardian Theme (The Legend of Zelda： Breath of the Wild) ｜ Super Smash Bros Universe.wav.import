@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dapixxm8rybel"
+path="res://.godot/imported/Guardian Theme (The Legend of Zelda： Breath of the Wild) ｜ Super Smash Bros Universe.wav-e751a0fc024d95cf1d92177c037d72fe.sample"
+
+[deps]
+
+source_file="res://assets/music/Guardian Theme (The Legend of Zelda： Breath of the Wild) ｜ Super Smash Bros Universe.wav"
+dest_files=["res://.godot/imported/Guardian Theme (The Legend of Zelda： Breath of the Wild) ｜ Super Smash Bros Universe.wav-e751a0fc024d95cf1d92177c037d72fe.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

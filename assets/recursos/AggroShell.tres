@@ -1,0 +1,54 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://p1lgq4lotnle"]
+
+[ext_resource type="Texture2D" uid="uid://ecs8j181uyr1" path="res://assets/sprites/Cangrejos.png" id="1_qhjdn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhjdn"]
+atlas = ExtResource("1_qhjdn")
+region = Rect2(80, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jmio"]
+atlas = ExtResource("1_qhjdn")
+region = Rect2(80, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmmjp"]
+atlas = ExtResource("1_qhjdn")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1skc"]
+atlas = ExtResource("1_qhjdn")
+region = Rect2(80, 0, 40, 40)
+
+[resource]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"Death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhjdn")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jmio")
+}],
+"loop": false,
+"name": &"Punched",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmmjp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1skc")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 14.0
+}]

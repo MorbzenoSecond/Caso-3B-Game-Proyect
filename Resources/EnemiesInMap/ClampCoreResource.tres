@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="EnemiesInMapData" load_steps=8 format=3 uid="uid://bn1ckyab1qwlm"]
+
+[ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/SpecialActionScripts/EnemyAction.gd" id="1_nsarc"]
+[ext_resource type="PackedScene" uid="uid://bll14li66rh20" path="res://scenes/Proyectiles/shoot.tscn" id="2_ho7ma"]
+[ext_resource type="PackedScene" uid="uid://cqeyj8ghalk2v" path="res://scenes/Proyectiles/SpecialEffects/visual_effect_purple.tscn" id="3_cxfoh"]
+[ext_resource type="Script" uid="uid://b0ghckxb8f0id" path="res://Resources/SpecialActionScripts/ShootActionScript.gd" id="4_qgggi"]
+[ext_resource type="SpriteFrames" uid="uid://cq2w4psg8w4bh" path="res://assets/recursos/ClampCore.tres" id="5_mi7sh"]
+[ext_resource type="Script" uid="uid://ba00fspq8q8te" path="res://Resources/EnemiesInMap/EnemiesInMapData.gd" id="6_0vyyv"]
+
+[sub_resource type="Resource" id="Resource_dgqxs"]
+script = ExtResource("4_qgggi")
+ShootType = ExtResource("2_ho7ma")
+ShootSpeed = 2.0
+VisualEffect = Array[PackedScene]([ExtResource("3_cxfoh")])
+CoolDown = 1.0
+metadata/_custom_type_script = "uid://b0ghckxb8f0id"
+
+[resource]
+script = ExtResource("6_0vyyv")
+character = ExtResource("5_mi7sh")
+RUN_MAX_SPEED = 0.5
+ACCELERATION = 3.0
+SpecialActions = Array[ExtResource("1_nsarc")]([SubResource("Resource_dgqxs")])
+enemy_data = {
+"Enemies": [{
+"damage": 1,
+"level": 3,
+"life": 7,
+"name": "ClampCore",
+"speed": 14,
+"type": "enemy"
+}]
+}
+metadata/_custom_type_script = "uid://ba00fspq8q8te"

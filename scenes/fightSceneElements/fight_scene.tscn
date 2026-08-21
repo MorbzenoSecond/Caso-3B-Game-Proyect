@@ -1,123 +1,88 @@
-[gd_scene load_steps=18 format=3 uid="uid://cn6cyqbunqh41"]
+[gd_scene load_steps=12 format=3 uid="uid://cn6cyqbunqh41"]
 
 [ext_resource type="Script" uid="uid://dhau6buv704jc" path="res://scenes/fightSceneElements/fight_scene.gd" id="1_llpdw"]
-[ext_resource type="Texture2D" uid="uid://cm3tswj0oxc1q" path="res://assets/sprites/spritesheet.png" id="2_5b1w7"]
-[ext_resource type="PackedScene" uid="uid://cg8d24tthjgo7" path="res://scenes/fightSceneElements/player_interface.tscn" id="3_8aimp"]
-[ext_resource type="PackedScene" uid="uid://52mmwlkmw6q" path="res://scenes/fightSceneElements/character_cart.tscn" id="6_srhpj"]
+[ext_resource type="MeshLibrary" uid="uid://b3owcrdd6jqj6" path="res://Resources/Tiles/tiles.tres" id="6_hfdjw"]
+[ext_resource type="PackedScene" uid="uid://52mmwlkmw6q" path="res://scenes/fightSceneElements/character_card.tscn" id="6_srhpj"]
 [ext_resource type="Shader" uid="uid://cxeef6cbmbbdu" path="res://assets/shaders/distorsion.gdshader" id="7_5b1w7"]
-[ext_resource type="PackedScene" uid="uid://b7gqbwv4oolhh" path="res://scenes/enemies/enemy_in_fight.tscn" id="7_8aimp"]
 [ext_resource type="Texture2D" uid="uid://cwiaaje0rltyp" path="res://assets/shaders/Captura de pantalla 2026-06-18 143344.png" id="8_srhpj"]
 [ext_resource type="Texture2D" uid="uid://bcpwv0rgpm584" path="res://assets/shaders/Captura de pantalla 2026-06-18 143335.png" id="9_mehbm"]
+
+[sub_resource type="Animation" id="Animation_hfdjw"]
+resource_name = "Defeat"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, -0.5),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_1rklm"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:position")
+tracks/0/path = NodePath("CanvasLayer/Node2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0.001),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-832, -348)]
+"values": [Vector2(0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect2:position")
+tracks/1/path = NodePath("CanvasLayer/BackBufferCopy:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0.001),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(584, -348)]
+"values": [Vector2(0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Icon:position")
+tracks/2/path = NodePath("CanvasLayer/ColorRect:color")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.001),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-256, -516)]
+"values": [Color(0, 0, 0, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Node2D:position")
+tracks/3/path = NodePath("CanvasLayer/Label:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.001),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-576, -324)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("ProgressBar:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.001),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-176, -244)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("level:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0.001),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(184, -292)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("name:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0.001),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-88, -292)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("BackBufferCopy:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0.001),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("enemyInFight:position")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(288, -512)]
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_1v880"]
@@ -126,141 +91,22 @@ length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
+tracks/0/path = NodePath("CanvasLayer/Node2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0.7, 1.5),
-"transitions": PackedFloat32Array(1, 1),
+"transitions": PackedFloat32Array(1, 0.5),
 "update": 0,
-"values": [Color(0, 0, 0, 0.415686), Color(0, 0, 0, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.7, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-832, -348), Vector2(-576, -348)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect2:color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.7, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0.415686), Color(0, 0, 0, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("ColorRect2:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.7, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(640, -348), Vector2(392, -348)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Icon:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.7, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-256, -516), Vector2(-256, 92)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Node2D:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0.7, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-576, -324), Vector2(-576, 176)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("ColorRect3:color")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0.7, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0.105882), Color(1, 1, 1, 1)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("enemyInFight:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0.7, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(288, -512), Vector2(288, 80)]
+"values": [Vector2(0, 0), Vector2(0, -126)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tmx0f"]
 _data = {
+&"Defeat": SubResource("Animation_hfdjw"),
 &"RESET": SubResource("Animation_1rklm"),
 &"ingrese": SubResource("Animation_1v880")
 }
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8aimp"]
-atlas = ExtResource("2_5b1w7")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_srhpj"]
-atlas = ExtResource("2_5b1w7")
-region = Rect2(48, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mehbm"]
-atlas = ExtResource("2_5b1w7")
-region = Rect2(96, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_decov"]
-atlas = ExtResource("2_5b1w7")
-region = Rect2(144, 0, 48, 48)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_1dt3f"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8aimp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_srhpj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mehbm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_decov")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8aimp"]
 shader = ExtResource("7_5b1w7")
@@ -271,141 +117,128 @@ shader_parameter/strength = 1.0
 shader_parameter/pixel_count = 53.848
 shader_parameter/alpha_threshold = 0.1
 
-[node name="fight_scene" type="Node2D"]
+[node name="fight_scene" type="Node3D"]
 script = ExtResource("1_llpdw")
-
-[node name="ColorRect3" type="ColorRect" parent="."]
-visible = false
-offset_left = -576.0
-offset_top = -328.0
-offset_right = 576.0
-offset_bottom = 320.0
-mouse_filter = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -576.0
-offset_top = -348.0
-offset_right = -384.0
-offset_bottom = 348.0
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="ColorRect2" type="ColorRect" parent="."]
-offset_left = 392.0
-offset_top = -348.0
-offset_right = 576.0
-offset_bottom = 348.0
-size_flags_horizontal = 4
-color = Color(0, 0, 0, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_tmx0f")
 }
 
-[node name="Icon" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
-position = Vector2(-256, -516)
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_1dt3f")
-frame_progress = 0.501619
-flip_h = true
-
-[node name="playerInterface" parent="Icon" instance=ExtResource("3_8aimp")]
-position = Vector2(0, 1)
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.6
 
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2(-576, -324)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="characterCart" parent="Node2D" instance=ExtResource("6_srhpj")]
-position = Vector2(112, -340)
-scale = Vector2(4, 4)
+[node name="Node2D" type="Node2D" parent="CanvasLayer"]
+scale = Vector2(3, 3)
 
-[node name="characterCart2" parent="Node2D" instance=ExtResource("6_srhpj")]
-position = Vector2(224, -340)
-scale = Vector2(4, 4)
+[node name="characterCart" parent="CanvasLayer/Node2D" instance=ExtResource("6_srhpj")]
+position = Vector2(144.667, 238)
 
-[node name="characterCart3" parent="Node2D" instance=ExtResource("6_srhpj")]
-position = Vector2(336, -340)
-scale = Vector2(4, 4)
+[node name="characterCart2" parent="CanvasLayer/Node2D" instance=ExtResource("6_srhpj")]
+modulate = Color(0.779291, 0.779291, 0.779291, 1)
+position = Vector2(168.667, 242)
 
-[node name="characterCart4" parent="Node2D" instance=ExtResource("6_srhpj")]
-position = Vector2(448, -340)
-scale = Vector2(4, 4)
+[node name="characterCart3" parent="CanvasLayer/Node2D" instance=ExtResource("6_srhpj")]
+modulate = Color(0.552956, 0.552956, 0.552956, 1)
+position = Vector2(192.667, 246)
 
-[node name="characterCart5" parent="Node2D" instance=ExtResource("6_srhpj")]
-position = Vector2(560, -340)
-scale = Vector2(4, 4)
+[node name="characterCart4" parent="CanvasLayer/Node2D" instance=ExtResource("6_srhpj")]
+modulate = Color(0.340339, 0.340339, 0.340339, 1)
+position = Vector2(216.667, 250)
 
-[node name="characterCart6" parent="Node2D" instance=ExtResource("6_srhpj")]
-position = Vector2(672, -340)
-scale = Vector2(4, 4)
+[node name="characterCart5" parent="CanvasLayer/Node2D" instance=ExtResource("6_srhpj")]
+modulate = Color(0.190762, 0.190762, 0.190762, 1)
+position = Vector2(240.667, 254)
 
-[node name="Label" type="Label" parent="Node2D"]
-offset_left = 64.0
-offset_top = -444.0
-offset_right = 159.0
-offset_bottom = -421.0
-theme_override_colors/font_color = Color(0.839216, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 7
-theme_override_constants/shadow_outline_size = 1
-text = "turno actual"
-
-[node name="ProgressBar" type="ProgressBar" parent="."]
-visible = false
-modulate = Color(1, 0.0784314, 0.0470588, 1)
-offset_left = -176.0
-offset_top = -244.0
-offset_right = 99.0
-offset_bottom = -217.0
-scale = Vector2(2, 2)
-value = 50.0
-metadata/_edit_use_anchors_ = true
-
-[node name="level" type="Label" parent="."]
-visible = false
-offset_left = 184.0
-offset_top = -292.0
-offset_right = 224.0
-offset_bottom = -269.0
-scale = Vector2(2, 2)
-metadata/_edit_use_anchors_ = true
-
-[node name="name" type="Label" parent="."]
-visible = false
-offset_left = -88.0
-offset_top = -292.0
-offset_right = -48.0
-offset_bottom = -269.0
-scale = Vector2(2, 2)
-metadata/_edit_use_anchors_ = true
-
-[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
-visible = false
+[node name="BackBufferCopy" type="BackBufferCopy" parent="CanvasLayer"]
 scale = Vector2(5.76, 3.24)
 copy_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="BackBufferCopy"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/BackBufferCopy"]
 material = SubResource("ShaderMaterial_8aimp")
 anchors_preset = -1
 anchor_left = -0.005
 anchor_top = 0.005
 anchor_bottom = 0.005
-offset_left = -99.0
-offset_top = -101.0
-offset_right = 100.0
-offset_bottom = 100.0
+offset_left = 1.0
+offset_top = -2.23457
+offset_right = 200.0
+offset_bottom = 198.765
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="enemyInFight" parent="." instance=ExtResource("7_8aimp")]
-position = Vector2(288, -512)
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 433.0
+offset_top = 288.0
+offset_right = 726.0
+offset_bottom = 376.0
+theme_override_colors/font_shadow_color = Color(1, 0.0627451, 0.0156863, 1)
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_x = -3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = -1
+theme_override_constants/shadow_outline_size = 7
+theme_override_font_sizes/font_size = 64
+text = "Derrota..."
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="Characters" type="Node3D" parent="."]
+
+[node name="EnemyPosiblePositions" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.219407, 0, 0)
+
+[node name="Marker3D" type="Marker3D" parent="EnemyPosiblePositions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.862129, 0.206, 0.142)
+
+[node name="Marker3D2" type="Marker3D" parent="EnemyPosiblePositions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19464, 0.206, 0.532859)
+
+[node name="Marker3D3" type="Marker3D" parent="EnemyPosiblePositions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.50665, 0.432, -0.28)
+
+[node name="Marker3D4" type="Marker3D" parent="EnemyPosiblePositions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.316, 0.216, 0.291)
+
+[node name="Marker3D5" type="Marker3D" parent="EnemyPosiblePositions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.353, 0.216, -0.383)
+
+[node name="CharacterPosiblePositions" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.448353, 0, 0)
+
+[node name="Marker3D" type="Marker3D" parent="CharacterPosiblePositions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0126588, 0.216, 0.043553)
+
+[node name="Marker3D2" type="Marker3D" parent="CharacterPosiblePositions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.640882, 0.216, -0.193518)
+
+[node name="Marker3D3" type="Marker3D" parent="CharacterPosiblePositions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.402553, 0.216, 0.620494)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06315, 1.19213)
+
+[node name="GridMap" type="GridMap" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.0989029, -0.224, -0.372023)
+mesh_library = ExtResource("6_hfdjw")
+cell_size = Vector3(1.6, 1.6, 1.6)
+data = {
+"cells": PackedInt32Array(65534, 0, 1048577, 65535, 0, 1048577, 0, 0, 1048577, 1, 0, 1048577, 65528, 65533, 1048577, 65528, 65534, 1048577, 65529, 65534, 1048577, 65529, 65535, 1048577, 65530, 65535, 1048577, 65531, 0, 1048577, 65532, 0, 1048577, 65532, 1, 1048577, 65533, 1, 1048577, 65534, 1, 1048577, 65534, 2, 1048577, 65535, 2, 1048577, 0, 2, 1048577, 0, 1, 1048577, 65535, 1, 1048577, 65533, 0, 1048577, 65530, 0, 1048577, 65531, 65535, 1048577, 65531, 65534, 1048577, 65532, 65534, 1048577, 65533, 65534, 1048577, 65531, 65533, 1048577, 65530, 65533, 1048577, 65529, 65533, 1048577, 65532, 65533, 1048577, 65533, 65533, 1048577, 65534, 65533, 1048577, 65535, 65533, 1048577, 0, 65533, 1048577, 1, 65533, 1048577, 2, 65533, 1048577, 3, 65533, 1048577, 4, 65533, 1048577, 5, 65533, 1048577, 6, 65533, 1048577, 7, 65533, 1048577, 7, 65534, 1048577, 7, 65535, 1048577, 7, 0, 1048577, 7, 1, 1048577, 7, 2, 1048577, 7, 3, 1048577, 7, 4, 1048577, 7, 5, 1048577, 7, 6, 1048577, 6, 6, 1048577, 5, 6, 1048577, 4, 6, 1048577, 3, 6, 1048577, 2, 6, 1048577, 1, 6, 1048577, 0, 6, 1048577, 65535, 6, 1048577, 65534, 6, 1048577, 65533, 6, 1048577, 65532, 6, 1048577, 65531, 6, 1048577, 65530, 6, 1048577, 65529, 6, 1048577, 65528, 6, 1048577, 65527, 6, 1048577, 65527, 5, 1048577, 65527, 4, 1048577, 65527, 3, 1048577, 65527, 2, 1048577, 65527, 1, 1048577, 65527, 0, 1048577, 65527, 65535, 1048577, 65527, 65534, 1048577, 65527, 65533, 1048577, 65528, 65535, 1048577, 65528, 0, 1048577, 65528, 1, 1048577, 65528, 2, 1048577, 65528, 3, 1048577, 65528, 4, 1048577, 65529, 4, 1048577, 65530, 5, 1048577, 65531, 5, 1048577, 65532, 5, 1048577, 65533, 5, 1048577, 65533, 4, 1048577, 65534, 4, 1048577, 65535, 4, 1048577, 0, 4, 1048577, 0, 3, 1048577, 65529, 2, 1048577, 65529, 3, 1048577, 65530, 3, 1048577, 65531, 3, 1048577, 65532, 3, 1048577, 65533, 3, 1048577, 65532, 2, 1048577, 65531, 1, 1048577, 65529, 0, 1048577, 65530, 4, 1048577, 65531, 4, 1048577, 65530, 2, 1048577, 65530, 1, 1048577, 65529, 1, 1048577, 65528, 5, 1048577, 65529, 5, 1048577, 65532, 4, 1048577, 65531, 2, 1048577, 65530, 65534, 1048577, 65533, 2, 1048577, 65532, 65535, 1048577, 65533, 65535, 1048577, 65534, 65535, 1048577, 65535, 65535, 1048577, 0, 65535, 1048577, 0, 65534, 1048577, 1, 65534, 1048577, 2, 65534, 1048577, 3, 65534, 1048577, 65535, 65534, 1048577, 65534, 65534, 1048577, 6, 65534, 1048577, 6, 65535, 1048577, 5, 65535, 1048577, 4, 65535, 1048577, 3, 65535, 1048577, 2, 65535, 1048577, 4, 65534, 1048577, 5, 65534, 1048577, 1, 65535, 1048577, 6, 0, 1048577, 5, 0, 1048577, 4, 0, 1048577, 2, 0, 1048577, 3, 1, 1048577, 4, 1, 1048577, 5, 1, 1048577, 3, 2, 1048577, 2, 2, 1048577, 1, 2, 1048577, 65534, 3, 1048577, 2, 1, 1048577, 65535, 3, 1048577, 1, 1, 1048577, 3, 0, 1048577, 4, 3, 1048577, 3, 3, 1048577, 3, 4, 1048577, 2, 4, 1048577, 1, 4, 1048577, 0, 5, 1048577, 65535, 5, 1048577, 65534, 5, 1048577, 1, 5, 1048577, 2, 5, 1048577, 3, 5, 1048577, 4, 5, 1048577, 5, 5, 1048577, 6, 5, 1048577, 6, 4, 1048577, 5, 4, 1048577, 5, 3, 1048577, 5, 2, 1048577, 4, 2, 1048577, 2, 3, 1048577, 1, 3, 1048577, 6, 3, 1048577, 6, 2, 1048577, 4, 4, 1048577, 6, 1, 1048577, 65526, 65532, 1048577, 65527, 65532, 1048577, 65528, 65532, 1048577, 65529, 65532, 1048577, 65530, 65532, 1048577, 65531, 65532, 1048577, 65532, 65532, 1048577, 65533, 65532, 1048577, 65534, 65532, 1048577, 65535, 65532, 1048577, 0, 65532, 1048577, 1, 65532, 1048577, 2, 65532, 1048577, 2, 65531, 1048577, 3, 65531, 1048577, 4, 65531, 1048577, 5, 65531, 1048577, 6, 65531, 1048577, 7, 65531, 1048577, 8, 65532, 1048577, 7, 65532, 1048577, 6, 65532, 1048577, 5, 65532, 1048577, 4, 65532, 1048577, 3, 65532, 1048577, 65543, 65533, 1048577, 65542, 65533, 1048577, 65541, 65533, 1048577, 65540, 65533, 1048577, 65539, 65533, 1048577, 65538, 65533, 1048577, 65537, 65533, 1048577, 65536, 65533, 1048577, 131071, 65533, 1048577, 131070, 65533, 1048577, 65543, 65532, 1048577, 65542, 65532, 1048577, 65541, 65532, 1048577, 65540, 65532, 1048577, 65539, 65532, 1048577, 65538, 65532, 1048577, 65537, 65532, 1048577, 65536, 65532, 1048577, 65536, 65531, 1048577, 131071, 65531, 1048577, 131071, 65532, 1048577, 131070, 65531, 1048577, 131070, 65532, 1048577, 131069, 65532, 1048577, 196606, 65532, 1048577, 196607, 65532, 1048577, 131072, 65532, 1048577, 131073, 65532, 1048577, 131074, 65532, 1048577, 131075, 65532, 1048577, 131076, 65532, 1048577, 131077, 65532, 1048577, 131078, 65532, 1048577, 131079, 65532, 1048577, 196611, 65532, 1048577, 196612, 65532, 1048577, 196613, 65532, 1048577, 196614, 65532, 1048577, 196615, 65532, 1048577, 131075, 65533, 1048577, 131076, 65533, 1048577, 131077, 65533, 1048577, 131078, 65533, 1048577, 131076, 65534, 1048577, 131077, 65534, 1048577, 131078, 65534, 1048577, 131079, 65534, 1048577, 65543, 65534, 1048577, 65542, 65534, 1048577, 65539, 65534, 1048577, 65540, 65534, 1048577, 65540, 65535, 1048577, 65541, 65535, 1048577, 65542, 65535, 1048577, 65543, 65535, 1048577, 65543, 0, 1048577, 7, 7, 1048577, 6, 7, 1048577, 5, 7, 1048577, 4, 7, 1048577, 3, 7, 1048577, 3, 8, 1048577, 2, 8, 1048577, 1, 8, 1048577, 1, 7, 1048577, 0, 7, 1048577, 65535, 7, 1048577, 65534, 7, 1048577, 65533, 7, 1048577, 65532, 7, 1048577, 2, 7, 1048577, 4, 8, 1048577, 3, 9, 1048577, 4, 9, 1048577, 4, 10, 1048577, 5, 10, 1048577, 5, 11, 1048577, 5, 9, 1048577, 6, 9, 1048577, 6, 8, 1048577, 6, 10, 1048577, 6, 11, 1048577, 7, 8, 1048577, 7, 9, 1048577, 7, 10, 1048577, 7, 11, 1048577, 7, 12, 1048577, 6, 12, 1048577, 9, 2, 1048577, 9, 3, 1048577, 9, 4, 1048577, 9, 5, 1048577, 9, 6, 1048577, 10, 7, 1048577, 10, 8, 1048577, 10, 6, 1048577, 8, 2, 1048577, 8, 1, 1048577, 8, 0, 1048577, 8, 3, 1048577, 8, 4, 1048577, 8, 5, 1048577, 8, 6, 1048577, 8, 7, 1048577, 9, 1, 1048577, 10, 0, 1048577, 10, 65535, 1048577, 11, 0, 1048577, 10, 65534, 1048577, 10, 65533, 1048577, 11, 65534, 1048577, 11, 65535, 1048577, 12, 1, 1048577, 12, 2, 1048577, 11, 2, 1048577, 10, 1, 1048577, 9, 0, 1048577, 9, 65535, 1048577, 9, 65534, 1048577, 9, 65533, 1048577, 11, 1, 1048577, 11, 3, 1048577, 11, 4, 1048577, 11, 5, 1048577, 11, 6, 1048577, 10, 4, 1048577, 10, 3, 1048577, 5, 8, 1048577, 8, 8, 1048577, 9, 8, 1048577, 9, 7, 1048577, 9, 9, 1048577, 9, 10, 1048577, 8, 9, 1048577, 8, 10, 1048577, 65525, 65534, 1048577, 65525, 65533, 1048577, 65525, 65532, 1048577, 65526, 65533, 1048577, 65526, 65534, 1048577, 65527, 65531, 1048577, 65528, 65530, 1048577, 65529, 65530, 1048577, 65529, 65529, 1048577, 65530, 65529, 1048577, 65530, 65528, 1048577, 65531, 65528, 1048577, 65532, 65528, 1048577, 65531, 65529, 1048577, 65532, 65529, 1048577, 65533, 65528, 1048577, 65531, 65530, 1048577, 65532, 65530, 1048577, 65530, 65530, 1048577, 196614, 65533, 2, -3, 65533, 2, 131079, 65535, 2)
+}
+metadata/_editor_floor_ = Vector3(0, 3, -1)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13781, 0.435741, -0.714498)
+light_color = Color(0.765648, 0.452967, 0.19822, 1)
+omni_range = 1.25
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

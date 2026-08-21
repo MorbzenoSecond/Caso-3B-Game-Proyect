@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemiesInMapData" load_steps=4 format=3 uid="uid://dc8ychgbrs3im"]
+
+[ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/SpecialActionScripts/EnemyAction.gd" id="1_wh4tj"]
+[ext_resource type="SpriteFrames" uid="uid://dk4gaiyf8sd83" path="res://assets/recursos/Player.tres" id="2_el0j4"]
+[ext_resource type="Script" uid="uid://ba00fspq8q8te" path="res://Resources/EnemiesInMap/EnemiesInMapData.gd" id="2_f2kfa"]
+
+[resource]
+script = ExtResource("2_f2kfa")
+character = ExtResource("2_el0j4")
+RUN_MAX_SPEED = 0.8
+ACCELERATION = 1.2
+SpecialActions = Array[ExtResource("1_wh4tj")]([])
+metadata/_custom_type_script = "uid://ba00fspq8q8te"

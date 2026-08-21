@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvs4i5thex2gf"]
+
+[ext_resource type="Script" uid="uid://dx3oxnl8oom4f" path="res://scenes/characters/inMap/WalkingPlayerInMap.gd" id="1_o60ur"]
+[ext_resource type="Texture2D" uid="uid://ecs8j181uyr1" path="res://assets/sprites/Cangrejos.png" id="2_o60ur"]
+[ext_resource type="Script" uid="uid://xiscktksb6o4" path="res://scenes/General/AnimatedSprites.gd" id="3_mg1ux"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o60ur"]
+size = Vector3(0.2, 0.315195, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mg1ux"]
+size = Vector3(0.241919, 0.411368, 0.225195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mg1ux"]
+atlas = ExtResource("2_o60ur")
+region = Rect2(120, 0, 40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a444n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mg1ux")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="MainCharacterWorld" type="CharacterBody3D"]
+collision_layer = 3
+script = ExtResource("1_o60ur")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0425977, 0)
+shape = SubResource("BoxShape3D_o60ur")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_mg1ux")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+cast_shadow = 2
+alpha_cut = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_a444n")
+script = ExtResource("3_mg1ux")
+color = Color(0.514, 0.804, 0.086, 0)

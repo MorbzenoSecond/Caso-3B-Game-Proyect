@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dleelqdk25qcu"]
+
+[ext_resource type="Script" uid="uid://dcumk2flsxpvv" path="res://Resources/after_image.gd" id="1_bmb58"]
+[ext_resource type="SpriteFrames" uid="uid://p1lgq4lotnle" path="res://assets/recursos/AggroShell.tres" id="2_bmb58"]
+
+[node name="AfterImage" type="Node3D" groups=["AFTERIMAGES"]]
+script = ExtResource("1_bmb58")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
+cast_shadow = 0
+double_sided = false
+alpha_cut = 2
+texture_filter = 0
+render_priority = -3
+sprite_frames = ExtResource("2_bmb58")
+animation = &"Punched"

@@ -1,107 +1,13 @@
-[gd_scene load_steps=24 format=3 uid="uid://b7gqbwv4oolhh"]
+[gd_scene load_steps=22 format=3 uid="uid://b7gqbwv4oolhh"]
 
 [ext_resource type="Script" uid="uid://bab72etoipkmn" path="res://scenes/enemies/enemy_in_fight.gd" id="1_0a5y4"]
-[ext_resource type="Texture2D" uid="uid://bkkw6slkpmt30" path="res://assets/sprites/boo.png" id="2_uyaet"]
-[ext_resource type="Texture2D" uid="uid://bsyg7brcp0d4j" path="res://assets/sprites/deviljho.png" id="3_so3t4"]
-[ext_resource type="Texture2D" uid="uid://5i1c54gp4nfy" path="res://assets/sprites/Goomba_exportable.png" id="4_s3a6u"]
+[ext_resource type="PackedScene" uid="uid://bll14li66rh20" path="res://scenes/Proyectiles/shoot.tscn" id="2_s3a6u"]
+[ext_resource type="SpriteFrames" uid="uid://3u7qeexoci1h" path="res://assets/recursos/RavenousCrab.tres" id="3_d3gou"]
+[ext_resource type="Script" uid="uid://xiscktksb6o4" path="res://scenes/General/AnimatedSprites.gd" id="4_d3gou"]
 [ext_resource type="Texture2D" uid="uid://72a3ar8efein" path="res://assets/sprites/Sprite-0003.png" id="5_s3a6u"]
 [ext_resource type="Texture2D" uid="uid://bueoqsuh6nh8y" path="res://assets/sprites/Sprite-0001.png" id="6_h3y8o"]
 [ext_resource type="Texture2D" uid="uid://dw78dcpnk4xcw" path="res://assets/sprites/Sprite-0002.png" id="7_d3gou"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tmx0f"]
-atlas = ExtResource("2_uyaet")
-region = Rect2(0, 0, 27, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oupg2"]
-atlas = ExtResource("2_uyaet")
-region = Rect2(27, 0, 27, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_asair"]
-atlas = ExtResource("2_uyaet")
-region = Rect2(54, 0, 27, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s7jgs"]
-atlas = ExtResource("2_uyaet")
-region = Rect2(81, 0, 27, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_decov"]
-atlas = ExtResource("3_so3t4")
-region = Rect2(0, 0, 285, 135)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iwotu"]
-atlas = ExtResource("4_s3a6u")
-region = Rect2(1, 61, 18, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3ewl6"]
-atlas = ExtResource("4_s3a6u")
-region = Rect2(19, 61, 18, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_acpyq"]
-atlas = ExtResource("4_s3a6u")
-region = Rect2(37, 61, 18, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_abfpn"]
-atlas = ExtResource("4_s3a6u")
-region = Rect2(55, 61, 18, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rctke"]
-atlas = ExtResource("4_s3a6u")
-region = Rect2(73, 61, 18, 20)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ogwn6"]
-atlas = ExtResource("4_s3a6u")
-region = Rect2(91, 61, 18, 20)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_h3y8o"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tmx0f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oupg2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_asair")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s7jgs")
-}],
-"loop": true,
-"name": &"Boo",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_decov")
-}],
-"loop": false,
-"name": &"Deviljho",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 3.0,
-"texture": SubResource("AtlasTexture_iwotu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3ewl6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_acpyq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_abfpn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rctke")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ogwn6")
-}],
-"loop": true,
-"name": &"Goomba",
-"speed": 6.0
-}]
+[ext_resource type="AudioStream" uid="uid://bl1i8posrhbmp" path="res://assets/sounds/tindeck_1.mp3" id="8_h3y8o"]
 
 [sub_resource type="Animation" id="Animation_d3gou"]
 resource_name = "Deviljho"
@@ -253,66 +159,240 @@ _data = {
 &"RESET": SubResource("Animation_h3y8o")
 }
 
-[node name="enemyInFight" type="Node2D"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_h3y8o"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[sub_resource type="GDScript" id="GDScript_h3y8o"]
+script/source = "@tool
+extends SubViewport
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_so3t4"]
+size = Vector3(0.2552, 0.28201, 0.1)
+
+[sub_resource type="Shader" id="Shader_y5th1"]
+code = "shader_type spatial;
+render_mode unshaded, blend_add, cull_disabled;
+
+group_uniforms Color;
+uniform vec3 primary_color : source_color = vec3(1.0);
+uniform vec3 secondary_color : source_color = vec3(1.0, 0.8, 0.4);
+uniform float emission = 2.0;
+uniform float emission_mult = 1.0;
+
+group_uniforms Shape;
+uniform bool alpha_as_factor = false;
+uniform float grow_factor : hint_range(0.0, 1.0, 0.01) = 0.5;
+uniform sampler2D flare_texture;
+uniform float streaks_amount = 4.0;
+uniform float variance1_amplitude = 12.0;
+uniform float variance2_amplitude = 5.0;
+
+group_uniforms Alpha;
+uniform float edge_hardness : hint_range(0.0, 1.0, 0.01) = 0.5;
+uniform float edge_position : hint_range(0.0, 1.0, 0.01) = 0.1;
+uniform bool proximity_fade = false;
+uniform float proximity_fade_distance = 1.0;
+
+uniform sampler2D depth_texture : hint_depth_texture, repeat_disable, filter_nearest;
+
+group_uniforms Billboard;
+uniform bool billboard = false;
+
+varying flat int id;
+
+float overlay(float base, float blend){
+	float limit = step(0.5, base);
+	return mix(2.0 * base * blend, 1.0 - 2.0 * (1.0 - base) * (1.0 - blend), limit);
+}
+
+void vertex() {
+	id = INSTANCE_ID;
+	if(billboard){
+		MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
+				MAIN_CAM_INV_VIEW_MATRIX[0],
+				MAIN_CAM_INV_VIEW_MATRIX[1],
+				MAIN_CAM_INV_VIEW_MATRIX[2],
+				MODEL_MATRIX[3]);
+		MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
+	}
+}
+
+void fragment() {
+	float flare = texture(flare_texture, UV).r;
+	flare = pow(flare, 8.0) * 0.8;
+	
+	vec2 centered_uv = UV - 0.5;
+	float angle = (atan(centered_uv.x, centered_uv.y));
+	
+	float id_offset = float(id);
+	
+	float streaks = pow(cos((angle + id_offset) * streaks_amount) * 0.5 + 0.5, 16.0);
+	float variance1 = sin((angle + id_offset) * variance1_amplitude) * 0.5 + 0.5;
+	streaks *= variance1;
+	
+	float value = overlay(flare, streaks);
+	value = max(value, flare*0.5);
+	
+	float variance2 = sin((angle + id_offset) * variance2_amplitude + id_offset) * 0.5 + 0.5;
+	value *= (0.5 + variance2 * 0.5);
+	
+	float l_edge = mix(0.0, edge_position, edge_hardness);
+	float r_edge = mix(1.0, edge_position + 0.01, edge_hardness);
+	value = smoothstep(l_edge,r_edge,value);
+	
+	ALBEDO = (mix(secondary_color, primary_color, value) * COLOR.rgb) * emission * COLOR.a * emission_mult;
+	
+	ALPHA = value;
+	
+	// Proximity Fade
+	if(proximity_fade){
+		float proximity_depth_tex = textureLod(depth_texture, SCREEN_UV, 0.0).r;
+		vec4 ndc = OUTPUT_IS_SRGB ? vec4(vec3(SCREEN_UV, proximity_depth_tex) * 2.0 - 1.0, 1.0) : vec4(SCREEN_UV * 2.0 - 1.0, proximity_depth_tex, 1.0);
+		vec4 proximity_view_pos = INV_PROJECTION_MATRIX * ndc;
+		proximity_view_pos.xyz /= proximity_view_pos.w;
+		ALPHA *= clamp(1.0 - smoothstep(proximity_view_pos.z + proximity_fade_distance, proximity_view_pos.z, VERTEX.z), 0.0, 1.0);
+	}
+}
+
+"
+
+[sub_resource type="Gradient" id="Gradient_so3t4"]
+offsets = PackedFloat32Array(0, 0.0294118, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p7w77"]
+gradient = SubResource("Gradient_so3t4")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s3a6u"]
+render_priority = 0
+shader = SubResource("Shader_y5th1")
+shader_parameter/primary_color = Color(0, 0, 0, 1)
+shader_parameter/secondary_color = Color(0, 0, 0, 1)
+shader_parameter/emission = 2.0
+shader_parameter/emission_mult = 1.0
+shader_parameter/alpha_as_factor = false
+shader_parameter/grow_factor = 0.87
+shader_parameter/flare_texture = SubResource("GradientTexture2D_p7w77")
+shader_parameter/streaks_amount = 4.0
+shader_parameter/variance1_amplitude = 12.0
+shader_parameter/variance2_amplitude = 5.0
+shader_parameter/edge_hardness = 0.5
+shader_parameter/edge_position = 0.1
+shader_parameter/proximity_fade = false
+shader_parameter/proximity_fade_distance = 1.0
+shader_parameter/billboard = false
+
+[sub_resource type="Gradient" id="Gradient_sb86v"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_h3y8o"]
+gradient = SubResource("Gradient_sb86v")
+
+[node name="CharacterInFight" type="Node3D"]
 script = ExtResource("1_0a5y4")
+shoot_type = ExtResource("2_s3a6u")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
-scale = Vector2(5, 5)
-sprite_frames = SubResource("SpriteFrames_h3y8o")
+[node name="AnimatedSprite2D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, 0, 0)
+alpha_cut = 2
+texture_filter = 0
+sprite_frames = ExtResource("3_d3gou")
 animation = &"Goomba"
-frame_progress = 0.999214
+script = ExtResource("4_d3gou")
 
-[node name="Data" type="Node2D" parent="."]
-
-[node name="ProgressBar" type="TextureProgressBar" parent="Data"]
-texture_filter = 1
-offset_left = -60.0
-offset_top = -60.0
-offset_right = -30.0
-offset_bottom = -55.0
-scale = Vector2(4, 4)
-value = 100.0
-texture_under = ExtResource("5_s3a6u")
-texture_over = ExtResource("6_h3y8o")
-texture_progress = ExtResource("7_d3gou")
-
-[node name="Name" type="Label" parent="Data"]
-offset_left = -64.0
-offset_top = -80.0
-offset_right = 32.0
-offset_bottom = -57.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 0
-text = "Goomba"
-horizontal_alignment = 3
-autowrap_mode = 1
-
-[node name="Level" type="Label" parent="Data"]
-offset_left = 32.0
-offset_top = -80.0
-offset_right = 72.0
-offset_bottom = -57.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 0
-text = "LV1"
-
-[node name="livedata" type="Label" parent="Data"]
-offset_left = -48.0
-offset_top = -58.0
-offset_right = 48.0
-offset_bottom = -42.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_constants/shadow_outline_size = 0
-theme_override_font_sizes/font_size = 11
-text = "120/120"
-horizontal_alignment = 1
-autowrap_mode = 1
+[node name="Data" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_m7iha")
 }
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, 0.164698, -0.0433117)
+texture_filter = 0
+texture = SubResource("ViewportTexture_h3y8o")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+disable_3d = true
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(30, 10)
+render_target_update_mode = 4
+script = SubResource("GDScript_h3y8o")
+
+[node name="Control" type="Control" parent="Sprite3D/SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="TextureProgressBar" parent="Sprite3D/SubViewport/Control"]
+texture_filter = 1
+layout_mode = 0
+offset_top = 5.0
+offset_right = 30.0
+offset_bottom = 10.0
+step = 0.01
+value = 30.0
+texture_under = ExtResource("5_s3a6u")
+texture_over = ExtResource("6_h3y8o")
+texture_progress = ExtResource("7_d3gou")
+
+[node name="Level" type="Label3D" parent="Sprite3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.09, 0.02, 0)
+text = "asd"
+
+[node name="Name" type="Label3D" parent="Sprite3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.1, 0.02, 0)
+text = "asdas"
+
+[node name="livedata" type="Label3D" parent="Sprite3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.025, 0.01)
+alpha_cut = 1
+text = "dsad"
+
+[node name="SelectorPosition" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.321, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.046, 0)
+shape = SubResource("BoxShape3D_so3t4")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="HitPosition1" type="Marker3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.191, 0)
+
+[node name="HitPosition2" type="Marker3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.191, 0)
+
+[node name="HitPosition3" type="Marker3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.191, 0)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.058093)
+
+[node name="Sprite3D" type="Sprite3D" parent="Marker3D"]
+material_override = SubResource("ShaderMaterial_s3a6u")
+texture = SubResource("GradientTexture2D_h3y8o")
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_h3y8o")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]

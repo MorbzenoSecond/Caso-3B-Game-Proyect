@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://6ji0ud2q5bqe"]
+
+[ext_resource type="Script" uid="uid://bs5qp6o8bi4kx" path="res://scenes/fightSceneElements/fight_end_scene.gd" id="1_0d6xt"]
+
+[node name="FightEndScene" type="Node3D"]
+script = ExtResource("1_0d6xt")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

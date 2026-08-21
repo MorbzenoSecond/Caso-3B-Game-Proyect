@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://3pxj0hjx0j6j"]
+
+[ext_resource type="ArrayMesh" uid="uid://cctfhemi5as0y" path="res://assets/sprites/voxels/caja.obj" id="1_k6t24"]
+[ext_resource type="ArrayMesh" uid="uid://bkst7klfj258q" path="res://assets/sprites/voxels/bloque-1.obj" id="2_d6bvg"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k6t24"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yfaa0"]
+size = Vector3(1.6, 1.6, 1.6)
+
+[node name="tiles" type="Node3D"]
+
+[node name="Caja" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = ExtResource("1_k6t24")
+
+[node name="Bloque-1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = ExtResource("2_d6bvg")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Bloque-1"]
+physics_material_override = SubResource("PhysicsMaterial_k6t24")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bloque-1/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00128172, 0.797562, 0)
+shape = SubResource("BoxShape3D_yfaa0")

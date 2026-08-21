@@ -1,55 +1,120 @@
-extends Node2D
+extends Node3D
 
 const FIGHT_SCENE = preload("res://scenes/fightSceneElements/fight_scene.tscn")
-@onready var camera = $MainCharacterWorld/Camera2D
+const PARTY_MEMBER = preload("res://walking_friend_in_map.tscn")
+
+@onready var camera = $GameParty/MainCharacterWorld/pivote/Camera2D
+@onready var pivote = $GameParty/MainCharacterWorld/pivote
+@onready var CanvasInfo = $CanvasInfo as CanvasLayer
+@onready var ColorRec = $CanvasInfo/ColorRect as ColorRect
+@onready var MainCharacter = $GameParty/MainCharacterWorld
+@onready var Dumpster = $Dumpster
 
 var characters := {
-	"players": {},
-	"enemies": {},
+	"players": [],
+	"enemies": [],
 }
 
+var scenary_path = "res://scenes/maps/Scenaries/" + GameDataManager.data["locacion"] + ".tscn"
+
+func _process(delta: float) -> void:
+	pass
+	#$WorldEnvironment.environment.sky_rotation.y += 0.1 * delta
+	#$WorldEnvironment.environment.sky_rotation.x += 0.1 * delta
+	#$WorldEnvironment.environment.sky_rotation.z += 0.1 * delta
+
+#func _unhandled_input(event: InputEvent) -> void:
+	#if event is InputEventMouseButton and event.is_pressed():
+		#if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			#camera.position.y += 0.1
+			#camera.position.z -= 0.01
+			#camera.rotate_x(deg_to_rad(2.0))
+			#
+		#elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			#camera.position.y -= 0.1
+			#camera.position.z += 0.01
+			#camera.rotate_x(deg_to_rad(-2.0))
+
 func _ready() -> void:
-	GameDataManager.cargar_y_conectar($WorldNode.get_child(0), $WorldNode.get_child(0).name, $WorldNode.get_child(0).next_rooms)
+	await GameDataManager.load_data()
+	await load_current_zone(GameDataManager.data["locacion"])
+	GameDataManager.cargar_y_conectar(GameDataManager.current_room)
+	MainCharacter.global_position = GameDataManager.CurrentRoomNode.get_spawn_point()
+	instanciate_party_members()
 
-	$WorldNode.get_child(0).set_camera_limits()
+func instanciate_party_members():
+	for player  in GameDataManager.data["Characters"]:
+		var resoure_path =  "res://Resources/EnemiesInMap/" + player["name"] + "Resource.tres"
+		if player["party_status"] == "leader":
+			MainCharacter.stats = load(resoure_path)
+			MainCharacter.set_sprite_frames()
+			continue
 
-func start_fight(enemy_data, scenary_fight_background, scenary_fight_music):
+		var character = PARTY_MEMBER.instantiate()
+		
+		character.stats = load(resoure_path)
+		
+		$GameParty/Followers.add_child(character)
+		character.global_position  = character.get_random_nearby_position(MainCharacter.global_position)
+
+func load_current_zone(NodeNameToLoad : String = ""):
+	GameDataManager.current_room = NodeNameToLoad
+	scenary_path = "res://scenes/maps/Scenaries/" + NodeNameToLoad + ".tscn"
+	var scenary_path_preloaded = load(scenary_path)
+	var scene = scenary_path_preloaded.instantiate()
+	$WorldNode.add_child(scene)
+	await get_tree().process_frame
+
+func _on_timer_timeout() -> void:
+	for i in $NodoDePelea.get_children():
+		i.queue_free()
+
+#region Fight Manager Region
+func start_fight(enemy_data, scenary_fight_background, scenary_fight_music, enemy_node):
+	for i in get_tree().get_nodes_in_group("PROYECTILE"):
+		i.queue_free()
 	music_selector(scenary_fight_music)
 	$AnimationPlayer.play("new_animation")
-	instanciate_fight(enemy_data, scenary_fight_background)
+	instanciate_fight(enemy_data, scenary_fight_background, enemy_node)
 	get_tree().paused = true
 
-func instanciate_fight(enemy_data : Dictionary, scenary_fight_background):
+func instanciate_fight(enemy_data : Dictionary, scenary_fight_background, enemies_nodes : Array):
 	var scene = FIGHT_SCENE.instantiate()
-	var enemigos 
 	
-	characters["players"]["morb"] = { "speed": 35 }
+	var index = 1
 	
-	for enemy in enemy_data.keys():
-		enemigos = enemy
-		characters["enemies"][enemy] = { "speed": enemy_data[enemy]["speed"],  "level": enemy_data[enemy]["level"],  "life": enemy_data[enemy]["life"]  }
+	for player in GameDataManager.data["Characters"]:
+		characters["players"].append({"id": index,  "name": player["name"], "speed": player["speed"],  "level": player["level"],  "life": player["life"], "type": "player", "damage" : player["damage"] })
+		index += 1
+	
+	for enemy in enemy_data["Enemies"]:
+		characters["enemies"].append({"id": index,  "name": enemy["name"], "speed": enemy["speed"],  "level": enemy["level"],  "life": enemy["life"], "type": "enemy", "damage" : enemy["damage"]  })
+		index += 1
+	
 	scene.charactersInBattleArray.merge(characters)
-
 	$NodoDePelea.add_child(scene)
-	$NodoDePelea.global_position = $MainCharacterWorld.global_position
+	$NodoDePelea.global_position = MainCharacter.global_position
+	
 	scene.chooseBackgroundScenary(scenary_fight_background)
-	if str(enemigos) == "Deviljho":
-		music_selector("boss_theme_deviljho")
-	camera.reparent($NodoDePelea)
-	camera.position = Vector2.ZERO
+	pivote.reparent($NodoDePelea)
+	camera.projection = 1
+	camera.size = 2
+	await get_tree().process_frame
+	scene.enemies_origin_nodes = enemies_nodes
+	camera.global_position = $NodoDePelea.get_child(0).get_node("Marker3D").global_position
+	camera.initial_rotation.x = deg_to_rad(-40)
 
 func finish_fight():
 	characters["players"].clear()
 	characters["enemies"].clear()
 	music_selector($WorldNode.get_child(0).scenary_music)
-	$NodoDePelea.global_position = $MainCharacterWorld.global_position
-	camera.reparent($MainCharacterWorld)
+	$NodoDePelea.global_position = MainCharacter.global_position
+	pivote.reparent(MainCharacter)
+	camera.projection = 0
+	camera.initial_rotation.x = deg_to_rad(-20)
 	$AnimationPlayer.play_backwards("new_animation")
 	$Timer.start()
-
-func _on_timer_timeout() -> void:
-	for i in $NodoDePelea.get_children():
-		i.queue_free()
+#endregion
 
 #region Music Manager Region
 @onready var audio : AudioStreamPlayer = self.get_node_or_null("MusicAudio") as AudioStreamPlayer
@@ -69,7 +134,6 @@ func music_selector(_new_music : String):
 		print_rich("[color=red][b]Error en nodo:[/b][/color] [color=yellow]" + self.name + "[/color], musica no encontrada")
 		return
 	
-	print(str(current_music) + "       " + _new_music)
 	if current_music == _new_music:
 		return
 	audio.stream = load(data["Song_path"])

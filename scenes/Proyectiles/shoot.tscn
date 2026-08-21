@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bll14li66rh20"]
+
+[ext_resource type="Script" uid="uid://bdjru5aug8mhx" path="res://scenes/Proyectiles/Behaviour/StraightShoot.gd" id="1_uhb48"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vnmmp"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="Shoot" type="RigidBody3D" groups=["PROYECTILE"]]
+gravity_scale = 0.0
+script = ExtResource("1_uhb48")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_vnmmp")
+
+[node name="VisualEffect" type="Node3D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
