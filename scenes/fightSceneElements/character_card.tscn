@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://52mmwlkmw6q"]
+[gd_scene load_steps=17 format=3 uid="uid://52mmwlkmw6q"]
 
 [ext_resource type="Texture2D" uid="uid://clgb5n5808x2m" path="res://assets/sprites/carta.png" id="1_uds1d"]
 [ext_resource type="Script" uid="uid://dxo4og1vtp227" path="res://scenes/fightSceneElements/character_card.gd" id="2_24ecu"]
@@ -115,6 +115,10 @@ shader_parameter/terminator_size_px = 4.0
 atlas = ExtResource("3_dswkm")
 region = Rect2(80, 0, 40, 40)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_pq4t7"]
+atlas = ExtResource("3_dswkm")
+region = Rect2(40, 0, 40, 40)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_24ecu"]
 atlas = ExtResource("3_dswkm")
 region = Rect2(0, 0, 40, 40)
@@ -135,6 +139,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"AggroShell",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pq4t7")
+}],
+"loop": true,
+"name": &"ClampCore",
 "speed": 5.0
 }, {
 "frames": [{
@@ -165,21 +177,25 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uds1d"]
 size = Vector2(20, 38)
 
-[node name="characterCard" type="AnimatedSprite2D"]
+[node name="Node2D" type="Node2D"]
+script = ExtResource("2_24ecu")
+
+[node name="TypeCard" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_v4l3w")
 animation = &"player"
-script = ExtResource("2_24ecu")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="CharacterCard" type="AnimatedSprite2D" parent="TypeCard"]
 material = SubResource("ShaderMaterial_r004s")
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_ktahu")
-animation = &"AggroShell"
+animation = &"ClampCore"
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="TypeCard"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TypeCard/Area2D"]
 shape = SubResource("RectangleShape2D_uds1d")
 
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="input_event" from="TypeCard/Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="TypeCard/Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="TypeCard/Area2D" to="." method="_on_area_2d_mouse_exited"]

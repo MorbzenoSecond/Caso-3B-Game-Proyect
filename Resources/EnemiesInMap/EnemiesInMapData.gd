@@ -10,11 +10,7 @@ extends Resource
 		"Enemies": [
 			{
 				"name": "MoshPunch",
-				"speed": 14,
 				"level": 2,
-				"life": 3, 
-				"damage" : 1,
-				"type" : "enemy"
 			},
 		]
 	}

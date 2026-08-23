@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EnemiesInMapData" load_steps=4 format=3 uid="uid://dx7cxpceoidhv"]
+
+[ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/EnemiesInMap/SpecialActionScripts/EnemyAction.gd" id="1_oduhb"]
+[ext_resource type="SpriteFrames" uid="uid://3u7qeexoci1h" path="res://assets/recursos/RavenousCrab.tres" id="2_elvan"]
+[ext_resource type="Script" uid="uid://ba00fspq8q8te" path="res://Resources/EnemiesInMap/EnemiesInMapData.gd" id="2_mlkda"]
+
+[resource]
+script = ExtResource("2_mlkda")
+character = ExtResource("2_elvan")
+RUN_MAX_SPEED = 0.8
+ACCELERATION = 5.0
+SpecialActions = Array[ExtResource("1_oduhb")]([])
+enemy_data = {
+"Enemies": [{
+"damage": 15,
+"level": 10,
+"life": 100,
+"name": "RavenousCrab",
+"speed": 40,
+"type": "enemy"
+}]
+}
+metadata/_custom_type_script = "uid://ba00fspq8q8te"

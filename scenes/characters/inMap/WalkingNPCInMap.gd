@@ -5,7 +5,6 @@ class_name WalkingNPCInMap
 @export var Dialogue : Resource
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
-@onready var original_position = global_position
 @onready var CUSTOM_RUN_MAX_SPEED = stats.RUN_MAX_SPEED
 
 var direction : Vector3 = Vector3(0,0,0)

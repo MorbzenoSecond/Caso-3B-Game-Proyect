@@ -1,8 +1,7 @@
-# MagicaVoxel @ Ephtracy
-
-newmtl palette
-illum 1
-Ka 0.000 0.000 0.000
-Kd 1.000 1.000 1.000
-Ks 0.000 0.000 0.000
+#@DL2023 - w:64, h:64
+newmtl x
 map_Kd savepoint.png
+map_Pr savepoint_extra.png -imfchain r
+map_Pm savepoint_extra.png -imfchain g
+map_Ns savepoint_extra.png -imfchain b
+map_Ni savepoint_extra.png -imfchain l

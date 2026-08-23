@@ -12,13 +12,18 @@ var has_target : bool = false
 func _ready() -> void:
 	CreateTimersForSpecialActions()
 	super.set_sprite_frames()
+	await get_tree().process_frame
+	original_position = global_position
 
 @onready var enemy_data_to_fight = stats.enemy_data["Enemies"].duplicate()
 var enemy_dictionary_to_fight : Dictionary
 var enemies_nodes_involucrated : Array
 
-func prepare_fight_data():
+func prepare_fight():
+	prepare_fight_data()
+	get_parent().get_parent().prepare_fight_scenary(enemy_dictionary_to_fight, enemies_nodes_involucrated)
 
+func prepare_fight_data():
 	var processed_body := []
 
 	for enemy in $RotableObjects/Areas/UndetectedArea3D.get_overlapping_bodies():
@@ -49,14 +54,14 @@ func CreateTimersForSpecialActions():
 
 #region Process Region
 func _process(_delta: float) -> void:
+
 	$Label3D.text = $StateMachine.current_state.name
 #endregion
 
 #region area collisions Region
 func _on_character_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("PLAYER"):
-		prepare_fight_data()
-		get_parent().get_parent().prepare_fight_scenary(enemy_dictionary_to_fight, enemies_nodes_involucrated)
+		prepare_fight()
 		player_is_in = true
 
 func _on_character_area_3d_body_exited(body: Node3D) -> void:

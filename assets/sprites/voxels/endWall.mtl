@@ -1,0 +1,7 @@
+#@DL2023 - w:64, h:64
+newmtl x
+map_Kd endWall.png
+map_Pr endWall_extra.png -imfchain r
+map_Pm endWall_extra.png -imfchain g
+map_Ns endWall_extra.png -imfchain b
+map_Ni endWall_extra.png -imfchain l

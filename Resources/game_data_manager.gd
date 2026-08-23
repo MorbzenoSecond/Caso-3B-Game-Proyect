@@ -85,17 +85,17 @@ var world_map = {
 			"E1-E3": {"target_room": "escenary1",   "target_marker": "E1-E3"}
 		}
 	},
-	"zone1": {
-		"zone" : "trees", 
+	"Interior1": {
+		"zone" : "Interior", 
 		"connections": {
 			#"E1-Z1": {"target_room": "escenary1",  "target_marker": "E1-Z1"},
-			"Z1-Z2": {"target_room": "zone2",  "target_marker": "Z1-Z2"}
+			"Z1-Z2": {"target_room": "Exterior1",  "target_marker": "Z1-Z2"}
 		}
 	},
-	"zone2": {
-		"zone" : "house", 
+	"Exterior1": {
+		"zone" : "Exterior", 
 		"connections": {
-			"Z1-Z2": {"target_room": "zone1",  "target_marker": "Z1-Z2"}
+			"Z1-Z2": {"target_room": "Interior1",  "target_marker": "Z1-Z2"}
 		}
 	}
 }
@@ -130,13 +130,14 @@ func cargar_y_conectar(room_actual_node : String):
 	zonas.text = "Fragmento: " + current_room  + " Zona: "  + world_map[current_room]["zone"]
 	
 	var nombre_marker_salida = "res://scenes/maps/Scenaries/" + current_room.to_lower() + ".tscn"
-	var nueva_room2 = load(nombre_marker_salida).instantiate()
+	var lista_siguientes = CurrentRoomNode.next_rooms.duplicate()
 	
 	var conexiones_room = world_map[current_room]["connections"]
-	for e in nueva_room2.next_rooms:
+	for e in lista_siguientes:
 		var datos = conexiones_room[e]
 		if parent_node.has_node(datos["target_room"]):
 			continue
+			
 		var path = "res://scenes/maps/Scenaries/" + datos["target_room"].to_lower() + ".tscn"
 		
 		var nueva_room = load(path).instantiate()
@@ -147,9 +148,22 @@ func cargar_y_conectar(room_actual_node : String):
 		var marker_salida = CurrentRoomNode.get_node("Conections/"+ e)
 		var marker_entrada = nueva_room.get_node("Conections/"+ e)
 		
+		#var link_bridge : NavigationLink3D = NavigationLink3D.new()
+		#
+		#link_bridge.global_position = marker_salida.global_position
+		#link_bridge.end_position = link_bridge.to_local(marker_entrada.global_position)
+		#
+		#link_bridge.bidirectional =  true
+		#
+		#MAIN.add_child(link_bridge)
+		
 		await get_tree().process_frame
-		nueva_room.global_position = marker_salida.global_position - marker_entrada.position
+		nueva_room.global_position = marker_salida.global_position - marker_entrada.global_position
+	
+	
 	_errase_not_linked_rooms(current_room)
+	if CurrentRoomNode.scenary_environment and MAIN.WorldEnvironmentNode.environment != CurrentRoomNode.scenary_environment:
+		MAIN.WorldEnvironmentNode.environment = CurrentRoomNode.scenary_environment
 	MAIN.music_selector(CurrentRoomNode.scenary_music)
 	ColorTweenFunctionPart2()
 	

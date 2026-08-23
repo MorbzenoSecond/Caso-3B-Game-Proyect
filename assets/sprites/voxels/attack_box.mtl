@@ -1,8 +1,7 @@
-# MagicaVoxel @ Ephtracy
-
-newmtl palette
-illum 1
-Ka 0.000 0.000 0.000
-Kd 1.000 1.000 1.000
-Ks 0.000 0.000 0.000
+#@DL2023 - w:32, h:32
+newmtl x
 map_Kd attack_box.png
+map_Pr attack_box_extra.png -imfchain r
+map_Pm attack_box_extra.png -imfchain g
+map_Ns attack_box_extra.png -imfchain b
+map_Ni attack_box_extra.png -imfchain l

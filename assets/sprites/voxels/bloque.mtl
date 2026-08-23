@@ -1,0 +1,7 @@
+#@DL2023 - w:64, h:64
+newmtl x
+map_Kd bloque.png
+map_Pr bloque_extra.png -imfchain r
+map_Pm bloque_extra.png -imfchain g
+map_Ns bloque_extra.png -imfchain b
+map_Ni bloque_extra.png -imfchain l

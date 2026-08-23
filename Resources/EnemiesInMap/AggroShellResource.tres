@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="EnemiesInMapData" load_steps=4 format=3 uid="uid://cjqivx4dogepw"]
 
+[ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/EnemiesInMap/SpecialActionScripts/EnemyAction.gd" id="1_4rfte"]
 [ext_resource type="Script" uid="uid://ba00fspq8q8te" path="res://Resources/EnemiesInMap/EnemiesInMapData.gd" id="1_enp0y"]
 [ext_resource type="SpriteFrames" uid="uid://p1lgq4lotnle" path="res://assets/recursos/AggroShell.tres" id="1_v4885"]
-[ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/SpecialActionScripts/EnemyAction.gd" id="2_iuacc"]
 
 [resource]
 script = ExtResource("1_enp0y")
 character = ExtResource("1_v4885")
 RUN_MAX_SPEED = 0.2
 ACCELERATION = 3.0
-SpecialActions = Array[ExtResource("2_iuacc")]([])
+SpecialActions = Array[ExtResource("1_4rfte")]([])
 enemy_data = {
 "Enemies": [{
 "damage": 1,

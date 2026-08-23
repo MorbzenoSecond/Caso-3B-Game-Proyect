@@ -1,0 +1,7 @@
+#@DL2023 - w:32, h:32
+newmtl x
+map_Kd neutralWalll.png
+map_Pr neutralWalll_extra.png -imfchain r
+map_Pm neutralWalll_extra.png -imfchain g
+map_Ns neutralWalll_extra.png -imfchain b
+map_Ni neutralWalll_extra.png -imfchain l

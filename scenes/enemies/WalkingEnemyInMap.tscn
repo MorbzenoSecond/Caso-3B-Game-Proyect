@@ -187,7 +187,7 @@ alpha_cut = 2
 texture_filter = 0
 sprite_frames = ExtResource("3_2k8jx")
 animation = &"Idle"
-frame_progress = 0.687375
+frame_progress = 0.604506
 script = ExtResource("4_kmquc")
 time = 0.5
 
@@ -260,9 +260,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, 0, 1, 0, 0, 0)
 stream = ExtResource("5_3ac0h")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-path_desired_distance = 0.1
-target_desired_distance = 0.1
-path_height_offset = 0.25
+path_desired_distance = 2.0
+target_desired_distance = 0.5
+debug_enabled = true
 
 [connection signal="body_entered" from="RotableObjects/Areas/CharacterArea3D" to="." method="_on_character_area_3d_body_entered"]
 [connection signal="body_exited" from="RotableObjects/Areas/CharacterArea3D" to="." method="_on_character_area_3d_body_exited"]

@@ -6,7 +6,6 @@ extends Area3D
 
 func _ready() -> void:
 	$CollisionShape2D.shape = ColisionShape
-	print($CollisionShape2D.shape)
 
 func _on_body_entered(body: Node3D) -> void:
 	if get_parent().get_parent().name == GameDataManager.current_room and body.is_in_group("PLAYER"):

@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://c6mf3lq5glq1w" path="res://scenes/maps/ChangeArea.gd" id="1_qqdb7"]
 
 [node name="ChangeArea" type="Area3D"]
-collision_layer = 0
-collision_mask = 2
+collision_layer = 4
+collision_mask = 6
 script = ExtResource("1_qqdb7")
 
 [node name="CollisionShape2D" type="CollisionShape3D" parent="."]

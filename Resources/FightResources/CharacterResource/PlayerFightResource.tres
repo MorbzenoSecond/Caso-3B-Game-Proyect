@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="FightMovementsResource" load_steps=10 format=3 uid="uid://rx71qnot1pje"]
+
+[ext_resource type="Script" uid="uid://c0gecm4ujy755" path="res://Resources/FightResources/MovementsScripts/FightMovements.gd" id="1_v87qy"]
+[ext_resource type="PackedScene" uid="uid://bll14li66rh20" path="res://scenes/Proyectiles/shoot.tscn" id="2_yrjpn"]
+[ext_resource type="PackedScene" uid="uid://cqeyj8ghalk2v" path="res://scenes/Proyectiles/SpecialEffects/visual_effect_purple.tscn" id="3_pn0ah"]
+[ext_resource type="Script" uid="uid://cwsj3y0oxnuja" path="res://Resources/FightResources/MovementsScripts/ShootMovementScript.gd" id="4_gvyv5"]
+[ext_resource type="Script" uid="uid://dt6qeewy4r4u1" path="res://Resources/FightResources/MovementsScripts/DirectPunchMovementScript.gd" id="5_jf0xy"]
+[ext_resource type="SpriteFrames" uid="uid://dk4gaiyf8sd83" path="res://assets/recursos/Player.tres" id="6_v87qy"]
+[ext_resource type="Script" uid="uid://bw3watrbs53ld" path="res://Resources/FightResources/CharacterResource/FightResourceScript.gd" id="7_jjo46"]
+
+[sub_resource type="Resource" id="Resource_ci18a"]
+script = ExtResource("4_gvyv5")
+ShootType = ExtResource("2_yrjpn")
+ShootSpeed = 2.0
+VisualEffect = Array[PackedScene]([ExtResource("3_pn0ah")])
+metadata/_custom_type_script = "uid://cwsj3y0oxnuja"
+
+[sub_resource type="Resource" id="Resource_m8d2d"]
+script = ExtResource("5_jf0xy")
+metadata/_custom_type_script = "uid://dt6qeewy4r4u1"
+
+[resource]
+script = ExtResource("7_jjo46")
+character = ExtResource("6_v87qy")
+SpecialActions = Array[ExtResource("1_v87qy")]([SubResource("Resource_ci18a"), SubResource("Resource_m8d2d")])
+base_speed = 20.0
+base_damage = 3.0
+base_life = 10.0
+metadata/_custom_type_script = "uid://bw3watrbs53ld"

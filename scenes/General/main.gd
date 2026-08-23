@@ -9,6 +9,7 @@ const PARTY_MEMBER = preload("res://walking_friend_in_map.tscn")
 @onready var ColorRec = $CanvasInfo/ColorRect as ColorRect
 @onready var MainCharacter = $GameParty/MainCharacterWorld
 @onready var Dumpster = $Dumpster
+@onready var WorldEnvironmentNode = $WorldEnvironment
 
 var characters := {
 	"players": [],
@@ -18,6 +19,7 @@ var characters := {
 var scenary_path = "res://scenes/maps/Scenaries/" + GameDataManager.data["locacion"] + ".tscn"
 
 func _process(delta: float) -> void:
+	Node.print_orphan_nodes()
 	pass
 	#$WorldEnvironment.environment.sky_rotation.y += 0.1 * delta
 	#$WorldEnvironment.environment.sky_rotation.x += 0.1 * delta
@@ -84,11 +86,11 @@ func instanciate_fight(enemy_data : Dictionary, scenary_fight_background, enemie
 	var index = 1
 	
 	for player in GameDataManager.data["Characters"]:
-		characters["players"].append({"id": index,  "name": player["name"], "speed": player["speed"],  "level": player["level"],  "life": player["life"], "type": "player", "damage" : player["damage"] })
+		characters["players"].append({"id": index,  "name": player["name"], "level": player["level"], "type": "player"})
 		index += 1
 	
 	for enemy in enemy_data["Enemies"]:
-		characters["enemies"].append({"id": index,  "name": enemy["name"], "speed": enemy["speed"],  "level": enemy["level"],  "life": enemy["life"], "type": "enemy", "damage" : enemy["damage"]  })
+		characters["enemies"].append({"id": index,  "name": enemy["name"], "level": enemy["level"], "type": "enemy" })
 		index += 1
 	
 	scene.charactersInBattleArray.merge(characters)

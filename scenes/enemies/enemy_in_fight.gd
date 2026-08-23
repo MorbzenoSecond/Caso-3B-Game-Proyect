@@ -15,22 +15,20 @@ extends Node3D
 
 var myself : Array = [self]
 var data : Dictionary
-var live : float = 0.0
+
 var max_live : float = 0.0
-var damage : float = 1.0
+
+var true_damage : float = 0.0
+var true_live : float = 0.0
+var true_speed : float = 0.0
 
 const INTERFACE_SCENE = preload("res://scenes/fightSceneElements/player_interface.tscn")
-#enum EnemyType {BOO, GOOMBA} 
-#@export var Enemy_type: EnemyType = EnemyType.BOO: 
-	#set(value): 
-		#Enemy_type = value  
-		#match Enemy_type:
-			#EnemyType.BOO:
-				#$AnimatedSprite2D.sprite_frames = load("res://assets/recursos/Boo.tres")
-				#$AnimatedSprite2D.play("Idle")
-			#EnemyType.GOOMBA:
-				#$AnimatedSprite2D.sprite_frames = load("res://assets/recursos/Goomba.tres")
-				#$AnimatedSprite2D.play("Idle")
+
+@export var FightResourceStats : FightMovementsResource
+
+func basic_attack(target_node: Node3D):
+	var i = FightResourceStats.SpecialActions.pick_random()
+	i.executed(self, target_node)
 
 func _ready() -> void:
 	$AnimatedSprite2D.play("Idle")
@@ -39,6 +37,7 @@ func _ready() -> void:
 
 func setup(character_data : Dictionary):
 	if character_data:
+		data = character_data
 		match character_data["type"] as String:
 			"player":
 				hit_position_1.position.x = 0.2
@@ -49,42 +48,44 @@ func setup(character_data : Dictionary):
 				hit_position_2.position.x = -0.75
 				hit_position_3.position.x = -0.15
 
-		data = character_data
-		if FileAccess.file_exists("res://assets/recursos/"+character_data["name"]+".tres"):
-			$AnimatedSprite2D.sprite_frames = load("res://assets/recursos/"+character_data["name"]+".tres")
-		$AnimatedSprite2D.play("Idle")
-		
+		var ResourceDirection = "res://Resources/FightResources/CharacterResource/"+data["name"]+"FightResource.tres"
+		if FileAccess.file_exists(ResourceDirection):
+			FightResourceStats = load(ResourceDirection)
+			level_stats_scalling()
+			#await FightResourceStats.property_list_changed
+
+		var SpriteResourceDirection = "res://assets/recursos/"+character_data["name"]+".tres"
+		if FileAccess.file_exists(SpriteResourceDirection):
+			$AnimatedSprite2D.sprite_frames = load(SpriteResourceDirection)
+			$AnimatedSprite2D.set_collision_size(original_position.y)
+			$AnimatedSprite2D.play("Idle")
+
 		levelLabel.text = "LV" + str(character_data["level"])
 		nameLabel.text = character_data["name"]
+		liveBar.max_value = true_live
+		max_live = true_live
+		liveBar.value = true_live
 		
-		liveBar.max_value = character_data["life"]
-		live = character_data["life"]
-		max_live = character_data["life"]
-		liveBar.value = character_data["life"]
-		damage = character_data["damage"]
-		
-		await get_tree().process_frame
-		
-		if $AnimatedSprite2D.sprite_frames.get_frame_texture("Idle", 0).get_size() == Vector2(128,128):
-			position.y += 0.421
-			original_position.y += 0.421
-			print($AnimatedSprite2D.sprite_frames.get_frame_texture("Idle", 0).get_size())
-		
-		liveDataLabel.text = str(character_data["life"])+"/"+str(character_data["life"])
+		liveDataLabel.text = str(true_live)+"/"+str(true_live)
+
+func level_stats_scalling():
+	true_live = FightResourceStats.base_life + data["level"]
+	true_damage = FightResourceStats.base_damage + data["level"]
+	true_speed = FightResourceStats.base_speed + data["level"]
 
 func attack(damage, Character_node :Node3D):
 	Character_node.get_damage(damage)
 
 func attack_everyone(damage):
 	for i in FIGHT_SCENE_PATH.get_node("Characters").get_children():
+
 		i.get_damage(damage)
 
 func get_damage(damage):
-	
-	live -= damage
-	liveBar.value = live
-	liveDataLabel.text = str(live) +"/"+str(max_live)
-	if live <= 0 and  $AnimatedSprite2D.animation != "Death":
+	true_live -= damage
+	liveBar.value = true_live
+	liveDataLabel.text = str(true_live) +"/"+str(max_live)
+	if true_live <= 0 and  $AnimatedSprite2D.animation != "Death":
 		$AnimatedSprite2D.animation = "Death"
 		FIGHT_SCENE_PATH.update_characters_in_fight(self)
 		#var resource = DialogueManager.create_resource_from_text("~ start \n " + data["name"] + ": hola,soy un "+ data["name"] +"!")
@@ -120,56 +121,6 @@ func get_marker_position(Type : String) -> Vector3:
 			return hit_position_2.global_position
 	return Vector3.ZERO
 
-func basic_attack(target_node: Node3D):
-	match data["name"] as String:
-		"MoshPunch":
-			front_direction(target_node)
-			#$AnimatedSprite2D.set_process(true)
-		"AggroShell":
-			shoot_attack(target_node)
-		"Player":
-			front_direction(target_node)
-		"RavenousCrab":
-			heavy_jump_attack(target_node)
-
-func front_direction(target_node: Node3D):
-	var tween := create_tween()
-	tween.tween_property(self, "global_position:x", target_node.get_marker_position("hit_position_1").x, 1.5)\
-		.set_trans(Tween.TRANS_SINE)\
-		.set_ease(Tween.EASE_OUT)
-
-	tween.parallel().tween_property(self, "global_position:z", target_node.get_marker_position("hit_position_1").z, 1.5)\
-		.set_trans(Tween.TRANS_SINE)\
-		.set_ease(Tween.EASE_OUT)
-
-	tween.tween_callback(attack.bind(damage, target_node))
-
-
-	tween.tween_property(self, "global_position", original_position, 1)\
-		.set_trans(Tween.TRANS_CUBIC)\
-		.set_ease(Tween.EASE_IN_OUT)
-
-	tween.tween_callback(FIGHT_SCENE_PATH.turns)
-
-func shoot_attack(target_node: Node3D):
-	var tween := create_tween()
-	tween.tween_property(self, "global_position:x", target_node.get_marker_position("hit_position_3").x, 1.5)\
-		.set_trans(Tween.TRANS_SINE)\
-		.set_ease(Tween.EASE_OUT)
-
-	tween.parallel().tween_property(self, "global_position:z", target_node.get_marker_position("hit_position_3").z, 1.5)\
-		.set_trans(Tween.TRANS_SINE)\
-		.set_ease(Tween.EASE_OUT)
-
-	tween.tween_callback(attack.bind(damage, target_node))
-	tween.tween_callback(shoot.bind(global_position.direction_to(target_node.global_position)))
-
-	tween.tween_property(self, "global_position", original_position, 1)\
-		.set_trans(Tween.TRANS_CUBIC)\
-		.set_ease(Tween.EASE_IN_OUT)
-
-	tween.tween_callback(FIGHT_SCENE_PATH.turns)
-
 func heavy_jump_attack(target_node: Node3D) -> void:
 	var target_pos: Vector3 = get_marker_position("hit_position_1")
 	var original_pos: Vector3 = global_position
@@ -204,7 +155,7 @@ func heavy_jump_attack(target_node: Node3D) -> void:
 	# --- 4. IMPACTO Y ATAQUE ---
 	# Daño al tocar suelo
 	tween.tween_callback(FIGHT_SCENE_PATH.get_parent().get_parent().camera.add_trauma.bind(0.8))
-	tween.tween_callback(attack_everyone.bind(damage))
+	tween.tween_callback(attack_everyone.bind(FightResourceStats.base_damage))
 	
 	# Pausa breve en el suelo tras el choque para simular masa
 	tween.tween_interval(0.15) 
@@ -216,62 +167,6 @@ func heavy_jump_attack(target_node: Node3D) -> void:
 
 	tween.tween_callback(FIGHT_SCENE_PATH.turns)
 
-func shoot(direction):
-	var scene = shoot_type.instantiate()
-	get_parent().add_child(scene)
-	
-	scene.global_position = $Marker3D.global_position
-	
-	scene.direction = direction
-	scene.node = self
-	var flare_tex = $Marker3D/Sprite3D.material_override.get_shader_parameter("flare_texture")
-
-	if flare_tex and flare_tex is GradientTexture2D:
-		var grad: Gradient = flare_tex.gradient
-		
-		if grad.get_point_count() > 0:
-			tween()
-
-func tween():
-	$AudioStreamPlayer3D2.play()
-	var sprite = $Marker3D/Sprite3D
-	if sprite.material_override:
-		sprite.material_override = sprite.material_override.duplicate()
-	var flare_tex = sprite.material_override.get_shader_parameter("flare_texture")
-
-	if flare_tex and flare_tex is GradientTexture2D:
-		var grad: Gradient = flare_tex.gradient
-		
-		if grad.get_point_count() > 1:
-			var target_color1 = Color(0.85, 0.38, 0.78)
-			var target_color2 = Color(0.99, 0.51, 0.63) 
-			
-			var start_color1 = Color(0.85, 0.38, 0.78)
-			var start_color2 = Color(0.99, 0.51, 0.63)
-			var start_offset = 0.01
-			
-			sprite.material_override.set_shader_parameter("primary_color", start_color1)
-			sprite.material_override.set_shader_parameter("secondary_color", start_color2)
-			grad.set_offset(1, start_offset)
-			var initial_offset = grad.get_offset(1)
-			
-			var target_offset = 0.99
-			var duration = 0.5
-			
-			var tw = create_tween()
-
-			tw.tween_method(
-				func(val: float): grad.set_offset(1, val),
-				initial_offset,
-				target_offset,
-				duration
-			).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-			
-			target_color1 = Color(0, 0, 0) 
-			target_color2 = Color(0, 0, 0) 
-			
-			tw.parallel().tween_property(sprite.material_override, "shader_parameter/primary_color", target_color1, duration)
-			tw.parallel().tween_property(sprite.material_override, "shader_parameter/secondary_color", target_color2, duration)
 
 func pick_random_character() -> Node3D:
 	var characters : Array = []

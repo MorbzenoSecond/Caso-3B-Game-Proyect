@@ -6,27 +6,22 @@ var turnDictionary : = {}
 var enemies_origin_nodes : Array
 var combatientes: Array = []
 @export var battle_paused : bool = false
-#enum BattleStatus {PAUSED, AGGROSHELL} 
-#@export var battle_status: BattleStatus = BattleStatus.MOSHPUNCH
 
 const ENEMY_SCENE = preload("res://scenes/enemies/enemy_in_fight.tscn")
 const END_FIGHT_SCENE = preload("res://scenes/fightSceneElements/fight_end_scene.tscn")
 
 func _ready() -> void:
-	set_keys()
+	await set_keys()
 	enterExitAnimation()
 	$AnimationPlayer.play("ingrese")
-	turnArray.clear()
-	await get_tree().process_frame
 	turns()         
-	#selected_enemy($Enemies.get_children())
+	selected_enemy($Enemies.get_children())
 
 func finish_fight():
 	$AnimationPlayer.play_backwards("ingrese")
 	get_parent().get_parent().finish_fight()
 	enterExitAnimation()
 	$Timer.start()      
-
 
 func set_keys():
 	for key in charactersInBattleArray.keys():
@@ -35,6 +30,8 @@ func set_keys():
 			for player in charactersInBattleArray[key]:
 				var character_to_instanciate = ENEMY_SCENE.instantiate()
 				$Characters.add_child(character_to_instanciate)
+				character_to_instanciate.global_position = Posible_spawn_positions(posible_positions_characters)
+				await character_to_instanciate.setup(player)
 				combatientes.append({
 					"id": combatientes.size() + 1,
 					"name": player["name"],
@@ -42,16 +39,17 @@ func set_keys():
 					"type": "player",
 					"able_to_fight" : true,
 					"current_dist": 0.0,
-					"speed": float(player["speed"]),
+					"speed": character_to_instanciate.true_speed,
 					"node": character_to_instanciate
 				})
-				character_to_instanciate.setup(player)
-				character_to_instanciate.global_position = Posible_spawn_positions(posible_positions_characters)
+				
 		if key == "enemies":
 			var posible_positions_enemies = $EnemyPosiblePositions.get_children()
 			for enemy in charactersInBattleArray[key]:
 				var character_to_instanciate = ENEMY_SCENE.instantiate()
 				$Enemies.add_child(character_to_instanciate)
+				character_to_instanciate.global_position = Posible_spawn_positions(posible_positions_enemies)
+				await character_to_instanciate.setup(enemy)
 				combatientes.append({
 					"id": combatientes.size() + 1,
 					"name": enemy["name"],
@@ -59,11 +57,10 @@ func set_keys():
 					"type": "enemy",
 					"able_to_fight" : true,
 					"current_dist": 0.0,
-					"speed": float(enemy["speed"]),
+					"speed": character_to_instanciate.true_speed,
 					"node": character_to_instanciate
 				})
-				character_to_instanciate.setup(enemy)
-				character_to_instanciate.global_position = Posible_spawn_positions(posible_positions_enemies)
+				
 
 func nextTurns():
 	var turn_threshold: float = 100.0
@@ -78,12 +75,12 @@ func nextTurns():
 		print_rich("[color=yellow]Aviso:[/color] No hay combatientes activos con velocidad mayor a 0.")
 		return
 
-	while turnArray.size() < 6:
+	while turnArray.size() < 5:
 		for combatiente in combatientes:
 			if combatiente.get("able_to_fight", true):
 				combatiente["current_dist"] += combatiente["speed"]
 
-		while turnArray.size() < 6:
+		while turnArray.size() < 5:
 			var combatientes_listo = []
 			
 			for combatiente in combatientes:
@@ -105,6 +102,8 @@ func nextTurns():
 				print_rich("Turno %d: [color=green][b]JUGADOR (%s)[/b][/color]" % [turnArray.size(), winner["name"]])
 			else:
 				print_rich("Turno %d: [color=red][b]ENEMIGO (%s)[/b][/color]" % [turnArray.size(), winner["name"]])
+	print("turnArray")
+	
 
 func turns():
 	if battle_paused:
@@ -134,21 +133,16 @@ func _on_timer_timeout() -> void:
 func turn():
 	var i = 0
 	for node in $CanvasLayer/Node2D.get_children():
-		if node is AnimatedSprite2D:
+		if node is Node2D:
 			node.enemy_of_origin.clear()
 			node.enemy_of_origin.append(turnArray[i]["node"]) 
 			if i < turnArray.size() and turnArray[i]["name"] == "player_turn": 
 				node.animation = "player"
-				node.get_node("AnimatedSprite2D").animation = "player"
-				
-				if node.material:
-					var unique_material = node.get_node("AnimatedSprite2D").material.duplicate() as ShaderMaterial
-					unique_material.set_shader_parameter("progress", 0.845)
-					unique_material.set_shader_parameter("progress2", 0.845)
-					node.material = unique_material
+				node.CharacterCard.animation = "player"
+
 			else:
-				node.animation = turnArray[i]["type"]
-				node.get_node("AnimatedSprite2D").animation = turnArray[i]["name"]
+				node.TypeCard.animation = turnArray[i]["type"]
+				node.CharacterCard.animation = turnArray[i]["name"]
 			i += 1
 
 func enterExitAnimation():
@@ -168,8 +162,7 @@ func Posible_spawn_positions(Posible_positions) -> Vector3:
 	if !Posible_positions.is_empty():
 		return Posible_positions.pop_front().global_position
 	else:
-		Posible_positions = Posible_positions.get_children()
-		return Posible_positions.pop_front().global_position
+		return Vector3(0,0,0)
 
 func update_characters_in_fight(character_to_delete : Node3D):
 	var target_id: int = character_to_delete.data.get("id", -1)

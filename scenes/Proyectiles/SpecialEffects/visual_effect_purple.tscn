@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cqeyj8ghalk2v"]
 
-[ext_resource type="Texture2D" uid="uid://bcpwv0rgpm584" path="res://assets/shaders/Captura de pantalla 2026-06-18 143335.png" id="1_fscfm"]
+[ext_resource type="Texture2D" uid="uid://bcpwv0rgpm584" path="res://assets/recursos/shaders/Captura de pantalla 2026-06-18 143335.png" id="1_fscfm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xvfi4"]
 shading_mode = 0

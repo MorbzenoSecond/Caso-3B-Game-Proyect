@@ -1,7 +1,27 @@
-extends AnimatedSprite2D
+extends Node2D
 
 var enemy_of_origin :Array =[]
+@onready var TypeCard = $TypeCard
+@onready var CharacterCard = $TypeCard/CharacterCard
+@onready var original_position_y = $TypeCard.position.y
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouse and Input.is_action_just_pressed("click"):
 		$"../../..".selected_enemy(enemy_of_origin)
+
+var animation_tween : Tween
+
+func tween(side, size):
+	if animation_tween:
+		if !animation_tween.is_running():
+			animation_tween.kill()
+	animation_tween = create_tween()
+	
+	animation_tween.tween_property(TypeCard, "position:y", original_position_y + side, 0.15).set_trans(Tween.TRANS_BOUNCE)
+	animation_tween.parallel().tween_property(TypeCard, "scale", size , 0.12).set_trans(Tween.TRANS_BOUNCE)
+
+func _on_area_2d_mouse_entered() -> void:
+	tween(-6, Vector2(1.2, 1.2))
+
+func _on_area_2d_mouse_exited() -> void:
+	tween(0, Vector2(1, 1))

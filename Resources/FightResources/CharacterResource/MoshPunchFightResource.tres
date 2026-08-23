@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="FightMovementsResource" load_steps=9 format=3 uid="uid://c3hkr4fvic8tn"]
+
+[ext_resource type="Script" uid="uid://cwsj3y0oxnuja" path="res://Resources/FightResources/MovementsScripts/ShootMovementScript.gd" id="1_b43i3"]
+[ext_resource type="Script" uid="uid://c0gecm4ujy755" path="res://Resources/FightResources/MovementsScripts/FightMovements.gd" id="1_mu1nx"]
+[ext_resource type="PackedScene" uid="uid://bll14li66rh20" path="res://scenes/Proyectiles/shoot.tscn" id="2_dwp78"]
+[ext_resource type="PackedScene" uid="uid://cqeyj8ghalk2v" path="res://scenes/Proyectiles/SpecialEffects/visual_effect_purple.tscn" id="3_4w7ux"]
+[ext_resource type="Script" uid="uid://bw3watrbs53ld" path="res://Resources/FightResources/CharacterResource/FightResourceScript.gd" id="3_mu1nx"]
+[ext_resource type="Script" uid="uid://dt6qeewy4r4u1" path="res://Resources/FightResources/MovementsScripts/DirectPunchMovementScript.gd" id="5_4w7ux"]
+
+[sub_resource type="Resource" id="Resource_ci18a"]
+script = ExtResource("1_b43i3")
+ShootType = ExtResource("2_dwp78")
+ShootSpeed = 2.0
+VisualEffect = Array[PackedScene]([ExtResource("3_4w7ux")])
+metadata/_custom_type_script = "uid://cwsj3y0oxnuja"
+
+[sub_resource type="Resource" id="Resource_m8d2d"]
+script = ExtResource("5_4w7ux")
+metadata/_custom_type_script = "uid://dt6qeewy4r4u1"
+
+[resource]
+script = ExtResource("3_mu1nx")
+SpecialActions = Array[ExtResource("1_mu1nx")]([SubResource("Resource_ci18a"), SubResource("Resource_m8d2d")])
+base_speed = 20.0
+base_damage = 3.0
+base_life = 10.0
+metadata/_custom_type_script = "uid://bw3watrbs53ld"

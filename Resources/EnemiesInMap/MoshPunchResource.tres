@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="EnemiesInMapData" load_steps=6 format=3 uid="uid://7nhjknp2ayb7"]
 
-[ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/SpecialActionScripts/EnemyAction.gd" id="1_8qtja"]
+[ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/EnemiesInMap/SpecialActionScripts/EnemyAction.gd" id="1_8qtja"]
 [ext_resource type="Script" uid="uid://ba00fspq8q8te" path="res://Resources/EnemiesInMap/EnemiesInMapData.gd" id="1_h45ex"]
 [ext_resource type="SpriteFrames" uid="uid://bqdfn5sk2byo7" path="res://assets/recursos/MoshPunch.tres" id="1_rumx6"]
-[ext_resource type="Script" uid="uid://d8aw0i2cac1n" path="res://Resources/SpecialActionScripts/PlacajeActionScript.gd" id="2_ib05p"]
+[ext_resource type="Script" uid="uid://d8aw0i2cac1n" path="res://Resources/EnemiesInMap/SpecialActionScripts/PlacajeActionScript.gd" id="2_ib05p"]
 
 [sub_resource type="Resource" id="Resource_5gdme"]
 script = ExtResource("2_ib05p")

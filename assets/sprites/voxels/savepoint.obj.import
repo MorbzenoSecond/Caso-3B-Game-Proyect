@@ -3,7 +3,7 @@
 importer="wavefront_obj"
 importer_version=1
 type="Mesh"
-uid="uid://5g7glp2xsxjt"
+uid="uid://dkib1r2yp2jl7"
 path="res://.godot/imported/savepoint.obj-be9c9c40806129f13625d56af29a6dce.mesh"
 
 [deps]
@@ -20,6 +20,6 @@ generate_lods=true
 generate_shadow_mesh=true
 generate_lightmap_uv2=false
 generate_lightmap_uv2_texel_size=0.2
-scale_mesh=Vector3(1, 1, 1)
+scale_mesh=Vector3(0.01, 0.01, 0.01)
 offset_mesh=Vector3(0, 0, 0)
 force_disable_mesh_compression=false
