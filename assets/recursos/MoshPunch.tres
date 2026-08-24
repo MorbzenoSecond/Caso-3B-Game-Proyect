@@ -15,6 +15,7 @@ atlas = ExtResource("1_ebw52")
 region = Rect2(0, 0, 40, 40)
 
 [resource]
+resource_name = "Mush Punch"
 animations = [{
 "frames": [],
 "loop": false,

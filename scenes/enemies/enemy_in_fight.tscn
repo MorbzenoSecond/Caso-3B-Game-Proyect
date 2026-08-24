@@ -1,10 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://b7gqbwv4oolhh"]
+[gd_scene load_steps=16 format=3 uid="uid://b7gqbwv4oolhh"]
 
 [ext_resource type="Script" uid="uid://bab72etoipkmn" path="res://scenes/enemies/enemy_in_fight.gd" id="1_0a5y4"]
 [ext_resource type="PackedScene" uid="uid://bll14li66rh20" path="res://scenes/Proyectiles/shoot.tscn" id="2_s3a6u"]
-[ext_resource type="SpriteFrames" uid="uid://3u7qeexoci1h" path="res://assets/recursos/RavenousCrab.tres" id="3_d3gou"]
 [ext_resource type="Resource" uid="uid://c3hkr4fvic8tn" path="res://Resources/FightResources/CharacterResource/MoshPunchFightResource.tres" id="3_m7iha"]
-[ext_resource type="Script" uid="uid://xiscktksb6o4" path="res://scenes/General/AnimatedSprites.gd" id="4_d3gou"]
 [ext_resource type="Texture2D" uid="uid://72a3ar8efein" path="res://assets/sprites/Sprite-0003.png" id="5_s3a6u"]
 [ext_resource type="Texture2D" uid="uid://bueoqsuh6nh8y" path="res://assets/sprites/Sprite-0001.png" id="6_h3y8o"]
 [ext_resource type="Texture2D" uid="uid://dw78dcpnk4xcw" path="res://assets/sprites/Sprite-0002.png" id="7_d3gou"]
@@ -27,9 +25,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 "
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_so3t4"]
-size = Vector3(0.2552, 0.28201, 0.1)
 
 [sub_resource type="Shader" id="Shader_y5th1"]
 code = "shader_type spatial;
@@ -156,19 +151,11 @@ script = ExtResource("1_0a5y4")
 shoot_type = ExtResource("2_s3a6u")
 FightResourceStats = ExtResource("3_m7iha")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, 0, 0)
-alpha_cut = 2
-texture_filter = 0
-sprite_frames = ExtResource("3_d3gou")
-animation = &"Goomba"
-script = ExtResource("4_d3gou")
-
 [node name="Data" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, 0.164698, -0.0433117)
+transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, 0.49372, -0.0433117)
 texture_filter = 0
 texture = SubResource("ViewportTexture_h3y8o")
 
@@ -214,12 +201,6 @@ text = "dsad"
 [node name="SelectorPosition" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.321, 0)
 
-[node name="Area3D" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.046, 0)
-shape = SubResource("BoxShape3D_so3t4")
-
 [node name="Node3D" type="Node3D" parent="."]
 
 [node name="HitPosition1" type="Marker3D" parent="Node3D"]
@@ -241,5 +222,4 @@ texture = SubResource("GradientTexture2D_h3y8o")
 [node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("8_h3y8o")
 
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]
+[node name="BodyParts" type="Node3D" parent="."]

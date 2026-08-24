@@ -1,0 +1,19 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://b5kkgmf1k4y5r"]
+
+[ext_resource type="Texture2D" uid="uid://ce38uqkos2vbb" path="res://assets/sprites/RavenousCrab.png" id="1_rjisu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ku7vo"]
+atlas = ExtResource("1_rjisu")
+region = Rect2(128, 0, 128, 128)
+
+[resource]
+resource_name = "Ravenous Crab Claw"
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ku7vo")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]

@@ -9,11 +9,15 @@ extends Node3D
 @onready var hit_position_2 = $Node3D/HitPosition2
 @onready var hit_position_3 = $Node3D/HitPosition3
 @onready var original_position = global_position
+var main_body_part
+var body_parts : Array
+
+const BODY_PART_SCENE = preload("res://scenes/fightSceneElements/body_part.tscn")
+
 @export var shoot_type : PackedScene 
 
 @onready var FIGHT_SCENE_PATH = get_parent().get_parent()
 
-var myself : Array = [self]
 var data : Dictionary
 
 var max_live : float = 0.0
@@ -31,7 +35,6 @@ func basic_attack(target_node: Node3D):
 	i.executed(self, target_node)
 
 func _ready() -> void:
-	$AnimatedSprite2D.play("Idle")
 	await get_tree().process_frame
 	original_position = global_position
 
@@ -55,57 +58,52 @@ func setup(character_data : Dictionary):
 			#await FightResourceStats.property_list_changed
 
 		var SpriteResourceDirection = "res://assets/recursos/"+character_data["name"]+".tres"
-		if FileAccess.file_exists(SpriteResourceDirection):
-			$AnimatedSprite2D.sprite_frames = load(SpriteResourceDirection)
-			$AnimatedSprite2D.set_collision_size(original_position.y)
-			$AnimatedSprite2D.play("Idle")
 
 		levelLabel.text = "LV" + str(character_data["level"])
 		nameLabel.text = character_data["name"]
 		liveBar.max_value = true_live
 		max_live = true_live
 		liveBar.value = true_live
-		
+
 		liveDataLabel.text = str(true_live)+"/"+str(true_live)
+
+		var render_priority_index : int = 0
+		var position_index : float = 0.00
+		if !FightResourceStats.BodyParts.is_empty():
+			for body_part in FightResourceStats.BodyParts:
+				var scene : Node3D = BODY_PART_SCENE.instantiate()
+				$BodyParts.add_child(scene)
+				scene.name = body_part.character.resource_name
+				scene.get_node("AnimatedSprite3D").sprite_frames = body_part.character
+				scene.get_node("AnimatedSprite3D").render_priority = render_priority_index 
+				scene.get_node("AnimatedSprite3D").set_collision_size(original_position.y)
+				scene.get_node("Area3D/CollisionShape3D").shape = body_part.shape3D
+				scene.get_node("Area3D/CollisionShape3D").position = body_part.shape_position + Vector3(0, position_index, position_index)
+				scene.get_node("SelectorPosition").position = body_part.selector_point_position
+				scene.local_life = body_part.local_life
+				
+				if body_part.main_body_part:
+					main_body_part = scene
+				
+				scene.parent_enemy = self
+				body_parts.append(scene)
+
+				render_priority_index -= 1
+				position_index -= 0.01
+
+				#scene.get_node("Area3D").input_event.connect(_on_area_3d_input_event)
 
 func level_stats_scalling():
 	true_live = FightResourceStats.base_life + data["level"]
 	true_damage = FightResourceStats.base_damage + data["level"]
 	true_speed = FightResourceStats.base_speed + data["level"]
 
-func attack(damage, Character_node :Node3D):
-	Character_node.get_damage(damage)
-
 func attack_everyone(damage):
 	for i in FIGHT_SCENE_PATH.get_node("Characters").get_children():
-
 		i.get_damage(damage)
 
-func get_damage(damage):
-	true_live -= damage
-	liveBar.value = true_live
-	liveDataLabel.text = str(true_live) +"/"+str(max_live)
-	if true_live <= 0 and  $AnimatedSprite2D.animation != "Death":
-		$AnimatedSprite2D.animation = "Death"
-		FIGHT_SCENE_PATH.update_characters_in_fight(self)
-		#var resource = DialogueManager.create_resource_from_text("~ start \n " + data["name"] + ": hola,soy un "+ data["name"] +"!")
-		#DialogueManager.show_example_dialogue_balloon(resource, "start")
-		#FIGHT_SCENE_PATH.battle_paused = true
-		#await DialogueManager.dialogue_ended
-		#FIGHT_SCENE_PATH.battle_paused = false
-		#FIGHT_SCENE_PATH.turns()
-
-		return
-	if $AnimatedSprite2D.animation == "Idle":
-		$AnimatedSprite2D.animation = "Punched"
-
-func _on_animated_sprite_2d_animation_finished() -> void:
-	if $AnimatedSprite2D.animation == "Punched":
-		$AnimatedSprite2D.play("Idle")
-
-func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
-	if event is InputEventMouse and Input.is_action_just_pressed("click"):
-		get_parent().get_parent().selected_enemy(myself)
+func attack(damage, Character_node :Node3D):
+	Character_node.get_damage(damage)
 
 func _activate_turn():
 	var scene = INTERFACE_SCENE.instantiate()
@@ -167,10 +165,9 @@ func heavy_jump_attack(target_node: Node3D) -> void:
 
 	tween.tween_callback(FIGHT_SCENE_PATH.turns)
 
-
 func pick_random_character() -> Node3D:
 	var characters : Array = []
 	for combatiente in FIGHT_SCENE_PATH.combatientes:
 		if combatiente["type"] == "player" and combatiente["able_to_fight"]:
 			characters.append(combatiente["node"])
-	return characters.pick_random()
+	return characters.pick_random().body_parts.pick_random()

@@ -19,12 +19,8 @@ ACCELERATION = 1.1
 SpecialActions = Array[ExtResource("1_8qtja")]([SubResource("Resource_5gdme")])
 enemy_data = {
 "Enemies": [{
-"damage": 1,
 "level": 2,
-"life": 3,
-"name": "MoshPunch",
-"speed": 14,
-"type": "enemy"
+"name": "MoshPunch"
 }]
 }
 metadata/_custom_type_script = "uid://ba00fspq8q8te"

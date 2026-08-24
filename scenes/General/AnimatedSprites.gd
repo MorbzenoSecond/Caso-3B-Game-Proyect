@@ -31,6 +31,5 @@ func spawn_afterimage():
 
 func set_collision_size(original_position):
 	if sprite_frames.get_frame_texture("Idle", 0).get_size() == Vector2(128,128):
-		position.y += 0.421
+		get_parent().position.y += 0.421
 		original_position += 0.421
-		print(sprite_frames.get_frame_texture("Idle", 0).get_size())

@@ -4,7 +4,10 @@ class_name WalkingEnemyInMap
 
 @onready var shoot_shader = $RotableObjects/Marker3D/Sprite3D
 @onready var id = str(global_position)
+@onready var enemy_data_to_fight = stats.enemy_data["Enemies"].duplicate()
 
+var enemy_dictionary_to_fight : Dictionary
+var enemies_nodes_involucrated : Array
 var _random_position = null
 var target_pos 
 var has_target : bool = false
@@ -14,10 +17,6 @@ func _ready() -> void:
 	super.set_sprite_frames()
 	await get_tree().process_frame
 	original_position = global_position
-
-@onready var enemy_data_to_fight = stats.enemy_data["Enemies"].duplicate()
-var enemy_dictionary_to_fight : Dictionary
-var enemies_nodes_involucrated : Array
 
 func prepare_fight():
 	prepare_fight_data()
@@ -50,7 +49,6 @@ func CreateTimersForSpecialActions():
 
 		NewTimer.wait_time = i.CoolDown
 		NewTimer.timeout.connect($StateMachine/Chase._on_special_action_timeout.bind(i))
-
 
 #region Process Region
 func _process(_delta: float) -> void:

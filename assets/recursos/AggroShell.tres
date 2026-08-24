@@ -19,6 +19,7 @@ atlas = ExtResource("1_qhjdn")
 region = Rect2(80, 0, 40, 40)
 
 [resource]
+resource_name = "Aggro Shell"
 animations = [{
 "frames": [],
 "loop": false,

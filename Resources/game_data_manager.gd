@@ -88,7 +88,6 @@ var world_map = {
 	"Interior1": {
 		"zone" : "Interior", 
 		"connections": {
-			#"E1-Z1": {"target_room": "escenary1",  "target_marker": "E1-Z1"},
 			"Z1-Z2": {"target_room": "Exterior1",  "target_marker": "Z1-Z2"}
 		}
 	},

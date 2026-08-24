@@ -15,8 +15,9 @@
 [ext_resource type="Shape3D" uid="uid://dxhuiair8w6nj" path="res://assets/recursos/CollisionShapeSizes/ForChangeArea/2x1x1.tres" id="12_55qbt"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_2wqqu"]
-vertices = PackedVector3Array(2.21, 0.358, -7.82836, 1.96, 0.358, -9.32836, 1.46, 0.358, -9.57836, 1.46, 0.358, -1.57836, 11.46, 0.358, -1.57836, 11.46, 0.358, -8.07836, 3.21, 1.858, -9.57836, 2.71, 2.108, -8.32836, 2.71, 2.358, -6.57836, 10.46, 2.358, -6.57836, 10.46, 1.858, -9.57836)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 0), PackedInt32Array(0, 4, 3), PackedInt32Array(7, 6, 8), PackedInt32Array(8, 6, 10), PackedInt32Array(8, 10, 9)]
+vertices = PackedVector3Array(1.46, 0.358, -1.57836, 11.46, 0.358, -1.57836, 11.46, 0.358, -9.32836, 1.46, 0.358, -9.57836, 3.21, 1.858, -9.57836, 2.71, 2.108, -8.32836, 2.71, 2.358, -6.57836, 10.46, 2.358, -6.57836, 10.46, 1.858, -9.57836)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 8), PackedInt32Array(6, 8, 7)]
+agent_height = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3ari"]
 albedo_color = Color(0, 0, 0, 1)
@@ -58,7 +59,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43873, 3.97626, -1.14699)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.00779, -2.89272, -5.13381)
 
 [node name="Enemy" parent="Enemies" instance=ExtResource("2_g5fj8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.10967, -2.89272, -7.12893)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.65907, -2.89272, -6.33045)
 stats = ExtResource("3_s720p")
 
 [node name="WalkingNPCInMap" parent="Enemies" instance=ExtResource("4_18l7l")]
@@ -70,7 +71,7 @@ stats = ExtResource("6_4uo8n")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.84779, -2.89272, -5.68893)
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource("2_g5fj8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.88779, -2.92927, -6.64893)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.88779, -2.92927, -6.30451)
 stats = ExtResource("7_111jt")
 
 [node name="Enemy5" parent="Enemies" instance=ExtResource("2_g5fj8")]

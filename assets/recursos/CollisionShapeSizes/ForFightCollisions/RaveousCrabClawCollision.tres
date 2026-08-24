@@ -1,0 +1,5 @@
+[gd_resource type="BoxShape3D" format=3 uid="uid://cm0h38xmv1nsf"]
+
+[resource]
+resource_name = "RaveousCrabClawCollision"
+size = Vector3(0.757813, 0.508286, 0.001)

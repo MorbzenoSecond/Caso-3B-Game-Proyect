@@ -1,11 +1,25 @@
-[gd_resource type="Resource" script_class="FightMovementsResource" load_steps=9 format=3 uid="uid://c3hkr4fvic8tn"]
+[gd_resource type="Resource" script_class="FightMovementsResource" load_steps=13 format=3 uid="uid://c3hkr4fvic8tn"]
 
 [ext_resource type="Script" uid="uid://cwsj3y0oxnuja" path="res://Resources/FightResources/MovementsScripts/ShootMovementScript.gd" id="1_b43i3"]
+[ext_resource type="Script" uid="uid://dmmvynklhh8f0" path="res://Resources/FightResources/MovementsScripts/BodyParts.gd" id="1_m8d2d"]
 [ext_resource type="Script" uid="uid://c0gecm4ujy755" path="res://Resources/FightResources/MovementsScripts/FightMovements.gd" id="1_mu1nx"]
+[ext_resource type="SpriteFrames" uid="uid://bqdfn5sk2byo7" path="res://assets/recursos/MoshPunch.tres" id="2_32irn"]
 [ext_resource type="PackedScene" uid="uid://bll14li66rh20" path="res://scenes/Proyectiles/shoot.tscn" id="2_dwp78"]
 [ext_resource type="PackedScene" uid="uid://cqeyj8ghalk2v" path="res://scenes/Proyectiles/SpecialEffects/visual_effect_purple.tscn" id="3_4w7ux"]
+[ext_resource type="Shape3D" uid="uid://rm7gdaate1eh" path="res://assets/recursos/CollisionShapeSizes/ForFightCollisions/48x48.tres" id="3_32irn"]
 [ext_resource type="Script" uid="uid://bw3watrbs53ld" path="res://Resources/FightResources/CharacterResource/FightResourceScript.gd" id="3_mu1nx"]
 [ext_resource type="Script" uid="uid://dt6qeewy4r4u1" path="res://Resources/FightResources/MovementsScripts/DirectPunchMovementScript.gd" id="5_4w7ux"]
+
+[sub_resource type="Resource" id="Resource_lnqsh"]
+script = ExtResource("1_m8d2d")
+character = ExtResource("2_32irn")
+main_body_part = true
+selector_point_position = Vector3(0, 0.15, -0.038)
+local_life = 10.0
+local_defense = 0.0
+shape3D = ExtResource("3_32irn")
+shape_position = Vector3(0, -0.06, 0)
+metadata/_custom_type_script = "uid://dmmvynklhh8f0"
 
 [sub_resource type="Resource" id="Resource_ci18a"]
 script = ExtResource("1_b43i3")
@@ -24,4 +38,5 @@ SpecialActions = Array[ExtResource("1_mu1nx")]([SubResource("Resource_ci18a"), S
 base_speed = 20.0
 base_damage = 3.0
 base_life = 10.0
+BodyParts = Array[ExtResource("1_m8d2d")]([SubResource("Resource_lnqsh")])
 metadata/_custom_type_script = "uid://bw3watrbs53ld"

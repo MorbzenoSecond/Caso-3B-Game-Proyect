@@ -19,6 +19,7 @@ atlas = ExtResource("1_uqify")
 region = Rect2(0, 0, 128, 128)
 
 [resource]
+resource_name = "Ravenous Crab"
 animations = [{
 "frames": [{
 "duration": 1.0,

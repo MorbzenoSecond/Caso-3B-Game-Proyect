@@ -12,10 +12,11 @@ const END_FIGHT_SCENE = preload("res://scenes/fightSceneElements/fight_end_scene
 
 func _ready() -> void:
 	await set_keys()
-	enterExitAnimation()
+	await enterExitAnimation()
 	$AnimationPlayer.play("ingrese")
-	turns()         
-	selected_enemy($Enemies.get_children())
+	await get_tree().process_frame
+	turns()
+	#selected_enemy($Enemies.get_children())
 
 func finish_fight():
 	$AnimationPlayer.play_backwards("ingrese")
@@ -40,7 +41,8 @@ func set_keys():
 					"able_to_fight" : true,
 					"current_dist": 0.0,
 					"speed": character_to_instanciate.true_speed,
-					"node": character_to_instanciate
+					"node": character_to_instanciate,
+					"main_body_node" : character_to_instanciate.main_body_part
 				})
 				
 		if key == "enemies":
@@ -58,7 +60,8 @@ func set_keys():
 					"able_to_fight" : true,
 					"current_dist": 0.0,
 					"speed": character_to_instanciate.true_speed,
-					"node": character_to_instanciate
+					"node": character_to_instanciate,
+					"main_body_node" : character_to_instanciate.main_body_part
 				})
 				
 
@@ -135,11 +138,10 @@ func turn():
 	for node in $CanvasLayer/Node2D.get_children():
 		if node is Node2D:
 			node.enemy_of_origin.clear()
-			node.enemy_of_origin.append(turnArray[i]["node"]) 
+			node.enemy_of_origin.append(turnArray[i]["main_body_node"]) 
 			if i < turnArray.size() and turnArray[i]["name"] == "player_turn": 
 				node.animation = "player"
 				node.CharacterCard.animation = "player"
-
 			else:
 				node.TypeCard.animation = turnArray[i]["type"]
 				node.CharacterCard.animation = turnArray[i]["name"]
@@ -209,14 +211,17 @@ func selected_enemy(Enemy_node : Array):
 	selected_enemies.clear()
 	for arrow : Sprite3D in actual_arrows:
 		arrow.queue_free()
-
+	
 	for node : Node3D in Enemy_node:
+		print(node.name +" "+ str(node.get_node("SelectorPosition").position))
 		var arrow = SELECT_ARROW.instantiate()
 		selected_enemies.append(node)
-		if node.data:
-			if node.data["type"] == "player":
-				arrow.get_node("OmniLight3D").light_color = Color("a3a200")
-			else:
-				arrow.get_node("OmniLight3D").light_color = Color("c81e4f")
-		node.get_node("SelectorPosition").add_child(arrow)
+		#if node.data:
+			#if node.data["type"] == "player":
+				#arrow.get_node("OmniLight3D").light_color = Color("a3a200")
+			#else:
+				#arrow.get_node("OmniLight3D").light_color = Color("c81e4f")
+		node.add_child(arrow)
+		arrow.position = node.get_node("SelectorPosition").position
+		
 #endregion

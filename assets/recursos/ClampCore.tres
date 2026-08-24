@@ -15,6 +15,7 @@ atlas = ExtResource("1_2hkoc")
 region = Rect2(40, 0, 40, 40)
 
 [resource]
+resource_name = "Clamp Core"
 animations = [{
 "frames": [{
 "duration": 1.0,

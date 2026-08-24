@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bo00pddy7gumm"]
+
+[ext_resource type="Script" uid="uid://bhvxr57njetyq" path="res://scenes/fightSceneElements/BodyPart.gd" id="1_8bhan"]
+[ext_resource type="Script" uid="uid://xiscktksb6o4" path="res://scenes/General/AnimatedSprites.gd" id="2_8bhan"]
+[ext_resource type="SpriteFrames" uid="uid://dk4gaiyf8sd83" path="res://assets/recursos/Player.tres" id="2_ohb5x"]
+[ext_resource type="Shape3D" uid="uid://cm0h38xmv1nsf" path="res://assets/recursos/CollisionShapeSizes/ForFightCollisions/RaveousCrabClawCollision.tres" id="4_pjj54"]
+
+[node name="BodyPart" type="Node3D"]
+script = ExtResource("1_8bhan")
+
+[node name="SelectorPosition" type="Marker3D" parent="."]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, 0, 0)
+texture_filter = 0
+sprite_frames = ExtResource("2_ohb5x")
+animation = &"Idle"
+script = ExtResource("2_8bhan")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, -0.35, 0.11)
+shape = ExtResource("4_pjj54")
+
+[connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]
