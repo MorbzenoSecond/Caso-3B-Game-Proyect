@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="FightMovementsResource" load_steps=13 format=3 uid="uid://csuaaq64lhao2"]
+
+[ext_resource type="Script" uid="uid://dmmvynklhh8f0" path="res://Resources/FightResources/MovementsScripts/BodyParts.gd" id="1_myptc"]
+[ext_resource type="SpriteFrames" uid="uid://rxsqsis17k4x" path="res://assets/recursos/Master.tres" id="2_fbylq"]
+[ext_resource type="Shape3D" uid="uid://rm7gdaate1eh" path="res://assets/recursos/CollisionShapeSizes/ForFightCollisions/48x48.tres" id="3_0sqlw"]
+[ext_resource type="Script" uid="uid://c0gecm4ujy755" path="res://Resources/FightResources/MovementsScripts/FightMovements.gd" id="4_5cjme"]
+[ext_resource type="PackedScene" uid="uid://bll14li66rh20" path="res://scenes/Proyectiles/shoot.tscn" id="5_dqk4t"]
+[ext_resource type="PackedScene" uid="uid://cqeyj8ghalk2v" path="res://scenes/Proyectiles/SpecialEffects/visual_effect_purple.tscn" id="6_2j360"]
+[ext_resource type="Script" uid="uid://cwsj3y0oxnuja" path="res://Resources/FightResources/MovementsScripts/ShootMovementScript.gd" id="7_hr0ir"]
+[ext_resource type="Script" uid="uid://dt6qeewy4r4u1" path="res://Resources/FightResources/MovementsScripts/DirectPunchMovementScript.gd" id="8_xfohr"]
+[ext_resource type="Script" uid="uid://bw3watrbs53ld" path="res://Resources/FightResources/CharacterResource/FightResourceScript.gd" id="9_kbq7i"]
+
+[sub_resource type="Resource" id="Resource_pn0ah"]
+script = ExtResource("1_myptc")
+character = ExtResource("2_fbylq")
+main_body_part = true
+selector_point_position = Vector3(0, 0.15, -0.38)
+local_life = 20.0
+local_defense = 3.0
+shape3D = ExtResource("3_0sqlw")
+shape_position = Vector3(0, -0.06, 0)
+metadata/_custom_type_script = "uid://dmmvynklhh8f0"
+
+[sub_resource type="Resource" id="Resource_ci18a"]
+script = ExtResource("7_hr0ir")
+ShootType = ExtResource("5_dqk4t")
+ShootSpeed = 2.0
+VisualEffect = Array[PackedScene]([ExtResource("6_2j360")])
+metadata/_custom_type_script = "uid://cwsj3y0oxnuja"
+
+[sub_resource type="Resource" id="Resource_m8d2d"]
+script = ExtResource("8_xfohr")
+metadata/_custom_type_script = "uid://dt6qeewy4r4u1"
+
+[resource]
+script = ExtResource("9_kbq7i")
+SpecialActions = Array[ExtResource("4_5cjme")]([SubResource("Resource_ci18a"), SubResource("Resource_m8d2d")])
+actions_positions = Vector3(0, 0.4, 0)
+base_speed = 25.0
+base_damage = 4.0
+base_life = 20.0
+BodyParts = Array[ExtResource("1_myptc")]([SubResource("Resource_pn0ah")])
+metadata/_custom_type_script = "uid://bw3watrbs53ld"

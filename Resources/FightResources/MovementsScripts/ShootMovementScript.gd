@@ -1,4 +1,3 @@
-
 class_name ShootMovement
 extends FightMovements
 
@@ -42,37 +41,37 @@ func shoot(direction, self_node):
 	scene.node = self
 	var flare_tex = self_node.get_node("Marker3D").get_node("Sprite3D").material_override.get_shader_parameter("flare_texture")
 
-	if flare_tex and flare_tex is GradientTexture2D:
-		var grad: Gradient = flare_tex.gradient
-		
-		if grad.get_point_count() > 0:
-			tween(self_node)
-
-func tween(self_node):
-	#$AudioStreamPlayer3D2.play()
-	var sprite = self_node.get_node("Marker3D").get_node("Sprite3D")
-	if sprite.material_override:
-		sprite.material_override = sprite.material_override.duplicate()
-	var flare_tex = sprite.material_override.get_shader_parameter("flare_texture")
-
-	if flare_tex and flare_tex is GradientTexture2D:
-		var grad: Gradient = flare_tex.gradient
-		
-		if grad.get_point_count() > 1:
-			var target_color1 = Color(0.85, 0.38, 0.78)
-			var target_color2 = Color(0.99, 0.51, 0.63) 
-			
-			var start_color1 = Color(0.85, 0.38, 0.78)
-			var start_color2 = Color(0.99, 0.51, 0.63)
-			var start_offset = 0.01
-			
-			sprite.material_override.set_shader_parameter("primary_color", start_color1)
-			sprite.material_override.set_shader_parameter("secondary_color", start_color2)
-			grad.set_offset(1, start_offset)
-			var initial_offset = grad.get_offset(1)
-			
-			var target_offset = 0.99
-			var duration = 0.5
+	#if flare_tex and flare_tex is GradientTexture2D:
+		#var grad: Gradient = flare_tex.gradient
+		#
+		#if grad.get_point_count() > 0:
+			#tween(self_node)
+#
+#func tween(self_node):
+	##$AudioStreamPlayer3D2.play()
+	#var sprite = self_node.get_node("Marker3D").get_node("Sprite3D")
+	#if sprite.material_override:
+		#sprite.material_override = sprite.material_override.duplicate()
+	#var flare_tex = sprite.material_override.get_shader_parameter("flare_texture")
+#
+	#if flare_tex and flare_tex is GradientTexture2D:
+		#var grad: Gradient = flare_tex.gradient
+		#
+		#if grad.get_point_count() > 1:
+			#var target_color1 = Color(0.85, 0.38, 0.78)
+			#var target_color2 = Color(0.99, 0.51, 0.63) 
+			#
+			#var start_color1 = Color(0.85, 0.38, 0.78)
+			#var start_color2 = Color(0.99, 0.51, 0.63)
+			#var start_offset = 0.01
+			#
+			#sprite.material_override.set_shader_parameter("primary_color", start_color1)
+			#sprite.material_override.set_shader_parameter("secondary_color", start_color2)
+			#grad.set_offset(1, start_offset)
+			#var initial_offset = grad.get_offset(1)
+			#
+			#var target_offset = 0.99
+			#var duration = 0.5
 			
 			#var tw = create_tween()
 #

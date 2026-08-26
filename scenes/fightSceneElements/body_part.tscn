@@ -1,9 +1,90 @@
-[gd_scene load_steps=5 format=3 uid="uid://bo00pddy7gumm"]
+[gd_scene load_steps=17 format=3 uid="uid://bo00pddy7gumm"]
 
 [ext_resource type="Script" uid="uid://bhvxr57njetyq" path="res://scenes/fightSceneElements/BodyPart.gd" id="1_8bhan"]
 [ext_resource type="Script" uid="uid://xiscktksb6o4" path="res://scenes/General/AnimatedSprites.gd" id="2_8bhan"]
-[ext_resource type="SpriteFrames" uid="uid://dk4gaiyf8sd83" path="res://assets/recursos/Player.tres" id="2_ohb5x"]
+[ext_resource type="Shader" uid="uid://38e3cy23ef31" path="res://scenes/fightSceneElements/outliner.gdshader" id="2_pjj54"]
+[ext_resource type="Texture2D" uid="uid://ecs8j181uyr1" path="res://assets/sprites/Cangrejos.png" id="3_xi7b8"]
 [ext_resource type="Shape3D" uid="uid://cm0h38xmv1nsf" path="res://assets/recursos/CollisionShapeSizes/ForFightCollisions/RaveousCrabClawCollision.tres" id="4_pjj54"]
+[ext_resource type="Texture2D" uid="uid://72a3ar8efein" path="res://assets/sprites/Sprite-0003.png" id="7_d6wfd"]
+[ext_resource type="Texture2D" uid="uid://bueoqsuh6nh8y" path="res://assets/sprites/Sprite-0001.png" id="8_ayjey"]
+[ext_resource type="Texture2D" uid="uid://dw78dcpnk4xcw" path="res://assets/sprites/Sprite-0002.png" id="9_f1y66"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xi7b8"]
+render_priority = 0
+shader = ExtResource("2_pjj54")
+shader_parameter/texture_albedo = ExtResource("3_xi7b8")
+shader_parameter/outline_color = Color(1, 1, 0, 1)
+shader_parameter/outline_width = 1.0
+shader_parameter/enable_outline = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hlbs1"]
+atlas = ExtResource("3_xi7b8")
+region = Rect2(120, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l737m"]
+atlas = ExtResource("3_xi7b8")
+region = Rect2(120, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exgvr"]
+atlas = ExtResource("3_xi7b8")
+region = Rect2(120, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hn46l"]
+atlas = ExtResource("3_xi7b8")
+region = Rect2(120, 0, 40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k4r0q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hlbs1")
+}],
+"loop": true,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l737m")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exgvr")
+}],
+"loop": true,
+"name": &"Punched",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hn46l")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gfuct"]
+viewport_path = NodePath("LiveBar/SubViewport")
+
+[sub_resource type="GDScript" id="GDScript_0ne7h"]
+script/source = "@tool
+extends SubViewport
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
 
 [node name="BodyPart" type="Node3D"]
 script = ExtResource("1_8bhan")
@@ -12,9 +93,10 @@ script = ExtResource("1_8bhan")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_xi7b8")
 texture_filter = 0
-sprite_frames = ExtResource("2_ohb5x")
-animation = &"Idle"
+sprite_frames = SubResource("SpriteFrames_k4r0q")
+animation = &"Punched"
 script = ExtResource("2_8bhan")
 
 [node name="Area3D" type="Area3D" parent="."]
@@ -22,5 +104,48 @@ script = ExtResource("2_8bhan")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, -0.35, 0.11)
 shape = ExtResource("4_pjj54")
+
+[node name="LiveBar" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, 0.49372, -0.0433117)
+texture_filter = 0
+texture = SubResource("ViewportTexture_gfuct")
+
+[node name="SubViewport" type="SubViewport" parent="LiveBar"]
+disable_3d = true
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(30, 10)
+render_target_update_mode = 4
+script = SubResource("GDScript_0ne7h")
+
+[node name="Control" type="Control" parent="LiveBar/SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="TextureProgressBar" parent="LiveBar/SubViewport/Control"]
+texture_filter = 1
+layout_mode = 0
+offset_top = 5.0
+offset_right = 30.0
+offset_bottom = 10.0
+step = 0.01
+value = 30.0
+texture_under = ExtResource("7_d6wfd")
+texture_over = ExtResource("8_ayjey")
+texture_progress = ExtResource("9_f1y66")
+
+[node name="Name" type="Label3D" parent="LiveBar"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.1, 0.02, 0)
+text = "asdas"
+
+[node name="livedata" type="Label3D" parent="LiveBar"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.025, 0.01)
+alpha_cut = 1
+text = "dsad"
+
+[node name="Level" type="Label3D" parent="LiveBar"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.09, 0.02, 0)
 
 [connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]

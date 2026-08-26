@@ -35,6 +35,7 @@ metadata/_custom_type_script = "uid://dt6qeewy4r4u1"
 [resource]
 script = ExtResource("7_70k86")
 SpecialActions = Array[ExtResource("1_vjqxw")]([SubResource("Resource_ci18a"), SubResource("Resource_m8d2d")])
+actions_positions = Vector3(0, -0.13, 0)
 base_speed = 20.0
 base_damage = 3.0
 base_life = 10.0

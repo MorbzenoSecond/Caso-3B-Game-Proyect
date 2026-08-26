@@ -15,8 +15,8 @@ func _ready() -> void:
 	await enterExitAnimation()
 	$AnimationPlayer.play("ingrese")
 	await get_tree().process_frame
-	turns()
-	#selected_enemy($Enemies.get_children())
+	await turns()
+	select_all_enemies()
 
 func finish_fight():
 	$AnimationPlayer.play_backwards("ingrese")
@@ -137,8 +137,7 @@ func turn():
 	var i = 0
 	for node in $CanvasLayer/Node2D.get_children():
 		if node is Node2D:
-			node.enemy_of_origin.clear()
-			node.enemy_of_origin.append(turnArray[i]["main_body_node"]) 
+			node.enemy_of_origin = turnArray[i]["main_body_node"]
 			if i < turnArray.size() and turnArray[i]["name"] == "player_turn": 
 				node.animation = "player"
 				node.CharacterCard.animation = "player"
@@ -209,19 +208,26 @@ var selected_enemies : Array = []
 func selected_enemy(Enemy_node : Array):
 	var actual_arrows = get_tree().get_nodes_in_group("SELECTARROW")
 	selected_enemies.clear()
-	for arrow : Sprite3D in actual_arrows:
-		arrow.queue_free()
+	for arrow : AnimatedSprite3D in actual_arrows:
+		arrow.remove_from_group("SELECTARROW")
+		arrow.material_override.set_shader_parameter("enable_outline", false)
 	
 	for node : Node3D in Enemy_node:
-		print(node.name +" "+ str(node.get_node("SelectorPosition").position))
-		var arrow = SELECT_ARROW.instantiate()
+		#print(node.name +" "+ str(node.get_node("SelectorPosition").position))
+		#var arrow = SELECT_ARROW.instantiate()
 		selected_enemies.append(node)
 		#if node.data:
 			#if node.data["type"] == "player":
 				#arrow.get_node("OmniLight3D").light_color = Color("a3a200")
 			#else:
 				#arrow.get_node("OmniLight3D").light_color = Color("c81e4f")
-		node.add_child(arrow)
-		arrow.position = node.get_node("SelectorPosition").position
-		
+		#node.add_child(arrow)
+		#arrow.position = node.get_node("SelectorPosition").position
+
+func select_all_enemies():
+	var all_body_parts : Array = get_tree().get_nodes_in_group("EnemyBodyPart")
+	for i : Node3D in all_body_parts:
+		i.get_node("AnimatedSprite3D").add_to_group("SELECTARROW")
+		i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
+	#selected_enemy(all_body_parts)
 #endregion

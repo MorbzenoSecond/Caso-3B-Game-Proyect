@@ -2,17 +2,16 @@
 
 [ext_resource type="Script" uid="uid://bk644qld6vvsi" path="res://scenes/characters/inMap/WalkingEnemyInMap.gd" id="1_2k8jx"]
 [ext_resource type="SpriteFrames" uid="uid://bqdfn5sk2byo7" path="res://assets/recursos/MoshPunch.tres" id="3_2k8jx"]
+[ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://assets/recursos/CollisionShapeSizes/ForWakingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="3_cjdqv"]
 [ext_resource type="Resource" uid="uid://7nhjknp2ayb7" path="res://Resources/EnemiesInMap/MoshPunchResource.tres" id="3_ubb1b"]
 [ext_resource type="Script" uid="uid://xiscktksb6o4" path="res://scenes/General/AnimatedSprites.gd" id="4_kmquc"]
 [ext_resource type="AudioStream" uid="uid://bl1i8posrhbmp" path="res://assets/sounds/tindeck_1.mp3" id="5_3ac0h"]
+[ext_resource type="Shape3D" uid="uid://jsnmr0624ump" path="res://assets/recursos/CollisionShapeSizes/ForWakingCharacterInMapCollisions/ForAreaCollisions/48x48.tres" id="6_kmquc"]
 [ext_resource type="Script" uid="uid://srhxtk46w3b7" path="res://Resources/State_Machine.gd" id="6_v1cm4"]
 [ext_resource type="Script" uid="uid://bx63c6h0u1nfc" path="res://scenes/enemies/normal.gd" id="7_lqaal"]
 [ext_resource type="Script" uid="uid://drroleuim42go" path="res://scenes/enemies/run.gd" id="8_an2a7"]
 [ext_resource type="Script" uid="uid://cyom2e2i57rtc" path="res://scenes/enemies/search.gd" id="9_sc62i"]
 [ext_resource type="Script" uid="uid://8bl4etaxftke" path="res://scenes/enemies/back.gd" id="10_isrwi"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_fcftc"]
-size = Vector3(0.14, 0.204, 0.083)
 
 [sub_resource type="Shader" id="Shader_2k8jx"]
 code = "shader_type spatial;
@@ -134,9 +133,6 @@ shader_parameter/billboard = false
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_pe3k2"]
 gradient = SubResource("Gradient_cjdqv")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_lu5c6"]
-size = Vector3(0.314477, 0.24895, 0.218732)
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_y5th1"]
 custom_solver_bias = 0.321
 margin = 2.864
@@ -167,8 +163,8 @@ script = ExtResource("1_2k8jx")
 stats = ExtResource("3_ubb1b")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.999999, -6.25849e-07, 0, 6.25849e-07, 0.999999, 0, 0.002, 5.82077e-11)
-shape = SubResource("BoxShape3D_fcftc")
+transform = Transform3D(1, 0, 0, 0, 0.999999, -6.25849e-07, 0, 6.25849e-07, 0.999999, 0, 0, 0)
+shape = ExtResource("3_cjdqv")
 debug_color = Color(0.94344, 0.21855, 0.251713, 0.42)
 
 [node name="RotableObjects" type="Node3D" parent="."]
@@ -187,7 +183,7 @@ alpha_cut = 2
 texture_filter = 0
 sprite_frames = ExtResource("3_2k8jx")
 animation = &"Idle"
-frame_progress = 0.615363
+frame_progress = 0.604626
 script = ExtResource("4_kmquc")
 time = 0.5
 
@@ -200,9 +196,10 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape3D" parent="RotableObjects/Areas/CharacterArea3D"]
 transform = Transform3D(1, 0, 0, 0, 0.999999, -5.96046e-07, 0, 5.96046e-07, 0.999999, 0, 0, 0)
-shape = SubResource("BoxShape3D_lu5c6")
+shape = ExtResource("6_kmquc")
 
 [node name="DetectionArea3D" type="Area3D" parent="RotableObjects/Areas"]
+visible = false
 collision_layer = 4
 collision_mask = 4
 
@@ -213,6 +210,7 @@ debug_color = Color(0.86593, 0.256442, 0.623914, 0.42)
 
 [node name="UndetectedArea3D" type="Area3D" parent="RotableObjects/Areas"]
 transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0)
+visible = false
 collision_layer = 4
 collision_mask = 4
 

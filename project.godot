@@ -34,6 +34,7 @@ MAIN=""
 SELECTARROW=""
 PROYECTILE=""
 AFTERIMAGES=""
+EnemyBodyPart=""
 
 [input]
 

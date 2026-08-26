@@ -1,34 +1,25 @@
-[gd_resource type="Resource" script_class="EnemiesInMapData" load_steps=8 format=3 uid="uid://bn1ckyab1qwlm"]
+[gd_resource type="Resource" script_class="EnemiesInMapData" load_steps=6 format=3 uid="uid://bn1ckyab1qwlm"]
 
 [ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/EnemiesInMap/SpecialActionScripts/EnemyAction.gd" id="1_nsarc"]
-[ext_resource type="PackedScene" uid="uid://bll14li66rh20" path="res://scenes/Proyectiles/shoot.tscn" id="2_ho7ma"]
-[ext_resource type="PackedScene" uid="uid://cqeyj8ghalk2v" path="res://scenes/Proyectiles/SpecialEffects/visual_effect_purple.tscn" id="3_cxfoh"]
-[ext_resource type="Script" uid="uid://b0ghckxb8f0id" path="res://Resources/EnemiesInMap/SpecialActionScripts/ShootActionScript.gd" id="4_qgggi"]
+[ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://assets/recursos/CollisionShapeSizes/ForWakingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="2_31bsi"]
+[ext_resource type="Shape3D" uid="uid://jsnmr0624ump" path="res://assets/recursos/CollisionShapeSizes/ForWakingCharacterInMapCollisions/ForAreaCollisions/48x48.tres" id="4_nsarc"]
 [ext_resource type="SpriteFrames" uid="uid://cq2w4psg8w4bh" path="res://assets/recursos/ClampCore.tres" id="5_mi7sh"]
 [ext_resource type="Script" uid="uid://ba00fspq8q8te" path="res://Resources/EnemiesInMap/EnemiesInMapData.gd" id="6_0vyyv"]
-
-[sub_resource type="Resource" id="Resource_dgqxs"]
-script = ExtResource("4_qgggi")
-ShootType = ExtResource("2_ho7ma")
-ShootSpeed = 2.0
-VisualEffect = Array[PackedScene]([ExtResource("3_cxfoh")])
-CoolDown = 1.0
-metadata/_custom_type_script = "uid://b0ghckxb8f0id"
 
 [resource]
 script = ExtResource("6_0vyyv")
 character = ExtResource("5_mi7sh")
 RUN_MAX_SPEED = 0.5
 ACCELERATION = 3.0
-SpecialActions = Array[ExtResource("1_nsarc")]([SubResource("Resource_dgqxs")])
+SpecialActions = Array[ExtResource("1_nsarc")]([])
 enemy_data = {
 "Enemies": [{
-"damage": 1,
-"level": 3,
-"life": 7,
-"name": "ClampCore",
-"speed": 14,
-"type": "enemy"
+"level": 2,
+"name": "ClampCore"
 }]
 }
+body_collision_type = ExtResource("2_31bsi")
+body_collision_position = Vector3(0, 0, 0)
+character_area_collision_type = ExtResource("4_nsarc")
+character_area_collision_position = Vector3(0, 0, 0)
 metadata/_custom_type_script = "uid://ba00fspq8q8te"

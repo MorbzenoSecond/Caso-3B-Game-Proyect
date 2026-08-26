@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dk4gaiyf8sd83"]
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dodm3dwr4014l"]
 
 [ext_resource type="Texture2D" uid="uid://ecs8j181uyr1" path="res://assets/sprites/Cangrejos.png" id="1_hlbs1"]
 
@@ -19,6 +19,7 @@ atlas = ExtResource("1_hlbs1")
 region = Rect2(120, 0, 40, 40)
 
 [resource]
+resource_name = "Player"
 animations = [{
 "frames": [{
 "duration": 1.0,

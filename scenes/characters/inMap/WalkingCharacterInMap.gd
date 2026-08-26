@@ -18,4 +18,4 @@ func set_sprite_frames() -> void:
 	if stats.character:
 		sprite.sprite_frames = load(stats.character.get_path())
 		sprite.play("Idle")
-	sprite.set_collision_size(original_position.y)
+	sprite.set_collision_size()

@@ -14,3 +14,11 @@ extends Resource
 			},
 		]
 	}
+
+@export_group("body_collision")
+@export var body_collision_type = Shape3D
+@export var body_collision_position : Vector3 = Vector3.ZERO
+
+@export_group("areas_collision")
+@export var character_area_collision_type = Shape3D
+@export var character_area_collision_position : Vector3 = Vector3.ZERO

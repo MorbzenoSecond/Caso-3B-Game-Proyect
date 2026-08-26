@@ -1,13 +1,13 @@
 extends Node2D
 
-var enemy_of_origin :Array =[]
+var enemy_of_origin
 @onready var TypeCard = $TypeCard
 @onready var CharacterCard = $TypeCard/CharacterCard
 @onready var original_position_y = $TypeCard.position.y
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouse and Input.is_action_just_pressed("click"):
-		$"../../..".selected_enemy(enemy_of_origin)
+		enemy_of_origin.select_body_part()
 
 var animation_tween : Tween
 

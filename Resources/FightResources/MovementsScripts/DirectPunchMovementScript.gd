@@ -10,7 +10,6 @@ func executed(self_node : Node3D, target_node: Node3D):
 	tween.parallel().tween_property(self_node, "global_position:z", target_node.get_marker_position("hit_position_1").z, 1.5)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_OUT)
-	print(target_node.name)
 	tween.tween_callback(self_node.attack.bind(self_node.true_damage, target_node))
 
 	tween.tween_property(self_node, "global_position", self_node.original_position, 1)\

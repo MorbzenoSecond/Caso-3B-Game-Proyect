@@ -1,30 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://b7gqbwv4oolhh"]
+[gd_scene load_steps=10 format=3 uid="uid://b7gqbwv4oolhh"]
 
 [ext_resource type="Script" uid="uid://bab72etoipkmn" path="res://scenes/enemies/enemy_in_fight.gd" id="1_0a5y4"]
-[ext_resource type="PackedScene" uid="uid://bll14li66rh20" path="res://scenes/Proyectiles/shoot.tscn" id="2_s3a6u"]
 [ext_resource type="Resource" uid="uid://c3hkr4fvic8tn" path="res://Resources/FightResources/CharacterResource/MoshPunchFightResource.tres" id="3_m7iha"]
-[ext_resource type="Texture2D" uid="uid://72a3ar8efein" path="res://assets/sprites/Sprite-0003.png" id="5_s3a6u"]
-[ext_resource type="Texture2D" uid="uid://bueoqsuh6nh8y" path="res://assets/sprites/Sprite-0001.png" id="6_h3y8o"]
-[ext_resource type="Texture2D" uid="uid://dw78dcpnk4xcw" path="res://assets/sprites/Sprite-0002.png" id="7_d3gou"]
 [ext_resource type="AudioStream" uid="uid://bl1i8posrhbmp" path="res://assets/sounds/tindeck_1.mp3" id="8_h3y8o"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_h3y8o"]
-viewport_path = NodePath("Sprite3D/SubViewport")
-
-[sub_resource type="GDScript" id="GDScript_h3y8o"]
-script/source = "@tool
-extends SubViewport
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
 
 [sub_resource type="Shader" id="Shader_y5th1"]
 code = "shader_type spatial;
@@ -148,57 +126,12 @@ gradient = SubResource("Gradient_sb86v")
 
 [node name="CharacterInFight" type="Node3D"]
 script = ExtResource("1_0a5y4")
-shoot_type = ExtResource("2_s3a6u")
 FightResourceStats = ExtResource("3_m7iha")
 
 [node name="Data" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, 0.49372, -0.0433117)
-texture_filter = 0
-texture = SubResource("ViewportTexture_h3y8o")
-
-[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
-disable_3d = true
-transparent_bg = true
-canvas_item_default_texture_filter = 0
-size = Vector2i(30, 10)
-render_target_update_mode = 4
-script = SubResource("GDScript_h3y8o")
-
-[node name="Control" type="Control" parent="Sprite3D/SubViewport"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ProgressBar" type="TextureProgressBar" parent="Sprite3D/SubViewport/Control"]
-texture_filter = 1
-layout_mode = 0
-offset_top = 5.0
-offset_right = 30.0
-offset_bottom = 10.0
-step = 0.01
-value = 30.0
-texture_under = ExtResource("5_s3a6u")
-texture_over = ExtResource("6_h3y8o")
-texture_progress = ExtResource("7_d3gou")
-
-[node name="Level" type="Label3D" parent="Sprite3D"]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.09, 0.02, 0)
-text = "asd"
-
-[node name="Name" type="Label3D" parent="Sprite3D"]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.1, 0.02, 0)
-text = "asdas"
-
-[node name="livedata" type="Label3D" parent="Sprite3D"]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.025, 0.01)
-alpha_cut = 1
-text = "dsad"
-
-[node name="SelectorPosition" type="Marker3D" parent="."]
+[node name="ActionsPosition" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.321, 0)
 
 [node name="Node3D" type="Node3D" parent="."]

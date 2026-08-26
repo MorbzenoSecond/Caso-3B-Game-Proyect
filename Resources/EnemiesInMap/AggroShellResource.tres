@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="EnemiesInMapData" load_steps=4 format=3 uid="uid://cjqivx4dogepw"]
+[gd_resource type="Resource" script_class="EnemiesInMapData" load_steps=6 format=3 uid="uid://cjqivx4dogepw"]
 
 [ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/EnemiesInMap/SpecialActionScripts/EnemyAction.gd" id="1_4rfte"]
 [ext_resource type="Script" uid="uid://ba00fspq8q8te" path="res://Resources/EnemiesInMap/EnemiesInMapData.gd" id="1_enp0y"]
 [ext_resource type="SpriteFrames" uid="uid://p1lgq4lotnle" path="res://assets/recursos/AggroShell.tres" id="1_v4885"]
+[ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://assets/recursos/CollisionShapeSizes/ForWakingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="2_m5y2y"]
+[ext_resource type="Shape3D" uid="uid://jsnmr0624ump" path="res://assets/recursos/CollisionShapeSizes/ForWakingCharacterInMapCollisions/ForAreaCollisions/48x48.tres" id="4_yfbv6"]
 
 [resource]
 script = ExtResource("1_enp0y")
@@ -12,12 +14,12 @@ ACCELERATION = 3.0
 SpecialActions = Array[ExtResource("1_4rfte")]([])
 enemy_data = {
 "Enemies": [{
-"damage": 1,
-"level": 4,
-"life": 6,
-"name": "AggroShell",
-"speed": 14,
-"type": "enemy"
+"level": 2,
+"name": "AggroShell"
 }]
 }
+body_collision_type = ExtResource("2_m5y2y")
+body_collision_position = Vector3(0, 0, 0)
+character_area_collision_type = ExtResource("4_yfbv6")
+character_area_collision_position = Vector3(0, 0, 0)
 metadata/_custom_type_script = "uid://ba00fspq8q8te"

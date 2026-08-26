@@ -29,7 +29,6 @@ func basic_movement(delta):
 	velocity.x = move_toward(velocity.x, direction2.x * CUSTOM_RUN_MAX_SPEED, stats.ACCELERATION * delta)
 	velocity.z = move_toward(velocity.z, direction2.z * CUSTOM_RUN_MAX_SPEED, stats.ACCELERATION * delta)
 
-
 	var target_rotation = direction.signed_angle_to(Vector3.MODEL_FRONT, Vector3.MODEL_BOTTOM)
 	if abs(target_rotation - rotation.y) >deg_to_rad(60):
 		ROTATION_SPEED = 20
