@@ -50,11 +50,11 @@ func CreateTimersForSpecialActions():
 		NewTimer.wait_time = i.CoolDown
 		NewTimer.timeout.connect($StateMachine/Chase._on_special_action_timeout.bind(i))
 
-#region Process Region
-func _process(_delta: float) -> void:
-
-	$Label3D.text = $StateMachine.current_state.name
-#endregion
+##region Process Region
+#func _process(_delta: float) -> void:
+#
+	#$Label3D.text = $StateMachine.current_state.name
+##endregion
 
 #region area collisions Region
 func _on_character_area_3d_body_entered(body: Node3D) -> void:
@@ -69,9 +69,22 @@ func _on_character_area_3d_body_exited(body: Node3D) -> void:
 func _on_detection_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("PLAYER"):
 		target_pos = body
+		if stats.SmartEnemy:
+			emit_alert()
 		has_target = true
 
 func _on_undetected_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("PLAYER"):
 		has_target = false
 #endregion
+
+func emit_alert():
+	var processed_body := []
+	for enemy in $RotableObjects/Areas/UndetectedArea3D.get_overlapping_bodies():
+		
+		if enemy == self:
+			continue
+
+		if enemy is WalkingEnemyInMap and enemy not in processed_body:
+			enemy.target_pos = target_pos
+			enemy.has_target= true

@@ -138,12 +138,10 @@ func turn():
 	for node in $CanvasLayer/Node2D.get_children():
 		if node is Node2D:
 			node.enemy_of_origin = turnArray[i]["main_body_node"]
-			if i < turnArray.size() and turnArray[i]["name"] == "player_turn": 
-				node.animation = "player"
-				node.CharacterCard.animation = "player"
-			else:
-				node.TypeCard.animation = turnArray[i]["type"]
-				node.CharacterCard.animation = turnArray[i]["name"]
+			var sprite_resource = "res://assets/recursos/"+turnArray[i]["name"]+".tres"
+			node.TypeCard.animation = turnArray[i]["type"]
+			node.CharacterCard.sprite_frames = load(sprite_resource)
+			node.CharacterCard.play("Idle")
 			i += 1
 
 func enterExitAnimation():

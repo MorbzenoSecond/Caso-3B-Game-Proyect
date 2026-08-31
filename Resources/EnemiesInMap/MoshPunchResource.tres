@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/EnemiesInMap/SpecialActionScripts/EnemyAction.gd" id="1_8qtja"]
 [ext_resource type="Script" uid="uid://ba00fspq8q8te" path="res://Resources/EnemiesInMap/EnemiesInMapData.gd" id="1_h45ex"]
 [ext_resource type="SpriteFrames" uid="uid://bqdfn5sk2byo7" path="res://assets/recursos/MoshPunch.tres" id="1_rumx6"]
-[ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://assets/recursos/CollisionShapeSizes/ForWakingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="2_5gdme"]
-[ext_resource type="Shape3D" uid="uid://jsnmr0624ump" path="res://assets/recursos/CollisionShapeSizes/ForWakingCharacterInMapCollisions/ForAreaCollisions/48x48.tres" id="4_7bbmi"]
+[ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://assets/recursos/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="2_5gdme"]
+[ext_resource type="Shape3D" uid="uid://jsnmr0624ump" path="res://assets/recursos/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForAreaCollisions/48x48.tres" id="4_7bbmi"]
 
 [resource]
 script = ExtResource("1_h45ex")
@@ -12,6 +12,7 @@ character = ExtResource("1_rumx6")
 RUN_MAX_SPEED = 0.5
 ACCELERATION = 1.1
 SpecialActions = Array[ExtResource("1_8qtja")]([])
+SmartEnemy = false
 enemy_data = {
 "Enemies": [{
 "level": 2,

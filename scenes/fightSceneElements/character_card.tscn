@@ -189,7 +189,7 @@ animation = &"player"
 material = SubResource("ShaderMaterial_r004s")
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_ktahu")
-animation = &"ClampCore"
+animation = &"morb"
 
 [node name="Area2D" type="Area2D" parent="TypeCard"]
 

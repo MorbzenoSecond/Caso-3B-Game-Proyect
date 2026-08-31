@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EventsResource" load_steps=8 format=3 uid="uid://bwxrw3ia817bt"]
+
+[ext_resource type="Script" uid="uid://chr0ghu81efaq" path="res://Resources/EventsResources/EventResourceScript.gd" id="2_15p3u"]
+[ext_resource type="Script" uid="uid://dbs4435dsf3ry" path="res://addons/dialogue_manager/dialogue_resource.gd" id="2_pm4bq"]
+[ext_resource type="Resource" uid="uid://hig5adbbujkd" path="res://Dialogues/evento1.dialogue" id="2_sl2vd"]
+[ext_resource type="Resource" uid="uid://dvbgi7c5ybnkw" path="res://evento2.dialogue" id="3_i8uum"]
+[ext_resource type="Script" uid="uid://dnbnrq2nbmdjr" path="res://Resources/EventsResources/EventOne.gd" id="4_o4x3f"]
+[ext_resource type="Resource" uid="uid://dvfkgyeydns3s" path="res://see_ya.dialogue" id="4_sl2vd"]
+
+[sub_resource type="Resource" id="Resource_pm4bq"]
+script = ExtResource("4_o4x3f")
+Dialogues = Array[ExtResource("2_pm4bq")]([ExtResource("2_sl2vd"), ExtResource("3_i8uum"), ExtResource("4_sl2vd")])
+metadata/_custom_type_script = "uid://dnbnrq2nbmdjr"
+
+[resource]
+script = ExtResource("2_15p3u")
+event_script = SubResource("Resource_pm4bq")
+metadata/_custom_type_script = "uid://chr0ghu81efaq"

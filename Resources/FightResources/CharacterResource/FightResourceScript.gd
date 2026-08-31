@@ -7,7 +7,6 @@ class_name FightMovementsResource
 @export_group("base_stats")
 @export var base_speed : float
 @export var base_damage : float
-@export var base_life : float
 
 @export_group("base_stats")
 @export var BodyParts : Array[BodyPart]

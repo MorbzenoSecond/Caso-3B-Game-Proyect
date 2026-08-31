@@ -2,7 +2,7 @@ extends WalkingCharacterInMap
 class_name WalkingNPCInMap
 
 @export var Stationary : bool = false
-@export var Dialogue : Resource
+@export var event_data : EventsResource
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var CUSTOM_RUN_MAX_SPEED = stats.RUN_MAX_SPEED

@@ -71,6 +71,14 @@ func _on_timer_timeout() -> void:
 	for i in $NodoDePelea.get_children():
 		i.queue_free()
 
+func enter_event():
+	GameDataManager.BlockedInputs = true
+	$UI/UI.animation_player.play("appear")
+
+func exit_event():
+	GameDataManager.BlockedInputs = false
+	$UI/UI.animation_player.play_backwards("appear")
+
 #region Fight Manager Region
 func start_fight(enemy_data, scenary_fight_background, scenary_fight_music, enemy_node):
 	for i in get_tree().get_nodes_in_group("PROYECTILE"):

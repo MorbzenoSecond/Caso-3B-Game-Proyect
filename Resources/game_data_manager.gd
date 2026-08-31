@@ -94,7 +94,21 @@ var world_map = {
 	"Exterior1": {
 		"zone" : "Exterior", 
 		"connections": {
-			"Z1-Z2": {"target_room": "Interior1",  "target_marker": "Z1-Z2"}
+			"Z1-Z2": {"target_room": "Interior1",  "target_marker": "Z1-Z2"},
+			"E1-E2": {"target_room": "Exterior2",  "target_marker": "E1-E2"}
+		}
+	},
+	"Exterior2": {
+		"zone" : "Exterior", 
+		"connections": {
+			"E1-E2": {"target_room": "Exterior1",  "target_marker": "E1-E2"},
+			"E2-E3": {"target_room": "Exterior3",  "target_marker": "E2-E3"}
+		}
+	},
+	"Exterior3": {
+		"zone" : "Exterior", 
+		"connections": {
+			"E2-E3": {"target_room": "Exterior2",  "target_marker": "E2-E3"}
 		}
 	}
 }
@@ -146,18 +160,24 @@ func cargar_y_conectar(room_actual_node : String):
 		
 		var marker_salida = CurrentRoomNode.get_node("Conections/"+ e)
 		var marker_entrada = nueva_room.get_node("Conections/"+ e)
+		var sign_value = sign(marker_salida.global_position - marker_entrada.global_position)
+		
+		print("resultado:    " +str(marker_salida.global_position - marker_entrada.global_position))
 		
 		#var link_bridge : NavigationLink3D = NavigationLink3D.new()
-		#
+		##
 		#link_bridge.global_position = marker_salida.global_position
-		#link_bridge.end_position = link_bridge.to_local(marker_entrada.global_position)
-		#
+		#link_bridge.start_position = - Vector3(sign_value.x, 0, sign_value.z)
+		#link_bridge.end_position =  Vector3(sign_value.x, 0, sign_value.z)
+		##
 		#link_bridge.bidirectional =  true
-		#
+		##
 		#MAIN.add_child(link_bridge)
-		
+		#
 		await get_tree().process_frame
 		nueva_room.global_position = marker_salida.global_position - marker_entrada.global_position
+		
+
 	
 	
 	_errase_not_linked_rooms(current_room)

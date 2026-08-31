@@ -35,6 +35,7 @@ SELECTARROW=""
 PROYECTILE=""
 AFTERIMAGES=""
 EnemyBodyPart=""
+DIALOGUEBALLON=""
 
 [input]
 
@@ -63,7 +64,7 @@ E={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Dialogues/main.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Dialogues/evento1.dialogue", "res://Dialogues/main.dialogue", "res://evento2.dialogue", "res://evento.dialogue", "res://see_ya.dialogue")
 
 [rendering]
 

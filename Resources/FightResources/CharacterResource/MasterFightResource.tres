@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FightMovementsResource" load_steps=13 format=3 uid="uid://csuaaq64lhao2"]
+[gd_resource type="Resource" script_class="FightResources" load_steps=13 format=3 uid="uid://csuaaq64lhao2"]
 
 [ext_resource type="Script" uid="uid://dmmvynklhh8f0" path="res://Resources/FightResources/MovementsScripts/BodyParts.gd" id="1_myptc"]
 [ext_resource type="SpriteFrames" uid="uid://rxsqsis17k4x" path="res://assets/recursos/Master.tres" id="2_fbylq"]

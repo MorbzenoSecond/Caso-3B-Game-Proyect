@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://cilffntik2n2v"]
+
+[ext_resource type="Texture2D" uid="uid://c4lo25rgehrrv" path="res://assets/sprites/witch.png" id="1_5dpkm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjkgd"]
+atlas = ExtResource("1_5dpkm")
+region = Rect2(0, 0, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjkgd")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]

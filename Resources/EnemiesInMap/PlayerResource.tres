@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="EnemiesInMapData" load_steps=6 format=3 uid="uid://dc8ychgbrs3im"]
 
 [ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/EnemiesInMap/SpecialActionScripts/EnemyAction.gd" id="1_wh4tj"]
-[ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://assets/recursos/CollisionShapeSizes/ForWakingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="2_bx3cb"]
+[ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://assets/recursos/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="2_bx3cb"]
 [ext_resource type="SpriteFrames" uid="uid://dodm3dwr4014l" path="res://assets/recursos/Player.tres" id="2_el0j4"]
 [ext_resource type="Script" uid="uid://ba00fspq8q8te" path="res://Resources/EnemiesInMap/EnemiesInMapData.gd" id="2_f2kfa"]
-[ext_resource type="Shape3D" uid="uid://jsnmr0624ump" path="res://assets/recursos/CollisionShapeSizes/ForWakingCharacterInMapCollisions/ForAreaCollisions/48x48.tres" id="4_knus5"]
+[ext_resource type="Shape3D" uid="uid://jsnmr0624ump" path="res://assets/recursos/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForAreaCollisions/48x48.tres" id="4_knus5"]
 
 [resource]
 script = ExtResource("2_f2kfa")
@@ -12,6 +12,7 @@ character = ExtResource("2_el0j4")
 RUN_MAX_SPEED = 0.8
 ACCELERATION = 1.2
 SpecialActions = Array[ExtResource("1_wh4tj")]([])
+SmartEnemy = false
 enemy_data = {
 "Enemies": [{
 "level": 2,

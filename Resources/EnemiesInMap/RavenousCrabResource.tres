@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/EnemiesInMap/SpecialActionScripts/EnemyAction.gd" id="1_oduhb"]
 [ext_resource type="SpriteFrames" uid="uid://3u7qeexoci1h" path="res://assets/recursos/RavenousCrab.tres" id="2_elvan"]
-[ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://assets/recursos/CollisionShapeSizes/ForWakingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="2_iixth"]
+[ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://assets/recursos/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="2_iixth"]
 [ext_resource type="Script" uid="uid://ba00fspq8q8te" path="res://Resources/EnemiesInMap/EnemiesInMapData.gd" id="2_mlkda"]
-[ext_resource type="Shape3D" uid="uid://jsnmr0624ump" path="res://assets/recursos/CollisionShapeSizes/ForWakingCharacterInMapCollisions/ForAreaCollisions/48x48.tres" id="4_ecap7"]
+[ext_resource type="Shape3D" uid="uid://jsnmr0624ump" path="res://assets/recursos/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForAreaCollisions/48x48.tres" id="4_ecap7"]
 
 [resource]
 script = ExtResource("2_mlkda")
@@ -12,6 +12,7 @@ character = ExtResource("2_elvan")
 RUN_MAX_SPEED = 0.8
 ACCELERATION = 5.0
 SpecialActions = Array[ExtResource("1_oduhb")]([])
+SmartEnemy = false
 enemy_data = {
 "Enemies": [{
 "level": 2,

@@ -1,7 +1,1 @@
-{
-	"Characters":[
-	{"level":1.0,"name":"Master","type":"player", "party_status" : "leader"},
-	{"level":2.0,"name":"Player","type":"player", "party_status" : "member"},
-	{"level":2.0,"name":"MoshPunch","type":"player", "party_status" : "member"}],
-	"locacion":"Exterior1"
-}
+{"Characters":[{"level":1.0,"name":"Master","party_status":"leader","type":"player"}],"locacion":"Exterior1"}

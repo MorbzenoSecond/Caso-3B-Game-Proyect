@@ -145,8 +145,8 @@ _data = {
 
 [node name="WalkingNeutralInMap" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, 0, 0)
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("1_y4w25")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -189,16 +189,18 @@ libraries = {
 }
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0.232674, 7.45058e-09)
-text = "asd"
+transform = Transform3D(1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 0.517954, 0.0899484)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, 0, 1, 0, 0, 0)
 stream = ExtResource("4_wrtts")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.1
+target_desired_distance = 0.1
+path_height_offset = 0.2
+avoidance_enabled = true
 debug_enabled = true
-debug_use_custom = true
 
 [connection signal="body_entered" from="RotableObjects/Areas/DialogueArea" to="." method="_on_dialogue_area_body_entered"]
 [connection signal="body_exited" from="RotableObjects/Areas/DialogueArea" to="." method="_on_dialogue_area_body_exited"]

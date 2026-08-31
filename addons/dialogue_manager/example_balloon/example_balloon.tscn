@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://73jm5qjy52vq"]
+[gd_scene load_steps=16 format=3 uid="uid://73jm5qjy52vq"]
 
 [ext_resource type="Script" uid="uid://d1wt4ma6055l8" path="res://addons/dialogue_manager/example_balloon/example_balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
+[ext_resource type="Texture2D" uid="uid://bhyilwtpo3irs" path="res://assets/sprites/ballon.png" id="2_kmygl"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
-[ext_resource type="Texture2D" uid="uid://ecs8j181uyr1" path="res://assets/sprites/Cangrejos.png" id="3_nlsx6"]
-[ext_resource type="AudioStream" uid="uid://bsa0v3wu3l7po" path="res://assets/music/end_Battle.wav" id="5_1337t"]
+[ext_resource type="Shader" uid="uid://bqho50vviyxxu" path="res://assets/recursos/shaders/outliner_2D.tres" id="4_kmygl"]
+[ext_resource type="SpriteFrames" uid="uid://bqdfn5sk2byo7" path="res://assets/recursos/MoshPunch.tres" id="5_kmygl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -65,137 +66,61 @@ MarginContainer/constants/margin_right = 30
 MarginContainer/constants/margin_top = 15
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_qkmqt")
 
-[sub_resource type="Shader" id="Shader_icv7u"]
-code = "shader_type canvas_item;
+[sub_resource type="Animation" id="Animation_kmygl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
-// License: CC0
-// Author: Ultipuk, https://ultipuk.xyz
-// Link: https://godotshaders.com/shader/desaturated-and-darkened-texture-progress
+[sub_resource type="Animation" id="Animation_1337t"]
+resource_name = "appear"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../..:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
-#define USE_TERMINATOR
- //#define USE_UV_BASED_TERMINATOR_SIZE
- //#define USE_SAMPLER_TEXTURE
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r5ei8"]
+_data = {
+&"RESET": SubResource("Animation_kmygl"),
+&"appear": SubResource("Animation_1337t")
+}
 
-/** Use this from the editor for interpolation. */
-uniform float progress: hint_range(-1.0, 1.0) = 0.5;
-uniform float progress2: hint_range(-1.0, 1.0) = 0.5;
-#ifdef USE_SAMPLER_TEXTURE
-/** Just a texture. */
-uniform sampler2D albedo_texture : source_color;
-#endif
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r5ei8"]
+shader = ExtResource("4_kmygl")
+shader_parameter/Width = 1.0
 
-#ifdef USE_TERMINATOR
-group_uniforms terminator;
-/** Terminator color. */
-uniform vec4 terminator_color: source_color = vec4(1.0);
-	#ifdef USE_UV_BASED_TERMINATOR_SIZE
-	/** Terminator size in UV coords. */
-	uniform float terminator_size: hint_range(0.0, 1.0) = 0.012;
-	#else
-	/** Terminator size in pixels. */
-	uniform float terminator_size_px: hint_range(0.0, 64.0, 1.0) = 4.0;
-	#endif
-#endif
-
-void fragment() {
-	#ifdef USE_SAMPLER_TEXTURE
-	vec4 color = texture(albedo_texture, UV);
-	#else
-	vec4 color = COLOR;
-	#endif
-
-	float cutoff = SCREEN_UV.x;
-	float cutoff2 = -SCREEN_UV.x;
-
-	#ifdef USE_TERMINATOR
-
-	float terminator_size_uv;
-
-
-
-
-	#endif
-	if (progress < cutoff) {
-		color.a = 0.0; // Hide outside the progress limit
-	}
-	// Right-to-left progressive cutoff
-	else if (progress2 < cutoff2) {
-		color.a = 0.0; // Hide outside the second progress limit
-	}
-
-	COLOR = color;
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1337t"]
-shader = SubResource("Shader_icv7u")
-shader_parameter/progress = 1.0
-shader_parameter/progress2 = 1.0
-shader_parameter/terminator_color = Color(1, 1, 1, 1)
-shader_parameter/terminator_size_px = 4.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uds1d"]
-atlas = ExtResource("3_nlsx6")
-region = Rect2(40, 0, 40, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_24ecu"]
-atlas = ExtResource("3_nlsx6")
-region = Rect2(0, 0, 40, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dswkm"]
-atlas = ExtResource("3_nlsx6")
-region = Rect2(120, 0, 40, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jbo7v"]
-atlas = ExtResource("3_nlsx6")
-region = Rect2(120, 0, 40, 40)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_kmygl"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uds1d")
-}],
-"loop": true,
-"name": &"AggroShell",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_24ecu")
-}],
-"loop": true,
-"name": &"MoshPunch",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dswkm")
-}],
-"loop": true,
-"name": &"Player",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jbo7v")
-}],
-"loop": true,
-"name": &"morb",
-"speed": 5.0
-}]
-
-[node name="ExampleBalloon" type="CanvasLayer"]
+[node name="ExampleBalloon" type="CanvasLayer" groups=["DIALOGUEBALLON"]]
 layer = 100
 script = ExtResource("1_36de5")
 
 [node name="Balloon" type="Control" parent="."]
 unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme = SubResource("Theme_qq3yp")
 
 [node name="MarginContainer" type="MarginContainer" parent="Balloon"]
@@ -204,14 +129,21 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -219.0
+offset_top = -289.0
+offset_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="Balloon/MarginContainer"]
-clip_children = 2
+clip_children = 1
 layout_mode = 2
 mouse_filter = 1
+
+[node name="TextureRect" type="TextureRect" parent="Balloon/MarginContainer/PanelContainer"]
+modulate = Color(1, 1, 1, 0.784314)
+layout_mode = 2
+texture = ExtResource("2_kmygl")
+expand_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Balloon/MarginContainer/PanelContainer"]
 layout_mode = 2
@@ -228,6 +160,7 @@ unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
 text = "Character"
 fit_content = true
@@ -237,6 +170,8 @@ scroll_active = false
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/bold_italics_font_size = 1
+theme_override_font_sizes/normal_font_size = 30
 text = "Dialogue..."
 
 [node name="Control" type="Control" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
@@ -246,17 +181,20 @@ size_flags_vertical = 8
 
 [node name="Progress" type="Polygon2D" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Control"]
 unique_name_in_owner = true
-polygon = PackedVector2Array(0, 0, 10, 10, 20, 0)
+polygon = PackedVector2Array(0, 0, 10, 10, 20, 0, 9.88597, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Control"]
+libraries = {
+&"": SubResource("AnimationLibrary_r5ei8")
+}
 autoplay = "progress"
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Balloon/MarginContainer"]
-material = SubResource("ShaderMaterial_1337t")
-position = Vector2(1014, 10)
-scale = Vector2(10, 10.433)
-sprite_frames = SubResource("SpriteFrames_kmygl")
-animation = &"Player"
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
+material = SubResource("ShaderMaterial_r5ei8")
+position = Vector2(874, 0)
+scale = Vector2(8, 8)
+sprite_frames = ExtResource("5_kmygl")
+animation = &"Idle"
 
 [node name="ResponsesMenu" type="VBoxContainer" parent="Balloon" node_paths=PackedStringArray("response_template")]
 unique_name_in_owner = true
@@ -281,11 +219,11 @@ response_template = NodePath("ResponseExample")
 [node name="ResponseExample" type="Button" parent="Balloon/ResponsesMenu"]
 layout_mode = 2
 text = "Response example"
+icon_alignment = 1
+expand_icon = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("5_1337t")
-pitch_scale = 5.0
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
 [connection signal="response_selected" from="Balloon/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

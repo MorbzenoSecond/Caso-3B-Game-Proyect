@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://ivr4vt84x64s"]
+
+[ext_resource type="Script" uid="uid://p88oy518y3l" path="res://scenes/maps/EventArea.gd" id="1_nlqeu"]
+[ext_resource type="Shape3D" uid="uid://dxhuiair8w6nj" path="res://assets/recursos/CollisionShapeSizes/ForChangeArea/2x1x1.tres" id="2_1cl3x"]
+
+[node name="EventArea" type="Area3D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_nlqeu")
+TriggerKey = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = ExtResource("2_1cl3x")
+debug_color = Color(0, 0.85098, 0.223529, 1)
+
+[node name="Markers" type="Node3D" parent="."]
+
+[node name="Marker3D" type="Marker3D" parent="Markers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03451, 0, 0)
+
+[node name="Marker3D2" type="Marker3D" parent="Markers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21754, 0, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://bk644qld6vvsi" path="res://scenes/characters/inMap/WalkingEnemyInMap.gd" id="1_2k8jx"]
 [ext_resource type="SpriteFrames" uid="uid://bqdfn5sk2byo7" path="res://assets/recursos/MoshPunch.tres" id="3_2k8jx"]
-[ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://assets/recursos/CollisionShapeSizes/ForWakingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="3_cjdqv"]
+[ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://assets/recursos/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="3_cjdqv"]
 [ext_resource type="Resource" uid="uid://7nhjknp2ayb7" path="res://Resources/EnemiesInMap/MoshPunchResource.tres" id="3_ubb1b"]
 [ext_resource type="Script" uid="uid://xiscktksb6o4" path="res://scenes/General/AnimatedSprites.gd" id="4_kmquc"]
 [ext_resource type="AudioStream" uid="uid://bl1i8posrhbmp" path="res://assets/sounds/tindeck_1.mp3" id="5_3ac0h"]
-[ext_resource type="Shape3D" uid="uid://jsnmr0624ump" path="res://assets/recursos/CollisionShapeSizes/ForWakingCharacterInMapCollisions/ForAreaCollisions/48x48.tres" id="6_kmquc"]
+[ext_resource type="Shape3D" uid="uid://jsnmr0624ump" path="res://assets/recursos/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForAreaCollisions/48x48.tres" id="6_kmquc"]
 [ext_resource type="Script" uid="uid://srhxtk46w3b7" path="res://Resources/State_Machine.gd" id="6_v1cm4"]
 [ext_resource type="Script" uid="uid://bx63c6h0u1nfc" path="res://scenes/enemies/normal.gd" id="7_lqaal"]
-[ext_resource type="Script" uid="uid://drroleuim42go" path="res://scenes/enemies/run.gd" id="8_an2a7"]
+[ext_resource type="Script" uid="uid://drroleuim42go" path="res://scenes/enemies/Chase.gd" id="8_an2a7"]
 [ext_resource type="Script" uid="uid://cyom2e2i57rtc" path="res://scenes/enemies/search.gd" id="9_sc62i"]
 [ext_resource type="Script" uid="uid://8bl4etaxftke" path="res://scenes/enemies/back.gd" id="10_isrwi"]
 
@@ -157,8 +157,8 @@ _data = {
 
 [node name="WalkingEnemyInMap" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, 0, 0)
-collision_layer = 7
-collision_mask = 7
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_2k8jx")
 stats = ExtResource("3_ubb1b")
 
@@ -183,7 +183,7 @@ alpha_cut = 2
 texture_filter = 0
 sprite_frames = ExtResource("3_2k8jx")
 animation = &"Idle"
-frame_progress = 0.604626
+frame_progress = 0.316785
 script = ExtResource("4_kmquc")
 time = 0.5
 
@@ -251,7 +251,6 @@ libraries = {
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0.232674, 7.45058e-09)
-text = "asd"
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, 0, 1, 0, 0, 0)
@@ -261,6 +260,7 @@ stream = ExtResource("5_3ac0h")
 path_desired_distance = 0.1
 target_desired_distance = 0.1
 path_height_offset = 0.2
+avoidance_enabled = true
 debug_enabled = true
 
 [connection signal="body_entered" from="RotableObjects/Areas/CharacterArea3D" to="." method="_on_character_area_3d_body_entered"]

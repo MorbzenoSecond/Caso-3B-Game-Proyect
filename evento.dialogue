@@ -1,0 +1,8 @@
+~ start
+MoshPunch: Quieres que te siga?
+- Si, sigueme por favor
+	MoshPunch: Esta bien
+	do follow()
+- La verdad es que no
+	MoshPunch: Esta bien
+=> END

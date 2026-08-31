@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EnemiesInMapData" load_steps=6 format=3 uid="uid://du68joqpiiewp"]
+
+[ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/EnemiesInMap/SpecialActionScripts/EnemyAction.gd" id="1_y5ja2"]
+[ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://assets/recursos/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="2_u2c61"]
+[ext_resource type="SpriteFrames" uid="uid://cilffntik2n2v" path="res://assets/recursos/Witch.tres" id="3_y5ja2"]
+[ext_resource type="Shape3D" uid="uid://jsnmr0624ump" path="res://assets/recursos/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForAreaCollisions/48x48.tres" id="4_0lw3d"]
+[ext_resource type="Script" uid="uid://ba00fspq8q8te" path="res://Resources/EnemiesInMap/EnemiesInMapData.gd" id="5_ikupa"]
+
+[resource]
+script = ExtResource("5_ikupa")
+character = ExtResource("3_y5ja2")
+RUN_MAX_SPEED = 0.2
+ACCELERATION = 3.0
+SpecialActions = Array[ExtResource("1_y5ja2")]([])
+SmartEnemy = false
+enemy_data = {
+"Enemies": [{
+"level": 2,
+"name": "AggroShell"
+}]
+}
+body_collision_type = ExtResource("2_u2c61")
+body_collision_position = Vector3(0, 0, 0)
+character_area_collision_type = ExtResource("4_0lw3d")
+character_area_collision_position = Vector3(0, 0, 0)
+metadata/_custom_type_script = "uid://ba00fspq8q8te"

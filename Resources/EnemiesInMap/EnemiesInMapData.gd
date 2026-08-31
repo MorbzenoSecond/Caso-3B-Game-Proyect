@@ -6,6 +6,7 @@ extends Resource
 @export var ACCELERATION :float= 1.2
 
 @export var SpecialActions : Array[EnemyAction]
+@export var SmartEnemy : bool = false
 @export var enemy_data : Dictionary =  {
 		"Enemies": [
 			{

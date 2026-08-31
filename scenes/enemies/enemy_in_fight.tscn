@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://b7gqbwv4oolhh"]
+[gd_scene load_steps=9 format=3 uid="uid://b7gqbwv4oolhh"]
 
 [ext_resource type="Script" uid="uid://bab72etoipkmn" path="res://scenes/enemies/enemy_in_fight.gd" id="1_0a5y4"]
-[ext_resource type="Resource" uid="uid://c3hkr4fvic8tn" path="res://Resources/FightResources/CharacterResource/MoshPunchFightResource.tres" id="3_m7iha"]
 [ext_resource type="AudioStream" uid="uid://bl1i8posrhbmp" path="res://assets/sounds/tindeck_1.mp3" id="8_h3y8o"]
 
 [sub_resource type="Shader" id="Shader_y5th1"]
@@ -126,7 +125,6 @@ gradient = SubResource("Gradient_sb86v")
 
 [node name="CharacterInFight" type="Node3D"]
 script = ExtResource("1_0a5y4")
-FightResourceStats = ExtResource("3_m7iha")
 
 [node name="Data" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)

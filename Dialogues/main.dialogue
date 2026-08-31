@@ -1,7 +1,12 @@
 ~ start
-MoshPunch: ¿Quieres que te siga?.
-- Si, sigueme por favor
-	MoshPunch: Te seguire entonces.
-	do follow()
-- La verdad es que no
-	MoshPunch: Esta bien => END
+Witch : [#voice=res://assets/music/Guardian Theme (The Legend of Zelda： Breath of the Wild) ｜ Super Smash Bros Universe.wav, #position=left, #mood=Idle, #character=Witch, #ballonTexture=Captura de pantalla 2026-07-21 211148]
+	[shake rate=20 level=10][wave amp=25 freq=5] Make Them [/wave][/shake][speed=0.2][shake rate=40 level=20][wave amp=50 freq=10] [color=red][b] [font_size=24]BURN [/font_size] [/b][/color] [/wave][/shake] => END
+
+#
+#- Si, sigueme por favor
+#	RavenousCrab: Te seguire entonces.
+#	do follow()
+#- La verdad es que no
+#	MoshPunch: Esta bien => END
+	
+	

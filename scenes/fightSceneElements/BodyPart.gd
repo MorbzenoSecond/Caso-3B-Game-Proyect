@@ -107,6 +107,23 @@ func select_body_part():
 	parent_enemy.get_parent().get_parent().selected_enemy(myself)
 	animated_sprite_3D.add_to_group("SELECTARROW")
 	animated_sprite_3D.material_override.set_shader_parameter("enable_outline", true)
+	animated_sprite_3D.material_override.set_shader_parameter("outline_color", Color("ffff00"))
+
+func above_body_part():
+	animated_sprite_3D.material_override.set_shader_parameter("enable_outline", true)
+	animated_sprite_3D.material_override.set_shader_parameter("outline_color", Color("ffffff"))
+
+func above_body_part_quit():
+	animated_sprite_3D.material_override.set_shader_parameter("enable_outline", false)
+
+func _on_area_3d_mouse_entered() -> void:
+	if !animated_sprite_3D.is_in_group("SELECTARROW"):
+		above_body_part()
+
+func _on_area_3d_mouse_exited() -> void:
+	if !animated_sprite_3D.is_in_group("SELECTARROW"):
+		above_body_part_quit()
+
 
 @export var max_position_offset := Vector3(1, 1, 0.2)
 @export var trauma_decay: float = 1

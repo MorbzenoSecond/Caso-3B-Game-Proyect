@@ -3,7 +3,7 @@
 		"Song_path" : "res://assets/music/ambiental-music.wav"
 	},
 	"fight_theme":{
-		"Song_path" : "res://assets/music/Guardian Theme (The Legend of Zelda： Breath of the Wild) ｜ Super Smash Bros Universe.wav"
+		"Song_path" : "res://assets/music/fight_theme.wav"
 	},
 	"end_fight":{
 		"Song_path" : "res://assets/music/end_Battle.wav"

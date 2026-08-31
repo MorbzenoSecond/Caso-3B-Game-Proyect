@@ -72,7 +72,7 @@ var mutation_cooldown: Timer = Timer.new()
 
 
 func _ready() -> void:
-	balloon.hide()
+	#balloon.hide()
 	Engine.get_singleton("DialogueManager").mutated.connect(_on_mutated)
 
 	# If the responses menu doesn't have a next action set, use this one
@@ -81,6 +81,7 @@ func _ready() -> void:
 
 	mutation_cooldown.timeout.connect(_on_mutation_cooldown_timeout)
 	add_child(mutation_cooldown)
+	
 
 	if auto_start:
 		if not is_instance_valid(dialogue_resource):
@@ -108,17 +109,27 @@ func _notification(what: int) -> void:
 		if visible_ratio < 1:
 			dialogue_label.skip_typing()
 
+@onready var animation_player = $Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Control/AnimationPlayer
 
 ## Start some dialogue
 func start(with_dialogue_resource: DialogueResource = null, title: String = "", extra_game_states: Array = []) -> void:
+	show()
+	var dialogue_ballons = get_tree().get_nodes_in_group("DIALOGUEBALLON")
+	for dialogue_ballon in dialogue_ballons:
+		if dialogue_ballon:
+			dialogue_ballon.animation_player.play("appear")
+
+	#await $Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Control/AnimationPlayer.animation_finished
+
 	temporary_game_states = [self] + extra_game_states
 	is_waiting_for_input = false
+
 	if is_instance_valid(with_dialogue_resource):
 		dialogue_resource = with_dialogue_resource
 	if not title.is_empty():
 		start_from_title = title
 	dialogue_line = await dialogue_resource.get_next_dialogue_line(start_from_title, temporary_game_states)
-	show()
+	
 
 
 ## Apply any changes to the balloon given a new [DialogueLine].
@@ -129,12 +140,12 @@ func apply_dialogue_line() -> void:
 	is_waiting_for_input = false
 	balloon.focus_mode = Control.FOCUS_ALL
 	balloon.grab_focus()
-
+	
+	
 	character_label.visible = not dialogue_line.character.is_empty()
 	character_label.text = tr(dialogue_line.character, "dialogue")
-	$Balloon/MarginContainer/AnimatedSprite2D2.play(tr(dialogue_line.character, "dialogue"))
 	
-	print(dialogue_line.tags)
+	apply_character_portray()
 
 	dialogue_label.hide()
 	dialogue_label.dialogue_line = dialogue_line
@@ -155,7 +166,7 @@ func apply_dialogue_line() -> void:
 	if dialogue_line.has_tag("voice"):
 		audio_stream_player.stream = load(dialogue_line.get_tag_value("voice"))
 		audio_stream_player.play()
-		await audio_stream_player.finished
+		#await audio_stream_player.finished
 		next(dialogue_line.next_id)
 	elif dialogue_line.responses.size() > 0:
 		balloon.focus_mode = Control.FOCUS_NONE
@@ -168,6 +179,29 @@ func apply_dialogue_line() -> void:
 		is_waiting_for_input = true
 		balloon.focus_mode = Control.FOCUS_ALL
 		balloon.grab_focus()
+
+@onready var animated_character = $Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/AnimatedSprite2D
+@onready var texture_rect = $Balloon/MarginContainer/PanelContainer/TextureRect
+
+func apply_character_portray():
+	if !dialogue_line.tags.is_empty():
+		if dialogue_line.has_tag("position"):
+			print(dialogue_line.get_tag_value("position"))
+
+		if dialogue_line.has_tag("character"):
+			var animated_sprite_resources = "res://assets/recursos/"+dialogue_line.get_tag_value("character")+".tres"
+			if FileAccess.file_exists(animated_sprite_resources):
+				animated_character.sprite_frames = load(animated_sprite_resources)
+
+		if dialogue_line.has_tag("mood"):
+			animated_character.animation = dialogue_line.get_tag_value("mood")
+			print(dialogue_line.get_tag_value("mood"))
+
+		if dialogue_line.has_tag("ballonTexture"):
+			var new_texture_rect = "res://assets/sprites/"+dialogue_line.get_tag_value("ballonTexture")+".png"
+			if FileAccess.file_exists(new_texture_rect):
+				texture_rect.texture = load(new_texture_rect)
+			pass
 
 
 ## Go to the next line

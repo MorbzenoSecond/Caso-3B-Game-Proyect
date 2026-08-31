@@ -21,7 +21,11 @@ func tween(side, size):
 	animation_tween.parallel().tween_property(TypeCard, "scale", size , 0.12).set_trans(Tween.TRANS_BOUNCE)
 
 func _on_area_2d_mouse_entered() -> void:
+	if !enemy_of_origin.animated_sprite_3D.is_in_group("SELECTARROW"):
+		enemy_of_origin.above_body_part()
 	tween(-6, Vector2(1.2, 1.2))
 
 func _on_area_2d_mouse_exited() -> void:
+	if !enemy_of_origin.animated_sprite_3D.is_in_group("SELECTARROW"):
+		enemy_of_origin.above_body_part_quit()
 	tween(0, Vector2(1, 1))
