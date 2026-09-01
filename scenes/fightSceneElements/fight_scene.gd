@@ -115,13 +115,13 @@ func turns():
 		nextTurns()
 		turn()
 	
-	var turn = turnArray.pop_front()
+	var next_turn = turnArray.pop_front()
 
-	if turn["type"] == "enemy" and turn["able_to_fight"]:
-		turn["node"].basic_attack(turn["node"].pick_random_character())
+	if next_turn["type"] == "enemy" and next_turn["able_to_fight"]:
+		next_turn["node"].basic_attack(next_turn["node"].pick_random_character())
 		return
-	elif turn["type"] == "player": 
-		turn["node"]._activate_turn()
+	elif next_turn["type"] == "player": 
+		next_turn["node"]._activate_turn()
 		return
 	else:
 		print_rich("[color=yellow]Aviso:[/color] Cola de turnos vacía.")

@@ -3,13 +3,14 @@ extends Node
 var music = {}
 
 var data : Dictionary = {
-	"locacion" : "escenary1",
+	"locacion" : "Exterior1",
 	"players" :[
 		{"name": "MoshPunch", "speed": 11, "level": 1, "life": 2, "damage" : 2, "type" : "player"},
 		{"name": "Player", "speed": 12, "level": 2, "life": 2, "damage" : 2, "type" : "player"},
 		{"name": "Player", "speed": 11, "level": 1, "life": 2, "damage" : 2, "type" : "player"}
 	]
 }
+var save_files_data ={}
 
 var BlockedInputs : bool = false
 
@@ -19,20 +20,33 @@ const MUSIC_PATH = "res://Resources/bibliotecas/music_manager.json"
 func _ready() -> void:
 	load_music_data()
 
-const SAVE_PATH = "res://save_file.json"
+var current_save_file = ""
+var current_save_file_base_name = ""
+var resume_save_file = "res://SaveFiles/resume_save_file/resume_save_file.json"
 
 func save(location_name : String):
 	data["locacion"] = location_name
-	var file = FileAccess.open(SAVE_PATH,FileAccess.WRITE)
+	var file = FileAccess.open(current_save_file,FileAccess.WRITE)
 	file.store_string(JSON.stringify(data))
 	file.close()
+	
+	await RenderingServer.frame_post_draw
+	get_window().get_texture().get_image().save_png("res://Screenshot_" + current_save_file_base_name + ".png")
+	
+	save_files_data[current_save_file_base_name]["image"] = "res://Screenshot_" + current_save_file_base_name + ".png"
+	save_files_data[current_save_file_base_name]["time"] = Time.get_datetime_string_from_system()
+	
+	var file2 = FileAccess.open(resume_save_file,FileAccess.WRITE)
+	file2.store_string(JSON.stringify(save_files_data))
+	file2.close()
+	
 	print("guardado: " + location_name)
 
 func load_data():
-	if not FileAccess.file_exists(SAVE_PATH):
+	if not FileAccess.file_exists(current_save_file):
 		save("escenary1")
 		await save("escenary1")
-	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+	var file = FileAccess.open(current_save_file, FileAccess.READ)
 	var json = JSON.parse_string(file.get_as_text())
 	file.close()
 	if json:
@@ -113,7 +127,7 @@ var world_map = {
 	}
 }
 
-var current_room : String = ""
+var current_room : String = "Exterior1"
 var CurrentRoomNode : Node3D
 
 var ColorTween : Tween
@@ -142,7 +156,7 @@ func cargar_y_conectar(room_actual_node : String):
 	var zonas = get_tree().get_first_node_in_group("ZONASLABEL") as Label
 	zonas.text = "Fragmento: " + current_room  + " Zona: "  + world_map[current_room]["zone"]
 	
-	var nombre_marker_salida = "res://scenes/maps/Scenaries/" + current_room.to_lower() + ".tscn"
+	#var nombre_marker_salida = "res://scenes/maps/Scenaries/" + current_room.to_lower() + ".tscn"
 	var lista_siguientes = CurrentRoomNode.next_rooms.duplicate()
 	
 	var conexiones_room = world_map[current_room]["connections"]
@@ -160,10 +174,8 @@ func cargar_y_conectar(room_actual_node : String):
 		
 		var marker_salida = CurrentRoomNode.get_node("Conections/"+ e)
 		var marker_entrada = nueva_room.get_node("Conections/"+ e)
-		var sign_value = sign(marker_salida.global_position - marker_entrada.global_position)
-		
-		print("resultado:    " +str(marker_salida.global_position - marker_entrada.global_position))
-		
+		#var sign_value = sign(marker_salida.global_position - marker_entrada.global_position)
+		#
 		#var link_bridge : NavigationLink3D = NavigationLink3D.new()
 		##
 		#link_bridge.global_position = marker_salida.global_position

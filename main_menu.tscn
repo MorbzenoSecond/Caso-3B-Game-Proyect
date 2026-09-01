@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://diyr6nfelgtbj"]
+
+[ext_resource type="Script" uid="uid://6rvn6flwvxe" path="res://main_menu.gd" id="1_06t4h"]
+
+[node name="Main_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 351.0
+theme_override_font_sizes/font_size = 70
+text = "Inicio"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = 245.0
+offset_bottom = 245.0
+grow_horizontal = 2
+mouse_filter = 1
+
+[node name="Button2" type="Button" parent="Control"]
+layout_mode = 2
+offset_left = -256.0
+offset_top = -23.0
+offset_right = 266.0
+offset_bottom = 27.0
+theme_override_font_sizes/font_size = 30
+text = "New Save File"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control"]
+layout_mode = 0
+offset_left = -254.0
+offset_top = 38.0
+offset_right = 266.0
+offset_bottom = 393.0
+draw_focus_border = true
+scroll_deadzone = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 150

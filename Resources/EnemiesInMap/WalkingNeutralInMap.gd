@@ -9,7 +9,7 @@ var target_pos
 func _ready() -> void:
 	super.set_sprite_frames()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if player_is_in and Input.is_action_just_pressed("E"):
 		event_data.event_script.execute(self,[])
 

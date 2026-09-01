@@ -109,6 +109,7 @@ ColisionShape = ExtResource("13_rjxxx")
 
 [node name="EventArea" parent="ChangeAreas" instance=ExtResource("14_6nl53")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.98768, 0.390827, -3.1999)
+TriggerKey = ""
 
 [node name="NavigationLink3D" type="NavigationLink3D" parent="ChangeAreas"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.11822, 0.0337617, -10.539)

@@ -73,7 +73,7 @@ func level_stats_scalling():
 	true_damage = FightResourceStats.base_damage + data["level"]
 	true_speed = FightResourceStats.base_speed + data["level"]
 
-func attack_everyone(damage):
+func attack_everyone(_damage):
 	pass
 	#for i in FIGHT_SCENE_PATH.get_node("Characters").get_children():
 		#i.get_damage(damage)

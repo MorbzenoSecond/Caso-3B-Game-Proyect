@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://co4l75fcvwiwh"]
+
+[ext_resource type="Script" uid="uid://d4jm8l1i2txs8" path="res://game_file_button.gd" id="1_r04n3"]
+[ext_resource type="Texture2D" uid="uid://xqs8yw2q453s" path="res://assets/sprites/voxels/savepoint.png" id="2_n4tde"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 327.0
+offset_bottom = 49.0
+script = ExtResource("1_r04n3")
+
+[node name="Button" type="Button" parent="."]
+offset_right = 429.0
+offset_bottom = 125.0
+pivot_offset = Vector2(203, 60)
+theme_override_font_sizes/font_size = 30
+
+[node name="TextureRect" type="TextureRect" parent="Button"]
+layout_mode = 0
+offset_right = 188.0
+offset_bottom = 125.0
+texture = ExtResource("2_n4tde")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Button"]
+layout_mode = 0
+offset_left = 245.0
+offset_top = 45.0
+offset_right = 360.0
+offset_bottom = 87.0
+theme_override_font_sizes/font_size = 30
+text = "asdassa"
+
+[node name="TimeLabel" type="Label" parent="Button"]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 102.0
+offset_right = 280.0
+offset_bottom = 125.0
+theme_override_colors/font_color = Color(0.617455, 0.617455, 0.617455, 1)
+text = "2321313213"
+
+[connection signal="focus_entered" from="Button" to="." method="_on_button_focus_entered"]
+[connection signal="focus_exited" from="Button" to="." method="_on_button_focus_exited"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

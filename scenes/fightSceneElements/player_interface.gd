@@ -13,19 +13,19 @@ func _attack():
 			
 			$"../../".basic_attack(enemy)
 
-func _on_scape_area_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+func _on_scape_area_input_event(_camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouse and Input.is_action_just_pressed("click"):
 		print(get_parent().get_parent().get_parent().get_parent().name)
 		get_parent().get_parent().get_parent().get_parent().finish_fight()
 		_deactivate_turn()
 
-func _on_attack_area_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+func _on_attack_area_input_event(_camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouse and Input.is_action_just_pressed("click"):
 		print("Area INPUT")
 		_attack()
 		_deactivate_turn()
 
-func _on_item_area_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+func _on_item_area_input_event(_camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouse and Input.is_action_just_pressed("click"):
 		_deactivate_turn()
 

@@ -5,7 +5,7 @@ var enemy_of_origin
 @onready var CharacterCard = $TypeCard/CharacterCard
 @onready var original_position_y = $TypeCard.position.y
 
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouse and Input.is_action_just_pressed("click"):
 		enemy_of_origin.select_body_part()
 

@@ -5,8 +5,8 @@ const PARTY_MEMBER = preload("res://walking_friend_in_map.tscn")
 
 @onready var camera = $GameParty/MainCharacterWorld/pivote/Camera2D
 @onready var pivote = $GameParty/MainCharacterWorld/pivote
-@onready var CanvasInfo = $CanvasInfo as CanvasLayer
-@onready var ColorRec = $CanvasInfo/ColorRect as ColorRect
+@onready var CanvasInfo = $UI/CanvasInfo as CanvasLayer
+@onready var ColorRec = $UI/CanvasInfo/ColorRect as ColorRect
 @onready var MainCharacter = $GameParty/MainCharacterWorld
 @onready var Dumpster = $Dumpster
 @onready var WorldEnvironmentNode = $WorldEnvironment
@@ -18,7 +18,7 @@ var characters := {
 
 var scenary_path = "res://scenes/maps/Scenaries/" + GameDataManager.data["locacion"] + ".tscn"
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	Node.print_orphan_nodes()
 	pass
 	#$WorldEnvironment.environment.sky_rotation.y += 0.1 * delta
@@ -38,6 +38,7 @@ func _process(delta: float) -> void:
 			#camera.rotate_x(deg_to_rad(-2.0))
 
 func _ready() -> void:
+	GameDataManager.MAIN = self
 	await GameDataManager.load_data()
 	await load_current_zone(GameDataManager.data["locacion"])
 	GameDataManager.cargar_y_conectar(GameDataManager.current_room)

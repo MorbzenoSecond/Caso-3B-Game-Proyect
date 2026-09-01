@@ -183,7 +183,7 @@ alpha_cut = 2
 texture_filter = 0
 sprite_frames = ExtResource("3_2k8jx")
 animation = &"Idle"
-frame_progress = 0.316785
+frame_progress = 0.974278
 script = ExtResource("4_kmquc")
 time = 0.5
 
