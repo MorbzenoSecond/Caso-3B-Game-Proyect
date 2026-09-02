@@ -1,7 +1,6 @@
 extends WalkingNPCInMap
 class_name WalkingNeutralInMap
 
-
 @export var EventKey : String
 
 var target_pos 

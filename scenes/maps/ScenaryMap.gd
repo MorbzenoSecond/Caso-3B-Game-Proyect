@@ -16,8 +16,8 @@ class_name ScenaryMap
 @onready var marcador = get_node_or_null("Elements").get_node_or_null("SavePoint")
 
 
-func prepare_fight_scenary(enemy_data, enemy_node):
-	GameDataManager.MAIN.start_fight(enemy_data, scenary_fight_ground, scenary_fight_music, enemy_node)
+func prepare_fight_scenary(enemy_data, enemy_nodes):
+	GameDataManager.MAIN.start_fight(enemy_data, scenary_fight_ground, scenary_fight_music, enemy_nodes)
 
 func get_spawn_point() -> Vector3 :
 	if marcador:

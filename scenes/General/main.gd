@@ -10,6 +10,7 @@ const PARTY_MEMBER = preload("res://walking_friend_in_map.tscn")
 @onready var MainCharacter = $GameParty/MainCharacterWorld
 @onready var Dumpster = $Dumpster
 @onready var WorldEnvironmentNode = $WorldEnvironment
+@onready var fight_node = $NodoDePelea
 
 var characters := {
 	"players": [],
@@ -37,11 +38,7 @@ func _process(_delta: float) -> void:
 			#camera.position.z += 0.01
 			#camera.rotate_x(deg_to_rad(-2.0))
 
-func _ready() -> void:
-	GameDataManager.MAIN = self
-	await GameDataManager.load_data()
-	await load_current_zone(GameDataManager.data["locacion"])
-	GameDataManager.cargar_y_conectar(GameDataManager.current_room)
+func setup():
 	MainCharacter.global_position = GameDataManager.CurrentRoomNode.get_spawn_point()
 	instanciate_party_members()
 
@@ -60,18 +57,6 @@ func instanciate_party_members():
 		$GameParty/Followers.add_child(character)
 		character.global_position  = character.get_random_nearby_position(MainCharacter.global_position)
 
-func load_current_zone(NodeNameToLoad : String = ""):
-	GameDataManager.current_room = NodeNameToLoad
-	scenary_path = "res://scenes/maps/Scenaries/" + NodeNameToLoad + ".tscn"
-	var scenary_path_preloaded = load(scenary_path)
-	var scene = scenary_path_preloaded.instantiate()
-	$WorldNode.add_child(scene)
-	await get_tree().process_frame
-
-func _on_timer_timeout() -> void:
-	for i in $NodoDePelea.get_children():
-		i.queue_free()
-
 func enter_event():
 	GameDataManager.BlockedInputs = true
 	$UI/UI.animation_player.play("appear")
@@ -86,14 +71,12 @@ func start_fight(enemy_data, scenary_fight_background, scenary_fight_music, enem
 		i.queue_free()
 	music_selector(scenary_fight_music)
 	$AnimationPlayer.play("new_animation")
-	instanciate_fight(enemy_data, scenary_fight_background, enemy_node)
+	
+	_instanciate_fight(enemy_data, scenary_fight_background, enemy_node)
 	get_tree().paused = true
 
-func instanciate_fight(enemy_data : Dictionary, scenary_fight_background, enemies_nodes : Array):
-	var scene = FIGHT_SCENE.instantiate()
-	
+func _instanciate_fight(enemy_data : Dictionary, scenary_fight_background, enemies_nodes : Array):
 	var index = 1
-	
 	for player in GameDataManager.data["Characters"]:
 		characters["players"].append({"id": index,  "name": player["name"], "level": player["level"], "type": "player"})
 		index += 1
@@ -102,29 +85,29 @@ func instanciate_fight(enemy_data : Dictionary, scenary_fight_background, enemie
 		characters["enemies"].append({"id": index,  "name": enemy["name"], "level": enemy["level"], "type": "enemy" })
 		index += 1
 	
-	scene.charactersInBattleArray.merge(characters)
-	$NodoDePelea.add_child(scene)
-	$NodoDePelea.global_position = MainCharacter.global_position
-	
-	scene.chooseBackgroundScenary(scenary_fight_background)
-	pivote.reparent($NodoDePelea)
+	fight_node.get_child(0).charactersInBattleArray.merge(characters)
+	fight_node.get_child(0).enemies_origin_nodes = enemies_nodes
+	fight_node.get_child(0).global_position = MainCharacter.global_position
+	fight_node.get_child(0).setup()
+	pivote.reparent(fight_node.get_child(0))
 	camera.projection = 1
 	camera.size = 2
 	await get_tree().process_frame
-	scene.enemies_origin_nodes = enemies_nodes
-	camera.global_position = $NodoDePelea.get_child(0).get_node("Marker3D").global_position
+	
+	camera.global_position = fight_node.get_child(0).get_node("Marker3D").global_position
 	camera.initial_rotation.x = deg_to_rad(-40)
 
 func finish_fight():
+	get_tree().paused = false
 	characters["players"].clear()
 	characters["enemies"].clear()
-	music_selector($WorldNode.get_child(0).scenary_music)
-	$NodoDePelea.global_position = MainCharacter.global_position
 	pivote.reparent(MainCharacter)
+	music_selector($WorldNode.get_child(0).scenary_music)
+	fight_node.get_child(0).global_position = Vector3(0,0,50)
+	camera.position = Vector3(0, 0.579, 1.074)
 	camera.projection = 0
 	camera.initial_rotation.x = deg_to_rad(-20)
 	$AnimationPlayer.play_backwards("new_animation")
-	$Timer.start()
 #endregion
 
 #region Music Manager Region

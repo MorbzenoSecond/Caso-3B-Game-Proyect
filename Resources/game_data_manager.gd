@@ -1,7 +1,21 @@
 extends Node
 
-var music = {}
 
+@onready var MAIN = get_tree().get_first_node_in_group("MAIN")
+const MUSIC_PATH = "res://Resources/bibliotecas/music_manager.json"
+const LOADING_SCREEN = preload("res://scenes/General/loading_screen.tscn")
+
+var BlockedInputs : bool = false
+var current_save_file = ""
+var current_save_file_base_name = ""
+var resume_save_file = "res://SaveFiles/resume_save_file/resume_save_file.json"
+var current_room : String = "Exterior1"
+var CurrentRoomNode : Node3D
+
+var ColorTween : Tween
+
+var music = {}
+var save_files_data ={}
 var data : Dictionary = {
 	"locacion" : "Exterior1",
 	"players" :[
@@ -10,19 +24,9 @@ var data : Dictionary = {
 		{"name": "Player", "speed": 11, "level": 1, "life": 2, "damage" : 2, "type" : "player"}
 	]
 }
-var save_files_data ={}
-
-var BlockedInputs : bool = false
-
-const MUSIC_PATH = "res://Resources/bibliotecas/music_manager.json"
-@onready var MAIN = get_tree().get_first_node_in_group("MAIN")
 
 func _ready() -> void:
 	load_music_data()
-
-var current_save_file = ""
-var current_save_file_base_name = ""
-var resume_save_file = "res://SaveFiles/resume_save_file/resume_save_file.json"
 
 func save(location_name : String):
 	data["locacion"] = location_name
@@ -31,9 +35,9 @@ func save(location_name : String):
 	file.close()
 	
 	await RenderingServer.frame_post_draw
-	get_window().get_texture().get_image().save_png("res://Screenshot_" + current_save_file_base_name + ".png")
+	get_window().get_texture().get_image().save_png("res://assets/ScreenShoots/" + current_save_file_base_name + ".png")
 	
-	save_files_data[current_save_file_base_name]["image"] = "res://Screenshot_" + current_save_file_base_name + ".png"
+	save_files_data[current_save_file_base_name]["image"] = "res://assets/ScreenShoots/" + current_save_file_base_name + ".png"
 	save_files_data[current_save_file_base_name]["time"] = Time.get_datetime_string_from_system()
 	
 	var file2 = FileAccess.open(resume_save_file,FileAccess.WRITE)
@@ -127,11 +131,6 @@ var world_map = {
 	}
 }
 
-var current_room : String = "Exterior1"
-var CurrentRoomNode : Node3D
-
-var ColorTween : Tween
-
 func ColorTweenFunctionPart1():
 	ColorTween = create_tween()
 	ColorTween.tween_property(MAIN.ColorRec, "color", Color("000000"), 0.5)
@@ -143,61 +142,92 @@ func ColorTweenFunctionPart2():
 	ColorTween.tween_property(MAIN.ColorRec, "color", Color("00000000"), 0.5)
 	await ColorTween.finished
 
+func first_connect(room_actual_node : String):
+	await load_instanciate()
+	await cargar_y_conectar(room_actual_node)
+
+var load_screen_instance = null
+
+func load_instanciate():
+	if LOADING_SCREEN and not is_instance_valid(load_screen_instance):
+		load_screen_instance = LOADING_SCREEN.instantiate()
+		MAIN.add_child(load_screen_instance)
+
+#optimizar a futuro
+func load_current_zone(NodeNameToLoad : String = ""):
+	GameDataManager.current_room = NodeNameToLoad
+	var scenary_path = "res://scenes/maps/Scenaries/" + NodeNameToLoad + ".tscn"
+	var scenary_path_preloaded = load(scenary_path)
+	var scene = scenary_path_preloaded.instantiate()
+	MAIN.get_node("WorldNode").add_child(scene)
+	for child in MAIN.get_node("WorldNode").get_children():
+		if child.name == NodeNameToLoad:
+			CurrentRoomNode = child
+			if CurrentRoomNode.scenary_fight_ground:
+				print(CurrentRoomNode.scenary_fight_ground)
+				var fight_scene = load(CurrentRoomNode.scenary_fight_ground).instantiate()
+				MAIN.fight_node.add_child(fight_scene)
+
 func cargar_y_conectar(room_actual_node : String):
+	var time_init = Time.get_ticks_msec()
+	load_current_zone(room_actual_node)
+
 	if str(world_map[current_room]["zone"]) != str(world_map[room_actual_node]["zone"]):
 		await ColorTweenFunctionPart1()
+		await load_instanciate()
 
-	MAIN.load_current_zone(room_actual_node)
-	for children in MAIN.get_node("WorldNode").get_children():
-		if children.name == room_actual_node:
-			CurrentRoomNode = children
-
-	var parent_node = get_tree().get_first_node_in_group("WorldNode")
-	var zonas = get_tree().get_first_node_in_group("ZONASLABEL") as Label
-	zonas.text = "Fragmento: " + current_room  + " Zona: "  + world_map[current_room]["zone"]
-	
-	#var nombre_marker_salida = "res://scenes/maps/Scenaries/" + current_room.to_lower() + ".tscn"
+	var world_node = MAIN.get_node("WorldNode")
 	var lista_siguientes = CurrentRoomNode.next_rooms.duplicate()
-	
 	var conexiones_room = world_map[current_room]["connections"]
+	
+	var total_rooms = lista_siguientes.size()
+	var processed_rooms = 0
+
+	#zonas.text = "Fragmento: " + current_room  + " Zona: "  + world_map[current_room]["zone"]
+	#var zonas = get_tree().get_first_node_in_group("ZONASLABEL") as Label
+	
+	var pending = {}
+	
 	for e in lista_siguientes:
 		var datos = conexiones_room[e]
-		if parent_node.has_node(datos["target_room"]):
-			continue
+		if not world_node.has_node(datos["target_room"]):
+			var path = "res://scenes/maps/Scenaries/" + datos["target_room"].to_lower() + ".tscn"
+			pending[e] = path
+			ResourceLoader.load_threaded_request(path)
 			
-		var path = "res://scenes/maps/Scenaries/" + datos["target_room"].to_lower() + ".tscn"
+	for e in pending:
+		var path = pending[e]
 		
-		var nueva_room = load(path).instantiate()
+		while ResourceLoader.load_threaded_get_status(path) == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+			await get_tree().process_frame
+		
+		var room_packed : PackedScene = ResourceLoader.load_threaded_get(path)
+		var datos = conexiones_room[e]
+		var nueva_room = room_packed.instantiate()
 		
 		nueva_room.name = datos["target_room"]
-		parent_node.call_deferred("add_child", nueva_room)
+		world_node.add_child(nueva_room)
 		
 		var marker_salida = CurrentRoomNode.get_node("Conections/"+ e)
 		var marker_entrada = nueva_room.get_node("Conections/"+ e)
-		#var sign_value = sign(marker_salida.global_position - marker_entrada.global_position)
-		#
-		#var link_bridge : NavigationLink3D = NavigationLink3D.new()
-		##
-		#link_bridge.global_position = marker_salida.global_position
-		#link_bridge.start_position = - Vector3(sign_value.x, 0, sign_value.z)
-		#link_bridge.end_position =  Vector3(sign_value.x, 0, sign_value.z)
-		##
-		#link_bridge.bidirectional =  true
-		##
-		#MAIN.add_child(link_bridge)
-		#
-		await get_tree().process_frame
+
 		nueva_room.global_position = marker_salida.global_position - marker_entrada.global_position
 		
+		processed_rooms += 1
+		if total_rooms > 0 and load_screen_instance:
+			var percentaje = (float(processed_rooms) / float(total_rooms)) * 100
+			load_screen_instance.set_progress(percentaje)
+	var total_time = Time.get_ticks_msec() - time_init
+	print_rich("[color=red][b] [DEBUG] [/b][/color] Tiempo de carga de las salas: ", total_time, " ms")
 
-	
-	
 	_errase_not_linked_rooms(current_room)
 	if CurrentRoomNode.scenary_environment and MAIN.WorldEnvironmentNode.environment != CurrentRoomNode.scenary_environment:
 		MAIN.WorldEnvironmentNode.environment = CurrentRoomNode.scenary_environment
 	MAIN.music_selector(CurrentRoomNode.scenary_music)
+	if is_instance_valid(load_screen_instance):
+		load_screen_instance.queue_free()
+		load_screen_instance = null
 	ColorTweenFunctionPart2()
-	
 
 func _errase_not_linked_rooms(ActualRoom):
 	var rooms_to_errase = []

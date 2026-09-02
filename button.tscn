@@ -11,6 +11,7 @@ offset_bottom = 49.0
 script = ExtResource("1_r04n3")
 
 [node name="Button" type="Button" parent="."]
+layout_mode = 0
 offset_right = 429.0
 offset_bottom = 125.0
 pivot_offset = Vector2(203, 60)

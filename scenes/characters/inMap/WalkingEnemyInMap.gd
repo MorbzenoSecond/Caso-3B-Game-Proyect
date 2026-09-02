@@ -19,26 +19,34 @@ func _ready() -> void:
 	original_position = global_position
 
 func prepare_fight():
-	prepare_fight_data()
+	await prepare_fight_data()
+	
 	get_parent().get_parent().prepare_fight_scenary(enemy_dictionary_to_fight, enemies_nodes_involucrated)
 
 func prepare_fight_data():
-	var processed_body := []
+	enemies_nodes_involucrated.clear()
+	enemy_dictionary_to_fight.clear()
+	enemy_data_to_fight.clear()
+
+	var processed_nodes := []
+	
+	enemies_nodes_involucrated.append(self)
+	for data in stats.enemy_data["Enemies"]:
+		enemy_data_to_fight.append(data)
 
 	for enemy in $RotableObjects/Areas/UndetectedArea3D.get_overlapping_bodies():
-		
 		if enemy == self:
-			enemies_nodes_involucrated.append(enemy)
 			continue
 
-		if enemy is WalkingEnemyInMap and enemy not in processed_body:
+		if enemy is WalkingEnemyInMap and enemy not in processed_nodes:
 			enemies_nodes_involucrated.append(enemy)
-			processed_body.append(enemy)
+			processed_nodes.append(enemy)
 
-			for data in enemy.enemy_data_to_fight:
+			for data in enemy.stats.enemy_data["Enemies"]:
 				enemy_data_to_fight.append(data)
-	
+		
 	enemy_dictionary_to_fight["Enemies"] = enemy_data_to_fight
+	#print("Instancia limpia de combate: ", enemy_data_to_fight)
 
 func CreateTimersForSpecialActions():
 	for i in stats.SpecialActions:

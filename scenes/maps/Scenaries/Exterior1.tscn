@@ -53,6 +53,7 @@ script = ExtResource("1_42xja")
 scenary_music = "ambiental_music"
 scenary_environment = ExtResource("2_s720p")
 next_rooms = Array[String](["Z1-Z2", "E1-E2"])
+scenary_fight_ground = "res://scenes/fightSceneElements/fight_scene.tscn"
 scenary_fight_music = "fight_theme"
 
 [node name="Conections" type="Node3D" parent="."]
@@ -135,6 +136,7 @@ shadow_blur = 0.0
 omni_range = 4.13
 
 [node name="Particles" type="Node3D" parent="."]
+visible = false
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Particles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.33795, 1.26856, -6.79567)
@@ -152,7 +154,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.24, -6.864)
 [node name="ChangeAreas" type="Node3D" parent="."]
 
 [node name="ChangeArea" parent="ChangeAreas" instance=ExtResource("11_jieit")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.23182, 0.588234, -11.1447)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.14982, 0.589389, -10.5316)
 collision_mask = 4
 new_room = "Exterior2"
 ColisionShape = ExtResource("12_55qbt")

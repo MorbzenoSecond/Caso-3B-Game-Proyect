@@ -2,8 +2,6 @@
 extends Control
 
 const BUTTON = preload("res://button.tscn")
-const MAIN = preload("res://scenes/General/Main.tscn")
-
 
 # Called when the node enters the scene tree for the first time.
 
@@ -22,7 +20,6 @@ func load_data():
 		return
 	var file = FileAccess.open(resume_save_file, FileAccess.READ)
 	var json = JSON.parse_string(file.get_as_text())
-	print(json)
 	file.close()
 	if json:
 		GameDataManager.save_files_data = json
@@ -43,13 +40,15 @@ func get_all_save_files():
 			
 			if GameDataManager.save_files_data.has(file.get_basename()):
 				
-				button.button_control.get_node("TextureRect").texture = load(GameDataManager.save_files_data[file.get_basename()]["image"])
+				if FileAccess.file_exists(GameDataManager.save_files_data[file.get_basename()]["image"]):
+					button.button_control.get_node("TextureRect").texture = load(GameDataManager.save_files_data[file.get_basename()]["image"])
 				
 			button.time_label.text = GameDataManager.save_files_data[file.get_basename()]["time"]
 			button.button_control.get_node("Label").text = file.get_basename()
 			button.game_file = "res://SaveFiles/" + file.get_basename() + ".json"
 
 func start_game():
-	var game= MAIN.instantiate()
+	await GameDataManager.load_data()
+	await GameDataManager.first_connect(GameDataManager.data["locacion"])
 	visible = false
-	get_parent().add_child(game)
+	GameDataManager.MAIN.setup()

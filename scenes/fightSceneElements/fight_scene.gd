@@ -10,7 +10,9 @@ var combatientes: Array = []
 const ENEMY_SCENE = preload("res://scenes/enemies/enemy_in_fight.tscn")
 const END_FIGHT_SCENE = preload("res://scenes/fightSceneElements/fight_end_scene.tscn")
 
-func _ready() -> void:
+func setup():
+	visible = true
+	$CanvasLayer.visible = true
 	await set_keys()
 	await enterExitAnimation()
 	$AnimationPlayer.play("ingrese")
@@ -18,10 +20,26 @@ func _ready() -> void:
 	await turns()
 	select_all_enemies()
 
+func clean():
+	battle_paused = false
+	for e in $Enemies.get_children():
+		e.queue_free()
+	for e in $Characters.get_children():
+		e.queue_free()
+	turnArray.clear()
+	charactersInBattleArray.clear()
+	turnDictionary.clear()
+	enemies_origin_nodes.clear()
+	combatientes.clear()
+
 func finish_fight():
+	clean()
 	$AnimationPlayer.play_backwards("ingrese")
+	await enterExitAnimation()
 	get_parent().get_parent().finish_fight()
 	enterExitAnimation()
+	visible = false
+	$CanvasLayer.visible = false
 	$Timer.start()      
 
 func set_keys():
@@ -156,6 +174,8 @@ func enterExitAnimation():
 	tween.parallel().tween_property($CanvasLayer/BackBufferCopy/ColorRect.material, "shader_parameter/pixel_count", 16.0, 1.5)\
 		.set_trans(Tween.TRANS_CUBIC)\
 		.set_ease(Tween.EASE_IN_OUT)
+
+	await tween.finished
 
 func Posible_spawn_positions(Posible_positions) -> Vector3:
 	if !Posible_positions.is_empty():

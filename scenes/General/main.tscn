@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bh38ky3nosg1n"]
+[gd_scene load_steps=11 format=3 uid="uid://bh38ky3nosg1n"]
 
 [ext_resource type="Script" uid="uid://ngsy3j5wnxdx" path="res://scenes/General/Main.gd" id="1_g4gp3"]
 [ext_resource type="PackedScene" uid="uid://bvs4i5thex2gf" path="res://scenes/characters/inMap/WalkingPlayerInMap.tscn" id="2_5jks7"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://di13krw3aiy81" path="res://scenes/General/CameraControl.gd" id="4_nxd7e"]
 [ext_resource type="AudioStream" uid="uid://bsa0v3wu3l7po" path="res://assets/music/end_Battle.wav" id="5_dllss"]
 [ext_resource type="Resource" uid="uid://dc8ychgbrs3im" path="res://Resources/EnemiesInMap/PlayerResource.tres" id="5_yfnky"]
-[ext_resource type="PackedScene" uid="uid://bhycbvo2waugj" path="res://UI.tscn" id="8_yfnky"]
 
 [sub_resource type="Animation" id="Animation_lquwl"]
 length = 0.001
@@ -75,7 +74,7 @@ process_mode = 3
 script = ExtResource("1_g4gp3")
 
 [node name="NodoDePelea" type="Node3D" parent="."]
-process_mode = 2
+process_mode = 3
 
 [node name="WorldNode" type="Node3D" parent="." groups=["WorldNode"]]
 process_mode = 1
@@ -84,10 +83,6 @@ process_mode = 1
 libraries = {
 &"": SubResource("AnimationLibrary_7mycd")
 }
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.6
-one_shot = true
 
 [node name="MusicAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_dllss")
@@ -104,36 +99,6 @@ directional_shadow_max_distance = 5.0
 
 [node name="UI" type="Node" parent="."]
 
-[node name="UI" parent="UI" instance=ExtResource("8_yfnky")]
-
-[node name="CanvasInfo" type="CanvasLayer" parent="UI"]
-
-[node name="ColorRect" type="ColorRect" parent="UI/CanvasInfo"]
-offset_right = 1152.0
-offset_bottom = 648.0
-mouse_filter = 2
-color = Color(0, 0, 0, 0)
-
-[node name="Label" type="Label" parent="UI/CanvasInfo" groups=["ZONASLABEL"]]
-offset_left = 7.0
-offset_top = 619.0
-offset_right = 384.0
-offset_bottom = 702.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 7
-theme_override_font_sizes/font_size = 20
-text = "ZONA: "
-
-[node name="SaveLabel" type="Label" parent="UI/CanvasInfo"]
-modulate = Color(1, 1, 1, 0)
-offset_left = 384.0
-offset_top = 488.0
-offset_right = 760.0
-offset_bottom = 571.0
-theme_override_colors/font_color = Color(0.243137, 0.847059, 0.317647, 1)
-theme_override_font_sizes/font_size = 60
-text = "Guardando..."
-
 [node name="GameParty" type="Node3D" parent="."]
 
 [node name="MainCharacterWorld" parent="GameParty" groups=["PLAYER"] instance=ExtResource("2_5jks7")]
@@ -141,7 +106,6 @@ process_mode = 1
 stats = ExtResource("5_yfnky")
 
 [node name="pivote" type="Node3D" parent="GameParty/MainCharacterWorld"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125721, 0.361734)
 script = ExtResource("3_yfnky")
 intensity = Vector3(2.4, 3.6, 0)
 
@@ -155,5 +119,3 @@ script = ExtResource("4_nxd7e")
 [node name="Dumpster" type="Node3D" parent="."]
 
 [node name="EventScript" type="Node3D" parent="."]
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
