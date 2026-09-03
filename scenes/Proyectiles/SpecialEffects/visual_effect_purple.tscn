@@ -4,9 +4,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xvfi4"]
 shading_mode = 0
-vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("1_fscfm")
-albedo_texture_force_srgb = true
 
 [sub_resource type="Curve" id="Curve_qdqv2"]
 _data = [Vector2(0, 0.776184), 0.0, 0.0, 0, 0, Vector2(0.70979, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.52131, 0.0, 0, 0]
@@ -22,8 +20,6 @@ emission_sphere_radius = 1.0
 gravity = Vector3(0, -0.1, 0)
 scale_min = 0.5
 scale_curve = SubResource("CurveTexture_q0eea")
-color = Color(1, 0, 1, 1)
-turbulence_enabled = true
 turbulence_influence_min = 0.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_2hghj"]
@@ -42,7 +38,7 @@ omni_range = 0.7047
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_xvfi4")
-amount = 30
+amount = 15
 lifetime = 0.25
 preprocess = 0.25
 process_material = SubResource("ParticleProcessMaterial_hj07l")

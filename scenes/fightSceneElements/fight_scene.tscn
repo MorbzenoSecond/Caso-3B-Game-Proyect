@@ -238,7 +238,6 @@ item/1/navigation_layers = 1
 item/1/preview = SubResource("ImageTexture_srn7m")
 
 [node name="fight_scene" type="Node3D"]
-visible = false
 script = ExtResource("1_llpdw")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -246,11 +245,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_tmx0f")
 }
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.6
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Node2D" type="Node2D" parent="CanvasLayer"]
 scale = Vector2(3, 3)
@@ -312,6 +307,21 @@ theme_override_constants/shadow_outline_size = 7
 theme_override_font_sizes/font_size = 64
 text = "Derrota..."
 
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 237.0
+offset_bottom = 336.0
+
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 264.0
+offset_bottom = 133.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/BoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 70
+
 [node name="Enemies" type="Node3D" parent="."]
 
 [node name="Characters" type="Node3D" parent="."]
@@ -363,5 +373,3 @@ metadata/_editor_floor_ = Vector3(0, 3, -1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13781, 0.435741, -0.714498)
 light_color = Color(0.765648, 0.452967, 0.19822, 1)
 omni_range = 1.25
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

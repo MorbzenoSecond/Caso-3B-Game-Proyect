@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FightResources" load_steps=13 format=3 uid="uid://csuaaq64lhao2"]
+[gd_resource type="Resource" script_class="FightMovementsResource" load_steps=13 format=3 uid="uid://csuaaq64lhao2"]
 
 [ext_resource type="Script" uid="uid://dmmvynklhh8f0" path="res://Resources/FightResources/MovementsScripts/BodyParts.gd" id="1_myptc"]
 [ext_resource type="SpriteFrames" uid="uid://rxsqsis17k4x" path="res://assets/recursos/Master.tres" id="2_fbylq"]
@@ -22,6 +22,7 @@ shape_position = Vector3(0, -0.06, 0)
 metadata/_custom_type_script = "uid://dmmvynklhh8f0"
 
 [sub_resource type="Resource" id="Resource_ci18a"]
+resource_name = "shoot"
 script = ExtResource("7_hr0ir")
 ShootType = ExtResource("5_dqk4t")
 ShootSpeed = 2.0
@@ -29,6 +30,7 @@ VisualEffect = Array[PackedScene]([ExtResource("6_2j360")])
 metadata/_custom_type_script = "uid://cwsj3y0oxnuja"
 
 [sub_resource type="Resource" id="Resource_m8d2d"]
+resource_name = "direct"
 script = ExtResource("8_xfohr")
 metadata/_custom_type_script = "uid://dt6qeewy4r4u1"
 
@@ -38,6 +40,5 @@ SpecialActions = Array[ExtResource("4_5cjme")]([SubResource("Resource_ci18a"), S
 actions_positions = Vector3(0, 0.4, 0)
 base_speed = 25.0
 base_damage = 4.0
-base_life = 20.0
 BodyParts = Array[ExtResource("1_myptc")]([SubResource("Resource_pn0ah")])
 metadata/_custom_type_script = "uid://bw3watrbs53ld"

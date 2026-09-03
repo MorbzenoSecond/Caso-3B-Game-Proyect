@@ -1,23 +1,24 @@
+@tool
 extends Node3D
 
-var turnArray : Array = []
-var charactersInBattleArray : Dictionary = {}
-var turnDictionary : = {}
-var enemies_origin_nodes : Array
-var combatientes: Array = []
 @export var battle_paused : bool = false
+
+var charactersInBattleArray : Dictionary = {}
+var turnDictionary : Dictionary = {}
+var enemies_origin_nodes : Array = []
+var combatientes: Array = []
+var turnArray : Array = []
 
 const ENEMY_SCENE = preload("res://scenes/enemies/enemy_in_fight.tscn")
 const END_FIGHT_SCENE = preload("res://scenes/fightSceneElements/fight_end_scene.tscn")
+const TYPE_MOVEMENT_SCENE = preload("res://type_attack_button.tscn")
 
 func setup():
-	visible = true
 	$CanvasLayer.visible = true
 	await set_keys()
-	await enterExitAnimation()
-	$AnimationPlayer.play("ingrese")
-	await get_tree().process_frame
 	await turns()
+	enterExitAnimation()
+	$AnimationPlayer.play("ingrese")
 	select_all_enemies()
 
 func clean():
@@ -33,123 +34,133 @@ func clean():
 	combatientes.clear()
 
 func finish_fight():
-	clean()
 	$AnimationPlayer.play_backwards("ingrese")
 	await enterExitAnimation()
-	get_parent().get_parent().finish_fight()
-	enterExitAnimation()
-	visible = false
 	$CanvasLayer.visible = false
-	$Timer.start()      
+	await clean()
+	GameDataManager.MAIN.finish_fight()
 
 func set_keys():
-	for key in charactersInBattleArray.keys():
-		if key == "players":
-			var posible_positions_characters = $CharacterPosiblePositions.get_children()
-			for player in charactersInBattleArray[key]:
-				var character_to_instanciate = ENEMY_SCENE.instantiate()
-				$Characters.add_child(character_to_instanciate)
-				character_to_instanciate.global_position = Posible_spawn_positions(posible_positions_characters)
-				await character_to_instanciate.setup(player)
-				combatientes.append({
-					"id": combatientes.size() + 1,
-					"name": player["name"],
-					"data": player,
-					"type": "player",
-					"able_to_fight" : true,
-					"current_dist": 0.0,
-					"speed": character_to_instanciate.true_speed,
-					"node": character_to_instanciate,
-					"main_body_node" : character_to_instanciate.main_body_part
-				})
-				
-		if key == "enemies":
-			var posible_positions_enemies = $EnemyPosiblePositions.get_children()
-			for enemy in charactersInBattleArray[key]:
-				var character_to_instanciate = ENEMY_SCENE.instantiate()
-				$Enemies.add_child(character_to_instanciate)
-				character_to_instanciate.global_position = Posible_spawn_positions(posible_positions_enemies)
-				await character_to_instanciate.setup(enemy)
-				combatientes.append({
-					"id": combatientes.size() + 1,
-					"name": enemy["name"],
-					"data": enemy,
-					"type": "enemy",
-					"able_to_fight" : true,
-					"current_dist": 0.0,
-					"speed": character_to_instanciate.true_speed,
-					"node": character_to_instanciate,
-					"main_body_node" : character_to_instanciate.main_body_part
-				})
-				
+	if !charactersInBattleArray.is_empty():
+		for key in charactersInBattleArray.keys():
+			if key == "players":
+				var posible_positions_characters = $CharacterPosiblePositions.get_children()
+				for player in charactersInBattleArray[key]:
+					var character_to_instanciate = ENEMY_SCENE.instantiate()
+					$Characters.add_child(character_to_instanciate)
+					character_to_instanciate.global_position = Posible_spawn_positions(posible_positions_characters)
+					await character_to_instanciate.setup(player)
+					combatientes.append({
+						"id": combatientes.size() + 1,
+						"name": player["name"],
+						"data": player,
+						"type": "player",
+						"able_to_fight" : true,
+						"current_dist": 0.0,
+						"speed": character_to_instanciate.true_speed,
+						"node": character_to_instanciate,
+						"main_body_node" : character_to_instanciate.main_body_part
+					})
+					
+			if key == "enemies":
+				var posible_positions_enemies = $EnemyPosiblePositions.get_children()
+				for enemy in charactersInBattleArray[key]:
+					var character_to_instanciate = ENEMY_SCENE.instantiate()
+					$Enemies.add_child(character_to_instanciate)
+					character_to_instanciate.global_position = Posible_spawn_positions(posible_positions_enemies)
+					await character_to_instanciate.setup(enemy)
+					combatientes.append({
+						"id": combatientes.size() + 1,
+						"name": enemy["name"],
+						"data": enemy,
+						"type": "enemy",
+						"able_to_fight" : true,
+						"current_dist": 0.0,
+						"speed": character_to_instanciate.true_speed,
+						"node": character_to_instanciate,
+						"main_body_node" : character_to_instanciate.main_body_part
+					})
 
 func nextTurns():
-	var turn_threshold: float = 100.0
+	if !charactersInBattleArray.is_empty():
+		var turn_threshold: float = 100.0
 
-	var hay_combatientes_activos: bool = false
-	for combatiente in combatientes:
-		if combatiente.get("able_to_fight", true) and combatiente.get("speed", 0.0) > 0.0:
-			hay_combatientes_activos = true
-			break
-
-	if not hay_combatientes_activos:
-		print_rich("[color=yellow]Aviso:[/color] No hay combatientes activos con velocidad mayor a 0.")
-		return
-
-	while turnArray.size() < 5:
+		var hay_combatientes_activos: bool = false
 		for combatiente in combatientes:
-			if combatiente.get("able_to_fight", true):
-				combatiente["current_dist"] += combatiente["speed"]
-
-		while turnArray.size() < 5:
-			var combatientes_listo = []
-			
-			for combatiente in combatientes:
-				if combatiente.get("able_to_fight", true) and combatiente["current_dist"] >= turn_threshold:
-					combatientes_listo.append(combatiente)
-
-			if combatientes_listo.is_empty():
+			if combatiente.get("able_to_fight", true) and combatiente.get("speed", 0.0) > 0.0:
+				hay_combatientes_activos = true
 				break
 
-			combatientes_listo.sort_custom(func(a, b): return a["current_dist"] > b["current_dist"])
+		if not hay_combatientes_activos:
+			print_rich("[color=yellow]Aviso:[/color] No hay combatientes activos con velocidad mayor a 0.")
+			return
 
-			var winner = combatientes_listo[0]
-			winner["current_dist"] -= turn_threshold
+		while turnArray.size() < 5:
+			for combatiente in combatientes:
+				if combatiente.get("able_to_fight", true):
+					combatiente["current_dist"] += combatiente["speed"]
 
-			var turn_snapshot: Dictionary = winner.duplicate(true)
-			turnArray.append(turn_snapshot)
+			while turnArray.size() < 5:
+				var combatientes_listo = []
+				
+				for combatiente in combatientes:
+					if combatiente.get("able_to_fight", true) and combatiente["current_dist"] >= turn_threshold:
+						combatientes_listo.append(combatiente)
 
-			if winner["type"] == "player":
-				print_rich("Turno %d: [color=green][b]JUGADOR (%s)[/b][/color]" % [turnArray.size(), winner["name"]])
-			else:
-				print_rich("Turno %d: [color=red][b]ENEMIGO (%s)[/b][/color]" % [turnArray.size(), winner["name"]])
-	print("turnArray")
-	
+				if combatientes_listo.is_empty():
+					break
+
+				combatientes_listo.sort_custom(func(a, b): return a["current_dist"] > b["current_dist"])
+
+				var winner = combatientes_listo[0]
+				winner["current_dist"] -= turn_threshold
+
+				var turn_snapshot: Dictionary = winner.duplicate(true)
+				turnArray.append(turn_snapshot)
+
+				if winner["type"] == "player":
+					print_rich("Turno %d: [color=green][b]JUGADOR (%s)[/b][/color]" % [turnArray.size(), winner["name"]])
+				else:
+					print_rich("Turno %d: [color=red][b]ENEMIGO (%s)[/b][/color]" % [turnArray.size(), winner["name"]])
+		print("turnArray")
 
 func turns():
-	if battle_paused:
-		return
-	while turnArray.size() < 5:
-		nextTurns()
-		turn()
-	
-	var next_turn = turnArray.pop_front()
+	if !charactersInBattleArray.is_empty():
+		if battle_paused:
+			return
+		while turnArray.size() < 5:
+			nextTurns()
+			turn()
+		
+		var next_turn = turnArray.pop_front()
 
-	if next_turn["type"] == "enemy" and next_turn["able_to_fight"]:
-		next_turn["node"].basic_attack(next_turn["node"].pick_random_character())
-		return
-	elif next_turn["type"] == "player": 
-		next_turn["node"]._activate_turn()
-		return
-	else:
-		print_rich("[color=yellow]Aviso:[/color] Cola de turnos vacía.")
+		if next_turn["type"] == "enemy" and next_turn["able_to_fight"]:
+			next_turn["node"].basic_attack(next_turn["node"].pick_random_character())
+			return
+		elif next_turn["type"] == "player": 
+			get_attacks(next_turn["node"])
+			next_turn["node"]._activate_turn()
+			return
+		else:
+			print_rich("[color=yellow]Aviso:[/color] Cola de turnos vacía.")
+
+func get_attacks(node):
+	for attack : Resource in node.FightResourceStats.SpecialActions:
+		if attack.resource_name:
+			var button = TYPE_MOVEMENT_SCENE.instantiate()
+			
+			$CanvasLayer/Control/BoxContainer/VBoxContainer.add_child(button)
+			button.movement_resource = attack
+			button.button.button_down.connect(on_button_pressed.bind(button, node))
+			button.button.get_node("Label").text = attack.resource_name
+			button.button.size = Vector2(224, 65)
+
+func on_button_pressed(button_node, node):
+	node.selected_attack = button_node.movement_resource
 
 func chooseBackgroundScenary(scenary_fight_background):
 	if scenary_fight_background == "lol":
 		$ColorRect3.self_modulate = Color("61bc58")
-
-func _on_timer_timeout() -> void:
-	get_tree().paused = false
 
 func turn():
 	var i = 0

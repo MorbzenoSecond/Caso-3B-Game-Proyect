@@ -151,6 +151,7 @@ script = ExtResource("1_y4w25")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.999999, -6.25849e-07, 0, 6.25849e-07, 0.999999, 0, 0.002, 5.82077e-11)
+visible = false
 shape = SubResource("BoxShape3D_fcftc")
 debug_color = Color(0.94344, 0.21855, 0.251713, 0.42)
 
@@ -169,12 +170,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0.087
 alpha_cut = 2
 texture_filter = 0
 sprite_frames = ExtResource("2_hon2w")
-animation = &"Idle"
-frame_progress = 0.82361
+animation = &"attack"
 script = ExtResource("3_qpvwn")
 time = 0.5
 
 [node name="Areas" type="Node3D" parent="RotableObjects"]
+visible = false
 
 [node name="DialogueArea" type="Area3D" parent="RotableObjects/Areas"]
 collision_layer = 4

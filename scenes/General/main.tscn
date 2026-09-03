@@ -37,7 +37,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_1bvp3"]
 resource_name = "new_animation"
-length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -74,7 +73,7 @@ process_mode = 3
 script = ExtResource("1_g4gp3")
 
 [node name="NodoDePelea" type="Node3D" parent="."]
-process_mode = 3
+process_mode = 2
 
 [node name="WorldNode" type="Node3D" parent="." groups=["WorldNode"]]
 process_mode = 1

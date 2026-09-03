@@ -18,9 +18,15 @@ var true_speed : float = 0.0
 var main_body_part
 var body_parts : Array
 var data : Dictionary
+var selected_attack : Resource
 
 func basic_attack(target_node: Node3D):
-	var i = FightResourceStats.SpecialActions.pick_random()
+	var i
+	if selected_attack:
+		i = selected_attack
+		i.executed(self, target_node)
+		return
+	i = FightResourceStats.SpecialActions.pick_random()
 	i.executed(self, target_node)
 
 func _ready() -> void:
