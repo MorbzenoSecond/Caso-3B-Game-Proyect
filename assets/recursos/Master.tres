@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://rxsqsis17k4x"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://rxsqsis17k4x"]
 
 [ext_resource type="Texture2D" uid="uid://bk3kiuf532j7w" path="res://assets/sprites/Master.png" id="1_cddhs"]
 
@@ -13,7 +13,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cddhs")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Idle",
 "speed": 5.0
 }]

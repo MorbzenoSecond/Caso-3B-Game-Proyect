@@ -44,6 +44,14 @@ func get_damage(damage):
 		##FIGHT_SCENE_PATH.battle_paused = false
 		##FIGHT_SCENE_PATH.turns()
 
+func use_item(effect):
+	local_life += effect
+
+	var message = str(local_life) + " + " + str(effect) + " = " + str(local_life + effect)
+	point_score(message)
+	update_life_bar()
+	parent_enemy.FIGHT_SCENE_PATH.turns()
+
 
 func calculate_damage(brute_damage):
 	var real_damage = brute_damage - local_defense

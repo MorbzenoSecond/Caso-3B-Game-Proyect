@@ -216,51 +216,78 @@ func Defeat():
 	$AnimationPlayer.play("Defeat")
 	get_parent().get_parent().music_selector("end_fight")
 
+func chooseBackgroundScenary(scenary_fight_background):
+	if scenary_fight_background == "lol":
+		$ColorRect3.self_modulate = Color("61bc58")
+
+func ItemEffect(item_name, character):
+	match item_name:
+		"healer":
+			character.use_item(2)
+			pass 
+		"item_two":
+			character.use_item(3)
+	pass
+
 #region Button instanciate
 func instanciate_return_button(node):
 	var return_button = TYPE_MOVEMENT_SCENE.instantiate()
 	movements_container.add_child(return_button)
 	return_button.button.get_node("Label").text = "Regresar"
-	return_button.button.button_down.connect(on_return_button_pressed.bind(node))
+	return_button.button.button_down.connect(_on_return_button_pressed.bind(node))
 
 func prepare_scape_options(node):
 	instanciate_return_button(node)
 	var scape_button = TYPE_MOVEMENT_SCENE.instantiate()
 	movements_container.add_child(scape_button)
 	scape_button.button.get_node("Label").text = "Escapar"
-	scape_button.button.button_down.connect(on_scape_button_pressed)
+	scape_button.button.button_down.connect(_on_scape_button_pressed)
 
 func prepare_attack_options(node):
 	instanciate_return_button(node)
-	
 	for attack : Resource in node.FightResourceStats.SpecialActions:
 		var button = TYPE_MOVEMENT_SCENE.instantiate()
 		movements_container.add_child(button)
 		button.movement_resource = attack
-		button.button.button_down.connect(on_attack_button_pressed.bind(button, node))
+		button.button.button_down.connect(_on_attack_button_pressed.bind(button, node))
 		button.button.size = Vector2(224, 65)
 
 		if attack.resource_name:
 			button.button.get_node("Label").text = attack.resource_name
 
-func on_attack_button_pressed(button_node, node):
+func prepare_item_options(node):
+	instanciate_return_button(node)
+	for item : Dictionary in GameDataManager.data["Items"]:
+		var button = TYPE_MOVEMENT_SCENE.instantiate()
+		movements_container.add_child(button)
+		button.button.button_down.connect(_on_item_button_pressed.bind(item.item_name, node))
+		button.button.size = Vector2(224, 65)
+
+		if item.item_name:
+			button.button.get_node("Label").text = item.item_name
+
+func _on_attack_button_pressed(button_node, node):
+	node.selected_attack = button_node.movement_resource
 	for movement in movements_container.get_children():
 		movement.button.disabled = true
+	if node.selected_attack.all_targets:
+		select_all_enemies()
 	for enemy in selected_enemies:
 		node.basic_attack(enemy)
-	node.selected_attack = button_node.movement_resource
 
-func on_scape_button_pressed():
+func _on_item_button_pressed(item, node):
+	for movement in movements_container.get_children():
+		movement.button.disabled = true
+	for character in selected_enemies:
+		ItemEffect(item, character)
+
+func _on_scape_button_pressed():
 	finish_fight()
 
-func on_return_button_pressed(node):
+func _on_return_button_pressed(node):
 	node._activate_turn()
 	for movement in movements_container.get_children():
 		movement.queue_free()
-	
-func chooseBackgroundScenary(scenary_fight_background):
-	if scenary_fight_background == "lol":
-		$ColorRect3.self_modulate = Color("61bc58")
 #endregion
 
 #region Enemy selection

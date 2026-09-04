@@ -1,1 +1,13 @@
-{"Characters":[{"level":1.0,"name":"Master","party_status":"leader","type":"player"}],"locacion":"Exterior3"}
+{
+	"Characters":[
+		{"level":1.0,"name":"Master","party_status":"leader","type":"player"},
+		{"level":1.0,"name":"MoshPunch","party_status":"member","type":"player"}
+	],
+
+	"Items" :[
+		{"item_name": "healer", "quantity" : 3},
+		{"item_name": "attack", "quantity" : 2}
+	],
+
+	"locacion":"Exterior1"
+}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7gqbwv4oolhh"]
+[gd_scene format=3 uid="uid://b7gqbwv4oolhh"]
 
 [ext_resource type="Script" uid="uid://bab72etoipkmn" path="res://scenes/enemies/enemy_in_fight.gd" id="1_0a5y4"]
 [ext_resource type="AudioStream" uid="uid://bl1i8posrhbmp" path="res://assets/sounds/tindeck_1.mp3" id="8_h3y8o"]
@@ -123,34 +123,34 @@ shader_parameter/billboard = false
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_h3y8o"]
 gradient = SubResource("Gradient_sb86v")
 
-[node name="CharacterInFight" type="Node3D"]
+[node name="CharacterInFight" type="Node3D" unique_id=1755138081]
 script = ExtResource("1_0a5y4")
 
-[node name="Data" type="Node3D" parent="."]
+[node name="Data" type="Node3D" parent="." unique_id=1519494574]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0)
 
-[node name="ActionsPosition" type="Marker3D" parent="."]
+[node name="ActionsPosition" type="Marker3D" parent="." unique_id=1811753955]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.321, 0)
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="Node3D" type="Node3D" parent="." unique_id=1813236595]
 
-[node name="HitPosition1" type="Marker3D" parent="Node3D"]
+[node name="HitPosition1" type="Marker3D" parent="Node3D" unique_id=349080610]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.191, 0)
 
-[node name="HitPosition2" type="Marker3D" parent="Node3D"]
+[node name="HitPosition2" type="Marker3D" parent="Node3D" unique_id=1025275125]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.191, 0)
 
-[node name="HitPosition3" type="Marker3D" parent="Node3D"]
+[node name="HitPosition3" type="Marker3D" parent="Node3D" unique_id=1285127333]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.191, 0)
 
-[node name="Marker3D" type="Marker3D" parent="."]
+[node name="Marker3D" type="Marker3D" parent="." unique_id=2025961120]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.058093)
 
-[node name="Sprite3D" type="Sprite3D" parent="Marker3D"]
+[node name="Sprite3D" type="Sprite3D" parent="Marker3D" unique_id=383186922]
 material_override = SubResource("ShaderMaterial_s3a6u")
 texture = SubResource("GradientTexture2D_h3y8o")
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="." unique_id=1025749021]
 stream = ExtResource("8_h3y8o")
 
-[node name="BodyParts" type="Node3D" parent="."]
+[node name="BodyParts" type="Node3D" parent="." unique_id=176206095]

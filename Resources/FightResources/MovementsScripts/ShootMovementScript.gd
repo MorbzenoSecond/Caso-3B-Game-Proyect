@@ -15,7 +15,7 @@ func executed(self_node : Node3D, target_node: Node3D):
 	tween.parallel().tween_property(self_node, "global_position:z", target_node.get_marker_position("hit_position_3").z, 1.5)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_OUT)
-	target_node
+
 	tween.tween_callback(self_node.attack.bind(self_node.FightResourceStats.base_damage, target_node))
 	tween.tween_callback(shoot.bind(self_node.global_position.direction_to(target_node.global_position), self_node))
 

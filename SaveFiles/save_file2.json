@@ -1,4 +1,13 @@
-{"Characters":[
-	{"level":1.0,"name":"Master","party_status":"leader","type":"player"},
-	{"level":1.0,"name":"MoshPunch","party_status":"member","type":"player"}],
-	"locacion":"Exterior1"}
+{
+	"Characters":[
+		{"level":1.0,"name":"Master","party_status":"leader","type":"player"},
+		{"level":1.0,"name":"MoshPunch","party_status":"member","type":"player"}
+	],
+
+	"Items" :[
+		{"item_name": "item_one", "quantity" : 3},
+		{"item_name": "item_two", "quantity" : 2}
+	],
+
+	"locacion":"Exterior1"
+}

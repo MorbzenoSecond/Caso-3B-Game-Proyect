@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemiesInMapData" load_steps=6 format=3 uid="uid://dswy2w7me3rqa"]
+[gd_resource type="Resource" script_class="EnemiesInMapData" format=3 uid="uid://dswy2w7me3rqa"]
 
 [ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/EnemiesInMap/SpecialActionScripts/EnemyAction.gd" id="1_sdgnh"]
 [ext_resource type="SpriteFrames" uid="uid://rxsqsis17k4x" path="res://assets/recursos/Master.tres" id="2_sdgnh"]
@@ -9,17 +9,6 @@
 [resource]
 script = ExtResource("3_v2ufx")
 character = ExtResource("2_sdgnh")
-RUN_MAX_SPEED = 0.8
-ACCELERATION = 1.2
-SpecialActions = Array[ExtResource("1_sdgnh")]([])
-enemy_data = {
-"Enemies": [{
-"level": 2,
-"name": "MoshPunch"
-}]
-}
 body_collision_type = ExtResource("2_v2ufx")
-body_collision_position = Vector3(0, 0, 0)
 character_area_collision_type = ExtResource("4_cnjy0")
-character_area_collision_position = Vector3(0, 0, 0)
 metadata/_custom_type_script = "uid://ba00fspq8q8te"
