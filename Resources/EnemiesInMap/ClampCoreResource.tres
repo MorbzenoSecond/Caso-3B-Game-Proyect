@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemiesInMapData" load_steps=10 format=3 uid="uid://bn1ckyab1qwlm"]
+[gd_resource type="Resource" script_class="EnemiesInMapData" format=3 uid="uid://bn1ckyab1qwlm"]
 
 [ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/EnemiesInMap/SpecialActionScripts/EnemyAction.gd" id="1_nsarc"]
 [ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://assets/recursos/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="2_31bsi"]
@@ -12,9 +12,7 @@
 [sub_resource type="Resource" id="Resource_0vyyv"]
 script = ExtResource("4_mi7sh")
 ShootType = ExtResource("2_cxfoh")
-ShootSpeed = 2.0
 VisualEffect = Array[PackedScene]([ExtResource("3_qgggi")])
-CoolDown = 1.0
 metadata/_custom_type_script = "uid://b0ghckxb8f0id"
 
 [resource]
@@ -23,7 +21,6 @@ character = ExtResource("5_mi7sh")
 RUN_MAX_SPEED = 0.5
 ACCELERATION = 3.0
 SpecialActions = Array[ExtResource("1_nsarc")]([SubResource("Resource_0vyyv")])
-SmartEnemy = false
 enemy_data = {
 "Enemies": [{
 "level": 2,
@@ -31,7 +28,5 @@ enemy_data = {
 }]
 }
 body_collision_type = ExtResource("2_31bsi")
-body_collision_position = Vector3(0, 0, 0)
 character_area_collision_type = ExtResource("4_nsarc")
-character_area_collision_position = Vector3(0, 0, 0)
 metadata/_custom_type_script = "uid://ba00fspq8q8te"

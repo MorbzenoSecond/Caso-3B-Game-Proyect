@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://bqdfn5sk2byo7"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://bqdfn5sk2byo7"]
 
 [ext_resource type="Texture2D" uid="uid://ecs8j181uyr1" path="res://assets/sprites/Cangrejos.png" id="1_ebw52"]
 
@@ -18,7 +18,7 @@ region = Rect2(0, 0, 40, 40)
 resource_name = "Mosh Punch"
 animations = [{
 "frames": [],
-"loop": false,
+"loop": 0,
 "name": &"Death",
 "speed": 5.0
 }, {
@@ -26,7 +26,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wxvyi")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Idle",
 "speed": 5.0
 }, {
@@ -34,7 +34,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rb4dl")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Punched",
 "speed": 5.0
 }, {
@@ -42,7 +42,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h1roa")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack",
 "speed": 5.0
 }]

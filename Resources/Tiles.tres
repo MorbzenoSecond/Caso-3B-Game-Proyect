@@ -1,4 +1,4 @@
-[gd_resource type="MeshLibrary" load_steps=21 format=4 uid="uid://bci3u03ai1j4i"]
+[gd_resource type="MeshLibrary" format=4 uid="uid://bci3u03ai1j4i"]
 
 [ext_resource type="Texture2D" uid="uid://ch2kepspa2i0h" path="res://assets/sprites/voxels/neutralWalll.png" id="1_3exke"]
 [ext_resource type="Texture2D" uid="uid://c6c314alewgwo" path="res://assets/sprites/voxels/bloque.png" id="2_6v5et"]

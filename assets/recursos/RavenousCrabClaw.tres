@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://b5kkgmf1k4y5r"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://b5kkgmf1k4y5r"]
 
 [ext_resource type="Texture2D" uid="uid://ce38uqkos2vbb" path="res://assets/sprites/RavenousCrab.png" id="1_rjisu"]
 
@@ -13,7 +13,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ku7vo")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Idle",
 "speed": 5.0
 }]

@@ -59,11 +59,11 @@ func instanciate_party_members():
 
 func enter_event():
 	GameDataManager.BlockedInputs = true
-	$UI/UI.animation_player.play("appear")
+	#$UI/UI.animation_player.play("appear")
 
 func exit_event():
 	GameDataManager.BlockedInputs = false
-	$UI/UI.animation_player.play_backwards("appear")
+	#$UI/UI.animation_player.play_backwards("appear")
 
 #region Fight Manager Region
 func start_fight(enemy_data, scenary_fight_background, scenary_fight_music, enemy_node):

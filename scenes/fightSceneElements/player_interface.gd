@@ -1,27 +1,25 @@
 @tool
 extends Node3D
 
+@onready var fight_scene = get_parent().get_parent().get_parent().get_parent()
+@onready var origin_character = $"../../"
+
 var active_cube
 var activated : bool = true
+
 func _deactivate_turn():
 	queue_free()
 
 func _attack():
 	if activated:
-		activated = false
-		for enemy in get_parent().get_parent().get_parent().get_parent().selected_enemies:
-			
-			$"../../".basic_attack(enemy)
+		fight_scene.prepare_attack_options(origin_character)
 
 func _on_scape_area_input_event(_camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouse and Input.is_action_just_pressed("click"):
-		print(get_parent().get_parent().get_parent().get_parent().name)
-		get_parent().get_parent().get_parent().get_parent().finish_fight()
-		_deactivate_turn()
+		fight_scene.prepare_scape_options(origin_character)
 
 func _on_attack_area_input_event(_camera: Node, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouse and Input.is_action_just_pressed("click"):
-		print("Area INPUT")
 		_attack()
 		_deactivate_turn()
 

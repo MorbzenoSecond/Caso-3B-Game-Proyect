@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EventsResource" load_steps=6 format=3 uid="uid://b07cwpeojnboo"]
+[gd_resource type="Resource" script_class="EventsResource" format=3 uid="uid://b07cwpeojnboo"]
 
 [ext_resource type="Script" uid="uid://dbs4435dsf3ry" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_xm8v8"]
 [ext_resource type="Resource" uid="uid://ce7i2fsvitjrq" path="res://evento.dialogue" id="2_r6pj1"]

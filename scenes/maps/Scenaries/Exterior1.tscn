@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bij1wytwxaih7"]
+[gd_scene format=3 uid="uid://bij1wytwxaih7"]
 
 [ext_resource type="Script" uid="uid://dkjnhkgt6exl7" path="res://scenes/maps/ScenaryMap.gd" id="1_42xja"]
 [ext_resource type="PackedScene" uid="uid://fvqsyu1mfxi7" path="res://scenes/enemies/WalkingEnemyInMap.tscn" id="2_g5fj8"]
@@ -48,7 +48,7 @@ turbulence_noise_scale = 5.4
 [sub_resource type="BoxMesh" id="BoxMesh_628xo"]
 size = Vector3(0.03, 0.03, 0.03)
 
-[node name="Exterior1" type="Node3D"]
+[node name="Exterior1" type="Node3D" unique_id=1357650203]
 script = ExtResource("1_42xja")
 scenary_music = "ambiental_music"
 scenary_environment = ExtResource("2_s720p")
@@ -56,60 +56,61 @@ next_rooms = Array[String](["Z1-Z2", "E1-E2"])
 scenary_fight_ground = "res://scenes/fightSceneElements/fight_scene.tscn"
 scenary_fight_music = "fight_theme"
 
-[node name="Conections" type="Node3D" parent="."]
+[node name="Conections" type="Node3D" parent="." unique_id=780159217]
 
-[node name="Z1-Z2" type="Marker3D" parent="Conections"]
+[node name="Z1-Z2" type="Marker3D" parent="Conections" unique_id=736535031]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2564, 0.0209269, -10.0781)
 
-[node name="E1-E2" type="Marker3D" parent="Conections"]
+[node name="E1-E2" type="Marker3D" parent="Conections" unique_id=138446150]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.15238, 0.021, -10.08)
 
-[node name="Enemies" type="Node3D" parent="."]
+[node name="Enemies" type="Node3D" parent="." unique_id=76469914]
 
-[node name="Enemy2" parent="Enemies" instance=ExtResource("2_g5fj8")]
+[node name="Enemy2" parent="Enemies" unique_id=411283341 instance=ExtResource("2_g5fj8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.00779, 0.382988, -5.14233)
 stats = ExtResource("4_4uo8n")
 
-[node name="Enemy" parent="Enemies" instance=ExtResource("2_g5fj8")]
+[node name="Enemy" parent="Enemies" unique_id=1125951069 instance=ExtResource("2_g5fj8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.70398, 0.57582, -6.3205)
 stats = ExtResource("3_s720p")
 
-[node name="WalkingNPCInMap" parent="Enemies" instance=ExtResource("4_18l7l")]
+[node name="WalkingNPCInMap" parent="Enemies" unique_id=1795806094 instance=ExtResource("4_18l7l")]
 transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 11.6246, 0.530732, -6.08281)
 EventKey = "evento1"
 event_data = ExtResource("7_4uo8n")
 stats = ExtResource("8_36aq3")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Enemies/WalkingNPCInMap"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Enemies/WalkingNPCInMap" unique_id=1359029713]
+visible = false
 light_color = Color(1, 0.277405, 0.994451, 1)
 light_energy = 0.5
 shadow_enabled = true
 omni_range = 1.328
 omni_attenuation = 3.415
 
-[node name="Enemy3" parent="Enemies" instance=ExtResource("2_g5fj8")]
+[node name="Enemy3" parent="Enemies" unique_id=1552698481 instance=ExtResource("2_g5fj8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.87847, 0.580387, -5.6805)
 
-[node name="Enemy4" parent="Enemies" instance=ExtResource("2_g5fj8")]
+[node name="Enemy4" parent="Enemies" unique_id=1632423195 instance=ExtResource("2_g5fj8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00124, 0.485779, -6.32055)
 stats = ExtResource("7_111jt")
 
-[node name="Enemy5" parent="Enemies" instance=ExtResource("2_g5fj8")]
+[node name="Enemy5" parent="Enemies" unique_id=1527364279 instance=ExtResource("2_g5fj8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.08153, 0.580387, -6.0005)
 stats = ExtResource("3_s720p")
 
-[node name="WalkingNPCInMap2" parent="Enemies" instance=ExtResource("4_18l7l")]
+[node name="WalkingNPCInMap2" parent="Enemies" unique_id=1850506864 instance=ExtResource("4_18l7l")]
 transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 10.4621, 0.530732, -6.08281)
 EventKey = "evento1"
 event_data = ExtResource("7_4uo8n")
 stats = ExtResource("11_w5wqd")
 
-[node name="GridMaps" type="Node3D" parent="."]
+[node name="GridMaps" type="Node3D" parent="." unique_id=1574738020]
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="GridMaps"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="GridMaps" unique_id=389013192]
 navigation_mesh = SubResource("NavigationMesh_2wqqu")
 
-[node name="GridMap" type="GridMap" parent="GridMaps/NavigationRegion3D"]
+[node name="GridMap" type="GridMap" parent="GridMaps/NavigationRegion3D" unique_id=839491792]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.222, 0.00164223)
 mesh_library = ExtResource("8_w5wqd")
 cell_size = Vector3(0.16, 0.16, 0.16)
@@ -119,14 +120,15 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="GridMaps"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GridMaps" unique_id=1345664648]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.20705, 0.869913, -10.1404)
 visible = false
 mesh = SubResource("BoxMesh_vs6h4")
 
-[node name="Lights" type="Node3D" parent="."]
+[node name="Lights" type="Node3D" parent="." unique_id=443857194]
+visible = false
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=1140586416]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96777, 1.34051, -4.86448)
 light_color = Color(0.589778, 0.75375, 1, 1)
 shadow_enabled = true
@@ -135,10 +137,10 @@ shadow_reverse_cull_face = true
 shadow_blur = 0.0
 omni_range = 4.13
 
-[node name="Particles" type="Node3D" parent="."]
+[node name="Particles" type="Node3D" parent="." unique_id=1429795184]
 visible = false
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Particles"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Particles" unique_id=1824807738]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.33795, 1.26856, -6.79567)
 material_override = SubResource("StandardMaterial3D_2wqqu")
 amount = 150
@@ -146,20 +148,20 @@ lifetime = 3.2
 process_material = SubResource("ParticleProcessMaterial_66uom")
 draw_pass_1 = SubResource("BoxMesh_628xo")
 
-[node name="Elements" type="Node3D" parent="."]
+[node name="Elements" type="Node3D" parent="." unique_id=160079889]
 
-[node name="SavePoint" parent="Elements" instance=ExtResource("10_cr2yd")]
+[node name="SavePoint" parent="Elements" unique_id=983580970 instance=ExtResource("10_cr2yd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.24, -6.864)
 
-[node name="ChangeAreas" type="Node3D" parent="."]
+[node name="ChangeAreas" type="Node3D" parent="." unique_id=1931437716]
 
-[node name="ChangeArea" parent="ChangeAreas" instance=ExtResource("11_jieit")]
+[node name="ChangeArea" parent="ChangeAreas" unique_id=129081586 instance=ExtResource("11_jieit")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.14982, 0.589389, -10.5316)
 collision_mask = 4
 new_room = "Exterior2"
 ColisionShape = ExtResource("12_55qbt")
 
-[node name="EventArea" parent="ChangeAreas" instance=ExtResource("14_s720p")]
+[node name="EventArea" parent="ChangeAreas" unique_id=1491146626 instance=ExtResource("14_s720p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3405, 0.390827, -3.1999)
 event_data = ExtResource("16_36aq3")
 TriggerKey = "evento1"
@@ -167,10 +169,10 @@ TriggerKey = "evento1"
 [node name="Marker3D2" parent="ChangeAreas/EventArea/Markers" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24431, 0, 0)
 
-[node name="Marker3D3" type="Marker3D" parent="ChangeAreas/EventArea/Markers" index="2"]
+[node name="Marker3D3" type="Marker3D" parent="ChangeAreas/EventArea/Markers" index="2" unique_id=668704081]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.06516, 0, 0)
 
-[node name="NavigationLink3D" type="NavigationLink3D" parent="ChangeAreas"]
+[node name="NavigationLink3D" type="NavigationLink3D" parent="ChangeAreas" unique_id=1901849891]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.11822, 0.0337617, -10.539)
 end_position = Vector3(0, 0, 1)
 

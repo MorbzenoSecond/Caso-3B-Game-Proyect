@@ -15,7 +15,6 @@ class_name ScenaryMap
 @onready var conections = get_node_or_null("Conections")
 @onready var marcador = get_node_or_null("Elements").get_node_or_null("SavePoint")
 
-
 func prepare_fight_scenary(enemy_data, enemy_nodes):
 	GameDataManager.MAIN.start_fight(enemy_data, scenary_fight_ground, scenary_fight_music, enemy_nodes)
 

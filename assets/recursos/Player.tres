@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dodm3dwr4014l"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://dodm3dwr4014l"]
 
 [ext_resource type="Texture2D" uid="uid://ecs8j181uyr1" path="res://assets/sprites/Cangrejos.png" id="1_hlbs1"]
 
@@ -25,7 +25,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hlbs1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Death",
 "speed": 5.0
 }, {
@@ -33,7 +33,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l737m")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Idle",
 "speed": 5.0
 }, {
@@ -41,7 +41,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_exgvr")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Punched",
 "speed": 5.0
 }, {
@@ -49,7 +49,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hn46l")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack",
 "speed": 5.0
 }]

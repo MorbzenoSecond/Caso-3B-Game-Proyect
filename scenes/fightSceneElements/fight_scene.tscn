@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://cn6cyqbunqh41"]
+[gd_scene format=4 uid="uid://cn6cyqbunqh41"]
 
 [ext_resource type="Script" uid="uid://dhau6buv704jc" path="res://scenes/fightSceneElements/fight_scene.gd" id="1_llpdw"]
 [ext_resource type="Texture2D" uid="uid://ch2kepspa2i0h" path="res://assets/sprites/voxels/neutralWalll.png" id="6_5b1w7"]
@@ -237,43 +237,42 @@ item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 
 item/1/navigation_layers = 1
 item/1/preview = SubResource("ImageTexture_srn7m")
 
-[node name="fight_scene" type="Node3D"]
+[node name="fight_scene" type="Node3D" unique_id=318868357]
 script = ExtResource("1_llpdw")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_tmx0f")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1315225446]
+libraries/ = SubResource("AnimationLibrary_tmx0f")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=7775653]
+visible = false
 
-[node name="Node2D" type="Node2D" parent="CanvasLayer"]
+[node name="Node2D" type="Node2D" parent="CanvasLayer" unique_id=49049259]
 scale = Vector2(3, 3)
 
-[node name="characterCart" parent="CanvasLayer/Node2D" instance=ExtResource("6_srhpj")]
+[node name="characterCart" parent="CanvasLayer/Node2D" unique_id=1466791145 instance=ExtResource("6_srhpj")]
 position = Vector2(144.667, 238)
 
-[node name="characterCart2" parent="CanvasLayer/Node2D" instance=ExtResource("6_srhpj")]
+[node name="characterCart2" parent="CanvasLayer/Node2D" unique_id=1338479107 instance=ExtResource("6_srhpj")]
 modulate = Color(0.779291, 0.779291, 0.779291, 1)
 position = Vector2(168.667, 242)
 
-[node name="characterCart3" parent="CanvasLayer/Node2D" instance=ExtResource("6_srhpj")]
+[node name="characterCart3" parent="CanvasLayer/Node2D" unique_id=2110749506 instance=ExtResource("6_srhpj")]
 modulate = Color(0.552956, 0.552956, 0.552956, 1)
 position = Vector2(192.667, 246)
 
-[node name="characterCart4" parent="CanvasLayer/Node2D" instance=ExtResource("6_srhpj")]
+[node name="characterCart4" parent="CanvasLayer/Node2D" unique_id=685579787 instance=ExtResource("6_srhpj")]
 modulate = Color(0.340339, 0.340339, 0.340339, 1)
 position = Vector2(216.667, 250)
 
-[node name="characterCart5" parent="CanvasLayer/Node2D" instance=ExtResource("6_srhpj")]
+[node name="characterCart5" parent="CanvasLayer/Node2D" unique_id=1359118373 instance=ExtResource("6_srhpj")]
 modulate = Color(0.190762, 0.190762, 0.190762, 1)
 position = Vector2(240.667, 254)
 
-[node name="BackBufferCopy" type="BackBufferCopy" parent="CanvasLayer"]
+[node name="BackBufferCopy" type="BackBufferCopy" parent="CanvasLayer" unique_id=1252073982]
 scale = Vector2(5.76, 3.24)
 copy_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/BackBufferCopy"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/BackBufferCopy" unique_id=1967226122]
 material = SubResource("ShaderMaterial_8aimp")
 anchors_preset = -1
 anchor_left = -0.005
@@ -286,13 +285,13 @@ offset_bottom = 198.765
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1814657228]
 offset_right = 1152.0
 offset_bottom = 648.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=552689960]
 modulate = Color(1, 1, 1, 0)
 offset_left = 433.0
 offset_top = 288.0
@@ -307,59 +306,60 @@ theme_override_constants/shadow_outline_size = 7
 theme_override_font_sizes/font_size = 64
 text = "Derrota..."
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=877044515]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 237.0
 offset_bottom = 336.0
+mouse_filter = 1
 
-[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/Control"]
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer/Control" unique_id=529781372]
 layout_mode = 0
 offset_right = 264.0
 offset_bottom = 133.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/BoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/BoxContainer" unique_id=1190506259]
 layout_mode = 2
 theme_override_constants/separation = 70
 
-[node name="Enemies" type="Node3D" parent="."]
+[node name="Enemies" type="Node3D" parent="." unique_id=179988038]
 
-[node name="Characters" type="Node3D" parent="."]
+[node name="Characters" type="Node3D" parent="." unique_id=1168880745]
 
-[node name="EnemyPosiblePositions" type="Node3D" parent="."]
+[node name="EnemyPosiblePositions" type="Node3D" parent="." unique_id=980591348]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.219407, 0, 0)
 
-[node name="Marker3D" type="Marker3D" parent="EnemyPosiblePositions"]
+[node name="Marker3D" type="Marker3D" parent="EnemyPosiblePositions" unique_id=1238676654]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.862129, 0.206, 0.142)
 
-[node name="Marker3D2" type="Marker3D" parent="EnemyPosiblePositions"]
+[node name="Marker3D2" type="Marker3D" parent="EnemyPosiblePositions" unique_id=1881065381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19464, 0.206, 0.532859)
 
-[node name="Marker3D3" type="Marker3D" parent="EnemyPosiblePositions"]
+[node name="Marker3D3" type="Marker3D" parent="EnemyPosiblePositions" unique_id=15499026]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.50665, 0.432, -0.28)
 
-[node name="Marker3D4" type="Marker3D" parent="EnemyPosiblePositions"]
+[node name="Marker3D4" type="Marker3D" parent="EnemyPosiblePositions" unique_id=654454470]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.316, 0.216, 0.291)
 
-[node name="Marker3D5" type="Marker3D" parent="EnemyPosiblePositions"]
+[node name="Marker3D5" type="Marker3D" parent="EnemyPosiblePositions" unique_id=1860367746]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.353, 0.216, -0.383)
 
-[node name="CharacterPosiblePositions" type="Node3D" parent="."]
+[node name="CharacterPosiblePositions" type="Node3D" parent="." unique_id=430029722]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.448353, 0, 0)
 
-[node name="Marker3D" type="Marker3D" parent="CharacterPosiblePositions"]
+[node name="Marker3D" type="Marker3D" parent="CharacterPosiblePositions" unique_id=903390034]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0126588, 0.216, 0.043553)
 
-[node name="Marker3D2" type="Marker3D" parent="CharacterPosiblePositions"]
+[node name="Marker3D2" type="Marker3D" parent="CharacterPosiblePositions" unique_id=156149326]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.640882, 0.216, -0.193518)
 
-[node name="Marker3D3" type="Marker3D" parent="CharacterPosiblePositions"]
+[node name="Marker3D3" type="Marker3D" parent="CharacterPosiblePositions" unique_id=35654631]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.402553, 0.216, 0.620494)
 
-[node name="Marker3D" type="Marker3D" parent="."]
+[node name="Marker3D" type="Marker3D" parent="." unique_id=446973636]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06315, 1.19213)
 
-[node name="GridMap" type="GridMap" parent="."]
+[node name="GridMap" type="GridMap" parent="." unique_id=547258925]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0989029, -0.224, -0.372023)
 mesh_library = SubResource("MeshLibrary_srhpj")
 cell_size = Vector3(0.16, 0.16, 0.16)
@@ -369,7 +369,7 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 3, -1)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2033314957]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13781, 0.435741, -0.714498)
 light_color = Color(0.765648, 0.452967, 0.19822, 1)
 omni_range = 1.25

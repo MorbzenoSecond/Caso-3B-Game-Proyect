@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://cilffntik2n2v"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://cilffntik2n2v"]
 
 [ext_resource type="Texture2D" uid="uid://c4lo25rgehrrv" path="res://assets/sprites/witch.png" id="1_5dpkm"]
 
@@ -12,7 +12,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jjkgd")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Idle",
 "speed": 5.0
 }]
