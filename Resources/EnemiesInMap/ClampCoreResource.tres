@@ -21,6 +21,7 @@ character = ExtResource("5_mi7sh")
 RUN_MAX_SPEED = 0.5
 ACCELERATION = 3.0
 SpecialActions = Array[ExtResource("1_nsarc")]([SubResource("Resource_0vyyv")])
+SmartEnemy = true
 enemy_data = {
 "Enemies": [{
 "level": 2,

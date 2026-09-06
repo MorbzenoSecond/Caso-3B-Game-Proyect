@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://fvqsyu1mfxi7"]
+[gd_scene format=3 uid="uid://fvqsyu1mfxi7"]
 
 [ext_resource type="Script" uid="uid://bk644qld6vvsi" path="res://scenes/characters/inMap/WalkingEnemyInMap.gd" id="1_2k8jx"]
 [ext_resource type="SpriteFrames" uid="uid://bqdfn5sk2byo7" path="res://assets/recursos/MoshPunch.tres" id="3_2k8jx"]
@@ -155,108 +155,106 @@ _data = {
 &"big_collision": SubResource("Animation_p7w77")
 }
 
-[node name="WalkingEnemyInMap" type="CharacterBody3D"]
+[node name="WalkingEnemyInMap" type="CharacterBody3D" unique_id=673496269]
 transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, 0, 0)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_2k8jx")
 stats = ExtResource("3_ubb1b")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=660685708]
 transform = Transform3D(1, 0, 0, 0, 0.999999, -6.25849e-07, 0, 6.25849e-07, 0.999999, 0, 0, 0)
 shape = ExtResource("3_cjdqv")
 debug_color = Color(0.94344, 0.21855, 0.251713, 0.42)
 
-[node name="RotableObjects" type="Node3D" parent="."]
+[node name="RotableObjects" type="Node3D" parent="." unique_id=1237569018]
 transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0)
 
-[node name="Marker3D" type="Marker3D" parent="RotableObjects"]
+[node name="Marker3D" type="Marker3D" parent="RotableObjects" unique_id=356501024]
 transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, -1.86265e-09, 0.058093)
 
-[node name="Sprite3D" type="Sprite3D" parent="RotableObjects/Marker3D"]
+[node name="Sprite3D" type="Sprite3D" parent="RotableObjects/Marker3D" unique_id=583968424]
 material_override = SubResource("ShaderMaterial_k4gvh")
 texture = SubResource("GradientTexture2D_pe3k2")
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="RotableObjects"]
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="RotableObjects" unique_id=2033990006]
 transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0.087, -3.72529e-09)
 alpha_cut = 2
 texture_filter = 0
 sprite_frames = ExtResource("3_2k8jx")
 animation = &"Idle"
-frame_progress = 0.239429
+frame_progress = 0.64176214
 script = ExtResource("4_kmquc")
 time = 0.5
 
-[node name="Areas" type="Node3D" parent="RotableObjects"]
+[node name="Areas" type="Node3D" parent="RotableObjects" unique_id=270566048]
 
-[node name="CharacterArea3D" type="Area3D" parent="RotableObjects/Areas"]
+[node name="CharacterArea3D" type="Area3D" parent="RotableObjects/Areas" unique_id=2073657949]
 transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0)
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape3D" parent="RotableObjects/Areas/CharacterArea3D"]
+[node name="CollisionShape2D" type="CollisionShape3D" parent="RotableObjects/Areas/CharacterArea3D" unique_id=1878402055]
 transform = Transform3D(1, 0, 0, 0, 0.999999, -5.96046e-07, 0, 5.96046e-07, 0.999999, 0, 0, 0)
+visible = false
 shape = ExtResource("6_kmquc")
 
-[node name="DetectionArea3D" type="Area3D" parent="RotableObjects/Areas"]
-visible = false
+[node name="DetectionArea3D" type="Area3D" parent="RotableObjects/Areas" unique_id=452196186]
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RotableObjects/Areas/DetectionArea3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RotableObjects/Areas/DetectionArea3D" unique_id=644957995]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.37296e-08, 0.493095)
 shape = SubResource("CylinderShape3D_y5th1")
 debug_color = Color(0.86593, 0.256442, 0.623914, 0.42)
 
-[node name="UndetectedArea3D" type="Area3D" parent="RotableObjects/Areas"]
+[node name="UndetectedArea3D" type="Area3D" parent="RotableObjects/Areas" unique_id=67405729]
 transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0)
-visible = false
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RotableObjects/Areas/UndetectedArea3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RotableObjects/Areas/UndetectedArea3D" unique_id=32608344]
+visible = false
 shape = SubResource("SphereShape3D_lu5c6")
 debug_color = Color(0.113725, 0.517647, 0, 1)
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="." unique_id=124736546 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_v1cm4")
 initial_state = NodePath("Normal")
 
-[node name="Normal" type="Node" parent="StateMachine"]
+[node name="Normal" type="Node" parent="StateMachine" unique_id=1552424483]
 script = ExtResource("7_lqaal")
 
-[node name="Timer" type="Timer" parent="StateMachine/Normal"]
+[node name="Timer" type="Timer" parent="StateMachine/Normal" unique_id=309470746]
 wait_time = 5.0
 
-[node name="Chase" type="Node" parent="StateMachine"]
+[node name="Chase" type="Node" parent="StateMachine" unique_id=1954484051]
 script = ExtResource("8_an2a7")
 
-[node name="Search" type="Node" parent="StateMachine"]
+[node name="Search" type="Node" parent="StateMachine" unique_id=1661202746]
 script = ExtResource("9_sc62i")
 
-[node name="Timer" type="Timer" parent="StateMachine/Search"]
+[node name="Timer" type="Timer" parent="StateMachine/Search" unique_id=734184927]
 wait_time = 10.0
 one_shot = true
 
-[node name="Timer2" type="Timer" parent="StateMachine/Search"]
+[node name="Timer2" type="Timer" parent="StateMachine/Search" unique_id=2103382699]
 wait_time = 3.0
 
-[node name="Back" type="Node" parent="StateMachine"]
+[node name="Back" type="Node" parent="StateMachine" unique_id=970986488]
 script = ExtResource("10_isrwi")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_twn6s")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=253969248]
+libraries/ = SubResource("AnimationLibrary_twn6s")
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Label3D" type="Label3D" parent="." unique_id=604889797]
 transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0.232674, 7.45058e-09)
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1472845674]
 transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, 0, 1, 0, 0, 0)
 stream = ExtResource("5_3ac0h")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=2031037498]
 path_desired_distance = 0.1
 target_desired_distance = 0.1
 path_height_offset = 0.2

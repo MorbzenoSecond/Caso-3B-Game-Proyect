@@ -10,10 +10,12 @@ var turnDictionary : Dictionary = {}
 var enemies_origin_nodes : Array = []
 var combatientes: Array = []
 var turnArray : Array = []
+var selected_enemies : Array = []
 
 const ENEMY_SCENE = preload("res://scenes/enemies/enemy_in_fight.tscn")
 const END_FIGHT_SCENE = preload("res://scenes/fightSceneElements/fight_end_scene.tscn")
 const TYPE_MOVEMENT_SCENE = preload("res://type_attack_button.tscn")
+const SELECT_ARROW = preload("res://scenes/fightSceneElements/Select_arrow.tscn")
 
 func setup():
 	$CanvasLayer.visible = true
@@ -21,7 +23,6 @@ func setup():
 	await turns()
 	enterExitAnimation()
 	$AnimationPlayer.play("ingrese")
-	select_all_enemies()
 
 func clean():
 	battle_paused = false
@@ -63,7 +64,7 @@ func set_keys():
 						"node": character_to_instanciate,
 						"main_body_node" : character_to_instanciate.main_body_part
 					})
-					
+					character_to_instanciate.name = player["name"]
 			if key == "enemies":
 				var posible_positions_enemies = $EnemyPosiblePositions.get_children()
 				for enemy in charactersInBattleArray[key]:
@@ -82,6 +83,7 @@ func set_keys():
 						"node": character_to_instanciate,
 						"main_body_node" : character_to_instanciate.main_body_part
 					})
+					character_to_instanciate.name = enemy["name"]
 
 func nextTurns():
 	if !charactersInBattleArray.is_empty():
@@ -140,7 +142,7 @@ func turns():
 			movement.queue_free()
 
 		if next_turn["type"] == "enemy" and next_turn["able_to_fight"]:
-			next_turn["node"].basic_attack(next_turn["node"].pick_random_character())
+			next_turn["node"].opponent_attack_logic()
 			return
 		elif next_turn["type"] == "player":
 			next_turn["node"]._activate_turn()
@@ -236,6 +238,12 @@ func instanciate_return_button(node):
 	return_button.button.get_node("Label").text = "Regresar"
 	return_button.button.button_down.connect(_on_return_button_pressed.bind(node))
 
+func instanciate_execute_button(node):
+	var return_button = TYPE_MOVEMENT_SCENE.instantiate()
+	movements_container.add_child(return_button)
+	return_button.button.get_node("Label").text = "Ejecutar"
+	return_button.button.button_down.connect(_on_execute_button_pressed.bind(node))
+
 func prepare_scape_options(node):
 	instanciate_return_button(node)
 	var scape_button = TYPE_MOVEMENT_SCENE.instantiate()
@@ -254,6 +262,7 @@ func prepare_attack_options(node):
 
 		if attack.resource_name:
 			button.button.get_node("Label").text = attack.resource_name
+	instanciate_execute_button(node)
 
 func prepare_item_options(node):
 	instanciate_return_button(node)
@@ -267,33 +276,44 @@ func prepare_item_options(node):
 			button.button.get_node("Label").text = item.item_name
 
 func _on_attack_button_pressed(button_node, node):
-	node.selected_attack = button_node.movement_resource
-	for movement in movements_container.get_children():
-		movement.button.disabled = true
-	if node.selected_attack.all_targets:
-		select_all_enemies()
-	for enemy in selected_enemies:
-		node.basic_attack(enemy)
+	await unselect_objetive()
+	if button_node.movement_resource.all_targets:
+		select_all_oponnents()
+	else:
+		select_random_oponents()
+	for movement_container in movements_container.get_children():
+		if movement_container.button.scale == Vector2(1,1):
+			continue
+		movement_container.tween(Vector2(1, 1))
+	if !selected_enemies.is_empty():
+		node.selected_attack = button_node.movement_resource
+	button_node.tween(Vector2(1.2, 1.2))
 
 func _on_item_button_pressed(item, node):
-	for movement in movements_container.get_children():
-		movement.button.disabled = true
-	for character in selected_enemies:
-		ItemEffect(item, character)
+	if !selected_enemies.is_empty():
+		for movement in movements_container.get_children():
+			movement.button.disabled = true
+		for character in selected_enemies:
+			ItemEffect(item, character)
+
+func _on_execute_button_pressed(node):
+	if !selected_enemies.is_empty():
+		for movement in movements_container.get_children():
+			movement.button.disabled = true
+		node.basic_attack(selected_enemies)
+		unselect_objetive()
 
 func _on_scape_button_pressed():
 	finish_fight()
 
 func _on_return_button_pressed(node):
-	node._activate_turn()
+	unselect_objetive()
+	node._activate_turn() 
 	for movement in movements_container.get_children():
 		movement.queue_free()
 #endregion
 
 #region Enemy selection
-const SELECT_ARROW = preload("res://scenes/fightSceneElements/Select_arrow.tscn")
-var selected_enemies : Array = []
-
 func selected_enemy(Enemy_node : Array):
 	var actual_arrows = get_tree().get_nodes_in_group("SELECTARROW")
 	selected_enemies.clear()
@@ -302,21 +322,29 @@ func selected_enemy(Enemy_node : Array):
 		arrow.material_override.set_shader_parameter("enable_outline", false)
 	
 	for node : Node3D in Enemy_node:
-		#print(node.name +" "+ str(node.get_node("SelectorPosition").position))
-		#var arrow = SELECT_ARROW.instantiate()
 		selected_enemies.append(node)
-		#if node.data:
-			#if node.data["type"] == "player":
-				#arrow.get_node("OmniLight3D").light_color = Color("a3a200")
-			#else:
-				#arrow.get_node("OmniLight3D").light_color = Color("c81e4f")
-		#node.add_child(arrow)
-		#arrow.position = node.get_node("SelectorPosition").position
 
-func select_all_enemies():
+func unselect_objetive():
+	var actual_arrows = get_tree().get_nodes_in_group("SELECTARROW")
+	for arrow : AnimatedSprite3D in actual_arrows:
+		arrow.remove_from_group("SELECTARROW")
+		arrow.material_override.set_shader_parameter("enable_outline", false)
+
+	selected_enemies.clear()
+
+func select_random_oponents():
+	var random_part : = get_tree().get_first_node_in_group("EnemyBodyPart")
+	if !random_part.get_node("AnimatedSprite3D").is_in_group("SELECTARROW"):
+		selected_enemies.append(random_part)
+		random_part.get_node("AnimatedSprite3D").add_to_group("SELECTARROW")
+		random_part.get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
+
+func select_all_oponnents():
 	var all_body_parts : Array = get_tree().get_nodes_in_group("EnemyBodyPart")
 	for i : Node3D in all_body_parts:
-		i.get_node("AnimatedSprite3D").add_to_group("SELECTARROW")
-		i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
-	#selected_enemy(all_body_parts)
+		if i.parent_enemy.data["type"] == "enemy":
+			selected_enemies.append(i)
+			i.get_node("AnimatedSprite3D").add_to_group("SELECTARROW")
+			i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
+			i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("outline_color", Color("ffff00"))
 #endregion

@@ -1,20 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://djkvge2ugd6vm"]
+[gd_scene format=3 uid="uid://djkvge2ugd6vm"]
 
 [ext_resource type="Script" uid="uid://c3yby8uxnmj7y" path="res://type_attack_button.gd" id="1_qkv60"]
 [ext_resource type="Texture2D" uid="uid://c6c314alewgwo" path="res://assets/sprites/voxels/bloque.png" id="2_44fa7"]
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" unique_id=1891142755]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_qkv60")
 
-[node name="TypeAttackButton" type="Button" parent="."]
+[node name="TypeAttackButton" type="Button" parent="." unique_id=1296772599]
+layout_mode = 0
 offset_right = 224.0
 offset_bottom = 65.0
+pivot_offset = Vector2(0, 33)
 
-[node name="Label" type="Label" parent="TypeAttackButton"]
+[node name="Label" type="Label" parent="TypeAttackButton" unique_id=1629463853]
 layout_mode = 0
 offset_left = 85.0
 offset_top = 12.0
@@ -23,7 +25,7 @@ offset_bottom = 54.0
 theme_override_font_sizes/font_size = 30
 text = "<empty>"
 
-[node name="TextureRect" type="TextureRect" parent="TypeAttackButton"]
+[node name="TextureRect" type="TextureRect" parent="TypeAttackButton" unique_id=1893794011]
 layout_mode = 0
 offset_left = 8.0
 offset_right = 72.0

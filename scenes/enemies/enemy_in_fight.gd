@@ -20,14 +20,28 @@ var body_parts : Array
 var data : Dictionary
 var selected_attack : Resource
 
-func basic_attack(target_node: Node3D):
+func basic_attack(target_node: Array):
 	var i
 	if selected_attack:
 		i = selected_attack
 		i.executed(self, target_node)
 		return
-	i = FightResourceStats.SpecialActions.pick_random()
-	i.executed(self, target_node)
+
+func opponent_attack_logic():
+	selected_attack = FightResourceStats.SpecialActions.pick_random()
+	var posible_characters : Array = []
+	var selected_character : Array = []
+	for character in FIGHT_SCENE_PATH.combatientes:
+		if character["type"] == "player":
+			posible_characters.append(character["node"].get_node("BodyParts").get_child(0))
+
+	if selected_attack.all_targets:
+		for posible_character in posible_characters:
+			selected_character.append(posible_character)
+	else:
+		selected_character.append(posible_characters.pick_random())
+
+	basic_attack(selected_character)
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -73,16 +87,10 @@ func setup(character_data : Dictionary):
 				position_index -= 0.01
 				
 				scene.add_to_group("EnemyBodyPart")
-				
 
 func level_stats_scalling():
 	true_damage = FightResourceStats.base_damage + data["level"]
 	true_speed = FightResourceStats.base_speed + data["level"]
-
-func attack_everyone(_damage):
-	pass
-	#for i in FIGHT_SCENE_PATH.get_node("Characters").get_children():
-		#i.get_damage(damage)
 
 func attack(damage, Character_node :Node3D):
 	Character_node.get_damage(damage)
@@ -107,7 +115,6 @@ func pick_random_character() -> Node3D:
 		if combatiente["type"] == "player" and combatiente["able_to_fight"]:
 			characters.append(combatiente["node"])
 	return characters.pick_random().body_parts.pick_random()
-
 # esto es temporal
 func character_down():
 	for body_part : Node3D in $BodyParts.get_children():

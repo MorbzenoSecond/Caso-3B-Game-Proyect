@@ -1,0 +1,14 @@
+[gd_resource type="AudioBusLayout" format=3 uid="uid://3dyvxrgdkfsc"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_j3pel"]
+resource_name = "Reverb"
+room_size = 0.3
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_j3pel"]
+resource_name = "Distortion"
+
+[resource]
+bus/0/effect/0/effect = SubResource("AudioEffectReverb_j3pel")
+bus/0/effect/0/enabled = true
+bus/0/effect/1/effect = SubResource("AudioEffectDistortion_j3pel")
+bus/0/effect/1/enabled = false

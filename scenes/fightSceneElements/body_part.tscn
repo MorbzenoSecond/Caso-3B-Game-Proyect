@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bo00pddy7gumm"]
+[gd_scene format=3 uid="uid://bo00pddy7gumm"]
 
 [ext_resource type="Script" uid="uid://bhvxr57njetyq" path="res://scenes/fightSceneElements/BodyPart.gd" id="1_8bhan"]
 [ext_resource type="Script" uid="uid://xiscktksb6o4" path="res://scenes/General/AnimatedSprites.gd" id="2_8bhan"]
@@ -39,7 +39,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hlbs1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Death",
 "speed": 5.0
 }, {
@@ -47,7 +47,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l737m")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Idle",
 "speed": 5.0
 }, {
@@ -55,7 +55,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_exgvr")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Punched",
 "speed": 5.0
 }, {
@@ -63,7 +63,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hn46l")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack",
 "speed": 5.0
 }]
@@ -73,12 +73,12 @@ viewport_path = NodePath("LiveBar/SubViewport")
 
 [sub_resource type="GDScript" id="GDScript_0ne7h"]
 
-[node name="BodyPart" type="Node3D"]
+[node name="BodyPart" type="Node3D" unique_id=1937919479]
 script = ExtResource("1_8bhan")
 
-[node name="SelectorPosition" type="Marker3D" parent="."]
+[node name="SelectorPosition" type="Marker3D" parent="." unique_id=1084440587]
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=951464659]
 transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_xi7b8")
 texture_filter = 0
@@ -86,18 +86,18 @@ sprite_frames = SubResource("SpriteFrames_k4r0q")
 animation = &"Punched"
 script = ExtResource("2_8bhan")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=351656627]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1570847584]
 transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, -0.35, 0.11)
 shape = ExtResource("4_pjj54")
 
-[node name="LiveBar" type="Sprite3D" parent="."]
+[node name="LiveBar" type="Sprite3D" parent="." unique_id=1963041889]
 transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, 0.49372, -0.0433117)
 texture_filter = 0
 texture = SubResource("ViewportTexture_gfuct")
 
-[node name="SubViewport" type="SubViewport" parent="LiveBar"]
+[node name="SubViewport" type="SubViewport" parent="LiveBar" unique_id=1525025911]
 disable_3d = true
 transparent_bg = true
 canvas_item_default_texture_filter = 0
@@ -105,13 +105,13 @@ size = Vector2i(30, 10)
 render_target_update_mode = 4
 script = SubResource("GDScript_0ne7h")
 
-[node name="Control" type="Control" parent="LiveBar/SubViewport"]
+[node name="Control" type="Control" parent="LiveBar/SubViewport" unique_id=1365938663]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ProgressBar" type="TextureProgressBar" parent="LiveBar/SubViewport/Control"]
+[node name="ProgressBar" type="TextureProgressBar" parent="LiveBar/SubViewport/Control" unique_id=2142212520]
 texture_filter = 1
 layout_mode = 0
 offset_top = 5.0
@@ -123,16 +123,16 @@ texture_under = ExtResource("7_d6wfd")
 texture_over = ExtResource("8_ayjey")
 texture_progress = ExtResource("9_f1y66")
 
-[node name="Name" type="Label3D" parent="LiveBar"]
+[node name="Name" type="Label3D" parent="LiveBar" unique_id=985647094]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.1, 0.02, 0)
 text = "asdas"
 
-[node name="livedata" type="Label3D" parent="LiveBar"]
+[node name="livedata" type="Label3D" parent="LiveBar" unique_id=1352821699]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.025, 0.01)
 alpha_cut = 1
 text = "dsad"
 
-[node name="Level" type="Label3D" parent="LiveBar"]
+[node name="Level" type="Label3D" parent="LiveBar" unique_id=177161350]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.09, 0.02, 0)
 
 [connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]

@@ -1,13 +1,13 @@
 class_name HeavyJumpMovement
 extends FightMovements
 
-func executed(self_node : Node3D, target_node: Node3D):
-	var target_pos: Vector3 = target_node.get_marker_position("hit_position_1")
+func executed(self_node : Node3D, target_nodes: Array):
+	var target_pos: Vector3 = target_nodes[0].get_marker_position("hit_position_1")
 	var jump_height: float = 2.0 # Altura del salto
 	var jump_time: float = 1.2    # Tiempo total en el aire (mitad subir, mitad caer)
 	var half_jump: float = jump_time / 2.0
 
-	var tween = target_node.create_tween()
+	var tween = target_nodes[0].create_tween()
 
 	# --- 1. MOVIMIENTO HORIZONTAL (X y Z) ---
 	# Avanza linealmente hacia el objetivo durante todo el salto
@@ -34,7 +34,8 @@ func executed(self_node : Node3D, target_node: Node3D):
 	# --- 4. IMPACTO Y ATAQUE ---
 	# Daño al tocar suelo
 	tween.tween_callback(self_node.FIGHT_SCENE_PATH.get_parent().get_parent().camera.add_trauma.bind(0.8))
-	tween.tween_callback(self_node.attack_everyone.bind(self_node.FightResourceStats.base_damage))
+	for target in target_nodes:
+		tween.tween_callback(self_node.attack.bind(self_node.FightResourceStats.base_damage, target))
 	
 	# Pausa breve en el suelo tras el choque para simular masa
 	tween.tween_interval(0.15) 

@@ -36,7 +36,7 @@ func get_marker_position(Type : String):
 
 func get_damage(damage):
 	await calculate_damage(damage)
-	add_trauma(3)
+	add_trauma(100)
 		##var resource = DialogueManager.create_resource_from_text("~ start \n " + data["name"] + ": hola,soy un "+ data["name"] +"!")
 		##DialogueManager.show_example_dialogue_balloon(resource, "start")
 		##FIGHT_SCENE_PATH.battle_paused = true
@@ -65,6 +65,7 @@ func calculate_damage(brute_damage):
 
 	if local_life <= 0:
 		visible = false
+		remove_from_group("EnemyBodyPart")
 		if body_part_is_main:
 			parent_enemy.character_down()
 			
@@ -146,7 +147,7 @@ func _process(delta: float) -> void:
 		_apply_shake()
 
 func add_trauma(amount: float) -> void:
-	trauma = clamp(trauma + amount, 0.0, 1.0)
+	trauma = clamp(trauma + amount, 0.0, 2.0)
 
 func _apply_shake() -> void:
 	var shake := trauma * trauma

@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bh38ky3nosg1n"]
+[gd_scene format=3 uid="uid://bh38ky3nosg1n"]
 
-[ext_resource type="Script" uid="uid://ngsy3j5wnxdx" path="res://scenes/General/Main.gd" id="1_g4gp3"]
+[ext_resource type="Script" uid="uid://ngsy3j5wnxdx" path="res://scenes/General/main.gd" id="1_g4gp3"]
 [ext_resource type="PackedScene" uid="uid://bvs4i5thex2gf" path="res://scenes/characters/inMap/WalkingPlayerInMap.tscn" id="2_5jks7"]
+[ext_resource type="AudioStream" uid="uid://bqq3fry046c2" path="res://assets/music/fight_theme.wav" id="2_yfnky"]
 [ext_resource type="Environment" uid="uid://cll226qxsbs1t" path="res://assets/recursos/SkyMaterial/ExteriorSkyMaterial2.tres" id="3_5jks7"]
 [ext_resource type="Script" uid="uid://bybq0lrbwmyit" path="res://scenes/General/pivote.gd" id="3_yfnky"]
 [ext_resource type="Script" uid="uid://di13krw3aiy81" path="res://scenes/General/CameraControl.gd" id="4_nxd7e"]
-[ext_resource type="AudioStream" uid="uid://bsa0v3wu3l7po" path="res://assets/music/end_Battle.wav" id="5_dllss"]
 [ext_resource type="Resource" uid="uid://dc8ychgbrs3im" path="res://Resources/EnemiesInMap/PlayerResource.tres" id="5_yfnky"]
 
 [sub_resource type="Animation" id="Animation_lquwl"]
@@ -68,53 +68,51 @@ _data = {
 &"new_animation": SubResource("Animation_1bvp3")
 }
 
-[node name="Main" type="Node3D" groups=["MAIN"]]
+[node name="Main" type="Node3D" unique_id=221742763 groups=["MAIN"]]
 process_mode = 3
 script = ExtResource("1_g4gp3")
 
-[node name="NodoDePelea" type="Node3D" parent="."]
+[node name="NodoDePelea" type="Node3D" parent="." unique_id=1471778054]
 process_mode = 2
 
-[node name="WorldNode" type="Node3D" parent="." groups=["WorldNode"]]
+[node name="WorldNode" type="Node3D" parent="." unique_id=1905709694 groups=["WorldNode"]]
 process_mode = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_7mycd")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1284989687]
+libraries/ = SubResource("AnimationLibrary_7mycd")
 
-[node name="MusicAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_dllss")
+[node name="MusicAudio" type="AudioStreamPlayer" parent="." unique_id=2104534470]
+stream = ExtResource("2_yfnky")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1046788296]
 environment = ExtResource("3_5jks7")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1103458694]
 transform = Transform3D(-0.552622, 0.708794, -0.438429, 0.561124, 0.705384, 0.433097, 0.616237, -0.00667433, -0.787532, 0, 0.703114, 0)
 light_color = Color(0.325441, 0.325441, 0.325441, 1)
 shadow_enabled = true
 directional_shadow_mode = 0
 directional_shadow_max_distance = 5.0
 
-[node name="UI" type="Node" parent="."]
+[node name="UI" type="Node" parent="." unique_id=1533688241]
 
-[node name="GameParty" type="Node3D" parent="."]
+[node name="GameParty" type="Node3D" parent="." unique_id=832557118]
 
-[node name="MainCharacterWorld" parent="GameParty" groups=["PLAYER"] instance=ExtResource("2_5jks7")]
+[node name="MainCharacterWorld" parent="GameParty" unique_id=413355732 groups=["PLAYER"] instance=ExtResource("2_5jks7")]
 process_mode = 1
 stats = ExtResource("5_yfnky")
 
-[node name="pivote" type="Node3D" parent="GameParty/MainCharacterWorld"]
+[node name="pivote" type="Node3D" parent="GameParty/MainCharacterWorld" unique_id=1654025448]
 script = ExtResource("3_yfnky")
 intensity = Vector3(2.4, 3.6, 0)
 
-[node name="Camera2D" type="Camera3D" parent="GameParty/MainCharacterWorld/pivote" groups=["CAMERA"]]
+[node name="Camera2D" type="Camera3D" parent="GameParty/MainCharacterWorld/pivote" unique_id=1799498933 groups=["CAMERA"]]
 transform = Transform3D(1, 0, 0, 0, 0.939692, 0.34202, 0, -0.34202, 0.939692, 0, 0.578636, 1.07448)
 far = 10.0
 script = ExtResource("4_nxd7e")
 
-[node name="Followers" type="Node3D" parent="GameParty"]
+[node name="Followers" type="Node3D" parent="GameParty" unique_id=688657761]
 
-[node name="Dumpster" type="Node3D" parent="."]
+[node name="Dumpster" type="Node3D" parent="." unique_id=1661436597]
 
-[node name="EventScript" type="Node3D" parent="."]
+[node name="EventScript" type="Node3D" parent="." unique_id=2049374417]

@@ -30,7 +30,9 @@ shape_position = Vector3(0, 0.207, 0.067)
 metadata/_custom_type_script = "uid://dmmvynklhh8f0"
 
 [sub_resource type="Resource" id="Resource_dwp78"]
+resource_name = "Heavy Jump"
 script = ExtResource("7_mawh1")
+all_targets = true
 metadata/_custom_type_script = "uid://b1b2346p0gbef"
 
 [resource]
