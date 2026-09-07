@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 #
 func spawn_afterimage():
 	var img = AFTERIMAGESCENE.instantiate()
-	GameDataManager.MAIN.Dumpster.add_child(img)
+	GameDataManager.MAIN.add_child(img)
 	img.setup(
 		sprite_frames.resource_path,
 		animation,

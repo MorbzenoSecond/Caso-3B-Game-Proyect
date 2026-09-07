@@ -27,6 +27,17 @@ func basic_attack(target_node: Array):
 		i.executed(self, target_node)
 		return
 
+func activate(status):
+	main_body_part.animated_sprite_3D.set_process(status)
+
+func provoque():
+	var turns = 3
+	var provoque_status : = {"origin_entity": self, "BodyPart" : main_body_part, "remaining_turns": turns}
+	for entity in FIGHT_SCENE_PATH.focussed_entities:
+		if entity["origin_entity"] == provoque_status["origin_entity"]:
+			FIGHT_SCENE_PATH.focussed_entities.erase(entity)
+	FIGHT_SCENE_PATH.focussed_entities.append(provoque_status)
+
 func opponent_attack_logic():
 	selected_attack = FightResourceStats.SpecialActions.pick_random()
 	var posible_characters : Array = []
@@ -38,8 +49,17 @@ func opponent_attack_logic():
 	if selected_attack.all_targets:
 		for posible_character in posible_characters:
 			selected_character.append(posible_character)
+	elif selected_attack.not_targets:
+		pass
 	else:
-		selected_character.append(posible_characters.pick_random())
+		if FIGHT_SCENE_PATH.focussed_entities.is_empty():
+			selected_character.append(posible_characters.pick_random())
+		else:
+			for entity in FIGHT_SCENE_PATH.focussed_entities:
+				if entity["BodyPart"].parent_enemy.data["type"] == "player":
+					selected_character.append(entity["BodyPart"])
+					break
+			selected_character.append(posible_characters.pick_random())
 
 	basic_attack(selected_character)
 
@@ -120,3 +140,7 @@ func character_down():
 	for body_part : Node3D in $BodyParts.get_children():
 		body_part.animated_sprite_3D.visible = false
 	FIGHT_SCENE_PATH.update_characters_in_fight(self)
+	if !FIGHT_SCENE_PATH.focussed_entities.is_empty():
+		for entity : Dictionary in FIGHT_SCENE_PATH.focussed_entities: 
+			if entity["origin_entity"] == self:
+				FIGHT_SCENE_PATH.focussed_entities.erase(entity)

@@ -10,13 +10,15 @@ func setup(
 	Sprite_Duration : float = 0.5,
 	):
 	
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	
 	$AnimatedSprite3D.sprite_frames = load(str(Sprite_Resource))
-	#await $AnimatedSprite3D.sprite_frames_changed
 	$AnimatedSprite3D.animation = Sprite_Animation
 	$AnimatedSprite3D.frame = Sprite_Frame
+	
 	global_position = Sprite_Position
 	$AnimatedSprite3D.rotation = Sprite_Rotation
 	
-	var tween = get_tree().create_tween()
+	var tween = create_tween()
 	tween.tween_property($AnimatedSprite3D, "modulate", Sprite_moduation, Sprite_Duration)
-	tween.tween_callback(Callable(self, "queue_free"))
+	tween.tween_callback(queue_free)

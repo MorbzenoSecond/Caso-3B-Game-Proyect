@@ -1,30 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://co4l75fcvwiwh"]
+[gd_scene format=3 uid="uid://co4l75fcvwiwh"]
 
 [ext_resource type="Script" uid="uid://d4jm8l1i2txs8" path="res://game_file_button.gd" id="1_r04n3"]
 [ext_resource type="Texture2D" uid="uid://xqs8yw2q453s" path="res://assets/sprites/voxels/savepoint.png" id="2_n4tde"]
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" unique_id=1561853321]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 327.0
 offset_bottom = 49.0
 script = ExtResource("1_r04n3")
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=1072597619]
 layout_mode = 0
 offset_right = 429.0
 offset_bottom = 125.0
 pivot_offset = Vector2(203, 60)
 theme_override_font_sizes/font_size = 30
 
-[node name="TextureRect" type="TextureRect" parent="Button"]
+[node name="TextureRect" type="TextureRect" parent="Button" unique_id=1943729174]
 layout_mode = 0
 offset_right = 188.0
 offset_bottom = 125.0
 texture = ExtResource("2_n4tde")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="Button"]
+[node name="Label" type="Label" parent="Button" unique_id=743539345]
 layout_mode = 0
 offset_left = 245.0
 offset_top = 45.0
@@ -33,7 +33,7 @@ offset_bottom = 87.0
 theme_override_font_sizes/font_size = 30
 text = "asdassa"
 
-[node name="TimeLabel" type="Label" parent="Button"]
+[node name="TimeLabel" type="Label" parent="Button" unique_id=858279090]
 layout_mode = 0
 offset_left = 188.0
 offset_top = 102.0

@@ -11,6 +11,7 @@ var enemies_origin_nodes : Array = []
 var combatientes: Array = []
 var turnArray : Array = []
 var selected_enemies : Array = []
+var focussed_entities : Array = []
 
 const ENEMY_SCENE = preload("res://scenes/enemies/enemy_in_fight.tscn")
 const END_FIGHT_SCENE = preload("res://scenes/fightSceneElements/fight_end_scene.tscn")
@@ -35,6 +36,7 @@ func clean():
 	turnDictionary.clear()
 	enemies_origin_nodes.clear()
 	combatientes.clear()
+	focussed_entities.clear()
 
 func finish_fight():
 	$AnimationPlayer.play_backwards("ingrese")
@@ -126,7 +128,6 @@ func nextTurns():
 					print_rich("Turno %d: [color=green][b]JUGADOR (%s)[/b][/color]" % [turnArray.size(), winner["name"]])
 				else:
 					print_rich("Turno %d: [color=red][b]ENEMIGO (%s)[/b][/color]" % [turnArray.size(), winner["name"]])
-		print("turnArray")
 
 func turns():
 	if !charactersInBattleArray.is_empty():
@@ -140,6 +141,14 @@ func turns():
 		
 		for movement in movements_container.get_children():
 			movement.queue_free()
+		
+		if !focussed_entities.is_empty():
+			for entity : Dictionary in focussed_entities: 
+				if entity["origin_entity"] == next_turn["node"]:
+					
+					entity["remaining_turns"] -= 1
+					if entity["remaining_turns"] <= 0:
+						focussed_entities.erase(entity)
 
 		if next_turn["type"] == "enemy" and next_turn["able_to_fight"]:
 			next_turn["node"].opponent_attack_logic()
@@ -277,7 +286,9 @@ func prepare_item_options(node):
 
 func _on_attack_button_pressed(button_node, node):
 	await unselect_objetive()
-	if button_node.movement_resource.all_targets:
+	if button_node.movement_resource.not_targets:
+		pass
+	elif  button_node.movement_resource.all_targets:
 		select_all_oponnents()
 	else:
 		select_random_oponents()
@@ -285,8 +296,7 @@ func _on_attack_button_pressed(button_node, node):
 		if movement_container.button.scale == Vector2(1,1):
 			continue
 		movement_container.tween(Vector2(1, 1))
-	if !selected_enemies.is_empty():
-		node.selected_attack = button_node.movement_resource
+	node.selected_attack = button_node.movement_resource
 	button_node.tween(Vector2(1.2, 1.2))
 
 func _on_item_button_pressed(item, node):
@@ -297,11 +307,17 @@ func _on_item_button_pressed(item, node):
 			ItemEffect(item, character)
 
 func _on_execute_button_pressed(node):
+	
 	if !selected_enemies.is_empty():
 		for movement in movements_container.get_children():
 			movement.button.disabled = true
 		node.basic_attack(selected_enemies)
 		unselect_objetive()
+	
+	elif node.selected_attack:
+		if node.selected_attack.not_targets:
+			node.basic_attack(selected_enemies)
+			unselect_objetive()
 
 func _on_scape_button_pressed():
 	finish_fight()
@@ -333,11 +349,20 @@ func unselect_objetive():
 	selected_enemies.clear()
 
 func select_random_oponents():
-	var random_part : = get_tree().get_first_node_in_group("EnemyBodyPart")
-	if !random_part.get_node("AnimatedSprite3D").is_in_group("SELECTARROW"):
-		selected_enemies.append(random_part)
-		random_part.get_node("AnimatedSprite3D").add_to_group("SELECTARROW")
-		random_part.get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
+	if focussed_entities.is_empty():
+		var random_part : = get_tree().get_first_node_in_group("EnemyBodyPart")
+		if !random_part.get_node("AnimatedSprite3D").is_in_group("SELECTARROW"):
+			selected_enemies.append(random_part)
+			random_part.get_node("AnimatedSprite3D").add_to_group("SELECTARROW")
+			random_part.get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
+	else:
+		for entity in focussed_entities:
+			if entity["BodyPart"].parent_enemy.data["type"] == "enemy":
+				if !entity["BodyPart"].get_node("AnimatedSprite3D").is_in_group("SELECTARROW"):
+					selected_enemies.append(entity["BodyPart"])
+					entity["BodyPart"].get_node("AnimatedSprite3D").add_to_group("SELECTARROW")
+					entity["BodyPart"].get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
+					break
 
 func select_all_oponnents():
 	var all_body_parts : Array = get_tree().get_nodes_in_group("EnemyBodyPart")

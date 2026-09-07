@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://dt6qeewy4r4u1" path="res://Resources/FightResources/MovementsScripts/DirectPunchMovementScript.gd" id="8_xfohr"]
 [ext_resource type="Script" uid="uid://b1b2346p0gbef" path="res://Resources/FightResources/MovementsScripts/HeavyJumpFightMovement.gd" id="9_fbylq"]
 [ext_resource type="Script" uid="uid://bw3watrbs53ld" path="res://Resources/FightResources/CharacterResource/FightResourceScript.gd" id="9_kbq7i"]
+[ext_resource type="Script" uid="uid://bvw1ojd7mi68w" path="res://Resources/FightResources/MovementsScripts/ShieldMovement.gd" id="10_0sqlw"]
 
 [sub_resource type="Resource" id="Resource_pn0ah"]
 script = ExtResource("1_myptc")
@@ -40,9 +41,15 @@ script = ExtResource("9_fbylq")
 all_targets = true
 metadata/_custom_type_script = "uid://b1b2346p0gbef"
 
+[sub_resource type="Resource" id="Resource_5jks7"]
+resource_name = "Provocacion"
+script = ExtResource("10_0sqlw")
+not_targets = true
+metadata/_custom_type_script = "uid://bvw1ojd7mi68w"
+
 [resource]
 script = ExtResource("9_kbq7i")
-SpecialActions = Array[ExtResource("4_5cjme")]([SubResource("Resource_ci18a"), SubResource("Resource_m8d2d"), SubResource("Resource_rlu7g")])
+SpecialActions = Array[ExtResource("4_5cjme")]([SubResource("Resource_ci18a"), SubResource("Resource_m8d2d"), SubResource("Resource_rlu7g"), SubResource("Resource_5jks7")])
 actions_positions = Vector3(0, 0.4, 0)
 base_speed = 25.0
 base_damage = 4.0

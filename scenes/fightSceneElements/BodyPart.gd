@@ -113,16 +113,23 @@ func positions_and_collisions_setup(body_part_data, position_index, render_prior
 	selector_position.position = body_part_data.selector_point_position
 
 func select_body_part():
-	parent_enemy.get_parent().get_parent().selected_enemy(myself)
+	if !check_if_can_foccuse():
+		return
+
+	parent_enemy.FIGHT_SCENE_PATH.selected_enemy(myself)
 	animated_sprite_3D.add_to_group("SELECTARROW")
 	animated_sprite_3D.material_override.set_shader_parameter("enable_outline", true)
 	animated_sprite_3D.material_override.set_shader_parameter("outline_color", Color("ffff00"))
 
 func above_body_part():
+	if !check_if_can_foccuse():
+		return
 	animated_sprite_3D.material_override.set_shader_parameter("enable_outline", true)
 	animated_sprite_3D.material_override.set_shader_parameter("outline_color", Color("ffffff"))
 
 func above_body_part_quit():
+	if !check_if_can_foccuse():
+		return
 	animated_sprite_3D.material_override.set_shader_parameter("enable_outline", false)
 
 func _on_area_3d_mouse_entered() -> void:
@@ -132,6 +139,19 @@ func _on_area_3d_mouse_entered() -> void:
 func _on_area_3d_mouse_exited() -> void:
 	if !animated_sprite_3D.is_in_group("SELECTARROW"):
 		above_body_part_quit()
+
+# arreglar a futuro
+func check_if_can_foccuse() -> bool:
+	if parent_enemy.data["type"] == "enemy":
+		if !parent_enemy.FIGHT_SCENE_PATH.focussed_entities.is_empty() :
+			for entity in parent_enemy.FIGHT_SCENE_PATH.focussed_entities:
+				if entity["origin_entity"] == parent_enemy and entity["origin_entity"].data["type"] == "enemy":
+					return true
+			return false
+		return true
+	elif parent_enemy.data["type"] == "player":
+		return true
+	return false
 
 
 @export var max_position_offset := Vector3(1, 1, 0.2)
