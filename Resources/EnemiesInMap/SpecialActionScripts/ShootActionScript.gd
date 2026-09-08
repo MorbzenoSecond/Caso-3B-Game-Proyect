@@ -1,8 +1,6 @@
 class_name ShootAction
 extends EnemyAction
 
-
-
 @export var ShootType : PackedScene 
 @export var ShootSpeed: float = 2.0
 @export var VisualEffect : Array[PackedScene]

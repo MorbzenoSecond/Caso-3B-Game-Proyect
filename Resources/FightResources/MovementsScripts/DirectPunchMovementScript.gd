@@ -13,9 +13,8 @@ func executed(self_node : Node3D, target_node: Array):
 	tween.tween_callback(self_node.attack.bind(self_node.true_damage, target_node[0]))
 	
 	tween.tween_callback(self_node.activate.bind(true))
-	tween.tween_property(self_node, "global_position:x", target_node[0].get_marker_position("hit_position_1").x, 0.3)
 	
-	tween.tween_property(self_node, "global_position:x", target_node[0].get_marker_position("hit_position_1").x -0.9, 0.2)\
+	tween.tween_property(self_node, "global_position:x", target_node[0].get_marker_position("hit_position_1").x -0.9, 0.5)\
 		.set_ease(Tween.EASE_OUT)
 
 	tween.tween_interval(0.7)

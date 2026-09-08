@@ -142,6 +142,8 @@ func _on_area_3d_mouse_exited() -> void:
 
 # arreglar a futuro
 func check_if_can_foccuse() -> bool:
+	if parent_enemy.FIGHT_SCENE_PATH.can_only_select_himself or parent_enemy.FIGHT_SCENE_PATH.cant_select_anyone:
+		return false
 	if parent_enemy.data["type"] == "enemy":
 		if !parent_enemy.FIGHT_SCENE_PATH.focussed_entities.is_empty() :
 			for entity in parent_enemy.FIGHT_SCENE_PATH.focussed_entities:

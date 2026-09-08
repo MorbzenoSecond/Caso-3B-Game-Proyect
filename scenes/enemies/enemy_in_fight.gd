@@ -43,7 +43,7 @@ func opponent_attack_logic():
 	var posible_characters : Array = []
 	var selected_character : Array = []
 	for character in FIGHT_SCENE_PATH.combatientes:
-		if character["type"] == "player":
+		if character["type"] == "player" and character.able_to_fight:
 			posible_characters.append(character["node"].get_node("BodyParts").get_child(0))
 
 	if selected_attack.all_targets:
@@ -60,7 +60,6 @@ func opponent_attack_logic():
 					selected_character.append(entity["BodyPart"])
 					break
 			selected_character.append(posible_characters.pick_random())
-
 	basic_attack(selected_character)
 
 func _ready() -> void:

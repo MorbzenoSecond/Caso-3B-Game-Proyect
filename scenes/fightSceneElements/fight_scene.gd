@@ -5,6 +5,8 @@ extends Node3D
 
 @export var battle_paused : bool = false
 
+var camera_tween : Tween
+
 var charactersInBattleArray : Dictionary = {}
 var turnDictionary : Dictionary = {}
 var enemies_origin_nodes : Array = []
@@ -12,6 +14,8 @@ var combatientes: Array = []
 var turnArray : Array = []
 var selected_enemies : Array = []
 var focussed_entities : Array = []
+var can_only_select_himself : bool = false
+var cant_select_anyone : bool = false
 
 const ENEMY_SCENE = preload("res://scenes/enemies/enemy_in_fight.tscn")
 const END_FIGHT_SCENE = preload("res://scenes/fightSceneElements/fight_end_scene.tscn")
@@ -36,8 +40,13 @@ func clean():
 	turnDictionary.clear()
 	enemies_origin_nodes.clear()
 	combatientes.clear()
-	focussed_entities.clear()
+	clear_entities()
 
+func clear_entities():
+	focussed_entities.clear()
+	cant_select_anyone = false
+	can_only_select_himself = false
+	
 func finish_fight():
 	$AnimationPlayer.play_backwards("ingrese")
 	await enterExitAnimation()
@@ -136,7 +145,7 @@ func turns():
 		while turnArray.size() < 5:
 			nextTurns()
 			turn()
-		
+		#reparent_camera(self)
 		var next_turn = turnArray.pop_front()
 		
 		for movement in movements_container.get_children():
@@ -287,10 +296,16 @@ func prepare_item_options(node):
 
 func _on_attack_button_pressed(button_node, node):
 	await unselect_objetive()
-	if button_node.movement_resource.not_targets:
+	await clear_entities()
+	if  button_node.movement_resource.can_only_target_himself:
 		camera_control(node.position, 1.1)
-		pass
+		select_itself(node)
+		can_only_select_himself = true
+	elif button_node.movement_resource.not_targets:
+		camera_control(node.position, 1.1)
+		select_itself(node)
 	elif  button_node.movement_resource.all_targets:
+		cant_select_anyone= true
 		camera_control($EnemyPosiblePositions/Marker3D4.position, 1.5)
 		select_all_oponnents()
 	else:
@@ -312,6 +327,7 @@ func _on_item_button_pressed(item, node):
 
 func _on_execute_button_pressed(node):
 	camera_control()
+	print("selected enemies: " +str(selected_enemies))
 	if !selected_enemies.is_empty():
 		for movement in movements_container.get_children():
 			movement.button.disabled = true
@@ -369,6 +385,13 @@ func select_random_oponents():
 					entity["BodyPart"].get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
 					break
 
+func select_itself(node):
+	for i : Node3D in node.body_parts:
+		selected_enemies.append(i)
+		i.get_node("AnimatedSprite3D").add_to_group("SELECTARROW")
+		i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
+		i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("outline_color", Color("ffff00"))
+
 func select_all_oponnents():
 	var all_body_parts : Array = get_tree().get_nodes_in_group("EnemyBodyPart")
 	for i : Node3D in all_body_parts:
@@ -379,14 +402,14 @@ func select_all_oponnents():
 			i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("outline_color", Color("ffff00"))
 #endregion
 
-var camera_tween : Tween
+func camera_control(new_position : Vector3 = Vector3.ZERO, new_size : float = 2, duration: float = 0.35):
+	if camera_tween and camera_tween.is_valid():
+		camera_tween.kill()
 
-func camera_control(new_position : Vector3 = Vector3.ZERO, new_size : float = 2):
-	if camera_tween:
-		if !camera_tween.is_running():
-			camera_tween.kill()
-	camera_tween = create_tween()
-	print(new_position.y)
-	camera_tween.tween_property(GameDataManager.MAIN.camera, "position:x", new_position.x, 0.15).set_ease(Tween.EASE_OUT)
-	camera_tween.parallel().tween_property(GameDataManager.MAIN.camera, "position:y", new_position.y, 0.15).set_ease(Tween.EASE_OUT)
-	camera_tween.parallel().tween_property(GameDataManager.MAIN.camera, "size", new_size , 0.10).set_ease(Tween.EASE_OUT)
+	camera_tween = create_tween().set_parallel(true)
+	camera_tween.set_trans(Tween.TRANS_CUBIC)
+	camera_tween.set_ease(Tween.EASE_OUT)    
+	
+	camera_tween.tween_property(GameDataManager.MAIN.camera, "position:y", new_position.y, duration)
+	camera_tween.tween_property(GameDataManager.MAIN.camera, "position:x", new_position.x, duration)
+	camera_tween.tween_property(GameDataManager.MAIN.camera, "size", new_size, duration)
