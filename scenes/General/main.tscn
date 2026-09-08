@@ -103,11 +103,12 @@ process_mode = 1
 stats = ExtResource("5_yfnky")
 
 [node name="pivote" type="Node3D" parent="GameParty/MainCharacterWorld" unique_id=1654025448]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43496943, 0.77366745)
 script = ExtResource("3_yfnky")
 intensity = Vector3(2.4, 3.6, 0)
 
 [node name="Camera2D" type="Camera3D" parent="GameParty/MainCharacterWorld/pivote" unique_id=1799498933 groups=["CAMERA"]]
-transform = Transform3D(1, 0, 0, 0, 0.939692, 0.34202, 0, -0.34202, 0.939692, 0, 0.578636, 1.07448)
+transform = Transform3D(1, 0, 0, 0, 0.939692, 0.34202, 0, -0.34202, 0.939692, 0, 0, 0)
 far = 10.0
 script = ExtResource("4_nxd7e")
 

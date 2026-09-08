@@ -27,7 +27,7 @@ func executed(self_node : Node3D, target_node: Array):
 
 func shoot(direction, self_node):
 	var scene = ShootType.instantiate()
-	GameDataManager.MAIN.Dumpster.add_child(scene)
+	GameDataManager.MAIN.dumpster.add_child(scene)
 	
 	for node in VisualEffect:
 		var effect = node.instantiate()

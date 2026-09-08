@@ -9,7 +9,7 @@ extends EnemyAction
 
 func execute(enemy):
 	var scene = ShootType.instantiate()
-	GameDataManager.MAIN.Dumpster.add_child(scene)
+	GameDataManager.MAIN.dumpster.add_child(scene)
 	
 	for node in VisualEffect:
 		var effect = node.instantiate()

@@ -8,11 +8,11 @@ const PARTY_MEMBER = preload("res://walking_friend_in_map.tscn")
 @onready var CanvasInfo = $UI/CanvasInfo as CanvasLayer
 @onready var ColorRec = $UI/CanvasInfo/ColorRect as ColorRect
 @onready var MainCharacter = $GameParty/MainCharacterWorld
-@onready var Dumpster = $Dumpster
+@onready var dumpster = $Dumpster
 @onready var WorldEnvironmentNode = $WorldEnvironment
 @onready var fight_node = $NodoDePelea
 
-var characters := {
+var characters : Dictionary = {
 	"players": [],
 	"enemies": [],
 }
@@ -94,7 +94,7 @@ func _instanciate_fight(enemy_data : Dictionary, scenary_fight_background, enemi
 	camera.size = 2
 	await get_tree().process_frame
 	
-	camera.global_position = fight_node.get_child(0).get_node("Marker3D").global_position
+	pivote.global_position = fight_node.get_child(0).get_node("Marker3D").global_position
 	camera.initial_rotation.x = deg_to_rad(-40)
 
 func finish_fight():
@@ -104,7 +104,7 @@ func finish_fight():
 	pivote.reparent(MainCharacter)
 	music_selector($WorldNode.get_child(0).scenary_music)
 	fight_node.get_child(0).global_position = Vector3(0,0,50)
-	camera.position = Vector3(0, 0.579, 1.074)
+	pivote.position = Vector3(0, 0.579, 1.074)
 	camera.projection = 0
 	camera.initial_rotation.x = deg_to_rad(-20)
 	$AnimationPlayer.play_backwards("new_animation")

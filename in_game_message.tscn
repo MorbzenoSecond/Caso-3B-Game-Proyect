@@ -1,15 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://n5stoo0ex5c7"]
+[gd_scene format=3 uid="uid://n5stoo0ex5c7"]
 
 [ext_resource type="Script" uid="uid://bogbii4h4ue8v" path="res://scenes/General/in_game_message.gd" id="1_ad70q"]
 
-[node name="InGameMessage" type="Node3D"]
+[node name="InGameMessage" type="Node3D" unique_id=583254687]
 script = ExtResource("1_ad70q")
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Label3D" type="Label3D" parent="." unique_id=438210229]
+modulate = Color(1, 1, 1, 0)
 text = "adsdas"
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
-autostart = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+font_size = 40

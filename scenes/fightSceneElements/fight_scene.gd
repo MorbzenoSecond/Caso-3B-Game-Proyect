@@ -261,6 +261,7 @@ func prepare_scape_options(node):
 	scape_button.button.button_down.connect(_on_scape_button_pressed)
 
 func prepare_attack_options(node):
+	camera_control(node.position, 1.1)
 	instanciate_return_button(node)
 	for attack : Resource in node.FightResourceStats.SpecialActions:
 		var button = TYPE_MOVEMENT_SCENE.instantiate()
@@ -287,10 +288,13 @@ func prepare_item_options(node):
 func _on_attack_button_pressed(button_node, node):
 	await unselect_objetive()
 	if button_node.movement_resource.not_targets:
+		camera_control(node.position, 1.1)
 		pass
 	elif  button_node.movement_resource.all_targets:
+		camera_control($EnemyPosiblePositions/Marker3D4.position, 1.5)
 		select_all_oponnents()
 	else:
+		camera_control($EnemyPosiblePositions/Marker3D4.position, 1.5)
 		select_random_oponents()
 	for movement_container in movements_container.get_children():
 		if movement_container.button.scale == Vector2(1,1):
@@ -307,7 +311,7 @@ func _on_item_button_pressed(item, node):
 			ItemEffect(item, character)
 
 func _on_execute_button_pressed(node):
-	
+	camera_control()
 	if !selected_enemies.is_empty():
 		for movement in movements_container.get_children():
 			movement.button.disabled = true
@@ -323,6 +327,7 @@ func _on_scape_button_pressed():
 	finish_fight()
 
 func _on_return_button_pressed(node):
+	camera_control()
 	unselect_objetive()
 	node._activate_turn() 
 	for movement in movements_container.get_children():
@@ -373,3 +378,15 @@ func select_all_oponnents():
 			i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
 			i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("outline_color", Color("ffff00"))
 #endregion
+
+var camera_tween : Tween
+
+func camera_control(new_position : Vector3 = Vector3.ZERO, new_size : float = 2):
+	if camera_tween:
+		if !camera_tween.is_running():
+			camera_tween.kill()
+	camera_tween = create_tween()
+	print(new_position.y)
+	camera_tween.tween_property(GameDataManager.MAIN.camera, "position:x", new_position.x, 0.15).set_ease(Tween.EASE_OUT)
+	camera_tween.parallel().tween_property(GameDataManager.MAIN.camera, "position:y", new_position.y, 0.15).set_ease(Tween.EASE_OUT)
+	camera_tween.parallel().tween_property(GameDataManager.MAIN.camera, "size", new_size , 0.10).set_ease(Tween.EASE_OUT)

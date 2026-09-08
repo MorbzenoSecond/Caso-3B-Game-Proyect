@@ -70,7 +70,7 @@ func calculate_damage(brute_damage):
 			parent_enemy.character_down()
 			
 
-	var message = str(brute_damage) + " - " + str(local_defense) + " = " + str(real_damage)
+	var message = str(real_damage)
 	point_score(message)
 
 	print(self.name + " | "+ "A la parte: " +self.name +" le queda:  "+ str(local_life))
@@ -182,4 +182,7 @@ func point_score(message : String):
 	var scene = MESSAGE_SCENE.instantiate()
 	parent_enemy.add_child(scene)
 	scene.position += Vector3(0, 0.3, 0.1)
-	scene.setup(message)
+	if float(message) == 0:
+		scene.setup(message,Color(0.0, 0.191, 0.438, 1.0))
+	else:
+		scene.setup(message)
