@@ -84,7 +84,7 @@ transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 
 material_override = SubResource("ShaderMaterial_xi7b8")
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_k4r0q")
-animation = &"Punched"
+animation = &"Idle"
 script = ExtResource("2_8bhan")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=351656627]

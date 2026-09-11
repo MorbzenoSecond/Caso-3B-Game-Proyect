@@ -31,3 +31,10 @@ offset_left = 8.0
 offset_right = 72.0
 offset_bottom = 64.0
 texture = ExtResource("2_44fa7")
+
+[node name="Label2" type="Label" parent="TypeAttackButton" unique_id=1121178159]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 48.0
+offset_right = 232.0
+offset_bottom = 71.0

@@ -1,6 +1,10 @@
 class_name FightMovements
 extends Resource
 
+
+@export var damage_multiplicator : float = 1.0
+@export var energy_consumtion : float = 1.0
+
 @export var all_targets : bool = false
 @export var not_targets : bool = false
 @export var can_only_target_himself : bool = false

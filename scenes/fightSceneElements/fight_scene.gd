@@ -2,6 +2,7 @@
 extends Node3D
 
 @onready var movements_container = $CanvasLayer/Control/BoxContainer/VBoxContainer
+@onready var progress_bar = $CanvasLayer/Control/ProgressBar
 
 @export var battle_paused : bool = false
 
@@ -40,10 +41,11 @@ func clean():
 	turnDictionary.clear()
 	enemies_origin_nodes.clear()
 	combatientes.clear()
+	focussed_entities.clear()
 	clear_entities()
 
 func clear_entities():
-	focussed_entities.clear()
+	print("limpieza de partes")
 	cant_select_anyone = false
 	can_only_select_himself = false
 	
@@ -145,14 +147,16 @@ func turns():
 		while turnArray.size() < 5:
 			nextTurns()
 			turn()
-		#reparent_camera(self)
+
+		clear_entities()
 		var next_turn = turnArray.pop_front()
-		
+
 		for movement in movements_container.get_children():
 			movement.queue_free()
-		
+
 		if !focussed_entities.is_empty():
 			for entity : Dictionary in focussed_entities: 
+				entity["already_checked"] = false
 				if entity["origin_entity"] == next_turn["node"]:
 					
 					entity["remaining_turns"] -= 1
@@ -161,9 +165,11 @@ func turns():
 
 		if next_turn["type"] == "enemy" and next_turn["able_to_fight"]:
 			next_turn["node"].opponent_attack_logic()
+			$CanvasLayer/Control/ProgressBar.visible = false
 			return
 		elif next_turn["type"] == "player":
 			next_turn["node"]._activate_turn()
+			$CanvasLayer/Control/ProgressBar.visible = true
 			return
 		else:
 			print_rich("[color=yellow]Aviso:[/color] Cola de turnos vacía.")
@@ -280,6 +286,7 @@ func prepare_attack_options(node):
 		button.button.size = Vector2(224, 65)
 
 		if attack.resource_name:
+			button.button.get_node("Label2").text = str(attack.energy_consumtion)
 			button.button.get_node("Label").text = attack.resource_name
 	instanciate_execute_button(node)
 
@@ -326,18 +333,24 @@ func _on_item_button_pressed(item, node):
 			ItemEffect(item, character)
 
 func _on_execute_button_pressed(node):
-	camera_control()
-	print("selected enemies: " +str(selected_enemies))
-	if !selected_enemies.is_empty():
-		for movement in movements_container.get_children():
-			movement.button.disabled = true
-		node.basic_attack(selected_enemies)
-		unselect_objetive()
+	if node.selected_attack:
+		print(str(node.selected_attack.energy_consumtion) +"    "+ str(node.actual_energy_capacity))
+		if node.selected_attack.energy_consumtion >= node.actual_energy_capacity:
+			# colocar una señal de que no tienes la energia suficiente despues
+			return
+		
+		camera_control()
 	
-	elif node.selected_attack:
-		if node.selected_attack.not_targets:
+		if !selected_enemies.is_empty():
+			for movement in movements_container.get_children():
+				movement.button.disabled = true
 			node.basic_attack(selected_enemies)
 			unselect_objetive()
+
+		elif node.selected_attack.not_targets:
+			node.basic_attack(selected_enemies)
+			unselect_objetive()
+		node.actual_energy_capacity -= node.selected_attack.energy_consumtion
 
 func _on_scape_button_pressed():
 	finish_fight()
@@ -345,7 +358,7 @@ func _on_scape_button_pressed():
 func _on_return_button_pressed(node):
 	camera_control()
 	unselect_objetive()
-	node._activate_turn() 
+	node._instanciate_interface()
 	for movement in movements_container.get_children():
 		movement.queue_free()
 #endregion

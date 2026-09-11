@@ -28,16 +28,22 @@ resource_name = "shoot"
 script = ExtResource("7_hr0ir")
 ShootType = ExtResource("5_dqk4t")
 VisualEffect = Array[PackedScene]([ExtResource("6_2j360")])
+damage_multiplicator = 3.0
+energy_consumtion = 20.0
 metadata/_custom_type_script = "uid://cwsj3y0oxnuja"
 
 [sub_resource type="Resource" id="Resource_m8d2d"]
 resource_name = "direct"
 script = ExtResource("8_xfohr")
+damage_multiplicator = 2.0
+energy_consumtion = 0.0
 metadata/_custom_type_script = "uid://dt6qeewy4r4u1"
 
 [sub_resource type="Resource" id="Resource_rlu7g"]
 resource_name = "jump"
 script = ExtResource("9_fbylq")
+damage_multiplicator = 0.5
+energy_consumtion = 4.0
 all_targets = true
 metadata/_custom_type_script = "uid://b1b2346p0gbef"
 
@@ -52,6 +58,8 @@ script = ExtResource("9_kbq7i")
 SpecialActions = Array[ExtResource("4_5cjme")]([SubResource("Resource_ci18a"), SubResource("Resource_m8d2d"), SubResource("Resource_rlu7g"), SubResource("Resource_5jks7")])
 actions_positions = Vector3(0, 0.4, 0)
 base_speed = 25.0
+base_energy = 30.0
+base_natural_recuperation = 3.0
 base_damage = 4.0
 BodyParts = Array[ExtResource("1_myptc")]([SubResource("Resource_pn0ah")])
 metadata/_custom_type_script = "uid://bw3watrbs53ld"

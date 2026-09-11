@@ -6,6 +6,8 @@ class_name FightMovementsResource
 @export var actions_positions : Vector3 = Vector3.ZERO
 @export_group("base_stats")
 @export var base_speed : float
+@export var base_energy : float
+@export var base_natural_recuperation : float
 @export var base_damage : float
 
 @export_group("base_stats")

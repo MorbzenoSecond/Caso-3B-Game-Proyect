@@ -19,6 +19,9 @@ var main_body_part
 var body_parts : Array
 var data : Dictionary
 var selected_attack : Resource
+var true_energy_capacity : float
+var true_energy_recuperation : float
+var actual_energy_capacity : float
 
 func basic_attack(target_node: Array):
 	var i
@@ -32,7 +35,7 @@ func activate(status):
 
 func provoque():
 	var turns = 3
-	var provoque_status : = {"origin_entity": self, "BodyPart" : main_body_part, "remaining_turns": turns}
+	var provoque_status : = {"origin_entity": self, "BodyPart" : main_body_part, "remaining_turns": turns, "already_checked" : false}
 	for entity in FIGHT_SCENE_PATH.focussed_entities:
 		if entity["origin_entity"] == provoque_status["origin_entity"]:
 			FIGHT_SCENE_PATH.focussed_entities.erase(entity)
@@ -106,15 +109,30 @@ func setup(character_data : Dictionary):
 				position_index -= 0.01
 				
 				scene.add_to_group("EnemyBodyPart")
+		FIGHT_SCENE_PATH.progress_bar.max_value = true_energy_capacity
+		FIGHT_SCENE_PATH.progress_bar.value = true_energy_capacity / 4
+		actual_energy_capacity = true_energy_capacity / 4
 
 func level_stats_scalling():
+	true_energy_capacity =  FightResourceStats.base_energy + data["level"]
+	true_energy_recuperation = FightResourceStats.base_natural_recuperation + data["level"]
 	true_damage = FightResourceStats.base_damage + data["level"]
 	true_speed = FightResourceStats.base_speed + data["level"]
 
-func attack(damage, Character_node :Node3D):
-	Character_node.get_damage(damage)
+func attack(damage, Character_node : Node3D):
+	Character_node.get_damage(selected_attack.damage_multiplicator, damage)
+
+func update_progress_bar():
+	FIGHT_SCENE_PATH.progress_bar.max_value = true_energy_capacity
+	actual_energy_capacity += true_energy_recuperation
+	FIGHT_SCENE_PATH.progress_bar.value = actual_energy_capacity
+	FIGHT_SCENE_PATH.progress_bar.get_node("Label").text = str(actual_energy_capacity) +"/"+ str(true_energy_capacity)
 
 func _activate_turn():
+	update_progress_bar()
+	_instanciate_interface()
+
+func _instanciate_interface():
 	var scene = INTERFACE_SCENE.instantiate()
 	actions_positions.add_child(scene)
 

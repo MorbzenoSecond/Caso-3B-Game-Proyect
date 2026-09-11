@@ -34,8 +34,8 @@ func _on_area_3d_input_event(_camera: Node, event: InputEvent, _event_position: 
 func get_marker_position(Type : String):
 	return parent_enemy.get_marker_position(Type)
 
-func get_damage(damage):
-	await calculate_damage(damage)
+func get_damage(damage_multiplier : float = 1.0, damage : float = 1.0):
+	await calculate_damage(damage_multiplier, damage)
 	add_trauma(100)
 		##var resource = DialogueManager.create_resource_from_text("~ start \n " + data["name"] + ": hola,soy un "+ data["name"] +"!")
 		##DialogueManager.show_example_dialogue_balloon(resource, "start")
@@ -53,8 +53,8 @@ func use_item(effect):
 	parent_enemy.FIGHT_SCENE_PATH.turns()
 
 
-func calculate_damage(brute_damage):
-	var real_damage = brute_damage - local_defense
+func calculate_damage(damage_multiplier, brute_damage):
+	var real_damage = (brute_damage * damage_multiplier) - local_defense
 	
 	if real_damage <= 0:
 		real_damage = 0
@@ -147,9 +147,11 @@ func check_if_can_foccuse() -> bool:
 	if parent_enemy.data["type"] == "enemy":
 		if !parent_enemy.FIGHT_SCENE_PATH.focussed_entities.is_empty() :
 			for entity in parent_enemy.FIGHT_SCENE_PATH.focussed_entities:
-				if entity["origin_entity"] == parent_enemy and entity["origin_entity"].data["type"] == "enemy":
-					return true
-			return false
+				if entity["origin_entity"].data["type"] == "enemy" and not entity["already_checked"]:
+					entity["already_checked"] == true
+					if entity["origin_entity"] == parent_enemy:
+						return true
+					return false
 		return true
 	elif parent_enemy.data["type"] == "player":
 		return true
