@@ -7,11 +7,7 @@ extends Node3D
 @onready var selector_position = $SelectorPosition
 @onready var collision_shape = $Area3D/CollisionShape3D
 
-@onready var liveBarProgressBar = $LiveBar/SubViewport/Control/ProgressBar
 @onready var liveBarNode = $LiveBar
-@onready var liveDataLabel = $LiveBar/livedata
-@onready var nameLabel = $LiveBar/Name
-@onready var levelLabel = $LiveBar/Level
 
 var local_life : float = 0.0
 var local_defense : float = 0.0
@@ -49,7 +45,7 @@ func use_item(effect):
 
 	var message = str(local_life) + " + " + str(effect) + " = " + str(local_life + effect)
 	point_score(message)
-	update_life_bar()
+	liveBarNode.update_life_bar(local_life, base_local_life)
 	parent_enemy.FIGHT_SCENE_PATH.turns()
 
 
@@ -74,26 +70,21 @@ func calculate_damage(damage_multiplier, brute_damage):
 	point_score(message)
 
 	print(self.name + " | "+ "A la parte: " +self.name +" le queda:  "+ str(local_life))
-	update_life_bar()
+	liveBarNode.update_life_bar(local_life, base_local_life)
 
 func level_stats_scalling_setup(new_local_life, new_local_defense, new_local_level):
 	if new_local_level:
 		body_part_is_main = true
-		levelLabel.text = " LV:"+str(int(parent_enemy.data["level"]))
-
 	local_life = new_local_life + parent_enemy.data["level"]
 	local_defense = new_local_defense + parent_enemy.data["level"]
 	base_local_life = new_local_life + parent_enemy.data["level"]
 	base_local_defense = new_local_defense + parent_enemy.data["level"]
 	liveBarNode.position = selector_position.position
-	update_life_bar()
-
-func update_life_bar():
-	nameLabel.text = self.name
-	liveBarProgressBar.max_value = base_local_life
-	liveBarProgressBar.value = local_life
-
-	liveDataLabel.text = str(local_life)+"/"+str(base_local_life)
+	liveBarNode.setup(local_life, base_local_life)
+	if parent_enemy.main_body_part != self:
+		liveBarNode.energy_control.queue_free()
+		return
+	liveBarNode.setup_energy(parent_enemy.true_energy_capacity, parent_enemy.true_energy_recuperation, parent_enemy.actual_energy_capacity)
 
 func positions_and_collisions_setup(body_part_data, position_index, render_priority_index):
 	name = body_part_data.character.resource_name

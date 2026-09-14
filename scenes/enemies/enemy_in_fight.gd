@@ -24,6 +24,7 @@ var true_energy_recuperation : float
 var actual_energy_capacity : float
 
 func basic_attack(target_node: Array):
+	actual_energy_capacity -= selected_attack.energy_consumtion
 	var i
 	if selected_attack:
 		i = selected_attack
@@ -42,6 +43,7 @@ func provoque():
 	FIGHT_SCENE_PATH.focussed_entities.append(provoque_status)
 
 func opponent_attack_logic():
+	await main_body_part.liveBarNode.update_progress_bar(true_energy_capacity, true_energy_recuperation,actual_energy_capacity)
 	selected_attack = FightResourceStats.SpecialActions.pick_random()
 	var posible_characters : Array = []
 	var selected_character : Array = []
@@ -64,6 +66,9 @@ func opponent_attack_logic():
 					break
 			selected_character.append(posible_characters.pick_random())
 	basic_attack(selected_character)
+	main_body_part.liveBarNode.show_energy_usage(actual_energy_capacity)
+	actual_energy_capacity -= selected_attack.energy_consumtion
+	main_body_part.liveBarNode.progress_bar_alterate(actual_energy_capacity, main_body_part.liveBarNode.energy_texture_process_bar)
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -89,6 +94,8 @@ func setup(character_data : Dictionary):
 
 		actions_positions.position =  FightResourceStats.actions_positions
 
+		actual_energy_capacity = true_energy_capacity / 4
+
 		var render_priority_index : int = 0
 		var position_index : float = 0.00
 		if !FightResourceStats.BodyParts.is_empty():
@@ -97,7 +104,7 @@ func setup(character_data : Dictionary):
 				$BodyParts.add_child(scene)
 				scene.name = body_part.character.resource_name
 				scene.get_node("AnimatedSprite3D").set_collision_size()
-				scene.setup(body_part, position_index, render_priority_index)
+				
 
 				if body_part.main_body_part:
 					main_body_part = scene
@@ -107,11 +114,10 @@ func setup(character_data : Dictionary):
 
 				render_priority_index -= 1
 				position_index -= 0.01
+				scene.setup(body_part, position_index, render_priority_index)
 				
 				scene.add_to_group("EnemyBodyPart")
-		FIGHT_SCENE_PATH.progress_bar.max_value = true_energy_capacity
-		FIGHT_SCENE_PATH.progress_bar.value = true_energy_capacity / 4
-		actual_energy_capacity = true_energy_capacity / 4
+
 
 func level_stats_scalling():
 	true_energy_capacity =  FightResourceStats.base_energy + data["level"]
@@ -120,16 +126,11 @@ func level_stats_scalling():
 	true_speed = FightResourceStats.base_speed + data["level"]
 
 func attack(damage, Character_node : Node3D):
+
 	Character_node.get_damage(selected_attack.damage_multiplicator, damage)
 
-func update_progress_bar():
-	FIGHT_SCENE_PATH.progress_bar.max_value = true_energy_capacity
-	actual_energy_capacity += true_energy_recuperation
-	FIGHT_SCENE_PATH.progress_bar.value = actual_energy_capacity
-	FIGHT_SCENE_PATH.progress_bar.get_node("Label").text = str(actual_energy_capacity) +"/"+ str(true_energy_capacity)
-
 func _activate_turn():
-	update_progress_bar()
+	main_body_part.liveBarNode.update_progress_bar(true_energy_capacity, true_energy_recuperation,actual_energy_capacity)
 	_instanciate_interface()
 
 func _instanciate_interface():

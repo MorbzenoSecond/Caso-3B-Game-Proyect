@@ -5,8 +5,10 @@
 [ext_resource type="Shader" uid="uid://38e3cy23ef31" path="res://scenes/fightSceneElements/outliner.gdshader" id="2_pjj54"]
 [ext_resource type="Texture2D" uid="uid://ecs8j181uyr1" path="res://assets/sprites/Cangrejos.png" id="3_xi7b8"]
 [ext_resource type="Shape3D" uid="uid://cm0h38xmv1nsf" path="res://assets/recursos/CollisionShapeSizes/ForFightCollisions/RaveousCrabClawCollision.tres" id="4_pjj54"]
+[ext_resource type="Script" uid="uid://piy76r4fvxt3" path="res://scenes/fightSceneElements/live_bar.gd" id="6_ayjey"]
 [ext_resource type="Texture2D" uid="uid://72a3ar8efein" path="res://assets/sprites/Sprite-0003.png" id="7_d6wfd"]
 [ext_resource type="Texture2D" uid="uid://bueoqsuh6nh8y" path="res://assets/sprites/Sprite-0001.png" id="8_ayjey"]
+[ext_resource type="Texture2D" uid="uid://b5nhdx7b6jcga" path="res://assets/sprites/magic_bar.png" id="9_d6wfd"]
 [ext_resource type="Texture2D" uid="uid://dw78dcpnk4xcw" path="res://assets/sprites/Sprite-0002.png" id="9_f1y66"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xi7b8"]
@@ -97,12 +99,13 @@ shape = ExtResource("4_pjj54")
 transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, 0.49372, -0.0433117)
 texture_filter = 0
 texture = SubResource("ViewportTexture_gfuct")
+script = ExtResource("6_ayjey")
 
 [node name="SubViewport" type="SubViewport" parent="LiveBar" unique_id=1525025911]
 disable_3d = true
 transparent_bg = true
 canvas_item_default_texture_filter = 0
-size = Vector2i(30, 10)
+size = Vector2i(30, 15)
 render_target_update_mode = 4
 script = SubResource("GDScript_0ne7h")
 
@@ -112,29 +115,77 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ProgressBar" type="TextureProgressBar" parent="LiveBar/SubViewport/Control" unique_id=2142212520]
+[node name="Energy" type="Control" parent="LiveBar/SubViewport/Control" unique_id=970711568]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="TextureProgressBar" parent="LiveBar/SubViewport/Control/Energy" unique_id=1768774245]
+texture_filter = 1
+layout_mode = 0
+offset_top = 14.0
+offset_right = 30.0
+offset_bottom = 19.0
+scale = Vector2(1, -1)
+step = 0.01
+texture_under = ExtResource("7_d6wfd")
+texture_over = ExtResource("8_ayjey")
+texture_progress = ExtResource("9_d6wfd")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="LiveBar/SubViewport/Control/Energy" unique_id=873726966]
+modulate = Color(1, 1, 1, 0.5411765)
+texture_filter = 1
+layout_mode = 0
+offset_top = 14.0
+offset_right = 30.0
+offset_bottom = 19.0
+scale = Vector2(1, -1)
+step = 0.01
+texture_progress = ExtResource("9_d6wfd")
+
+[node name="Health" type="Control" parent="LiveBar/SubViewport/Control" unique_id=120954614]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="TextureProgressBar" parent="LiveBar/SubViewport/Control/Health" unique_id=2142212520]
 texture_filter = 1
 layout_mode = 0
 offset_top = 5.0
 offset_right = 30.0
 offset_bottom = 10.0
 step = 0.01
-value = 30.0
 texture_under = ExtResource("7_d6wfd")
 texture_over = ExtResource("8_ayjey")
 texture_progress = ExtResource("9_f1y66")
 
+[node name="TextureProgressBar" type="TextureProgressBar" parent="LiveBar/SubViewport/Control/Health" unique_id=768036485]
+modulate = Color(1, 1, 1, 0.54901963)
+texture_filter = 1
+layout_mode = 0
+offset_top = 5.0
+offset_right = 30.0
+offset_bottom = 10.0
+step = 0.01
+texture_progress = ExtResource("9_f1y66")
+
 [node name="Name" type="Label3D" parent="LiveBar" unique_id=985647094]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.1, 0.02, 0)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.1, 0.05, 0)
 text = "asdas"
 
 [node name="livedata" type="Label3D" parent="LiveBar" unique_id=1352821699]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.025, 0.01)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.005, 0.01)
 alpha_cut = 1
 text = "dsad"
 
 [node name="Level" type="Label3D" parent="LiveBar" unique_id=177161350]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.09, 0.02, 0)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.09, 0.05, 0)
+
+[node name="energy_label" type="Label3D" parent="LiveBar" unique_id=29027211]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.05, 0.02)
+visible = false
+alpha_cut = 1
+text = "dsad"
 
 [connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]
 [connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]

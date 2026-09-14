@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemiesInMapData" load_steps=6 format=3 uid="uid://cjqivx4dogepw"]
+[gd_resource type="Resource" script_class="EnemiesInMapData" format=3 uid="uid://cjqivx4dogepw"]
 
 [ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/EnemiesInMap/SpecialActionScripts/EnemyAction.gd" id="1_4rfte"]
 [ext_resource type="Script" uid="uid://ba00fspq8q8te" path="res://Resources/EnemiesInMap/EnemiesInMapData.gd" id="1_enp0y"]
@@ -11,16 +11,12 @@ script = ExtResource("1_enp0y")
 character = ExtResource("1_v4885")
 RUN_MAX_SPEED = 0.2
 ACCELERATION = 3.0
-SpecialActions = Array[ExtResource("1_4rfte")]([])
-SmartEnemy = false
 enemy_data = {
 "Enemies": [{
-"level": 2,
+"level": 1,
 "name": "AggroShell"
 }]
 }
 body_collision_type = ExtResource("2_m5y2y")
-body_collision_position = Vector3(0, 0, 0)
 character_area_collision_type = ExtResource("4_yfbv6")
-character_area_collision_position = Vector3(0, 0, 0)
 metadata/_custom_type_script = "uid://ba00fspq8q8te"

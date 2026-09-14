@@ -2,11 +2,11 @@
 extends Node3D
 
 @onready var movements_container = $CanvasLayer/Control/BoxContainer/VBoxContainer
-@onready var progress_bar = $CanvasLayer/Control/ProgressBar
 
 @export var battle_paused : bool = false
 
 var camera_tween : Tween
+var progress_bar_tween : Tween
 
 var charactersInBattleArray : Dictionary = {}
 var turnDictionary : Dictionary = {}
@@ -45,10 +45,9 @@ func clean():
 	clear_entities()
 
 func clear_entities():
-	print("limpieza de partes")
 	cant_select_anyone = false
 	can_only_select_himself = false
-	
+
 func finish_fight():
 	$AnimationPlayer.play_backwards("ingrese")
 	await enterExitAnimation()
@@ -165,11 +164,9 @@ func turns():
 
 		if next_turn["type"] == "enemy" and next_turn["able_to_fight"]:
 			next_turn["node"].opponent_attack_logic()
-			$CanvasLayer/Control/ProgressBar.visible = false
 			return
 		elif next_turn["type"] == "player":
 			next_turn["node"]._activate_turn()
-			$CanvasLayer/Control/ProgressBar.visible = true
 			return
 		else:
 			print_rich("[color=yellow]Aviso:[/color] Cola de turnos vacía.")
@@ -313,10 +310,10 @@ func _on_attack_button_pressed(button_node, node):
 		select_itself(node)
 	elif  button_node.movement_resource.all_targets:
 		cant_select_anyone= true
-		camera_control($EnemyPosiblePositions/Marker3D4.position, 1.5)
+		camera_control($EnemyPosiblePositions/Marker3D4.position, 1.7)
 		select_all_oponnents()
 	else:
-		camera_control($EnemyPosiblePositions/Marker3D4.position, 1.5)
+		camera_control($EnemyPosiblePositions/Marker3D4.position, 1.7)
 		select_random_oponents()
 	for movement_container in movements_container.get_children():
 		if movement_container.button.scale == Vector2(1,1):
@@ -324,6 +321,7 @@ func _on_attack_button_pressed(button_node, node):
 		movement_container.tween(Vector2(1, 1))
 	node.selected_attack = button_node.movement_resource
 	button_node.tween(Vector2(1.2, 1.2))
+	node.main_body_part.liveBarNode.show_energy_usage(node.actual_energy_capacity)
 
 func _on_item_button_pressed(item, node):
 	if !selected_enemies.is_empty():
@@ -334,9 +332,8 @@ func _on_item_button_pressed(item, node):
 
 func _on_execute_button_pressed(node):
 	if node.selected_attack:
-		print(str(node.selected_attack.energy_consumtion) +"    "+ str(node.actual_energy_capacity))
 		if node.selected_attack.energy_consumtion >= node.actual_energy_capacity:
-			# colocar una señal de que no tienes la energia suficiente despues
+			GameDataManager.MAIN.camera.add_trauma(0.5)
 			return
 		
 		camera_control()
@@ -350,12 +347,14 @@ func _on_execute_button_pressed(node):
 		elif node.selected_attack.not_targets:
 			node.basic_attack(selected_enemies)
 			unselect_objetive()
-		node.actual_energy_capacity -= node.selected_attack.energy_consumtion
+
+		node.main_body_part.liveBarNode.progress_bar_alterate(node.actual_energy_capacity - node.selected_attack.energy_consumtion, node.main_body_part.liveBarNode.energy_texture_process_bar)
 
 func _on_scape_button_pressed():
 	finish_fight()
 
 func _on_return_button_pressed(node):
+	node.main_body_part.liveBarNode.progress_bar_alterate(node.actual_energy_capacity, node.main_body_part.liveBarNode.energy_process_bar)
 	camera_control()
 	unselect_objetive()
 	node._instanciate_interface()
@@ -373,6 +372,7 @@ func selected_enemy(Enemy_node : Array):
 	
 	for node : Node3D in Enemy_node:
 		selected_enemies.append(node)
+	selected_enemies_show_health()
 
 func unselect_objetive():
 	var actual_arrows = get_tree().get_nodes_in_group("SELECTARROW")
@@ -397,6 +397,7 @@ func select_random_oponents():
 					entity["BodyPart"].get_node("AnimatedSprite3D").add_to_group("SELECTARROW")
 					entity["BodyPart"].get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
 					break
+	selected_enemies_show_health()
 
 func select_itself(node):
 	for i : Node3D in node.body_parts:
@@ -404,6 +405,7 @@ func select_itself(node):
 		i.get_node("AnimatedSprite3D").add_to_group("SELECTARROW")
 		i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
 		i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("outline_color", Color("ffff00"))
+	selected_enemies_show_health()
 
 func select_all_oponnents():
 	var all_body_parts : Array = get_tree().get_nodes_in_group("EnemyBodyPart")
@@ -413,6 +415,12 @@ func select_all_oponnents():
 			i.get_node("AnimatedSprite3D").add_to_group("SELECTARROW")
 			i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
 			i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("outline_color", Color("ffff00"))
+	selected_enemies_show_health()
+
+func selected_enemies_show_health():
+	
+	for entity in selected_enemies:
+		print(entity.local_life)
 #endregion
 
 func camera_control(new_position : Vector3 = Vector3.ZERO, new_size : float = 2, duration: float = 0.35):

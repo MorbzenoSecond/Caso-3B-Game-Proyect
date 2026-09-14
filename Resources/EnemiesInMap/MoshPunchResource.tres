@@ -19,6 +19,7 @@ character = ExtResource("1_rumx6")
 RUN_MAX_SPEED = 0.5
 ACCELERATION = 1.1
 SpecialActions = Array[ExtResource("1_8qtja")]([SubResource("Resource_7cf5j")])
+enemy_data = null
 body_collision_type = ExtResource("2_5gdme")
 character_area_collision_type = ExtResource("4_7bbmi")
 metadata/_custom_type_script = "uid://ba00fspq8q8te"

@@ -13,12 +13,10 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if trauma > 0.0:
-		# Reduce el trauma con el tiempo
 		trauma = max(trauma - trauma_decay * delta, 0.0)
 		time += delta * 30.0
 		_apply_shake()
 	else:
-		# Restaura la rotación original suavemente cuando termina
 		rotation = rotation.lerp(initial_rotation, delta * 10.0)
 
 # Llama a esta función para activar la sacudida (ej. add_trauma(0.8))

@@ -14,7 +14,7 @@ extends Resource
 				"level": 2,
 			},
 		]
-	}
+	}.duplicate()
 
 @export_group("body_collision")
 @export var body_collision_type = Shape3D

@@ -29,7 +29,7 @@ script = ExtResource("7_hr0ir")
 ShootType = ExtResource("5_dqk4t")
 VisualEffect = Array[PackedScene]([ExtResource("6_2j360")])
 damage_multiplicator = 3.0
-energy_consumtion = 20.0
+energy_consumtion = 5.0
 metadata/_custom_type_script = "uid://cwsj3y0oxnuja"
 
 [sub_resource type="Resource" id="Resource_m8d2d"]

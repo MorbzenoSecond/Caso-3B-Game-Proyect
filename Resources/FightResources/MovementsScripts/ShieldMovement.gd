@@ -6,4 +6,6 @@ func executed(self_node : Node3D, target_node: Array):
 
 	tween.tween_callback(self_node.provoque)
 
+	tween.tween_interval(1)
+
 	tween.tween_callback(self_node.FIGHT_SCENE_PATH.turns)
