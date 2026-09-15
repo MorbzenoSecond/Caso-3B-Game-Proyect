@@ -17,16 +17,83 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="experimento rpg"
 run/main_scene="uid://bwotkxwem84sj"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://assets/sprites/icon.svg"
+config/icon="res://Assets/Art/2DSprites/icon.svg"
+
+[audio]
+
+buses/default_bus_layout=""
 
 [autoload]
 
-GameDataManager="*res://Resources/game_data_manager.gd"
+GameDataManager="*res://Scr/Core/game_data_manager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://Assets/": "red",
+"res://Assets/Art/": "orange",
+"res://Assets/Art/2DSprites/": "yellow",
+"res://Assets/Art/3DModels/": "yellow",
+"res://Assets/Fonts/": "orange",
+"res://Assets/ScreenShoots/": "orange",
+"res://Assets/Sounds/": "orange",
+"res://Assets/Sounds/Effects/": "yellow",
+"res://Assets/Sounds/Music/": "yellow",
+"res://Resources/": "red",
+"res://Resources/CollisionShapeSizes/": "orange",
+"res://Resources/CollisionShapeSizes/ForChangeArea/": "yellow",
+"res://Resources/CollisionShapeSizes/ForFightCollisions/": "yellow",
+"res://Resources/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/": "yellow",
+"res://Resources/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForAreaCollisions/": "green",
+"res://Resources/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForBodyCollisions/": "green",
+"res://Resources/DialoguesResources/": "orange",
+"res://Resources/DictionaryResources/": "orange",
+"res://Resources/EnemiesInMap/": "orange",
+"res://Resources/EnemiesInMap/SpecialActionScripts/": "yellow",
+"res://Resources/Events/": "orange",
+"res://Resources/EventsResources/": "orange",
+"res://Resources/FightResources/": "orange",
+"res://Resources/FightResources/CharacterResources/": "yellow",
+"res://Resources/FightResources/MovementsScripts/": "yellow",
+"res://Resources/ShaderResources/": "orange",
+"res://Resources/SkyMaterial/": "orange",
+"res://Resources/SpriteFramesResources/": "orange",
+"res://Resources/Tiles/": "orange",
+"res://SaveFiles/": "red",
+"res://SaveFiles/ResumeSaveFile/": "orange",
+"res://Scr/": "red",
+"res://Scr/Combat/": "orange",
+"res://Scr/Core/": "orange",
+"res://Scr/Entities/": "orange",
+"res://Scr/Entities/InFight/": "yellow",
+"res://Scr/Entities/InWorld/": "yellow",
+"res://Scr/Entities/Projectiles/": "yellow",
+"res://Scr/Entities/Projectiles/Behaviour/": "green",
+"res://Scr/Entities/Projectiles/SpecialEffects/": "green",
+"res://Scr/SpecialEffects/": "orange",
+"res://Scr/UI/": "orange",
+"res://Scr/UI/Components/": "yellow",
+"res://Scr/UI/Menus/": "yellow",
+"res://Scr/UI/Overlay/": "yellow",
+"res://Scr/World/": "orange",
+"res://Scr/World/Elements/": "yellow",
+"res://Scr/World/Maps/": "yellow",
+"res://addons/": "red",
+"res://addons/dialogue_manager/": "orange",
+"res://addons/dialogue_manager/assets/": "yellow",
+"res://addons/dialogue_manager/compiler/": "yellow",
+"res://addons/dialogue_manager/components/": "yellow",
+"res://addons/dialogue_manager/components/editor_property/": "green",
+"res://addons/dialogue_manager/example_balloon/": "yellow",
+"res://addons/dialogue_manager/l10n/": "yellow",
+"res://addons/dialogue_manager/utilities/": "yellow",
+"res://addons/dialogue_manager/views/": "yellow"
+}
 
 [global_group]
 
@@ -68,7 +135,7 @@ E={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Dialogues/evento1.dialogue", "res://Dialogues/main.dialogue", "res://evento2.dialogue", "res://evento.dialogue", "res://see_ya.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Resources/DialoguesResources/evento1.dialogue", "res://Resources/DialoguesResources/main.dialogue", "res://Resources/Events/evento2.dialogue", "res://Resources/Events/evento.dialogue", "res://Resources/Events/see_ya.dialogue")
 
 [rendering]
 

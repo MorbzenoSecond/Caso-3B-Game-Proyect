@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="EnemiesInMapData" load_steps=6 format=3 uid="uid://du68joqpiiewp"]
+[gd_resource type="Resource" script_class="EnemiesInMapData" format=3 uid="uid://du68joqpiiewp"]
 
 [ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/EnemiesInMap/SpecialActionScripts/EnemyAction.gd" id="1_y5ja2"]
-[ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://assets/recursos/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="2_u2c61"]
-[ext_resource type="SpriteFrames" uid="uid://cilffntik2n2v" path="res://assets/recursos/Witch.tres" id="3_y5ja2"]
-[ext_resource type="Shape3D" uid="uid://jsnmr0624ump" path="res://assets/recursos/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForAreaCollisions/48x48.tres" id="4_0lw3d"]
+[ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://Resources/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="2_u2c61"]
+[ext_resource type="SpriteFrames" uid="uid://cilffntik2n2v" path="res://Resources/SpriteFramesResources/Witch.tres" id="3_y5ja2"]
+[ext_resource type="Shape3D" uid="uid://jsnmr0624ump" path="res://Resources/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForAreaCollisions/48x48.tres" id="4_0lw3d"]
 [ext_resource type="Script" uid="uid://ba00fspq8q8te" path="res://Resources/EnemiesInMap/EnemiesInMapData.gd" id="5_ikupa"]
 
 [resource]

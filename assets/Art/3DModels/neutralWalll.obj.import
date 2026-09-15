@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cup0sulxal1xj"
+path="res://.godot/imported/neutralWalll.obj-e1e8dc02d79a107180341605c660ca7f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/neutralWalll.obj-e1e8dc02d79a107180341605c660ca7f.mesh"]
+
+source_file="res://Assets/Art/3DModels/neutralWalll.obj"
+dest_files=["res://.godot/imported/neutralWalll.obj-e1e8dc02d79a107180341605c660ca7f.mesh", "res://.godot/imported/neutralWalll.obj-e1e8dc02d79a107180341605c660ca7f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(0.01, 0.01, 0.01)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

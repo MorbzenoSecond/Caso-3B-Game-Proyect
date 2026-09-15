@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://cg8d24tthjgo7"]
+
+[ext_resource type="Script" uid="uid://c3wtuxgyke27t" path="res://Scr/Combat/player_interface.gd" id="1_o6jvd"]
+[ext_resource type="Texture2D" uid="uid://c1pe2g7bd0ogu" path="res://Assets/Art/3DModels/attack_box.png" id="2_l0bkx"]
+[ext_resource type="Texture2D" uid="uid://iyq6a354dfid" path="res://Assets/Art/3DModels/scape_box.png" id="2_ny3mm"]
+[ext_resource type="ArrayMesh" uid="uid://cxvgrlgnlgijj" path="res://Assets/Art/3DModels/scape_box.obj" id="2_rk0l1"]
+[ext_resource type="Texture2D" uid="uid://b7wxxfwwvqrq6" path="res://Assets/Art/3DModels/Item_Box.png" id="2_ui3so"]
+[ext_resource type="ArrayMesh" uid="uid://dwfnsv1t5knyg" path="res://Assets/Art/3DModels/attack_box.obj" id="3_l0bkx"]
+[ext_resource type="ArrayMesh" uid="uid://c1vt50dxny81a" path="res://Assets/Art/3DModels/Item_Box.obj" id="4_e073l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o6jvd"]
+size = Vector3(0.16, 0.16, 0.16)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pe70q"]
+albedo_texture = ExtResource("2_ny3mm")
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mvyqf"]
+size = Vector3(0.16, 0.16, 0.16)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e073l"]
+albedo_texture = ExtResource("2_l0bkx")
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ui3so"]
+size = Vector3(0.16, 0.16, 0.16)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rk0l1"]
+albedo_texture = ExtResource("2_ui3so")
+texture_filter = 0
+
+[node name="playerInterface" type="Node3D"]
+script = ExtResource("1_o6jvd")
+
+[node name="ScapeArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, -0.05, 0, 0)
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape3D" parent="ScapeArea"]
+transform = Transform3D(1, 0, 0, 0, 0.999999, -4.47035e-07, 0, 4.47035e-07, 0.999999, -0.15, 0.08, 0)
+shape = SubResource("BoxShape3D_o6jvd")
+
+[node name="ScapeBox" type="MeshInstance3D" parent="ScapeArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, 0)
+material_override = SubResource("StandardMaterial3D_pe70q")
+mesh = ExtResource("2_rk0l1")
+
+[node name="attackArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, 0, 0)
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape3D" parent="attackArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+shape = SubResource("BoxShape3D_mvyqf")
+debug_color = Color(0.964706, 0, 0.501961, 1)
+
+[node name="AttackBox" type="MeshInstance3D" parent="attackArea"]
+material_override = SubResource("StandardMaterial3D_e073l")
+cast_shadow = 2
+mesh = ExtResource("3_l0bkx")
+skeleton = NodePath("../../ItemArea")
+
+[node name="ItemArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0.05, 0, 0)
+
+[node name="CollisionShape2D" type="CollisionShape3D" parent="ItemArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0.08, 0)
+shape = SubResource("BoxShape3D_ui3so")
+debug_color = Color(0.847059, 0.8, 0.0980392, 0.419608)
+
+[node name="ItemBox" type="MeshInstance3D" parent="ItemArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, 0)
+material_override = SubResource("StandardMaterial3D_rk0l1")
+mesh = ExtResource("4_e073l")
+skeleton = NodePath("../..")
+
+[connection signal="input_event" from="ScapeArea" to="." method="_on_scape_area_input_event"]
+[connection signal="mouse_entered" from="ScapeArea" to="." method="_on_scape_area_mouse_entered"]
+[connection signal="mouse_exited" from="ScapeArea" to="." method="_on_scape_area_mouse_exited"]
+[connection signal="input_event" from="attackArea" to="." method="_on_attack_area_input_event"]
+[connection signal="mouse_entered" from="attackArea" to="." method="_on_attack_area_mouse_entered"]
+[connection signal="mouse_exited" from="attackArea" to="." method="_on_attack_area_mouse_exited"]
+[connection signal="input_event" from="ItemArea" to="." method="_on_item_area_input_event"]
+[connection signal="mouse_entered" from="ItemArea" to="." method="_on_item_area_mouse_entered"]
+[connection signal="mouse_exited" from="ItemArea" to="." method="_on_item_area_mouse_exited"]

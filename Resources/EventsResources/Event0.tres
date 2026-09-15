@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EventsResource" format=3 uid="uid://b07cwpeojnboo"]
 
 [ext_resource type="Script" uid="uid://dbs4435dsf3ry" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_xm8v8"]
-[ext_resource type="Resource" uid="uid://ce7i2fsvitjrq" path="res://evento.dialogue" id="2_r6pj1"]
+[ext_resource type="Resource" uid="uid://ce7i2fsvitjrq" path="res://Resources/Events/evento.dialogue" id="2_r6pj1"]
 [ext_resource type="Script" uid="uid://dnbnrq2nbmdjr" path="res://Resources/EventsResources/EventOne.gd" id="5_mxj20"]
 [ext_resource type="Script" uid="uid://chr0ghu81efaq" path="res://Resources/EventsResources/EventResourceScript.gd" id="6_uix3b"]
 

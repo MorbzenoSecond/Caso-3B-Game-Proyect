@@ -1,0 +1,55 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://p1lgq4lotnle"]
+
+[ext_resource type="Texture2D" uid="uid://d28r030x414jh" path="res://Assets/Art/2DSprites/Cangrejos.png" id="1_qhjdn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhjdn"]
+atlas = ExtResource("1_qhjdn")
+region = Rect2(80, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jmio"]
+atlas = ExtResource("1_qhjdn")
+region = Rect2(80, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmmjp"]
+atlas = ExtResource("1_qhjdn")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1skc"]
+atlas = ExtResource("1_qhjdn")
+region = Rect2(80, 0, 40, 40)
+
+[resource]
+resource_name = "Aggro Shell"
+animations = [{
+"frames": [],
+"loop": 0,
+"name": &"Death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhjdn")
+}],
+"loop": 0,
+"name": &"Idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jmio")
+}],
+"loop": 0,
+"name": &"Punched",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmmjp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1skc")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 14.0
+}]

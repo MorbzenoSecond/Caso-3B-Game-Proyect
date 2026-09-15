@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bu0v1cyqmnlgt"
+path="res://.godot/imported/bloque.obj-bf2ca8f6d3a4a245367f83311737885e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bloque.obj-bf2ca8f6d3a4a245367f83311737885e.mesh"]
+
+source_file="res://Assets/Art/3DModels/bloque.obj"
+dest_files=["res://.godot/imported/bloque.obj-bf2ca8f6d3a4a245367f83311737885e.mesh", "res://.godot/imported/bloque.obj-bf2ca8f6d3a4a245367f83311737885e.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(0.01, 0.01, 0.01)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

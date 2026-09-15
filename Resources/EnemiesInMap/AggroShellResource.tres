@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://f62esgbf3ed7" path="res://Resources/EnemiesInMap/SpecialActionScripts/EnemyAction.gd" id="1_4rfte"]
 [ext_resource type="Script" uid="uid://ba00fspq8q8te" path="res://Resources/EnemiesInMap/EnemiesInMapData.gd" id="1_enp0y"]
-[ext_resource type="SpriteFrames" uid="uid://p1lgq4lotnle" path="res://assets/recursos/AggroShell.tres" id="1_v4885"]
-[ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://assets/recursos/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="2_m5y2y"]
-[ext_resource type="Shape3D" uid="uid://jsnmr0624ump" path="res://assets/recursos/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForAreaCollisions/48x48.tres" id="4_yfbv6"]
+[ext_resource type="SpriteFrames" uid="uid://p1lgq4lotnle" path="res://Resources/SpriteFramesResources/AggroShell.tres" id="1_v4885"]
+[ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://Resources/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="2_m5y2y"]
+[ext_resource type="Shape3D" uid="uid://jsnmr0624ump" path="res://Resources/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForAreaCollisions/48x48.tres" id="4_yfbv6"]
 
 [resource]
 script = ExtResource("1_enp0y")
