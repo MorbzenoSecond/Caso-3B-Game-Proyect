@@ -43,7 +43,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Shader" id="Shader_jbo7v"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uds1d"]
+size = Vector2(20, 38)
+
+[sub_resource type="Shader" id="Shader_vl382"]
 code = "shader_type canvas_item;
 
 // License: CC0
@@ -105,7 +108,7 @@ void fragment() {
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r004s"]
-shader = SubResource("Shader_jbo7v")
+shader = SubResource("Shader_vl382")
 shader_parameter/progress = 1.0
 shader_parameter/progress2 = 1.0
 shader_parameter/terminator_color = Color(1, 1, 1, 1)
@@ -174,9 +177,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uds1d"]
-size = Vector2(20, 38)
-
 [node name="Node2D" type="Node2D" unique_id=749257225]
 script = ExtResource("1_vl382")
 
@@ -185,16 +185,23 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_v4l3w")
 animation = &"player"
 
-[node name="CharacterCard" type="AnimatedSprite2D" parent="TypeCard" unique_id=380978823]
-material = SubResource("ShaderMaterial_r004s")
-position = Vector2(0, -1)
-sprite_frames = SubResource("SpriteFrames_ktahu")
-animation = &"morb"
-
 [node name="Area2D" type="Area2D" parent="TypeCard" unique_id=462373027]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TypeCard/Area2D" unique_id=1913262873]
 shape = SubResource("RectangleShape2D_uds1d")
+
+[node name="MarginContainer" type="MarginContainer" parent="TypeCard" unique_id=575361164]
+clip_contents = true
+offset_left = -10.0
+offset_top = -19.0
+offset_right = 10.0
+offset_bottom = 19.0
+
+[node name="CharacterCard" type="AnimatedSprite2D" parent="TypeCard/MarginContainer" unique_id=380978823]
+material = SubResource("ShaderMaterial_r004s")
+position = Vector2(10, 19)
+sprite_frames = SubResource("SpriteFrames_ktahu")
+animation = &"morb"
 
 [connection signal="input_event" from="TypeCard/Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="TypeCard/Area2D" to="." method="_on_area_2d_mouse_entered"]

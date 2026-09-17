@@ -140,7 +140,6 @@ func ColorTweenFunctionPart1():
 
 func ColorTweenFunctionPart2():
 	ColorTween = create_tween()
-	ColorTween.tween_property(MAIN.ColorRec, "color", Color("00000000"), 0.5)
 	await ColorTween.finished
 
 func first_connect(room_actual_node : String):
@@ -153,7 +152,6 @@ func load_instanciate():
 	if LOADING_SCREEN and not is_instance_valid(load_screen_instance):
 		load_screen_instance = LOADING_SCREEN.instantiate()
 		MAIN.add_child(load_screen_instance)
-
 
 #optimizar a futuro
 func load_current_zone(NodeNameToLoad : String = ""):
@@ -175,7 +173,6 @@ func cargar_y_conectar(room_actual_node : String):
 	load_current_zone(room_actual_node)
 
 	if str(world_map[current_room]["zone"]) != str(world_map[room_actual_node]["zone"]):
-		await ColorTweenFunctionPart1()
 		await load_instanciate()
 
 	var world_node = MAIN.get_node("WorldNode")
@@ -229,7 +226,6 @@ func cargar_y_conectar(room_actual_node : String):
 	if is_instance_valid(load_screen_instance):
 		load_screen_instance.queue_free()
 		load_screen_instance = null
-	ColorTweenFunctionPart2()
 
 func _errase_not_linked_rooms(ActualRoom):
 	var rooms_to_errase = []

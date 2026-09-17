@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dvfkgyeydns3s"
+path="res://.godot/imported/see_ya.dialogue-ad49aaae1a9f1cf69016bad9c908508a.tres"
+
+[deps]
+
+source_file="res://Resources/DialoguesResources/see_ya.dialogue"
+dest_files=["res://.godot/imported/see_ya.dialogue-ad49aaae1a9f1cf69016bad9c908508a.tres"]
+
+[params]
+
+defaults=true

@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bybq0lrbwmyit" path="res://Scr/Core/pivote.gd" id="3_yfnky"]
 [ext_resource type="Script" uid="uid://di13krw3aiy81" path="res://Scr/Core/CameraControl.gd" id="4_nxd7e"]
 [ext_resource type="Resource" uid="uid://dc8ychgbrs3im" path="res://Resources/EnemiesInMap/PlayerResource.tres" id="5_yfnky"]
+[ext_resource type="Script" uid="uid://dnvgkm2u33mbv" path="res://Scr/Core/EventRunner.gd" id="8_dmanu"]
 
 [sub_resource type="Animation" id="Animation_lquwl"]
 length = 0.001
@@ -117,3 +118,4 @@ script = ExtResource("4_nxd7e")
 [node name="Dumpster" type="Node3D" parent="." unique_id=1661436597]
 
 [node name="EventScript" type="Node3D" parent="." unique_id=2049374417]
+script = ExtResource("8_dmanu")

@@ -26,7 +26,7 @@ func setup(local_life, base_local_life):
 	
 	live_data_label.text = str(local_life)+"/"+str(base_local_life)
 
-func setup_energy(true_energy_capacity, true_energy_recuperation,actual_energy_capacity):
+func setup_energy(true_energy_capacity, actual_energy_capacity):
 	energy_process_bar.max_value = true_energy_capacity
 	get_parent().parent_enemy.actual_energy_capacity = actual_energy_capacity
 	

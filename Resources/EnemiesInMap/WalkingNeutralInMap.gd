@@ -10,7 +10,12 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if player_is_in and Input.is_action_just_pressed("E"):
-		event_data.event_script.execute(self,[])
+		GameDataManager.MAIN.event_runner.execute_event(
+			event_logic_script, 
+			self, 
+			markers, 
+			dialogues
+		)
 
 func _on_dialogue_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("PLAYER"):

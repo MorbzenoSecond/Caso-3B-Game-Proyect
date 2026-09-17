@@ -5,12 +5,11 @@ const PARTY_MEMBER = preload("res://Scr/Entities/InWorld/walking_friend_in_map.t
 
 @onready var camera = $GameParty/MainCharacterWorld/pivote/Camera2D
 @onready var pivote = $GameParty/MainCharacterWorld/pivote
-@onready var CanvasInfo = $UI/CanvasInfo as CanvasLayer
-@onready var ColorRec = $UI/CanvasInfo/ColorRect as ColorRect
 @onready var MainCharacter = $GameParty/MainCharacterWorld
 @onready var dumpster = $Dumpster
 @onready var WorldEnvironmentNode = $WorldEnvironment
 @onready var fight_node = $NodoDePelea
+@onready var event_runner = $EventScript
 
 var characters : Dictionary = {
 	"players": [],
@@ -75,7 +74,7 @@ func start_fight(enemy_data, scenary_fight_background, scenary_fight_music, enem
 	_instanciate_fight(enemy_data, scenary_fight_background, enemy_node)
 	get_tree().paused = true
 
-func _instanciate_fight(enemy_data : Dictionary, scenary_fight_background, enemies_nodes : Array):
+func _instanciate_fight(enemy_data : Dictionary, _scenary_fight_background, enemies_nodes : Array):
 	var index = 1
 	for player in GameDataManager.data["Characters"]:
 		characters["players"].append({"id": index,  "name": player["name"], "level": player["level"], "type": "player"})

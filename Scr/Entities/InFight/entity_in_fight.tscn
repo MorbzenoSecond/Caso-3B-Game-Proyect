@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b7gqbwv4oolhh"]
 
-[ext_resource type="Script" uid="uid://bab72etoipkmn" path="res://Scr/Entities/InFight/enemy_in_fight.gd" id="1_0a5y4"]
+[ext_resource type="Script" uid="uid://bab72etoipkmn" path="res://Scr/Entities/InFight/entity_in_fight.gd" id="1_0a5y4"]
 [ext_resource type="AudioStream" uid="uid://bl1i8posrhbmp" path="res://Assets/Sounds/Effects/tindeck_1.mp3" id="8_h3y8o"]
 
 [sub_resource type="Shader" id="Shader_y5th1"]

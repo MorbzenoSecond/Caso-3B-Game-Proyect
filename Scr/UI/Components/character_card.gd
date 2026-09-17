@@ -2,7 +2,7 @@ extends Node2D
 
 var enemy_of_origin
 @onready var TypeCard = $TypeCard
-@onready var CharacterCard = $TypeCard/CharacterCard
+@onready var CharacterCard = $TypeCard/MarginContainer/CharacterCard
 @onready var original_position_y = $TypeCard.position.y
 
 func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:

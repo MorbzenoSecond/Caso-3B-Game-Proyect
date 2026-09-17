@@ -6,17 +6,21 @@
 [ext_resource type="Resource" uid="uid://cjqivx4dogepw" path="res://Resources/EnemiesInMap/AggroShellResource.tres" id="3_s720p"]
 [ext_resource type="Resource" uid="uid://dx7cxpceoidhv" path="res://Resources/EnemiesInMap/RavenousCrabResource.tres" id="4_4uo8n"]
 [ext_resource type="PackedScene" uid="uid://bqtomavbrq1ey" path="res://Scr/Entities/InWorld/WalkingNPCInMap.tscn" id="4_18l7l"]
-[ext_resource type="Resource" uid="uid://b07cwpeojnboo" path="res://Resources/EventsResources/Event0.tres" id="7_4uo8n"]
 [ext_resource type="Resource" uid="uid://bn1ckyab1qwlm" path="res://Resources/EnemiesInMap/ClampCoreResource.tres" id="7_111jt"]
+[ext_resource type="Script" uid="uid://c8agtukex1u17" path="res://Resources/EventsResources/CutsceneMovement.gd" id="7_qxsas"]
 [ext_resource type="Resource" uid="uid://du68joqpiiewp" path="res://Resources/EnemiesInMap/WitchResource.tres" id="8_36aq3"]
+[ext_resource type="Script" uid="uid://dbs4435dsf3ry" path="res://addons/dialogue_manager/dialogue_resource.gd" id="8_hckga"]
 [ext_resource type="MeshLibrary" uid="uid://bci3u03ai1j4i" path="res://Resources/Tiles/Tiles.tres" id="8_w5wqd"]
+[ext_resource type="Resource" uid="uid://dvfkgyeydns3s" path="res://Resources/DialoguesResources/see_ya.dialogue" id="9_ggaug"]
 [ext_resource type="Texture2D" uid="uid://cwxru8cmum51r" path="res://Assets/Art/2DSprites/godot lol.png" id="9_k4m3a"]
 [ext_resource type="PackedScene" uid="uid://dar0652jdcv2i" path="res://Scr/World/Elements/SavePoint.tscn" id="10_cr2yd"]
 [ext_resource type="PackedScene" uid="uid://pxq54c0dh264" path="res://Scr/World/Elements/ChangeArea.tscn" id="11_jieit"]
 [ext_resource type="Resource" uid="uid://7nhjknp2ayb7" path="res://Resources/EnemiesInMap/MoshPunchResource.tres" id="11_w5wqd"]
 [ext_resource type="Shape3D" uid="uid://dxhuiair8w6nj" path="res://Resources/CollisionShapeSizes/ForChangeArea/2x1x1.tres" id="12_55qbt"]
+[ext_resource type="Resource" uid="uid://ce7i2fsvitjrq" path="res://Resources/DialoguesResources/evento.dialogue" id="12_pvct3"]
 [ext_resource type="PackedScene" uid="uid://ivr4vt84x64s" path="res://Scr/World/Elements/EventArea.tscn" id="14_s720p"]
-[ext_resource type="Resource" uid="uid://bwxrw3ia817bt" path="res://Resources/EventsResources/Event1.tres" id="16_36aq3"]
+[ext_resource type="Resource" uid="uid://dvbgi7c5ybnkw" path="res://Resources/DialoguesResources/evento2.dialogue" id="20_hckga"]
+[ext_resource type="Resource" uid="uid://hig5adbbujkd" path="res://Resources/DialoguesResources/evento1.dialogue" id="21_ggaug"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_2wqqu"]
 vertices = PackedVector3Array(7.21, 0.298, -4.32836, 7.71, 0.298, -3.82836, 8.96, 0.298, -4.32836, 11.96, 0.298, -9.82836, 11.96, 0.298, -4.32836, 1.21, 0.298, -9.82836, 1.21, 0.298, -4.32836, 2.96, 1.698, -9.82836, 2.46, 2.098, -8.57836, 2.46, 2.298, -6.32836, 10.71, 2.298, -6.32836, 10.71, 1.698, -9.82836, 12.21, 0.298, -2.57836, 14.21, 0.298, -2.57836, 14.21, 0.298, -3.82836, 12.21, 0.298, -3.82836, 7.21, 0.298, -2.32836, 1.21, 0.298, -1.32836, 9.21, 0.298, -2.57836, 11.96, 0.298, -1.32836)
@@ -77,7 +81,8 @@ stats = ExtResource("3_s720p")
 [node name="WalkingNPCInMap" parent="Enemies" unique_id=1795806094 instance=ExtResource("4_18l7l")]
 transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 11.6246, 0.530732, -6.08281)
 EventKey = "evento1"
-event_data = ExtResource("7_4uo8n")
+event_logic_script = ExtResource("7_qxsas")
+dialogues = Array[ExtResource("8_hckga")]([ExtResource("9_ggaug")])
 stats = ExtResource("8_36aq3")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Enemies/WalkingNPCInMap" unique_id=1359029713]
@@ -102,7 +107,8 @@ stats = ExtResource("3_s720p")
 [node name="WalkingNPCInMap2" parent="Enemies" unique_id=1850506864 instance=ExtResource("4_18l7l")]
 transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 10.4621, 0.530732, -6.08281)
 EventKey = "evento1"
-event_data = ExtResource("7_4uo8n")
+event_logic_script = ExtResource("7_qxsas")
+dialogues = Array[ExtResource("8_hckga")]([ExtResource("12_pvct3")])
 stats = ExtResource("11_w5wqd")
 
 [node name="GridMaps" type="Node3D" parent="." unique_id=1574738020]
@@ -161,15 +167,17 @@ collision_mask = 4
 new_room = "Exterior2"
 ColisionShape = ExtResource("12_55qbt")
 
-[node name="EventArea" parent="ChangeAreas" unique_id=1491146626 instance=ExtResource("14_s720p")]
+[node name="EventArea" parent="ChangeAreas" unique_id=1491146626 node_paths=PackedStringArray("markers") instance=ExtResource("14_s720p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3405, 0.390827, -3.1999)
-event_data = ExtResource("16_36aq3")
+event_logic_script = ExtResource("7_qxsas")
+dialogues = Array[ExtResource("8_hckga")]([ExtResource("20_hckga"), ExtResource("21_ggaug"), ExtResource("9_ggaug")])
+markers = [NodePath("Markers/Marker3D"), NodePath("Markers/Marker3D2"), NodePath("Markers/Marker3D3")]
 TriggerKey = "evento1"
 
-[node name="Marker3D2" parent="ChangeAreas/EventArea/Markers" index="1"]
+[node name="Marker3D2" parent="ChangeAreas/EventArea/Markers" parent_id_path=PackedInt32Array(1491146626, 308621907) index="1" unique_id=1560676146]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24431, 0, 0)
 
-[node name="Marker3D3" type="Marker3D" parent="ChangeAreas/EventArea/Markers" index="2" unique_id=668704081]
+[node name="Marker3D3" type="Marker3D" parent="ChangeAreas/EventArea/Markers" parent_id_path=PackedInt32Array(1491146626, 308621907) index="2" unique_id=668704081]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.06516, 0, 0)
 
 [node name="NavigationLink3D" type="NavigationLink3D" parent="ChangeAreas" unique_id=1901849891]

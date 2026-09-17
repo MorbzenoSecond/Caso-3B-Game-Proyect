@@ -259,7 +259,6 @@ path_desired_distance = 0.1
 target_desired_distance = 0.1
 path_height_offset = 0.2
 avoidance_enabled = true
-debug_enabled = true
 
 [connection signal="body_entered" from="RotableObjects/Areas/CharacterArea3D" to="." method="_on_character_area_3d_body_entered"]
 [connection signal="body_exited" from="RotableObjects/Areas/CharacterArea3D" to="." method="_on_character_area_3d_body_exited"]

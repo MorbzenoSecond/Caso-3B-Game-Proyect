@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://dg6ibqidwokwo"]
+
+[ext_resource type="Texture2D" uid="uid://clgb5n5808x2m" path="res://Assets/Art/2DSprites/carta.png" id="1_htr5s"]
+[ext_resource type="Script" uid="uid://dgfptjalmwte4" path="res://Scr/UI/Components/character_movement_card.gd" id="1_ppmvc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4l3w"]
+atlas = ExtResource("1_htr5s")
+region = Rect2(110, 0, 22, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dt3f"]
+atlas = ExtResource("1_htr5s")
+region = Rect2(44, 0, 22, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_waq4j"]
+atlas = ExtResource("1_htr5s")
+region = Rect2(22, 0, 22, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xu2c0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4l3w")
+}],
+"loop": 1,
+"name": &"Deviljho",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dt3f")
+}],
+"loop": 0,
+"name": &"enemy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_waq4j")
+}],
+"loop": 0,
+"name": &"player",
+"speed": 5.0
+}]
+
+[node name="CharacterMovementCard" type="Control" unique_id=756911323]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ppmvc")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1710374497]
+clip_contents = true
+layout_mode = 0
+offset_left = -63.0
+offset_top = -27.0
+offset_right = 64.0
+offset_bottom = 31.0
+
+[node name="BackGround" type="AnimatedSprite2D" parent="MarginContainer" unique_id=1234868517]
+modulate = Color(1, 1, 1, 0.6862745)
+texture_filter = 1
+position = Vector2(64.16667, 28.833342)
+scale = Vector2(5.8333335, 1.4416667)
+sprite_frames = SubResource("SpriteFrames_xu2c0")
+animation = &"player"
+
+[node name="Characters" type="Control" parent="MarginContainer" unique_id=297917144]
+layout_mode = 2
+
+[node name="Allies" type="Control" parent="MarginContainer/Characters" unique_id=359771658]
+anchors_preset = 0
+offset_left = 34.0
+offset_top = 27.0
+offset_right = 34.0
+offset_bottom = 27.0
+
+[node name="Enemies" type="Control" parent="MarginContainer/Characters" unique_id=1436129720]
+anchors_preset = 0
+offset_left = 95.0
+offset_top = 27.0
+offset_right = 95.0
+offset_bottom = 27.0
+
+[node name="Label" type="Label" parent="." unique_id=1860166734]
+layout_mode = 0
+offset_left = -37.0
+offset_top = -27.0
+offset_right = 37.0
+offset_bottom = -4.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
