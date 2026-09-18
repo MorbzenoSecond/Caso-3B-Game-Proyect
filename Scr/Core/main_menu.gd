@@ -1,20 +1,14 @@
-
 extends Control
 
 const BUTTON = preload("res://Scr/UI/Components/button.tscn")
 
-# Called when the node enters the scene tree for the first time.
-
 var resume_save_file = "res://SaveFiles/ResumeSaveFile/resume_save_file.json"
 
-#func save(location_name : String):
-	#data["locacion"] = location_name
-	#var file = FileAccess.open(current_save_file,FileAccess.WRITE)
-	#file.store_string(JSON.stringify(data))
-	#file.close()
-	#print("guardado: " + location_name)
+func _ready() -> void:
+	await load_resume()
+	get_all_save_files()
 
-func load_data():
+func load_resume():
 	if not FileAccess.file_exists(resume_save_file):
 		# funcion para crear en caso de no existir  despues
 		return
@@ -26,10 +20,6 @@ func load_data():
 		
 	else:
 		return
- 
-func _ready() -> void:
-	await load_data()
-	get_all_save_files()
 
 func get_all_save_files():
 	var save_files = DirAccess.get_files_at("res://SaveFiles/")

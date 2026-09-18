@@ -20,7 +20,7 @@ metadata/_custom_type_script = "uid://dmmvynklhh8f0"
 [sub_resource type="Resource" id="Resource_0sqlw"]
 resource_name = "SHIELD"
 script = ExtResource("5_7cf5j")
-not_targets = true
+can_only_target_himself = true
 metadata/_custom_type_script = "uid://bvw1ojd7mi68w"
 
 [resource]

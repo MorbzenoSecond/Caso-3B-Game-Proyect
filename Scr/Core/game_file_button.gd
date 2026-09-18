@@ -1,8 +1,10 @@
 extends Control
 
-var game_file = ""
 @onready var button_control = $Button
 @onready var time_label = $Button/TimeLabel
+
+var game_file = ""
+var animation_tween : Tween
 
 func _on_button_pressed() -> void:
 	GameDataManager.current_save_file = game_file
@@ -15,7 +17,7 @@ func _on_button_mouse_entered() -> void:
 func _on_button_mouse_exited() -> void:
 	tween(0, Vector2(1, 1))
 
-var animation_tween : Tween
+
 
 func tween(side, new_size):
 	if animation_tween:

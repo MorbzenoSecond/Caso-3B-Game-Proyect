@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dppb0n6cean48"
-path.s3tc="res://.godot/imported/barra_de_vida_V1.png-3ecabc50badba4fe258bcc6aa25d0461.s3tc.ctex"
+path.s3tc="res://.godot/imported/barra_de_vida_V1.png-734f6e370b59e48eb5857a160ef711be.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Art/2DSprites/barra_de_vida_V1.png"
-dest_files=["res://.godot/imported/barra_de_vida_V1.png-3ecabc50badba4fe258bcc6aa25d0461.s3tc.ctex"]
+source_file="res://assets/Art/2DSprites/barra_de_vida_V1.png"
+dest_files=["res://.godot/imported/barra_de_vida_V1.png-734f6e370b59e48eb5857a160ef711be.s3tc.ctex"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bqq3fry046c2"
-path="res://.godot/imported/fight_theme.wav-5e33623d4a63b2aea4718d6a564dbda9.sample"
+path="res://.godot/imported/fight_theme.wav-55d6f331413d9dc12d273bac5702393d.sample"
 
 [deps]
 
-source_file="res://Assets/Sounds/Music/fight_theme.wav"
-dest_files=["res://.godot/imported/fight_theme.wav-5e33623d4a63b2aea4718d6a564dbda9.sample"]
+source_file="res://assets/Sounds/Music/fight_theme.wav"
+dest_files=["res://.godot/imported/fight_theme.wav-55d6f331413d9dc12d273bac5702393d.sample"]
 
 [params]
 

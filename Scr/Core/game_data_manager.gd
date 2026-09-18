@@ -1,7 +1,7 @@
 extends Node
 
-
 @onready var MAIN = get_tree().get_first_node_in_group("MAIN")
+
 const MUSIC_PATH = "res://Resources/bibliotecas/music_manager.json"
 const LOADING_SCREEN = preload("res://Scr/UI/Overlay/loading_screen.tscn")
 
@@ -27,6 +27,20 @@ var data : Dictionary = {
 
 func _ready() -> void:
 	load_music_data()
+
+func create_dialogue(NewDialogue : Resource):
+	if !NewDialogue:
+		print(self.name + " Este personaje No cuenta con Dialogos activos")
+		return
+	if BlockedInputs:
+		print(self.name + " Ya hay un dialogo activo")
+		return
+	BlockedInputs = true
+	DialogueManager.show_example_dialogue_balloon(NewDialogue, "start")
+	await DialogueManager.dialogue_ended
+	BlockedInputs = false
+
+#region Archives loader-saves Region
 
 func save(location_name : String):
 	data["locacion"] = location_name
@@ -69,18 +83,7 @@ func load_music_data():
 		music = json
 	else:
 		return
-
-func create_dialogue(NewDialogue : Resource):
-	if !NewDialogue:
-		print(self.name + " Este personaje No cuenta con Dialogos activos")
-		return
-	if BlockedInputs:
-		print(self.name + " Ya hay un dialogo activo")
-		return
-	BlockedInputs = true
-	DialogueManager.show_example_dialogue_balloon(NewDialogue, "start")
-	await DialogueManager.dialogue_ended
-	BlockedInputs = false
+#endregion
 
 #region SCENARY
 var world_map = {

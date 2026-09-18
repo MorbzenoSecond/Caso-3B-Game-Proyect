@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwxru8cmum51r"
-path.s3tc="res://.godot/imported/godot lol.png-71185805cd99b93755e98f011ab3afd5.s3tc.ctex"
+path.s3tc="res://.godot/imported/godot lol.png-e4053a88c85261b62ceece981c83c651.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Art/2DSprites/godot lol.png"
-dest_files=["res://.godot/imported/godot lol.png-71185805cd99b93755e98f011ab3afd5.s3tc.ctex"]
+source_file="res://assets/Art/2DSprites/godot lol.png"
+dest_files=["res://.godot/imported/godot lol.png-e4053a88c85261b62ceece981c83c651.s3tc.ctex"]
 
 [params]
 

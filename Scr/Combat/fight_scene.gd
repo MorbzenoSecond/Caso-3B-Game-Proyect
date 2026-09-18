@@ -331,7 +331,10 @@ func _on_item_button_pressed(item):
 			ItemEffect(item, character)
 
 func _on_execute_button_pressed(node):
+	
 	if node.selected_attack:
+		var active_characters : Array = []
+		
 		if node.selected_attack.energy_consumtion >= node.actual_energy_capacity:
 			GameDataManager.MAIN.camera.add_trauma(0.5)
 			return
@@ -340,14 +343,12 @@ func _on_execute_button_pressed(node):
 		if !selected_enemies.is_empty():
 			for movement in movements_container.get_children():
 				movement.button.disabled = true
-			node.basic_attack(selected_enemies)
+		
+		node.basic_attack(selected_enemies)
+		if !node.selected_attack.can_only_target_himself:
+			active_characters.append(node.main_body_part)
 
-		elif node.selected_attack.not_targets:
-			node.basic_attack(selected_enemies)
-
-		var active_characters : Array = []
 		active_characters.append_array(selected_enemies)
-		active_characters.append(node.main_body_part)
 		movement_card.setup(active_characters, node.selected_attack.resource_name, node.data["type"] )
 
 		unselect_objetive()

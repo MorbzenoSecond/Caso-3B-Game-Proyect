@@ -58,20 +58,22 @@ func opponent_attack_logic():
 	if selected_attack.all_targets:
 		for posible_character in posible_characters:
 			selected_characters.append(posible_character)
-	elif selected_attack.not_targets:
+	elif selected_attack.can_only_target_himself:
 		pass
 	else:
 		if FIGHT_SCENE_PATH.focussed_entities.is_empty():
+			posible_characters.clear()
 			selected_characters.append(posible_characters.pick_random())
 		else:
 			for entity in FIGHT_SCENE_PATH.focussed_entities:
 				if entity["BodyPart"].parent_enemy.data["type"] == "player":
 					selected_characters.append(entity["BodyPart"])
 					break
-			selected_characters.append(posible_characters.pick_random())
+			#selected_characters.append(posible_characters.pick_random())
 	basic_attack(selected_characters)
 	var active_characters : Array = []
-	active_characters.append_array(selected_characters)
+	for selected_character in selected_characters:
+		active_characters.append(selected_character)
 	active_characters.append(main_body_part)
 	main_body_part.liveBarNode.show_energy_usage(actual_energy_capacity)
 	actual_energy_capacity -= selected_attack.energy_consumtion

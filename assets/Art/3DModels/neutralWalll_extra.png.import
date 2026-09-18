@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ddmr7ym1wg3l1"
-path="res://.godot/imported/neutralWalll_extra.png-fb5bae93760fe2a7f0ef0123f6bbb725.ctex"
+path="res://.godot/imported/neutralWalll_extra.png-780f6ab632fa24e9b3f49960d3b50d32.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/3DModels/neutralWalll_extra.png"
-dest_files=["res://.godot/imported/neutralWalll_extra.png-fb5bae93760fe2a7f0ef0123f6bbb725.ctex"]
+source_file="res://assets/Art/3DModels/neutralWalll_extra.png"
+dest_files=["res://.godot/imported/neutralWalll_extra.png-780f6ab632fa24e9b3f49960d3b50d32.ctex"]
 
 [params]
 
