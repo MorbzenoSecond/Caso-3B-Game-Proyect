@@ -1,7 +1,7 @@
 class_name HeavyJumpMovement
 extends FightMovements
 
-func executed(self_node : Node3D, target_nodes: Array):
+func executed(effect, self_node : Node3D, target_nodes: Array):
 	var target_pos: Vector3 = target_nodes[0].get_marker_position("hit_position_1")
 	var jump_height: float = 2.0 # Altura del salto
 	var jump_time: float = 1.2    # Tiempo total en el aire (mitad subir, mitad caer)
@@ -35,7 +35,7 @@ func executed(self_node : Node3D, target_nodes: Array):
 	# Daño al tocar suelo
 	tween.tween_callback(self_node.FIGHT_SCENE_PATH.get_parent().get_parent().camera.add_trauma.bind(0.8))
 	for target in target_nodes:
-		tween.tween_callback(self_node.attack.bind(self_node.FightResourceStats.base_damage, target))
+		tween.tween_callback(self_node.attack.bind(effect,  self_node.FightResourceStats.base_damage, target))
 	
 	# Pausa breve en el suelo tras el choque para simular masa
 	tween.tween_interval(0.15) 

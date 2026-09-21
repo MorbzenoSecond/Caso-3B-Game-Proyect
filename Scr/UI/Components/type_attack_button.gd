@@ -2,6 +2,8 @@ extends Control
 
 var movement_resource : FightMovements
 @onready var button = $TypeAttackButton
+@onready var sprite = $TypeAttackButton/targets
+@onready var effects_animated_sprite_2D = $TypeAttackButton/effect
 
 func setup():
 	pass

@@ -23,62 +23,10 @@ var true_energy_capacity : float
 var true_energy_recuperation : float
 var actual_energy_capacity : float
 
+#region Setup Region
 func _ready() -> void:
 	await get_tree().process_frame
 	original_position = global_position
-
-func basic_attack(target_node: Array):
-	actual_energy_capacity -= selected_attack.energy_consumtion
-	var i
-	if selected_attack:
-		i = selected_attack
-		i.executed(self, target_node)
-		return
-
-func activate(status):
-	main_body_part.animated_sprite_3D.set_process(status)
-
-func provoque():
-	var turns = 3
-	var provoque_status : = {"origin_entity": self, "BodyPart" : main_body_part, "remaining_turns": turns, "already_checked" : false}
-	for entity in FIGHT_SCENE_PATH.focussed_entities:
-		if entity["origin_entity"] == provoque_status["origin_entity"]:
-			FIGHT_SCENE_PATH.focussed_entities.erase(entity)
-	FIGHT_SCENE_PATH.focussed_entities.append(provoque_status)
-
-func opponent_attack_logic():
-	await main_body_part.liveBarNode.update_progress_bar(true_energy_capacity, true_energy_recuperation,actual_energy_capacity)
-	selected_attack = FightResourceStats.SpecialActions.pick_random()
-	var posible_characters : Array = []
-	var selected_characters : Array = []
-	for character in FIGHT_SCENE_PATH.combatientes:
-		if character["type"] == "player" and character.able_to_fight:
-			posible_characters.append(character["node"].get_node("BodyParts").get_child(0))
-
-	if selected_attack.all_targets:
-		for posible_character in posible_characters:
-			selected_characters.append(posible_character)
-	elif selected_attack.can_only_target_himself:
-		pass
-	else:
-		if FIGHT_SCENE_PATH.focussed_entities.is_empty():
-			posible_characters.clear()
-			selected_characters.append(posible_characters.pick_random())
-		else:
-			for entity in FIGHT_SCENE_PATH.focussed_entities:
-				if entity["BodyPart"].parent_enemy.data["type"] == "player":
-					selected_characters.append(entity["BodyPart"])
-					break
-			#selected_characters.append(posible_characters.pick_random())
-	basic_attack(selected_characters)
-	var active_characters : Array = []
-	for selected_character in selected_characters:
-		active_characters.append(selected_character)
-	active_characters.append(main_body_part)
-	main_body_part.liveBarNode.show_energy_usage(actual_energy_capacity)
-	actual_energy_capacity -= selected_attack.energy_consumtion
-	main_body_part.liveBarNode.progress_bar_alterate(actual_energy_capacity, main_body_part.liveBarNode.energy_texture_process_bar)
-	FIGHT_SCENE_PATH.movement_card.setup(active_characters, selected_attack.resource_name, data["type"] )
 
 func setup(character_data : Dictionary):
 	if character_data:
@@ -129,10 +77,72 @@ func level_stats_scalling():
 	true_energy_recuperation = FightResourceStats.base_natural_recuperation + data["level"]
 	true_damage = FightResourceStats.base_damage + data["level"]
 	true_speed = FightResourceStats.base_speed + data["level"]
+#endregion
 
-func attack(damage, Character_node : Node3D):
+func basic_attack(target_node: Array):
+	var effect: String = ""
+	match selected_attack.attack_effect:
+		selected_attack.attackEffect.neutral:
+			effect = "neutral"
+		selected_attack.attackEffect.fire:
+			effect = "fire"
+		selected_attack.attackEffect.chaos:
+			effect = "chaos"
+		selected_attack.attackEffect.electricity:
+			effect = "electricity"
 
-	Character_node.get_damage(selected_attack.damage_multiplicator, damage)
+	actual_energy_capacity -= selected_attack.energy_consumtion
+	var i
+	if selected_attack:
+		i = selected_attack
+		i.executed(effect, self, target_node)
+		return
+
+func activate(status):
+	main_body_part.animated_sprite_3D.set_process(status)
+
+func provoque():
+	var turns = 3
+	var provoque_status : = {"origin_entity": self, "BodyPart" : main_body_part, "remaining_turns": turns, "already_checked" : false}
+	for entity in FIGHT_SCENE_PATH.focussed_entities:
+		if entity["origin_entity"] == provoque_status["origin_entity"]:
+			FIGHT_SCENE_PATH.focussed_entities.erase(entity)
+	FIGHT_SCENE_PATH.focussed_entities.append(provoque_status)
+
+func opponent_attack_logic():
+	await main_body_part.liveBarNode.update_progress_bar(true_energy_capacity, true_energy_recuperation,actual_energy_capacity)
+	selected_attack = FightResourceStats.SpecialActions.pick_random()
+	var posible_characters : Array = []
+	var selected_characters : Array = []
+	for character in FIGHT_SCENE_PATH.combatientes:
+		if character["type"] == "player" and character.able_to_fight:
+			posible_characters.append(character["node"].get_node("BodyParts").get_child(0))
+	match selected_attack.attack_target:
+		selected_attack.attackTarget.can_target_all_enemies:
+			for posible_character in posible_characters:
+				selected_characters.append(posible_character)
+		selected_attack.attackTarget.can_only_target_himself:
+			pass
+		selected_attack.attackTarget.can_only_target_enemies:
+			if FIGHT_SCENE_PATH.focussed_entities.is_empty():
+				selected_characters.append(posible_characters.pick_random())
+			else:
+				for entity in FIGHT_SCENE_PATH.focussed_entities:
+					if entity["BodyPart"].parent_enemy.data["type"] == "player":
+						selected_characters.append(entity["BodyPart"])
+						break
+	basic_attack(selected_characters)
+	var active_characters : Array = []
+	for selected_character in selected_characters:
+		active_characters.append(selected_character)
+	active_characters.append(main_body_part)
+	main_body_part.liveBarNode.show_energy_usage(actual_energy_capacity)
+	actual_energy_capacity -= selected_attack.energy_consumtion
+	main_body_part.liveBarNode.progress_bar_alterate(actual_energy_capacity, main_body_part.liveBarNode.energy_texture_process_bar)
+	FIGHT_SCENE_PATH.movement_card.setup(active_characters, selected_attack.resource_name, data["type"] )
+
+func attack(damage_type, damage, Character_node : Node3D):
+	Character_node.get_damage(damage_type, selected_attack.damage_multiplicator, damage)
 
 func _activate_turn():
 	main_body_part.liveBarNode.update_progress_bar(true_energy_capacity, true_energy_recuperation,actual_energy_capacity)

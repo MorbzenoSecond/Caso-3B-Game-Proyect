@@ -256,12 +256,16 @@ func ItemEffect(item_name, character):
 func instanciate_return_button(node):
 	var return_button = TYPE_MOVEMENT_SCENE.instantiate()
 	movements_container.add_child(return_button)
+	return_button.sprite.play("default")
+	return_button.effects_animated_sprite_2D.play("default")
 	return_button.button.get_node("Label").text = "Regresar"
 	return_button.button.button_down.connect(_on_return_button_pressed.bind(node))
 
 func instanciate_execute_button(node):
 	var return_button = TYPE_MOVEMENT_SCENE.instantiate()
 	movements_container.add_child(return_button)
+	return_button.sprite.play("default")
+	return_button.effects_animated_sprite_2D.play("default")
 	return_button.button.get_node("Label").text = "Ejecutar"
 	return_button.button.button_down.connect(_on_execute_button_pressed.bind(node))
 
@@ -280,11 +284,28 @@ func prepare_attack_options(node):
 		movements_container.add_child(button)
 		button.movement_resource = attack
 		button.button.button_down.connect(_on_attack_button_pressed.bind(button, node))
-		button.button.size = Vector2(224, 65)
 
 		if attack.resource_name:
 			button.button.get_node("Label2").text = str(attack.energy_consumtion)
 			button.button.get_node("Label").text = attack.resource_name
+
+		match button.movement_resource.attack_target:
+			button.movement_resource.attackTarget.can_only_target_himself:
+				button.sprite.play("can_only_target_himself")
+			button.movement_resource.attackTarget.can_target_all_enemies:
+				button.sprite.play("can_target_all_enemies")
+			button.movement_resource.attackTarget.can_only_target_enemies:
+				button.sprite.play("can_only_target_enemies")
+
+		match button.movement_resource.attack_effect:
+			button.movement_resource.attackEffect.neutral:
+				button.effects_animated_sprite_2D.play("neutral")
+			button.movement_resource.attackEffect.fire:
+				button.effects_animated_sprite_2D.play("fire")
+			button.movement_resource.attackEffect.chaos:
+				button.effects_animated_sprite_2D.play("chaos")
+			button.movement_resource.attackEffect.electricity:
+				button.effects_animated_sprite_2D.play("electricity")
 	instanciate_execute_button(node)
 
 func prepare_item_options(node):
@@ -301,20 +322,20 @@ func prepare_item_options(node):
 func _on_attack_button_pressed(button_node, node):
 	await unselect_objetive()
 	await clear_entities()
-	if  button_node.movement_resource.can_only_target_himself:
-		camera_control(node.position, 1.1)
-		select_itself(node)
-		can_only_select_himself = true
-	elif button_node.movement_resource.not_targets:
-		camera_control(node.position, 1.1)
-		select_itself(node)
-	elif  button_node.movement_resource.all_targets:
-		cant_select_anyone= true
-		camera_control($EnemyPosiblePositions/Marker3D4.position, 1.7)
-		select_all_oponnents()
-	else:
-		camera_control($EnemyPosiblePositions/Marker3D4.position, 1.7)
-		select_random_oponents()
+
+	match button_node.movement_resource.attack_target:
+		button_node.movement_resource.attackTarget.can_only_target_himself:
+			camera_control(node.position, 1.1)
+			select_itself(node)
+			can_only_select_himself = true
+		button_node.movement_resource.attackTarget.can_target_all_enemies:
+			cant_select_anyone= true
+			camera_control($EnemyPosiblePositions/Marker3D4.position, 1.7)
+			select_all_oponnents()
+		button_node.movement_resource.attackTarget.can_only_target_enemies:
+			camera_control($EnemyPosiblePositions/Marker3D4.position, 1.7)
+			select_random_oponents()
+
 	for movement_container in movements_container.get_children():
 		if movement_container.button.scale == Vector2(1,1):
 			continue
@@ -331,7 +352,6 @@ func _on_item_button_pressed(item):
 			ItemEffect(item, character)
 
 func _on_execute_button_pressed(node):
-	
 	if node.selected_attack:
 		var active_characters : Array = []
 		
@@ -345,7 +365,7 @@ func _on_execute_button_pressed(node):
 				movement.button.disabled = true
 		
 		node.basic_attack(selected_enemies)
-		if !node.selected_attack.can_only_target_himself:
+		if node.selected_attack.attack_target != node.selected_attack.attackTarget.can_only_target_himself:
 			active_characters.append(node.main_body_part)
 
 		active_characters.append_array(selected_enemies)
@@ -377,7 +397,6 @@ func selected_enemy(Enemy_node : Array):
 	
 	for node : Node3D in Enemy_node:
 		selected_enemies.append(node)
-		
 
 func unselect_objetive():
 	var actual_arrows = get_tree().get_nodes_in_group("SELECTARROW")

@@ -2,6 +2,150 @@
 
 [ext_resource type="Script" uid="uid://c3yby8uxnmj7y" path="res://Scr/UI/Components/type_attack_button.gd" id="1_qkv60"]
 [ext_resource type="Texture2D" uid="uid://c6c314alewgwo" path="res://Assets/Art/3DModels/bloque.png" id="2_44fa7"]
+[ext_resource type="Texture2D" uid="uid://co58i8culd38c" path="res://Assets/Art/2DSprites/target_conditions.png" id="3_bi621"]
+[ext_resource type="Texture2D" uid="uid://cosnsd604od4b" path="res://Assets/Art/2DSprites/special_effects.png" id="4_npbvg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npbvg"]
+atlas = ExtResource("3_bi621")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjdou"]
+atlas = ExtResource("3_bi621")
+region = Rect2(0, 9, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omstj"]
+atlas = ExtResource("3_bi621")
+region = Rect2(0, 18, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7u7vh"]
+atlas = ExtResource("3_bi621")
+region = Rect2(9, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqmtl"]
+atlas = ExtResource("3_bi621")
+region = Rect2(9, 9, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01187"]
+atlas = ExtResource("3_bi621")
+region = Rect2(9, 18, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5h11f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npbvg")
+}],
+"loop": 0,
+"name": &"can_only_target_allies",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gjdou")
+}],
+"loop": 0,
+"name": &"can_only_target_enemies",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_omstj")
+}],
+"loop": 0,
+"name": &"can_only_target_himself",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7u7vh")
+}],
+"loop": 0,
+"name": &"can_target_all_allies",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqmtl")
+}],
+"loop": 0,
+"name": &"can_target_all_enemies",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01187")
+}],
+"loop": 0,
+"name": &"can_target_anyone",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ea55s"]
+atlas = ExtResource("4_npbvg")
+region = Rect2(0, 9, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwp41"]
+atlas = ExtResource("4_npbvg")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_givxb"]
+atlas = ExtResource("4_npbvg")
+region = Rect2(9, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkba5"]
+atlas = ExtResource("4_npbvg")
+region = Rect2(9, 9, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bx8n8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ea55s")
+}],
+"loop": 0,
+"name": &"chaos",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iwp41")
+}],
+"loop": 0,
+"name": &"electricity",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_givxb")
+}],
+"loop": 0,
+"name": &"fire",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkba5")
+}],
+"loop": 0,
+"name": &"neutral",
+"speed": 5.0
+}]
 
 [node name="Control" type="Control" unique_id=1891142755]
 layout_mode = 3
@@ -12,7 +156,7 @@ script = ExtResource("1_qkv60")
 
 [node name="TypeAttackButton" type="Button" parent="." unique_id=1296772599]
 layout_mode = 0
-offset_right = 224.0
+offset_right = 276.0
 offset_bottom = 65.0
 pivot_offset = Vector2(0, 33)
 
@@ -38,3 +182,13 @@ offset_left = 192.0
 offset_top = 48.0
 offset_right = 232.0
 offset_bottom = 71.0
+
+[node name="targets" type="AnimatedSprite2D" parent="TypeAttackButton" unique_id=1476413605]
+position = Vector2(255, 49)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_5h11f")
+
+[node name="effect" type="AnimatedSprite2D" parent="TypeAttackButton" unique_id=2004102799]
+position = Vector2(255, 16)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_bx8n8")

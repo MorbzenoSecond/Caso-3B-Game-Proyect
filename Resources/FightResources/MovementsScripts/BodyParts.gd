@@ -9,6 +9,9 @@ class_name BodyPart
 @export_group("local_stats")
 @export var local_life : float = 0.0
 @export var local_defense : float = 0.0
+@export var local_fire_defense : float = 0.0
+@export var local_chaos_defense : float = 0.0
+@export var local_electicity_defense : float = 0.0
 
 @export_group("shape_stats")
 @export var shape3D : Shape3D

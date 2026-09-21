@@ -115,8 +115,8 @@ func _on_area_3d_mouse_exited() -> void:
 #endregion
 
 #region calculate damage Region
-func get_damage(damage_multiplier : float = 1.0, damage : float = 1.0):
-	await calculate_damage(damage_multiplier, damage)
+func get_damage(damage_type, damage_multiplier : float = 1.0, damage : float = 1.0,):
+	await calculate_damage(damage_type,damage_multiplier, damage)
 		##var resource = DialogueManager.create_resource_from_text("~ start \n " + data["name"] + ": hola,soy un "+ data["name"] +"!")
 		##DialogueManager.show_example_dialogue_balloon(resource, "start")
 		##FIGHT_SCENE_PATH.battle_paused = true
@@ -128,11 +128,11 @@ func use_item(effect):
 	local_life += effect
 
 	var message = str(local_life) + " + " + str(effect) + " = " + str(local_life + effect)
-	point_score(message)
+	point_score("cure",message)
 	liveBarNode.update_life_bar(local_life, base_local_life)
 	parent_enemy.FIGHT_SCENE_PATH.turns()
 
-func calculate_damage(damage_multiplier, brute_damage):
+func calculate_damage(damage_type, damage_multiplier, brute_damage):
 	add_trauma(100)
 	var real_damage = (brute_damage * damage_multiplier) - local_defense
 	
@@ -154,7 +154,7 @@ func calculate_damage(damage_multiplier, brute_damage):
 			
 
 	var message = str(real_damage)
-	point_score(message)
+	point_score(damage_type, message)
 
 	print(self.name + " | "+ "A la parte: " +self.name +" le queda:  "+ str(local_life))
 	liveBarNode.update_life_bar(local_life, base_local_life)
@@ -168,7 +168,6 @@ func put_true_damage(real_damage):
 			parent_enemy.character_down()
 
 	var message = str(real_damage)
-	point_score(message)
 
 	print(self.name + " | "+ "A la parte: " +self.name +" le queda:  "+ str(local_life))
 	liveBarNode.update_life_bar(local_life, base_local_life)
@@ -195,11 +194,16 @@ func _apply_shake() -> void:
 func get_marker_position(Type : String):
 	return parent_enemy.get_marker_position(Type)
 
-func point_score(message : String):
+func point_score(damage_type, message : String):
 	var scene = MESSAGE_SCENE.instantiate()
 	parent_enemy.add_child(scene)
 	scene.position += Vector3(0, 0.3, 0.1)
-	if float(message) == 0:
-		scene.setup(message,Color(0.0, 0.191, 0.438, 1.0))
-	else:
-		scene.setup(message)
+	match damage_type:
+		"neutral":
+			scene.setup(message)
+		"fire":
+			scene.setup(message,Color(0.898, 0.494, 0.067, 1.0))
+		"chaos":
+			scene.setup(message,Color(1.0, 0.115, 0.421, 1.0))
+		"electricity":
+			scene.setup(message,Color(0.769, 1.0, 0.871, 1.0))

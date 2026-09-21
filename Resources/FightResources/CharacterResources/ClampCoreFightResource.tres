@@ -24,6 +24,7 @@ resource_name = "Shoot"
 script = ExtResource("7_h38h6")
 ShootType = ExtResource("5_mgctf")
 VisualEffect = Array[PackedScene]([ExtResource("6_83p6j")])
+attack_effect = 2
 metadata/_custom_type_script = "uid://cwsj3y0oxnuja"
 
 [resource]

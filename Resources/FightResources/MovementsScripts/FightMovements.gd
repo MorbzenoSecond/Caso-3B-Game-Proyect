@@ -5,12 +5,22 @@ extends Resource
 @export var damage_multiplicator : float = 1.0
 @export var energy_consumtion : float = 1.0
 
-@export var all_targets : bool = false
-@export var not_targets : bool = false
-@export var can_only_target_himself : bool = false
-@export var can_only_target_alies : bool = false
-@export var can_only_target_enemies : bool = false
+@export var attack_target: attackTarget = attackTarget.can_only_target_enemies
+enum attackTarget {
+	can_only_target_enemies, 
+	can_target_all_enemies, 
+	can_only_target_himself, 
+	can_only_target_allies, 
+	can_target_all_allies
+}
 
-# Esta función la ejecutará el enemigo cuando active la acción
-func execute(_self_node, _enemy: Node3D) -> void:
+@export var attack_effect: attackEffect = attackEffect.neutral
+enum attackEffect {
+	neutral, 
+	fire, 
+	chaos, 
+	electricity
+}
+
+func execute(_effect, _self_node, _enemy: Node3D) -> void:
 	pass
