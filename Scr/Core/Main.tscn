@@ -3,11 +3,12 @@
 [ext_resource type="Script" uid="uid://ngsy3j5wnxdx" path="res://Scr/Core/main.gd" id="1_g4gp3"]
 [ext_resource type="PackedScene" uid="uid://bvs4i5thex2gf" path="res://Scr/Entities/InWorld/WalkingPlayerInMap.tscn" id="2_5jks7"]
 [ext_resource type="AudioStream" uid="uid://bqq3fry046c2" path="res://Assets/Sounds/Music/fight_theme.wav" id="2_yfnky"]
-[ext_resource type="Environment" uid="uid://cll226qxsbs1t" path="res://Resources/SkyMaterial/ExteriorSkyMaterial2.tres" id="3_5jks7"]
+[ext_resource type="Environment" uid="uid://dtk38670brqxw" path="res://Resources/SkyMaterial/ExteriorSkyMaterial.tres" id="3_qvhdm"]
 [ext_resource type="Script" uid="uid://bybq0lrbwmyit" path="res://Scr/Core/pivote.gd" id="3_yfnky"]
 [ext_resource type="Script" uid="uid://di13krw3aiy81" path="res://Scr/Core/CameraControl.gd" id="4_nxd7e"]
 [ext_resource type="Resource" uid="uid://dc8ychgbrs3im" path="res://Resources/EnemiesInMap/PlayerResource.tres" id="5_yfnky"]
 [ext_resource type="Script" uid="uid://dnvgkm2u33mbv" path="res://Scr/Core/EventRunner.gd" id="8_dmanu"]
+[ext_resource type="Shader" uid="uid://06d4oyvcvoxu" path="res://Resources/ShaderResources/post.gdshader" id="8_qvhdm"]
 
 [sub_resource type="Animation" id="Animation_lquwl"]
 length = 0.001
@@ -69,6 +70,15 @@ _data = {
 &"new_animation": SubResource("Animation_1bvp3")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8raax"]
+render_priority = 0
+shader = ExtResource("8_qvhdm")
+
+[sub_resource type="QuadMesh" id="QuadMesh_5h11f"]
+material = SubResource("ShaderMaterial_8raax")
+flip_faces = true
+size = Vector2(2, 2)
+
 [node name="Main" type="Node3D" unique_id=221742763 groups=["MAIN"]]
 process_mode = 3
 script = ExtResource("1_g4gp3")
@@ -86,7 +96,7 @@ libraries/ = SubResource("AnimationLibrary_7mycd")
 stream = ExtResource("2_yfnky")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1046788296]
-environment = ExtResource("3_5jks7")
+environment = ExtResource("3_qvhdm")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1103458694]
 transform = Transform3D(-0.552622, 0.708794, -0.438429, 0.561124, 0.705384, 0.433097, 0.616237, -0.00667433, -0.787532, 0, 0.703114, 0)
@@ -112,6 +122,13 @@ intensity = Vector3(2.4, 3.6, 0)
 transform = Transform3D(1, 0, 0, 0, 0.939692, 0.34202, 0, -0.34202, 0.939692, 0, 0, 0)
 far = 10.0
 script = ExtResource("4_nxd7e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameParty/MainCharacterWorld/pivote/Camera2D" unique_id=2055701294]
+transform = Transform3D(1, 0, 0, 0, 0.9396927, -0.34202027, 0, 0.34202024, 0.9396927, 0, -0.011879072, -0.093379796)
+visible = false
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_5h11f")
+skeleton = NodePath("../../../../..")
 
 [node name="Followers" type="Node3D" parent="GameParty" unique_id=688657761]
 

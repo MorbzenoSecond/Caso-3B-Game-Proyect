@@ -54,7 +54,7 @@ size = Vector3(0.03, 0.03, 0.03)
 
 [node name="Exterior1" type="Node3D" unique_id=1357650203]
 script = ExtResource("1_2jqb3")
-scenary_music = "ambiental_music"
+scenary_music = "ambiental_musi"
 scenary_environment = ExtResource("2_s720p")
 next_rooms = Array[String](["Z1-Z2", "E1-E2"])
 scenary_fight_ground = "res://Scr/Combat/fight_scene.tscn"

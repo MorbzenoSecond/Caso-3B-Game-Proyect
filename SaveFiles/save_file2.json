@@ -5,8 +5,8 @@
 	],
 
 	"Items" :[
-		{"item_name": "item_one", "quantity" : 3},
-		{"item_name": "item_two", "quantity" : 2}
+		{"item_name": "item_one", "quantity" : 3, "target": "can_only_target_himself", "effect": "cure", "target" : "can_target_all_allies"},
+		{"item_name": "item_two", "quantity" : 2, "target": "can_only_target_himself", "effect": "cure", "target" : "can_only_target_allies", "icon" : "res://Assets/Art/2DSprites/Icons/icons1.png"}
 	],
 
 	"locacion":"Exterior1"

@@ -11,7 +11,6 @@ extends Node3D
 @export var FightResourceStats : FightMovementsResource
 
 const BODY_PART_SCENE = preload("res://Scr/Combat/body_part.tscn")
-const INTERFACE_SCENE = preload("res://Scr/Combat/player_interface.tscn")
 
 var true_damage : float = 0.0
 var true_speed : float = 0.0
@@ -69,8 +68,11 @@ func setup(character_data : Dictionary):
 				render_priority_index -= 1
 				position_index -= 0.01
 				scene.setup(body_part, position_index, render_priority_index)
-				
-				scene.add_to_group("EnemyBodyPart")
+				match character_data["type"]:
+					"player":
+						scene.add_to_group("AllyBodyPart")
+					"enemy":
+						scene.add_to_group("EnemyBodyPart")
 
 func level_stats_scalling():
 	true_energy_capacity =  FightResourceStats.base_energy + data["level"]
@@ -145,12 +147,8 @@ func attack(damage_type, damage, Character_node : Node3D):
 	Character_node.get_damage(damage_type, selected_attack.damage_multiplicator, damage)
 
 func _activate_turn():
+	selected_attack = null
 	main_body_part.liveBarNode.update_progress_bar(true_energy_capacity, true_energy_recuperation,actual_energy_capacity)
-	_instanciate_interface()
-
-func _instanciate_interface():
-	var scene = INTERFACE_SCENE.instantiate()
-	actions_positions.add_child(scene)
 
 func get_marker_position(Type : String) -> Vector3:
 	match Type as String:

@@ -106,6 +106,7 @@ PROYECTILE=""
 AFTERIMAGES=""
 EnemyBodyPart=""
 DIALOGUEBALLON=""
+AlliBodyPart=""
 
 [input]
 

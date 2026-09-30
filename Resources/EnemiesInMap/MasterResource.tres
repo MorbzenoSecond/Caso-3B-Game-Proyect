@@ -9,6 +9,7 @@
 [resource]
 script = ExtResource("3_v2ufx")
 character = ExtResource("2_sdgnh")
+enemy_data = null
 body_collision_type = ExtResource("2_v2ufx")
 character_area_collision_type = ExtResource("4_cnjy0")
 metadata/_custom_type_script = "uid://ba00fspq8q8te"

@@ -2,7 +2,7 @@ extends Node
 
 @onready var MAIN = get_tree().get_first_node_in_group("MAIN")
 
-const MUSIC_PATH = "res://Resources/bibliotecas/music_manager.json"
+const MUSIC_PATH = "res://Resources/DictionaryResources/music_manager.json"
 const LOADING_SCREEN = preload("res://Scr/UI/Overlay/loading_screen.tscn")
 
 var BlockedInputs : bool = false

@@ -11,7 +11,8 @@ enum attackTarget {
 	can_target_all_enemies, 
 	can_only_target_himself, 
 	can_only_target_allies, 
-	can_target_all_allies
+	can_target_all_allies,
+	can_target_everybody
 }
 
 @export var attack_effect: attackEffect = attackEffect.neutral
@@ -21,6 +22,8 @@ enum attackEffect {
 	chaos, 
 	electricity
 }
+
+@export var movement_icon : CompressedTexture2D
 
 func execute(_effect, _self_node, _enemy: Node3D) -> void:
 	pass

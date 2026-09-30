@@ -1,6 +1,7 @@
 extends Node3D
 
-@onready var movements_container = $CanvasLayer/Control/BoxContainer/VBoxContainer
+@onready var movements_container = $CanvasLayer/FightInterface/MovementTypeControl/ScrollContainer/VBoxContainer
+@onready var fight_interface = $CanvasLayer/FightInterface
 @onready var movement_card = $CanvasLayer/Node2D/CharacterMovementCard
 
 var camera_tween : Tween
@@ -15,8 +16,8 @@ var turnArray : Array = []
 var selected_enemies : Array = []
 var focussed_entities : Array = []
 
-var can_only_select_himself : bool = false
-var cant_select_anyone : bool = false
+var target_enum 
+var selected_target
 var battle_paused : bool = false
 
 const ENEMY_SCENE = preload("res://Scr/Entities/InFight/entity_in_fight.tscn")
@@ -45,8 +46,7 @@ func clean():
 	clear_entities()
 
 func clear_entities():
-	cant_select_anyone = false
-	can_only_select_himself = false
+	pass
 
 func finish_fight():
 	$AnimationPlayer.play_backwards("ingrese")
@@ -140,6 +140,7 @@ func nextTurns():
 					print_rich("Turno %d: [color=red][b]ENEMIGO (%s)[/b][/color]" % [turnArray.size(), winner["name"]])
 
 func turns():
+	selected_enemies.clear()
 	if !charactersInBattleArray.is_empty():
 		if battle_paused:
 			return
@@ -167,6 +168,8 @@ func turns():
 			return
 		elif next_turn["type"] == "player":
 			next_turn["node"]._activate_turn()
+			fight_interface.appear_animation()
+			$CanvasLayer/FightInterface.origin_character = next_turn["node"]
 			return
 		else:
 			print_rich("[color=yellow]Aviso:[/color] Cola de turnos vacía.")
@@ -253,41 +256,25 @@ func ItemEffect(item_name, character):
 	pass
 
 #region Button instanciate
-func instanciate_return_button(node):
-	var return_button = TYPE_MOVEMENT_SCENE.instantiate()
-	movements_container.add_child(return_button)
-	return_button.sprite.play("default")
-	return_button.effects_animated_sprite_2D.play("default")
-	return_button.button.get_node("Label").text = "Regresar"
-	return_button.button.button_down.connect(_on_return_button_pressed.bind(node))
-
-func instanciate_execute_button(node):
-	var return_button = TYPE_MOVEMENT_SCENE.instantiate()
-	movements_container.add_child(return_button)
-	return_button.sprite.play("default")
-	return_button.effects_animated_sprite_2D.play("default")
-	return_button.button.get_node("Label").text = "Ejecutar"
-	return_button.button.button_down.connect(_on_execute_button_pressed.bind(node))
-
 func prepare_scape_options(node):
-	instanciate_return_button(node)
 	var scape_button = TYPE_MOVEMENT_SCENE.instantiate()
 	movements_container.add_child(scape_button)
-	scape_button.button.get_node("Label").text = "Escapar"
+	scape_button.appear_animation()
+	scape_button.name_label.text = "Escapar"
 	scape_button.button.button_down.connect(_on_scape_button_pressed)
 
 func prepare_attack_options(node):
 	camera_control(node.position, 1.1)
-	instanciate_return_button(node)
 	for attack : Resource in node.FightResourceStats.SpecialActions:
 		var button = TYPE_MOVEMENT_SCENE.instantiate()
 		movements_container.add_child(button)
 		button.movement_resource = attack
 		button.button.button_down.connect(_on_attack_button_pressed.bind(button, node))
+		button.appear_animation()
 
 		if attack.resource_name:
-			button.button.get_node("Label2").text = str(attack.energy_consumtion)
-			button.button.get_node("Label").text = attack.resource_name
+			button.number_label.text = str(int(attack.energy_consumtion))
+			button.name_label.text = attack.resource_name
 
 		match button.movement_resource.attack_target:
 			button.movement_resource.attackTarget.can_only_target_himself:
@@ -296,6 +283,12 @@ func prepare_attack_options(node):
 				button.sprite.play("can_target_all_enemies")
 			button.movement_resource.attackTarget.can_only_target_enemies:
 				button.sprite.play("can_only_target_enemies")
+			button.movement_resource.attackTarget.can_only_target_allies:
+				button.sprite.play("can_only_target_allies")
+			button.movement_resource.attackTarget.can_target_all_allies:
+				button.sprite.play("can_target_all_allies")
+			button.movement_resource.attackTarget.can_target_everybody:
+				button.sprite.play("can_target_everybody")
 
 		match button.movement_resource.attack_effect:
 			button.movement_resource.attackEffect.neutral:
@@ -306,52 +299,146 @@ func prepare_attack_options(node):
 				button.effects_animated_sprite_2D.play("chaos")
 			button.movement_resource.attackEffect.electricity:
 				button.effects_animated_sprite_2D.play("electricity")
-	instanciate_execute_button(node)
+		
+		if button.movement_resource.movement_icon:
+			button.icon.texture = load(button.movement_resource.movement_icon.load_path)
 
 func prepare_item_options(node):
-	instanciate_return_button(node)
+	camera_control(node.position, 1.1)
 	for item : Dictionary in GameDataManager.data["Items"]:
 		var button = TYPE_MOVEMENT_SCENE.instantiate()
 		movements_container.add_child(button)
-		button.button.button_down.connect(_on_item_button_pressed.bind(item.item_name))
-		button.button.size = Vector2(224, 65)
+		button.button.button_down.connect(_on_item_button_pressed.bind(button,node,item))
+		button.number_label.text = str(int(item.quantity)) + "x" 
+		button.appear_animation()
+		#button.number_label.font_color = Color(0.957, 0.541, 0.055, 1.0)
+		if item.has("target"):
+			match item.target:
+				"can_only_target_himself":
+					button.sprite.play("can_only_target_himself")
+				"can_target_all_enemies":
+					button.sprite.play("can_target_all_enemies")
+				"can_only_target_enemies":
+					button.sprite.play("can_only_target_enemies")
+				"can_only_target_allies":
+					button.sprite.play("can_only_target_allies")
+				"can_target_all_allies":
+					button.sprite.play("can_target_all_allies")
+				"can_target_everybody":
+					button.sprite.play("can_target_everybody")
+		else:
+			push_error(name +" | No existe el target")
+
+		if item.has("effect"):
+			match item.effect:
+				"neutral":
+					button.effects_animated_sprite_2D.play("neutral")
+				"fire":
+					button.effects_animated_sprite_2D.play("fire")
+				"chaos":
+					button.effects_animated_sprite_2D.play("chaos")
+				"electricity":
+					button.effects_animated_sprite_2D.play("electricity")
+		else:
+			push_error(name +" | No existe el efecto")
+
+		if item.has("icon"):
+			button.icon.texture = load(item.icon)
+		else:
+			push_error(name +" | No existe el icono")
 
 		if item.item_name:
-			button.button.get_node("Label").text = item.item_name
+			button.name_label.text = item.item_name
 
 func _on_attack_button_pressed(button_node, node):
+	if button_node.button.scale != Vector2(1,1):
+		_on_button_double_pressed_movement(node)
+		return
+
 	await unselect_objetive()
 	await clear_entities()
-
+	
 	match button_node.movement_resource.attack_target:
-		button_node.movement_resource.attackTarget.can_only_target_himself:
+		button_node.movement_resource.attackTarget.can_only_target_himself: 
 			camera_control(node.position, 1.1)
 			select_itself(node)
-			can_only_select_himself = true
 		button_node.movement_resource.attackTarget.can_target_all_enemies:
-			cant_select_anyone= true
 			camera_control($EnemyPosiblePositions/Marker3D4.position, 1.7)
 			select_all_oponnents()
 		button_node.movement_resource.attackTarget.can_only_target_enemies:
 			camera_control($EnemyPosiblePositions/Marker3D4.position, 1.7)
 			select_random_oponents()
+		button_node.movement_resource.attackTarget.can_only_target_allies:
+			pass
+		button_node.movement_resource.attackTarget.can_target_all_allies:
+			pass
+		button_node.movement_resource.attackTarget.can_target_everybody:
+			pass
+	selected_target = button_node.movement_resource.attackTarget
+	target_enum = button_node.movement_resource.attack_target
+	
 
 	for movement_container in movements_container.get_children():
 		if movement_container.button.scale == Vector2(1,1):
 			continue
-		movement_container.tween(Vector2(1, 1))
+		movement_container.tween(Vector2(1, 1), 70, 0)
 	node.selected_attack = button_node.movement_resource
 	button_node.tween(Vector2(1.2, 1.2))
 	node.main_body_part.liveBarNode.show_energy_usage(node.actual_energy_capacity)
 
-func _on_item_button_pressed(item):
-	if !selected_enemies.is_empty():
-		for movement in movements_container.get_children():
-			movement.button.disabled = true
-		for character in selected_enemies:
-			ItemEffect(item, character)
+func _on_item_button_pressed(button_node, node, item):
+	
+	if button_node.button.scale != Vector2(1,1):
+		_on_button_double_pressed_item(node, item.item_name)
+		return
 
-func _on_execute_button_pressed(node):
+	await unselect_objetive()
+	await clear_entities()
+	
+	if item.has("target"):
+		match item.target:
+			"can_only_target_himself":
+				camera_control(node.position, 1.1)
+				select_itself(node)
+			"can_target_all_enemies":
+				camera_control($EnemyPosiblePositions/Marker3D4.position, 1.7)
+				select_all_oponnents()
+			"can_only_target_enemies":
+				camera_control($EnemyPosiblePositions/Marker3D4.position, 1.7)
+				select_random_oponents()
+			"can_only_target_allies":
+				select_random_allies()
+			"can_target_all_allies":
+				select_all_allies()
+			"can_target_everybody":
+				pass
+	else:
+		push_error(name +" | No existe el target")
+	for movement_container in movements_container.get_children():
+		if movement_container.button.scale == Vector2(1,1):
+			continue
+		movement_container.tween(Vector2(1, 1), 70, 0)
+	button_node.tween(Vector2(1.2, 1.2))
+
+
+func _on_button_double_pressed_item(node,item):
+	if item:
+		var active_characters : Array = []
+		
+		camera_control()
+		if !selected_enemies.is_empty():
+			for movement in movements_container.get_children():
+				movement.button.disabled = true
+			for character in selected_enemies:
+				ItemEffect(item, character)
+
+		active_characters.append_array(selected_enemies)
+		movement_card.setup(active_characters, item, node.data["type"])
+		fight_interface.disappear_animation()
+
+		unselect_objetive()
+
+func _on_button_double_pressed_movement(node):
 	if node.selected_attack:
 		var active_characters : Array = []
 		
@@ -369,7 +456,8 @@ func _on_execute_button_pressed(node):
 			active_characters.append(node.main_body_part)
 
 		active_characters.append_array(selected_enemies)
-		movement_card.setup(active_characters, node.selected_attack.resource_name, node.data["type"] )
+		movement_card.setup(active_characters, node.selected_attack.resource_name, node.data["type"])
+		fight_interface.disappear_animation()
 
 		unselect_objetive()
 	
@@ -377,14 +465,6 @@ func _on_execute_button_pressed(node):
 
 func _on_scape_button_pressed():
 	finish_fight()
-
-func _on_return_button_pressed(node):
-	node.main_body_part.liveBarNode.progress_bar_alterate(node.actual_energy_capacity, node.main_body_part.liveBarNode.energy_process_bar)
-	camera_control()
-	unselect_objetive()
-	node._instanciate_interface()
-	for movement in movements_container.get_children():
-		movement.queue_free()
 #endregion
 
 #region Enemy selection
@@ -422,6 +502,21 @@ func select_random_oponents():
 					entity["BodyPart"].get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
 					break
 
+func select_random_allies():
+	var random_part : = get_tree().get_first_node_in_group("AllyBodyPart")
+	if !random_part.get_node("AnimatedSprite3D").is_in_group("SELECTARROW"):
+		selected_enemies.append(random_part)
+		random_part.get_node("AnimatedSprite3D").add_to_group("SELECTARROW")
+		random_part.get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
+
+func select_all_allies():
+	var all_body_parts : Array = get_tree().get_nodes_in_group("AllyBodyPart")
+	for i : Node3D in all_body_parts:
+		selected_enemies.append(i)
+		i.get_node("AnimatedSprite3D").add_to_group("SELECTARROW")
+		i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
+		i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("outline_color", Color("ffff00"))
+
 func select_itself(node):
 	for i : Node3D in node.body_parts:
 		selected_enemies.append(i)
@@ -432,11 +527,10 @@ func select_itself(node):
 func select_all_oponnents():
 	var all_body_parts : Array = get_tree().get_nodes_in_group("EnemyBodyPart")
 	for i : Node3D in all_body_parts:
-		if i.parent_enemy.data["type"] == "enemy":
-			selected_enemies.append(i)
-			i.get_node("AnimatedSprite3D").add_to_group("SELECTARROW")
-			i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
-			i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("outline_color", Color("ffff00"))
+		selected_enemies.append(i)
+		i.get_node("AnimatedSprite3D").add_to_group("SELECTARROW")
+		i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("enable_outline", true)
+		i.get_node("AnimatedSprite3D").material_override.set_shader_parameter("outline_color", Color("ffff00"))
 #endregion
 
 func camera_control(new_position : Vector3 = Vector3.ZERO, new_size : float = 2, duration: float = 0.35):
@@ -447,6 +541,6 @@ func camera_control(new_position : Vector3 = Vector3.ZERO, new_size : float = 2,
 	camera_tween.set_trans(Tween.TRANS_CUBIC)
 	camera_tween.set_ease(Tween.EASE_OUT)    
 	
-	camera_tween.tween_property(GameDataManager.MAIN.camera, "position:y", new_position.y, duration)
-	camera_tween.tween_property(GameDataManager.MAIN.camera, "position:x", new_position.x, duration)
+	camera_tween.tween_property(GameDataManager.MAIN.camera, "position:y", new_position.y + 0.1, duration)
+	camera_tween.tween_property(GameDataManager.MAIN.camera, "position:x", new_position.x - 0.35, duration)
 	camera_tween.tween_property(GameDataManager.MAIN.camera, "size", new_size, duration)

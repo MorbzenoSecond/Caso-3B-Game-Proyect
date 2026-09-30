@@ -1,11 +1,11 @@
 { 
 	"ambiental_music":{
-		"Song_path" : "res://assets/music/ambiental-music.wav"
+		"Song_path" : "res://Assets/Sounds/Music/ambiental-music.wav"
 	},
 	"fight_theme":{
-		"Song_path" : "res://assets/music/fight_theme.wav"
+		"Song_path" : "res://Assets/Sounds/Music/fight_theme.wav"
 	},
 	"end_fight":{
-		"Song_path" : "res://assets/music/end_Battle.wav"
+		"Song_path" : "res://Assets/Sounds/Music/end_Battle.wav"
 	}
 }

@@ -83,20 +83,39 @@ func above_body_part_quit():
 	if !check_if_can_foccuse():
 		return
 	animated_sprite_3D.material_override.set_shader_parameter("enable_outline", false)
-# arreglar a futuro
+
 func check_if_can_foccuse() -> bool:
-	if parent_enemy.FIGHT_SCENE_PATH.can_only_select_himself or parent_enemy.FIGHT_SCENE_PATH.cant_select_anyone:
+	if parent_enemy.FIGHT_SCENE_PATH.selected_target != null:
+		match parent_enemy.FIGHT_SCENE_PATH.target_enum:
+			parent_enemy.FIGHT_SCENE_PATH.selected_target.can_only_target_himself: 
+				return false
+			parent_enemy.FIGHT_SCENE_PATH.selected_target.can_target_all_enemies:
+				return false
+			parent_enemy.FIGHT_SCENE_PATH.selected_target.can_only_target_enemies:
+				if parent_enemy.data["type"] == "enemy":
+					if !parent_enemy.FIGHT_SCENE_PATH.focussed_entities.is_empty() :
+						for entity in parent_enemy.FIGHT_SCENE_PATH.focussed_entities:
+							if entity["origin_entity"].data["type"] == "enemy":
+								if entity["origin_entity"] == parent_enemy:
+									return true
+								return false
+					return true
+				return false
+			parent_enemy.FIGHT_SCENE_PATH.selected_target.can_only_target_allies:
+				if parent_enemy.data["type"] == "player":
+					if !parent_enemy.FIGHT_SCENE_PATH.focussed_entities.is_empty() :
+						for entity in parent_enemy.FIGHT_SCENE_PATH.focussed_entities:
+							if entity["origin_entity"].data["type"] == "player":
+								if entity["origin_entity"] == parent_enemy:
+									return true
+								return false
+					return true
+				return false
+			parent_enemy.FIGHT_SCENE_PATH.selected_target.can_target_all_allies:
+				return false
+			parent_enemy.FIGHT_SCENE_PATH.selected_target.can_target_everybody:
+				return false
 		return false
-	if parent_enemy.data["type"] == "enemy":
-		if !parent_enemy.FIGHT_SCENE_PATH.focussed_entities.is_empty() :
-			for entity in parent_enemy.FIGHT_SCENE_PATH.focussed_entities:
-				if entity["origin_entity"].data["type"] == "enemy":
-					if entity["origin_entity"] == parent_enemy:
-						return true
-					return false
-		return true
-	elif parent_enemy.data["type"] == "player":
-		return true
 	return false
 #endregion
 
@@ -127,8 +146,7 @@ func get_damage(damage_type, damage_multiplier : float = 1.0, damage : float = 1
 func use_item(effect):
 	local_life += effect
 
-	var message = str(local_life) + " + " + str(effect) + " = " + str(local_life + effect)
-	point_score("cure",message)
+	point_score("cure" ,str(effect))
 	liveBarNode.update_life_bar(local_life, base_local_life)
 	parent_enemy.FIGHT_SCENE_PATH.turns()
 
@@ -207,3 +225,5 @@ func point_score(damage_type, message : String):
 			scene.setup(message,Color(1.0, 0.115, 0.421, 1.0))
 		"electricity":
 			scene.setup(message,Color(0.769, 1.0, 0.871, 1.0))
+		"cure":
+			scene.setup(message,Color(0.071, 1.0, 0.435, 1.0))

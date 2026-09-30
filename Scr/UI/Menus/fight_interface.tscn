@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://dqaunpqmj8bdx"]
+
+[ext_resource type="Script" uid="uid://c701pvoy5rta5" path="res://Scr/UI/Menus/fight_interface.gd" id="1_p3ft0"]
+[ext_resource type="Texture2D" uid="uid://blyhjvyldkt51" path="res://Assets/Art/2DSprites/Icons/MovementButton.png" id="2_jalyv"]
+[ext_resource type="Texture2D" uid="uid://bc48g3al0uhgm" path="res://Assets/Art/2DSprites/Icons/ObjectsButton.png" id="4_lpacg"]
+[ext_resource type="Texture2D" uid="uid://dyvsc3akhfh2m" path="res://Assets/Art/2DSprites/Icons/ScapeButton.png" id="6_4vqmu"]
+[ext_resource type="Texture2D" uid="uid://d2413u17xvhip" path="res://Assets/Art/2DSprites/Icons/SpecialMovementButton.png" id="6_igu7g"]
+
+[node name="FightInterface" type="Control" unique_id=1762687643]
+layout_mode = 3
+anchor_right = 0.497
+anchor_bottom = 0.50200003
+offset_right = 0.45599365
+offset_bottom = -0.2960205
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p3ft0")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1754724638]
+layout_mode = 0
+offset_right = 573.0
+offset_bottom = 326.0
+color = Color(0.5764706, 0.5764706, 0.5764706, 0.69411767)
+
+[node name="Line2D" type="Line2D" parent="." unique_id=67824826]
+position = Vector2(0, 3)
+points = PackedVector2Array(0, 66, 573, 66)
+default_color = Color(0, 0, 0, 1)
+
+[node name="MenuControl" type="Control" parent="." unique_id=1908242566]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MovementButton" type="TextureButton" parent="MenuControl" unique_id=820322331]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 24.0
+offset_right = 88.0
+offset_bottom = 40.0
+scale = Vector2(4, 4)
+pivot_offset = Vector2(16, 8)
+texture_normal = ExtResource("2_jalyv")
+
+[node name="ObjectsButton" type="TextureButton" parent="MenuControl" unique_id=191090776]
+layout_mode = 0
+offset_left = 196.0
+offset_top = 24.0
+offset_right = 228.0
+offset_bottom = 40.0
+scale = Vector2(4, 4)
+pivot_offset = Vector2(16, 8)
+texture_normal = ExtResource("4_lpacg")
+
+[node name="SpecialMovementButton" type="TextureButton" parent="MenuControl" unique_id=272791096]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 24.0
+offset_right = 368.0
+offset_bottom = 40.0
+scale = Vector2(4, 4)
+pivot_offset = Vector2(16, 8)
+texture_normal = ExtResource("6_igu7g")
+
+[node name="ScapeButton" type="TextureButton" parent="MenuControl" unique_id=1567571947]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 24.0
+offset_right = 528.0
+offset_bottom = 40.0
+scale = Vector2(4, 4)
+pivot_offset = Vector2(7.9375, 8.0625)
+texture_normal = ExtResource("6_4vqmu")
+
+[node name="MovementTypeControl" type="Control" parent="." unique_id=555783579]
+anchors_preset = 0
+offset_top = 74.0
+offset_right = 573.0
+offset_bottom = 325.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MovementTypeControl" unique_id=312829059]
+layout_mode = 0
+offset_right = 571.0
+offset_bottom = 255.0
+follow_focus = true
+draw_focus_border = true
+horizontal_scroll_mode = 0
+scroll_hint_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MovementTypeControl/ScrollContainer" unique_id=1818920294]
+custom_minimum_size = Vector2(550, 229)
+propagate_maximum_size = false
+clip_contents = true
+layout_mode = 2
+offset_transform_position = Vector2(0, 10)
+accessibility_region = true
+
+[connection signal="button_down" from="MenuControl/MovementButton" to="." method="_on_movement_button_button_down"]
+[connection signal="button_down" from="MenuControl/ObjectsButton" to="." method="_on_objects_button_button_down"]
+[connection signal="pressed" from="MenuControl/ObjectsButton" to="." method="_on_objects_button_pressed"]
+[connection signal="button_down" from="MenuControl/SpecialMovementButton" to="." method="_on_special_movement_button_button_down"]
+[connection signal="button_down" from="MenuControl/ScapeButton" to="." method="_on_scape_button_button_down"]
+[connection signal="pressed" from="MenuControl/ScapeButton" to="." method="_on_scape_button_pressed"]
