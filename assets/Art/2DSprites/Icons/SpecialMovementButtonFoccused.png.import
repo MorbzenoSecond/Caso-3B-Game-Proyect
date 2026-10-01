@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cvec4bjp47q7g"
-path="res://.godot/imported/SpecialMovementButtonFoccused.png-2d0131267a1ad2421912f513882eb607.ctex"
+path="res://.godot/imported/SpecialMovementButtonFoccused.png-373ab0d987a7413e7289e51cc133c8b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/2DSprites/Icons/SpecialMovementButtonFoccused.png"
-dest_files=["res://.godot/imported/SpecialMovementButtonFoccused.png-2d0131267a1ad2421912f513882eb607.ctex"]
+source_file="res://assets/Art/2DSprites/Icons/SpecialMovementButtonFoccused.png"
+dest_files=["res://.godot/imported/SpecialMovementButtonFoccused.png-373ab0d987a7413e7289e51cc133c8b7.ctex"]
 
 [params]
 

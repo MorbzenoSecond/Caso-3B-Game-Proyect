@@ -8,6 +8,8 @@ func run(body: CharacterBody3D, markers: Array, dialogues: Array[DialogueResourc
 		DialogueManager.show_example_dialogue_balloon(dialogues[0], "start", [body])
 		await DialogueManager.dialogue_ended
 
+	print(markers.is_empty())
+	
 	if not markers.is_empty():
 		body.target_pos = markers[0]
 		await body.nav_agent.navigation_finished

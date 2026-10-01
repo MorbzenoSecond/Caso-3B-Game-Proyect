@@ -4,14 +4,14 @@ importer="wavefront_obj"
 importer_version=1
 type="Mesh"
 uid="uid://dkib1r2yp2jl7"
-path="res://.godot/imported/savepoint.obj-46aa1fe0b72fbd69bffd97a32e6e43b2.mesh"
+path="res://.godot/imported/savepoint.obj-fabc18447f065f2e7c4c044cdb0f1a1c.mesh"
 
 [deps]
 
-files=["res://.godot/imported/savepoint.obj-46aa1fe0b72fbd69bffd97a32e6e43b2.mesh"]
+files=["res://.godot/imported/savepoint.obj-fabc18447f065f2e7c4c044cdb0f1a1c.mesh"]
 
-source_file="res://Assets/Art/3DModels/savepoint.obj"
-dest_files=["res://.godot/imported/savepoint.obj-46aa1fe0b72fbd69bffd97a32e6e43b2.mesh", "res://.godot/imported/savepoint.obj-46aa1fe0b72fbd69bffd97a32e6e43b2.mesh"]
+source_file="res://assets/Art/3DModels/savepoint.obj"
+dest_files=["res://.godot/imported/savepoint.obj-fabc18447f065f2e7c4c044cdb0f1a1c.mesh", "res://.godot/imported/savepoint.obj-fabc18447f065f2e7c4c044cdb0f1a1c.mesh"]
 
 [params]
 

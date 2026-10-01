@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dwmbwyph7flir"
-path="res://.godot/imported/savepoint_extra.png-e5735bdad820f3484dc61777820c091a.ctex"
+path="res://.godot/imported/savepoint_extra.png-578d67776f288e328d7fb284611f4ba8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/3DModels/savepoint_extra.png"
-dest_files=["res://.godot/imported/savepoint_extra.png-e5735bdad820f3484dc61777820c091a.ctex"]
+source_file="res://assets/Art/3DModels/savepoint_extra.png"
+dest_files=["res://.godot/imported/savepoint_extra.png-578d67776f288e328d7fb284611f4ba8.ctex"]
 
 [params]
 

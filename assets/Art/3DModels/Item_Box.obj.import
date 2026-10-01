@@ -4,14 +4,14 @@ importer="wavefront_obj"
 importer_version=1
 type="Mesh"
 uid="uid://c1vt50dxny81a"
-path="res://.godot/imported/Item_Box.obj-092633c8564ca5779ca0978d4d570180.mesh"
+path="res://.godot/imported/Item_Box.obj-fc6f611a34491ca5eb2e6890a2a7a81e.mesh"
 
 [deps]
 
-files=["res://.godot/imported/Item_Box.obj-092633c8564ca5779ca0978d4d570180.mesh"]
+files=["res://.godot/imported/Item_Box.obj-fc6f611a34491ca5eb2e6890a2a7a81e.mesh"]
 
-source_file="res://Assets/Art/3DModels/Item_Box.obj"
-dest_files=["res://.godot/imported/Item_Box.obj-092633c8564ca5779ca0978d4d570180.mesh", "res://.godot/imported/Item_Box.obj-092633c8564ca5779ca0978d4d570180.mesh"]
+source_file="res://assets/Art/3DModels/Item_Box.obj"
+dest_files=["res://.godot/imported/Item_Box.obj-fc6f611a34491ca5eb2e6890a2a7a81e.mesh", "res://.godot/imported/Item_Box.obj-fc6f611a34491ca5eb2e6890a2a7a81e.mesh"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b7wxxfwwvqrq6"
-path.s3tc="res://.godot/imported/Item_Box.png-3bba658dcbe581f538dc97fff63c2e0f.s3tc.ctex"
+path.s3tc="res://.godot/imported/Item_Box.png-f3c73e84c5873b6c1559e92c52a34320.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Art/3DModels/Item_Box.png"
-dest_files=["res://.godot/imported/Item_Box.png-3bba658dcbe581f538dc97fff63c2e0f.s3tc.ctex"]
+source_file="res://assets/Art/3DModels/Item_Box.png"
+dest_files=["res://.godot/imported/Item_Box.png-f3c73e84c5873b6c1559e92c52a34320.s3tc.ctex"]
 
 [params]
 

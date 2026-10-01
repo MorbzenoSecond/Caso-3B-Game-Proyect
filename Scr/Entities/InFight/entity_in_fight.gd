@@ -51,13 +51,13 @@ func setup(character_data : Dictionary):
 
 		var render_priority_index : int = 0
 		var position_index : float = 0.00
+
 		if !FightResourceStats.BodyParts.is_empty():
 			for body_part in FightResourceStats.BodyParts:
 				var scene : Node3D = BODY_PART_SCENE.instantiate()
 				$BodyParts.add_child(scene)
 				scene.name = body_part.character.resource_name
 				scene.get_node("AnimatedSprite3D").set_collision_size()
-				
 
 				if body_part.main_body_part:
 					main_body_part = scene

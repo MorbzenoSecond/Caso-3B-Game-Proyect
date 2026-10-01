@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bp3jdff8ijpi"
-path="res://.godot/imported/cangrejo.png-fcbb48b9f4d2ec929a4e86a3e12fe4c2.ctex"
+path="res://.godot/imported/cangrejo.png-fac6eed47dacfebda2e30c01aac2f15b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/2DSprites/cangrejo.png"
-dest_files=["res://.godot/imported/cangrejo.png-fcbb48b9f4d2ec929a4e86a3e12fe4c2.ctex"]
+source_file="res://assets/Art/2DSprites/cangrejo.png"
+dest_files=["res://.godot/imported/cangrejo.png-fac6eed47dacfebda2e30c01aac2f15b.ctex"]
 
 [params]
 

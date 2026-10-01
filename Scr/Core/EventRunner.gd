@@ -13,6 +13,6 @@ func execute_event(event_script: Script, body: CharacterBody3D, markers: Array, 
 	
 	var logic_instance: EventLogic = event_script.new()
 	
-	logic_instance.run(body, markers, dialogues)
+	await logic_instance.run(body, markers, dialogues)
 	
 	event_finished.emit()

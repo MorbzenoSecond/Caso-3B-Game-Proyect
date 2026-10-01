@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bx3d7yrmj5udn"
-path="res://.godot/imported/Captura de pantalla 2026-07-21 211148.png-434e1983e0a4b8b46ed4e468a37b90de.ctex"
+path="res://.godot/imported/Captura de pantalla 2026-07-21 211148.png-6713c9d838fc62666087e204a8fe72bb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/2DSprites/Captura de pantalla 2026-07-21 211148.png"
-dest_files=["res://.godot/imported/Captura de pantalla 2026-07-21 211148.png-434e1983e0a4b8b46ed4e468a37b90de.ctex"]
+source_file="res://assets/Art/2DSprites/Captura de pantalla 2026-07-21 211148.png"
+dest_files=["res://.godot/imported/Captura de pantalla 2026-07-21 211148.png-6713c9d838fc62666087e204a8fe72bb.ctex"]
 
 [params]
 

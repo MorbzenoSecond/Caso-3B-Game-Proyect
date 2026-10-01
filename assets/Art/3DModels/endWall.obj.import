@@ -4,14 +4,14 @@ importer="wavefront_obj"
 importer_version=1
 type="Mesh"
 uid="uid://c7bb6ooblxv01"
-path="res://.godot/imported/endWall.obj-432152a2b9208e50b984dcbef65a3708.mesh"
+path="res://.godot/imported/endWall.obj-8120ef17ed07812b90b9ebe059434a5b.mesh"
 
 [deps]
 
-files=["res://.godot/imported/endWall.obj-432152a2b9208e50b984dcbef65a3708.mesh"]
+files=["res://.godot/imported/endWall.obj-8120ef17ed07812b90b9ebe059434a5b.mesh"]
 
-source_file="res://Assets/Art/3DModels/endWall.obj"
-dest_files=["res://.godot/imported/endWall.obj-432152a2b9208e50b984dcbef65a3708.mesh", "res://.godot/imported/endWall.obj-432152a2b9208e50b984dcbef65a3708.mesh"]
+source_file="res://assets/Art/3DModels/endWall.obj"
+dest_files=["res://.godot/imported/endWall.obj-8120ef17ed07812b90b9ebe059434a5b.mesh", "res://.godot/imported/endWall.obj-8120ef17ed07812b90b9ebe059434a5b.mesh"]
 
 [params]
 

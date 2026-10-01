@@ -253,7 +253,7 @@ func ItemEffect(item_name, character):
 			pass 
 		"item_two":
 			character.use_item(3)
-	pass
+	turn()
 
 #region Button instanciate
 func prepare_scape_options(node):

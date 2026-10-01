@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dyvsc3akhfh2m"
-path="res://.godot/imported/ScapeButton.png-677f0d75e490bc00e0619f8e1c1e6bcd.ctex"
+path="res://.godot/imported/ScapeButton.png-c7b57c19f8350323c4f7bac74543ed1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/2DSprites/Icons/ScapeButton.png"
-dest_files=["res://.godot/imported/ScapeButton.png-677f0d75e490bc00e0619f8e1c1e6bcd.ctex"]
+source_file="res://assets/Art/2DSprites/Icons/ScapeButton.png"
+dest_files=["res://.godot/imported/ScapeButton.png-c7b57c19f8350323c4f7bac74543ed1c.ctex"]
 
 [params]
 
