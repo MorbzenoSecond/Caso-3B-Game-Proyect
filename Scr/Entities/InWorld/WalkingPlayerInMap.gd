@@ -7,6 +7,8 @@ var ACCELERATION :float= 3
 
 func _ready() -> void:
 	super.set_sprite_frames()
+	await get_tree().process_frame
+	super.create_map()
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)

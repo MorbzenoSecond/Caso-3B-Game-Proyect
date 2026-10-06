@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://c701pvoy5rta5" path="res://Scr/UI/Menus/fight_interface.gd" id="1_p3ft0"]
 [ext_resource type="Texture2D" uid="uid://blyhjvyldkt51" path="res://Assets/Art/2DSprites/Icons/MovementButton.png" id="2_jalyv"]
-[ext_resource type="Texture2D" uid="uid://bc48g3al0uhgm" path="res://Assets/Art/2DSprites/Icons/ObjectsButton.png" id="4_lpacg"]
+[ext_resource type="Texture2D" uid="uid://b50f450e4d1t0" path="res://Assets/Art/2DSprites/Icons/ObjectsButton.png" id="4_lpacg"]
 [ext_resource type="Texture2D" uid="uid://dyvsc3akhfh2m" path="res://Assets/Art/2DSprites/Icons/ScapeButton.png" id="6_4vqmu"]
 [ext_resource type="Texture2D" uid="uid://d2413u17xvhip" path="res://Assets/Art/2DSprites/Icons/SpecialMovementButton.png" id="6_igu7g"]
+[ext_resource type="PackedScene" uid="uid://djkvge2ugd6vm" path="res://Scr/UI/Components/type_attack_button.tscn" id="6_y04qv"]
 
 [node name="FightInterface" type="Control" unique_id=1762687643]
 layout_mode = 3
@@ -82,10 +83,11 @@ offset_bottom = 325.0
 layout_mode = 0
 offset_right = 571.0
 offset_bottom = 255.0
+theme_override_colors/scroll_hint_vertical_color = Color(1, 0, 0, 1)
+theme_override_constants/scrollbar_v_separation = 1
 follow_focus = true
 draw_focus_border = true
-horizontal_scroll_mode = 0
-scroll_hint_mode = 3
+scroll_hint_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MovementTypeControl/ScrollContainer" unique_id=1818920294]
 custom_minimum_size = Vector2(550, 229)
@@ -94,6 +96,18 @@ clip_contents = true
 layout_mode = 2
 offset_transform_position = Vector2(0, 10)
 accessibility_region = true
+
+[node name="Control" parent="MovementTypeControl/ScrollContainer/VBoxContainer" unique_id=1891142755 instance=ExtResource("6_y04qv")]
+layout_mode = 2
+
+[node name="Control2" parent="MovementTypeControl/ScrollContainer/VBoxContainer" unique_id=1867283004 instance=ExtResource("6_y04qv")]
+layout_mode = 2
+
+[node name="Control3" parent="MovementTypeControl/ScrollContainer/VBoxContainer" unique_id=1623885195 instance=ExtResource("6_y04qv")]
+layout_mode = 2
+
+[node name="Control4" parent="MovementTypeControl/ScrollContainer/VBoxContainer" unique_id=687451918 instance=ExtResource("6_y04qv")]
+layout_mode = 2
 
 [connection signal="button_down" from="MenuControl/MovementButton" to="." method="_on_movement_button_button_down"]
 [connection signal="button_down" from="MenuControl/ObjectsButton" to="." method="_on_objects_button_button_down"]

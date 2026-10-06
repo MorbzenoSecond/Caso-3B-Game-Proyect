@@ -1,6 +1,6 @@
 extends Control
 
-var movement_resource : FightMovements = load("res://Resources/FightResources/CharacterResources/MasterFightResource.tres::Resource_ci18a")
+var movement_resource : FightMovements 
 
 @onready var button = $TypeAttackButton
 @onready var sprite = $TypeAttackButton/targets

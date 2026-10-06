@@ -4,6 +4,7 @@ extends WalkingNPCInMap
 
 func _ready() -> void:
 	super.set_sprite_frames()
+	super.create_map()
 
 
 func _physics_process(delta : float):

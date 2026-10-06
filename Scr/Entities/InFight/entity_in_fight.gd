@@ -81,7 +81,7 @@ func level_stats_scalling():
 	true_speed = FightResourceStats.base_speed + data["level"]
 #endregion
 
-func basic_attack(target_node: Array):
+func basic_attack(target_nodes: Array):
 	var effect: String = ""
 	match selected_attack.attack_effect:
 		selected_attack.attackEffect.neutral:
@@ -97,7 +97,7 @@ func basic_attack(target_node: Array):
 	var i
 	if selected_attack:
 		i = selected_attack
-		i.executed(effect, self, target_node)
+		i.executed(effect, self, target_nodes)
 		return
 
 func activate(status):
@@ -129,10 +129,17 @@ func opponent_attack_logic():
 			if FIGHT_SCENE_PATH.focussed_entities.is_empty():
 				selected_characters.append(posible_characters.pick_random())
 			else:
+				var player_in_foccused : bool = false
 				for entity in FIGHT_SCENE_PATH.focussed_entities:
+
 					if entity["BodyPart"].parent_enemy.data["type"] == "player":
 						selected_characters.append(entity["BodyPart"])
+						player_in_foccused = true
 						break
+
+					if !player_in_foccused:
+						selected_characters.append(posible_characters.pick_random())
+	#print(posible_characters)
 	basic_attack(selected_characters)
 	var active_characters : Array = []
 	for selected_character in selected_characters:

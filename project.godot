@@ -107,6 +107,7 @@ AFTERIMAGES=""
 EnemyBodyPart=""
 DIALOGUEBALLON=""
 AlliBodyPart=""
+MAPMUSTSELECT=""
 
 [input]
 

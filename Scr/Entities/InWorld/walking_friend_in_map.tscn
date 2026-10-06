@@ -142,28 +142,28 @@ _data = {
 &"big_collision": SubResource("Animation_p7w77")
 }
 
-[node name="WalkingFriendInMap" type="CharacterBody3D"]
+[node name="WalkingFriendInMap" type="CharacterBody3D" unique_id=319677771]
 transform = Transform3D(1, 0, 0, 0, 0.953717, 0.300706, 0, -0.300706, 0.953717, 0, 0, 0)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_ujrc8")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=903929237]
 transform = Transform3D(1, 0, 0, 0, 0.999999, -6.25849e-07, 0, 6.25849e-07, 0.999999, 0, 0.002, 5.82077e-11)
 shape = SubResource("CapsuleShape3D_ujrc8")
 debug_color = Color(0.94344, 0.21855, 0.251713, 0.42)
 
-[node name="RotableObjects" type="Node3D" parent="."]
+[node name="RotableObjects" type="Node3D" parent="." unique_id=1491694451]
 transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0)
 
-[node name="Marker3D" type="Marker3D" parent="RotableObjects"]
+[node name="Marker3D" type="Marker3D" parent="RotableObjects" unique_id=19761653]
 transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, -1.86265e-09, 0.058093)
 
-[node name="Sprite3D" type="Sprite3D" parent="RotableObjects/Marker3D"]
+[node name="Sprite3D" type="Sprite3D" parent="RotableObjects/Marker3D" unique_id=379047243]
 material_override = SubResource("ShaderMaterial_k4gvh")
 texture = SubResource("GradientTexture2D_pe3k2")
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="RotableObjects"]
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="RotableObjects" unique_id=1353339633]
 transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0.087, -3.72529e-09)
 alpha_cut = 2
 texture_filter = 0
@@ -172,20 +172,16 @@ animation = &"Punched"
 script = ExtResource("3_wlcig")
 time = 0.5
 
-[node name="Areas" type="Node3D" parent="RotableObjects"]
+[node name="Areas" type="Node3D" parent="RotableObjects" unique_id=1995312200]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_twn6s")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1755111091]
+libraries/ = SubResource("AnimationLibrary_twn6s")
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Label3D" type="Label3D" parent="." unique_id=858178433]
 transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0.232674, 7.45058e-09)
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1000609756]
 transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, 0, 1, 0, 0, 0)
 stream = ExtResource("4_5aqfh")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-avoidance_enabled = true
-debug_enabled = true
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1954440887]

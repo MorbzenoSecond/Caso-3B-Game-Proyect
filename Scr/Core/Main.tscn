@@ -9,6 +9,8 @@
 [ext_resource type="Resource" uid="uid://dc8ychgbrs3im" path="res://Resources/EnemiesInMap/PlayerResource.tres" id="5_yfnky"]
 [ext_resource type="Script" uid="uid://dnvgkm2u33mbv" path="res://Scr/Core/EventRunner.gd" id="8_dmanu"]
 [ext_resource type="Shader" uid="uid://06d4oyvcvoxu" path="res://Resources/ShaderResources/post.gdshader" id="8_qvhdm"]
+[ext_resource type="Texture2D" uid="uid://cwxru8cmum51r" path="res://Assets/Art/2DSprites/godot lol.png" id="10_rkan4"]
+[ext_resource type="PackedScene" uid="uid://drm20f5d6s4fm" path="res://Scr/UI/Menus/mini_map_control.tscn" id="11_qcksj"]
 
 [sub_resource type="Animation" id="Animation_lquwl"]
 length = 0.001
@@ -112,6 +114,7 @@ directional_shadow_max_distance = 5.0
 [node name="MainCharacterWorld" parent="GameParty" unique_id=413355732 groups=["PLAYER"] instance=ExtResource("2_5jks7")]
 process_mode = 1
 stats = ExtResource("5_yfnky")
+icon = ExtResource("10_rkan4")
 
 [node name="pivote" type="Node3D" parent="GameParty/MainCharacterWorld" unique_id=1654025448]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43496943, 0.77366745)
@@ -136,3 +139,5 @@ skeleton = NodePath("../../../../..")
 
 [node name="EventScript" type="Node3D" parent="." unique_id=2049374417]
 script = ExtResource("8_dmanu")
+
+[node name="MiniMapControl" parent="." unique_id=2082375147 instance=ExtResource("11_qcksj")]

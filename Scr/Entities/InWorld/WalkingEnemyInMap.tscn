@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bk644qld6vvsi" path="res://Scr/Entities/InWorld/WalkingEnemyInMap.gd" id="1_2k8jx"]
 [ext_resource type="SpriteFrames" uid="uid://bqdfn5sk2byo7" path="res://Resources/SpriteFramesResources/MoshPunch.tres" id="3_2k8jx"]
 [ext_resource type="Shape3D" uid="uid://d1fhpek8h66yd" path="res://Resources/CollisionShapeSizes/ForWalkingCharacterInMapCollisions/ForBodyCollisions/48x48.tres" id="3_cjdqv"]
+[ext_resource type="Texture2D" uid="uid://ckqkbgt1wara7" path="res://Assets/Art/2DSprites/Icons/Skull.png" id="3_hc5xv"]
 [ext_resource type="Resource" uid="uid://7nhjknp2ayb7" path="res://Resources/EnemiesInMap/MoshPunchResource.tres" id="3_ubb1b"]
 [ext_resource type="Script" uid="uid://xiscktksb6o4" path="res://Scr/SpecialEffects/AnimatedSprites.gd" id="4_kmquc"]
 [ext_resource type="AudioStream" uid="uid://bl1i8posrhbmp" path="res://Assets/Sounds/Effects/tindeck_1.mp3" id="5_3ac0h"]
@@ -161,6 +162,7 @@ collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_2k8jx")
 stats = ExtResource("3_ubb1b")
+icon = ExtResource("3_hc5xv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=660685708]
 transform = Transform3D(1, 0, 0, 0, 0.999999, -6.25849e-07, 0, 6.25849e-07, 0.999999, 0, 0, 0)
@@ -168,7 +170,7 @@ shape = ExtResource("3_cjdqv")
 debug_color = Color(0.94344, 0.21855, 0.251713, 0.42)
 
 [node name="RotableObjects" type="Node3D" parent="." unique_id=1237569018]
-transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.95371693, -0.3007058, 0, 0.3007058, 0.95371693, 0, 0, 0)
 
 [node name="Marker3D" type="Marker3D" parent="RotableObjects" unique_id=356501024]
 transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, -1.86265e-09, 0.058093)
@@ -218,6 +220,10 @@ visible = false
 shape = SubResource("SphereShape3D_lu5c6")
 debug_color = Color(0.113725, 0.517647, 0, 1)
 
+[node name="RayCast3D" type="RayCast3D" parent="RotableObjects" unique_id=1227919913]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+target_position = Vector3(0, 0, 0.1)
+
 [node name="StateMachine" type="Node" parent="." unique_id=124736546 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_v1cm4")
 initial_state = NodePath("Normal")
@@ -255,10 +261,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, 0, 1, 0, 0, 0)
 stream = ExtResource("5_3ac0h")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=2031037498]
-path_desired_distance = 0.1
-target_desired_distance = 0.1
-path_height_offset = 0.2
-avoidance_enabled = true
+debug_enabled = true
 
 [connection signal="body_entered" from="RotableObjects/Areas/CharacterArea3D" to="." method="_on_character_area_3d_body_entered"]
 [connection signal="body_exited" from="RotableObjects/Areas/CharacterArea3D" to="." method="_on_character_area_3d_body_exited"]

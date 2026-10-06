@@ -253,7 +253,6 @@ func ItemEffect(item_name, character):
 			pass 
 		"item_two":
 			character.use_item(3)
-	turn()
 
 #region Button instanciate
 func prepare_scape_options(node):
@@ -345,7 +344,7 @@ func prepare_item_options(node):
 		if item.has("icon"):
 			button.icon.texture = load(item.icon)
 		else:
-			push_error(name +" | No existe el icono")
+			push_warning(name +" | No existe el icono")
 
 		if item.item_name:
 			button.name_label.text = item.item_name
@@ -431,6 +430,7 @@ func _on_button_double_pressed_item(node,item):
 				movement.button.disabled = true
 			for character in selected_enemies:
 				ItemEffect(item, character)
+			turns()
 
 		active_characters.append_array(selected_enemies)
 		movement_card.setup(active_characters, item, node.data["type"])
@@ -460,7 +460,7 @@ func _on_button_double_pressed_movement(node):
 		fight_interface.disappear_animation()
 
 		unselect_objetive()
-	
+
 		node.main_body_part.liveBarNode.progress_bar_alterate(node.actual_energy_capacity - node.selected_attack.energy_consumtion, node.main_body_part.liveBarNode.energy_texture_process_bar)
 
 func _on_scape_button_pressed():

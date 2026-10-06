@@ -4,6 +4,7 @@ extends FightMovements
 func executed(effect, self_node : Node3D, target_node: Array):
 	var tween : Tween = self_node.create_tween()
 	
+
 	tween.tween_property(self_node, "global_position:x", target_node[0].get_marker_position("hit_position_3").x, 1.5)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_OUT)

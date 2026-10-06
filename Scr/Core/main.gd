@@ -10,6 +10,7 @@ const PARTY_MEMBER = preload("res://Scr/Entities/InWorld/walking_friend_in_map.t
 @onready var WorldEnvironmentNode = $WorldEnvironment
 @onready var fight_node = $NodoDePelea
 @onready var event_runner = $EventScript
+@onready var mini_map = $MiniMapControl
 
 var characters : Dictionary = {
 	"players": [],
@@ -18,7 +19,12 @@ var characters : Dictionary = {
 
 var scenary_path = "res://scenes/maps/Scenaries/" + GameDataManager.data["locacion"] + ".tscn"
 
+func create_map():
+	for i in $WorldNode.get_children():
+		i.create_map()
+
 func _process(_delta: float) -> void:
+	mini_map.maps.position = -Vector2($GameParty/MainCharacterWorld.global_position.x, $GameParty/MainCharacterWorld.global_position.z) * 50 + Vector2(130,121)
 	Node.print_orphan_nodes()
 	pass
 	#$WorldEnvironment.environment.sky_rotation.y += 0.1 * delta
@@ -40,6 +46,7 @@ func _process(_delta: float) -> void:
 func setup():
 	MainCharacter.global_position = GameDataManager.CurrentRoomNode.get_spawn_point()
 	instanciate_party_members()
+	create_map()
 
 func instanciate_party_members():
 	for player  in GameDataManager.data["Characters"]:
@@ -48,7 +55,6 @@ func instanciate_party_members():
 			MainCharacter.stats = load(resoure_path)
 			MainCharacter.set_sprite_frames()
 			continue
-
 		var character = PARTY_MEMBER.instantiate()
 		
 		character.stats = load(resoure_path)

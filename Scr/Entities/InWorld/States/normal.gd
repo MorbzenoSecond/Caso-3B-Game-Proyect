@@ -14,12 +14,14 @@ func Physics_Update(delta: float) -> void:
 	if _random_position != null:
 		parent.nav_agent.target_position = _random_position
 		parent.basic_movement(delta)
-	if parent.nav_agent.is_navigation_finished():
+	if parent.nav_agent.distance_to_target() < 0.1:
 		parent.CUSTOM_RUN_MAX_SPEED = 0.0
 		parent.velocity = Vector3.ZERO
 		_random_position = null
 	else:
 		parent.CUSTOM_RUN_MAX_SPEED = parent.stats.RUN_MAX_SPEED
+		if parent.raycast3D.is_colliding() and parent.is_on_floor():
+			parent.velocity.y = parent.JUMP_VELOCITY
 	if parent.has_target:
 		Transitioned.emit(self, "Chase")
 

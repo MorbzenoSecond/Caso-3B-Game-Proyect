@@ -26,7 +26,7 @@ func scale_tween(button : TextureButton):
 
 	if FileAccess.file_exists(icon_path):
 		animation_tween.tween_property(button, "texture_normal", load(icon_path) , 0)
-	animation_tween.tween_property(button, "scale", Vector2(3.6,3.6) , 0.05).set_trans(Tween.TRANS_BOUNCE)
+	animation_tween.tween_property(button, "scale", Vector2(3,3) , 0.05).set_trans(Tween.TRANS_BOUNCE)
 	animation_tween.tween_interval(0.05)
 	animation_tween.tween_property(button, "scale", Vector2(4,4) , 0.1).set_trans(Tween.TRANS_BOUNCE)
 

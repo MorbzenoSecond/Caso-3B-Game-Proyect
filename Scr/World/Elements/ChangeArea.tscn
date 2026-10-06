@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://c6mf3lq5glq1w" path="res://Scr/World/Elements/ChangeArea.gd" id="1_qqdb7"]
 
-[node name="ChangeArea" type="Area3D"]
+[node name="ChangeArea" type="Area3D" unique_id=1603260039]
 collision_layer = 4
 collision_mask = 6
 script = ExtResource("1_qqdb7")
+new_room = null
 
-[node name="CollisionShape2D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape3D" parent="." unique_id=1685741631]
 debug_color = Color(0.25098, 1, 0.470588, 0.419608)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

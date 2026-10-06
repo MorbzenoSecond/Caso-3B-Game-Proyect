@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://iyq6a354dfid"
-path="res://.godot/imported/scape_box.png-f8328e37f3bc3d1a52d5ae414bd016dc.ctex"
+path="res://.godot/imported/scape_box.png-f585ee0d816a8781d873112d503e3626.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Art/3DModels/scape_box.png"
-dest_files=["res://.godot/imported/scape_box.png-f8328e37f3bc3d1a52d5ae414bd016dc.ctex"]
+source_file="res://Assets/Art/3DModels/scape_box.png"
+dest_files=["res://.godot/imported/scape_box.png-f585ee0d816a8781d873112d503e3626.ctex"]
 
 [params]
 

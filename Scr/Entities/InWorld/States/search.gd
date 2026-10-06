@@ -16,6 +16,8 @@ func Physics_Update(delta: float) -> void:
 	if _random_position != null:
 			parent.nav_agent.target_position = parent.target_pos.global_position
 	parent.basic_movement(delta)
+	if parent.raycast3D.is_colliding() and parent.is_on_floor():
+		parent.velocity.y = parent.JUMP_VELOCITY
 	if parent.has_target:
 		Transitioned.emit(self, "Chase")
 

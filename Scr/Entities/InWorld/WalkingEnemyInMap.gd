@@ -1,8 +1,8 @@
-
 extends WalkingNPCInMap
 class_name WalkingEnemyInMap
 
 @onready var shoot_shader = $RotableObjects/Marker3D/Sprite3D
+@onready var raycast3D = $RotableObjects/RayCast3D
 @onready var id = str(global_position)
 @onready var enemy_data_to_fight = stats.enemy_data["Enemies"].duplicate()
 
@@ -11,11 +11,13 @@ var enemies_nodes_involucrated : Array
 var _random_position = null
 var target_pos 
 var has_target : bool = false
+const JUMP_VELOCITY = 2.5
 
 func _ready() -> void:
 	CreateTimersForSpecialActions()
 	super.set_sprite_frames()
 	await get_tree().process_frame
+	super.create_map()
 	original_position = global_position
 
 func prepare_fight():
