@@ -10,7 +10,9 @@ var map_sprite = null
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		if velocity.y >= -2.5:
+			velocity += get_gravity() * delta
+		
 	move_and_slide()
 
 func change_resource(newResource : String):

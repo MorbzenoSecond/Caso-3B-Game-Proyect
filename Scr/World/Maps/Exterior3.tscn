@@ -3,11 +3,8 @@
 [ext_resource type="Script" uid="uid://dkjnhkgt6exl7" path="res://Scr/World/Maps/ScenaryMap.gd" id="1_n7jse"]
 [ext_resource type="Environment" uid="uid://dtk38670brqxw" path="res://Resources/SkyMaterial/ExteriorSkyMaterial.tres" id="2_pplsv"]
 [ext_resource type="MeshLibrary" uid="uid://bci3u03ai1j4i" path="res://Resources/Tiles/Tiles.tres" id="9_1wtrm"]
-[ext_resource type="Texture2D" uid="uid://cwxru8cmum51r" path="res://Assets/Art/2DSprites/godot lol.png" id="10_nygpt"]
-[ext_resource type="PackedScene" uid="uid://dar0652jdcv2i" path="res://Scr/World/Elements/SavePoint.tscn" id="11_nnip1"]
 [ext_resource type="PackedScene" uid="uid://pxq54c0dh264" path="res://Scr/World/Elements/ChangeArea.tscn" id="12_d535f"]
 [ext_resource type="Shape3D" uid="uid://dxhuiair8w6nj" path="res://Resources/CollisionShapeSizes/ForChangeArea/2x1x1.tres" id="13_nqcw0"]
-[ext_resource type="PackedScene" uid="uid://ivr4vt84x64s" path="res://Scr/World/Elements/EventArea.tscn" id="14_5asnh"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_2wqqu"]
 vertices = PackedVector3Array(-2.77, 0.76, -0.39, -3.02, 1.01, 0.61, -2.77, 1.01, 0.61, -2.27, 0.51, 0.61, 1.23, 0.51, 0.61, 1.23, 0.51, -0.39, -3.27, 0.51, 1.36, -1.02, 0.51, 1.36, -0.52, 0.51, 1.61, -0.77, 0.51, 2.1100001, 0.73, 0.51, 2.1100001, -1.27, 0.51, 1.86, -3.27, 0.51, 2.3600001)
@@ -23,20 +20,6 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_vs6h4"]
 material = SubResource("StandardMaterial3D_q3ari")
 size = Vector3(2.5, 2, 0.1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2wqqu"]
-albedo_texture = ExtResource("10_nygpt")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_66uom"]
-emission_shape_scale = Vector3(10, 1, 5)
-emission_shape = 3
-emission_box_extents = Vector3(1, 1, 1)
-damping_max = 9.091
-turbulence_enabled = true
-turbulence_noise_scale = 5.4
-
-[sub_resource type="BoxMesh" id="BoxMesh_628xo"]
-size = Vector3(0.03, 0.03, 0.03)
 
 [node name="Exterior3" type="Node3D" unique_id=1292156428]
 script = ExtResource("1_n7jse")
@@ -73,37 +56,14 @@ mesh = SubResource("BoxMesh_vs6h4")
 
 [node name="Lights" type="Node3D" parent="." unique_id=1081220392]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=831786683]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96777, 1.34051, -4.86448)
-light_color = Color(0.589778, 0.75375, 1, 1)
-shadow_enabled = true
-shadow_bias = 0.0
-shadow_reverse_cull_face = true
-shadow_blur = 0.0
-omni_range = 4.13
-
 [node name="Particles" type="Node3D" parent="." unique_id=1346943199]
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Particles" unique_id=213862259]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.33795, 1.26856, -6.79567)
-material_override = SubResource("StandardMaterial3D_2wqqu")
-amount = 150
-lifetime = 3.2
-process_material = SubResource("ParticleProcessMaterial_66uom")
-draw_pass_1 = SubResource("BoxMesh_628xo")
-
 [node name="Elements" type="Node3D" parent="." unique_id=1222531873]
-
-[node name="SavePoint" parent="Elements" unique_id=947676378 instance=ExtResource("11_nnip1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.24, -6.864)
 
 [node name="ChangeAreas" type="Node3D" parent="." unique_id=413156808]
 
 [node name="ChangeArea" parent="ChangeAreas" unique_id=1105934328 instance=ExtResource("12_d535f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.23182, 0.588234, -10.2016)
+transform = Transform3D(-0.12735878, 0, -0.9918567, 0, 1, 0, 0.9918567, 0, -0.12735878, 1.9011481, 0.471753, 0.23438811)
 collision_mask = 4
 new_room = "Exterior3"
 ColisionShape = ExtResource("13_nqcw0")
-
-[node name="EventArea" parent="ChangeAreas" unique_id=1988089612 instance=ExtResource("14_5asnh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.98768, 0.390827, -3.1999)

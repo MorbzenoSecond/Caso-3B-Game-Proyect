@@ -4,6 +4,9 @@ const SPEED = 1.0
 const JUMP_VELOCITY = 2
 var RUN_MAX_SPEED :float= 0.8
 var ACCELERATION :float= 3
+var is_active: bool = true
+
+var last_save_point_position : Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	super.set_sprite_frames()
@@ -11,6 +14,8 @@ func _ready() -> void:
 	super.create_map()
 
 func _physics_process(delta: float) -> void:
+	if !is_active:
+		return
 	super._physics_process(delta)
 	
 	var input_dir := Vector2.ZERO
@@ -33,3 +38,7 @@ func _physics_process(delta: float) -> void:
 func basic_movement(delta, direction):
 	velocity.x = move_toward(velocity.x, direction.x * RUN_MAX_SPEED, ACCELERATION * delta)
 	velocity.z = move_toward(velocity.z, direction.z * RUN_MAX_SPEED, ACCELERATION * delta)
+
+func teleport_last_save_point():
+	
+	global_position = last_save_point_position

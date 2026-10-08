@@ -5,6 +5,7 @@ class_name WalkingNeutralInMap
 
 var target_pos 
 
+
 func _ready() -> void:
 	super.set_sprite_frames()
 
@@ -37,6 +38,8 @@ func unfollow():
 	target_pos = null
 
 func _physics_process(delta : float):
+	
+	
 	super._physics_process(delta)
 	if target_pos:
 		nav_agent.target_position = target_pos.global_position

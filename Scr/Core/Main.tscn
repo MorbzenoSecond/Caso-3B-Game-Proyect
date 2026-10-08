@@ -11,6 +11,7 @@
 [ext_resource type="Shader" uid="uid://06d4oyvcvoxu" path="res://Resources/ShaderResources/post.gdshader" id="8_qvhdm"]
 [ext_resource type="Texture2D" uid="uid://cwxru8cmum51r" path="res://Assets/Art/2DSprites/godot lol.png" id="10_rkan4"]
 [ext_resource type="PackedScene" uid="uid://drm20f5d6s4fm" path="res://Scr/UI/Menus/mini_map_control.tscn" id="11_qcksj"]
+[ext_resource type="PackedScene" uid="uid://c70l7sb5np6ux" path="res://Scr/UI/Menus/bars_control.tscn" id="12_dy0cy"]
 
 [sub_resource type="Animation" id="Animation_lquwl"]
 length = 0.001
@@ -100,15 +101,6 @@ stream = ExtResource("2_yfnky")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1046788296]
 environment = ExtResource("3_qvhdm")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1103458694]
-transform = Transform3D(-0.552622, 0.708794, -0.438429, 0.561124, 0.705384, 0.433097, 0.616237, -0.00667433, -0.787532, 0, 0.703114, 0)
-light_color = Color(0.325441, 0.325441, 0.325441, 1)
-shadow_enabled = true
-directional_shadow_mode = 0
-directional_shadow_max_distance = 5.0
-
-[node name="UI" type="Node" parent="." unique_id=1533688241]
-
 [node name="GameParty" type="Node3D" parent="." unique_id=832557118]
 
 [node name="MainCharacterWorld" parent="GameParty" unique_id=413355732 groups=["PLAYER"] instance=ExtResource("2_5jks7")]
@@ -140,4 +132,16 @@ skeleton = NodePath("../../../../..")
 [node name="EventScript" type="Node3D" parent="." unique_id=2049374417]
 script = ExtResource("8_dmanu")
 
-[node name="MiniMapControl" parent="." unique_id=2082375147 instance=ExtResource("11_qcksj")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=657305826]
+
+[node name="MiniMapControl" parent="CanvasLayer" unique_id=2082375147 instance=ExtResource("11_qcksj")]
+anchor_left = 1.0
+anchor_top = 0.003
+anchor_right = 1.274
+anchor_bottom = 0.36900002
+offset_left = 0.0
+offset_top = 0.055999994
+offset_right = 0.33581543
+offset_bottom = -0.11201477
+
+[node name="BarsControl" parent="CanvasLayer" unique_id=1280381816 instance=ExtResource("12_dy0cy")]

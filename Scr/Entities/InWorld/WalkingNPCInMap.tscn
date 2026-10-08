@@ -195,9 +195,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, 0, 1, 0, 0, 0)
 stream = ExtResource("4_wrtts")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1672180871]
-path_desired_distance = 0.1
-target_desired_distance = 0.1
-path_height_offset = 0.2
+target_desired_distance = 0.2
 avoidance_enabled = true
 
 [connection signal="body_entered" from="RotableObjects/Areas/DialogueArea" to="." method="_on_dialogue_area_body_entered"]

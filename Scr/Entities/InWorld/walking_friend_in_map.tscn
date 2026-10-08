@@ -185,3 +185,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, 0, 1, 0, 0, 0)
 stream = ExtResource("4_5aqfh")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1954440887]
+debug_enabled = true

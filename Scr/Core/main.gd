@@ -10,7 +10,8 @@ const PARTY_MEMBER = preload("res://Scr/Entities/InWorld/walking_friend_in_map.t
 @onready var WorldEnvironmentNode = $WorldEnvironment
 @onready var fight_node = $NodoDePelea
 @onready var event_runner = $EventScript
-@onready var mini_map = $MiniMapControl
+@onready var mini_map = $CanvasLayer/MiniMapControl
+@onready var bars_control = $CanvasLayer/BarsControl/AnimationPlayer
 
 var characters : Dictionary = {
 	"players": [],
@@ -24,7 +25,6 @@ func create_map():
 		i.create_map()
 
 func _process(_delta: float) -> void:
-	mini_map.maps.position = -Vector2($GameParty/MainCharacterWorld.global_position.x, $GameParty/MainCharacterWorld.global_position.z) * 50 + Vector2(130,121)
 	Node.print_orphan_nodes()
 	pass
 	#$WorldEnvironment.environment.sky_rotation.y += 0.1 * delta
@@ -44,7 +44,8 @@ func _process(_delta: float) -> void:
 			#camera.rotate_x(deg_to_rad(-2.0))
 
 func setup():
-	MainCharacter.global_position = GameDataManager.CurrentRoomNode.get_spawn_point()
+	MainCharacter.last_save_point_position = GameDataManager.CurrentRoomNode.get_spawn_point()
+	MainCharacter.teleport_last_save_point()
 	instanciate_party_members()
 	create_map()
 

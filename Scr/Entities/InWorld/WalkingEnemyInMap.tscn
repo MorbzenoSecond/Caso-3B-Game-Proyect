@@ -165,12 +165,11 @@ stats = ExtResource("3_ubb1b")
 icon = ExtResource("3_hc5xv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=660685708]
-transform = Transform3D(1, 0, 0, 0, 0.999999, -6.25849e-07, 0, 6.25849e-07, 0.999999, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.999999, -6.2584877e-07, 0, 6.2584877e-07, 0.999999, 0, 0, 0)
 shape = ExtResource("3_cjdqv")
 debug_color = Color(0.94344, 0.21855, 0.251713, 0.42)
 
 [node name="RotableObjects" type="Node3D" parent="." unique_id=1237569018]
-transform = Transform3D(1, 0, 0, 0, 0.95371693, -0.3007058, 0, 0.3007058, 0.95371693, 0, 0, 0)
 
 [node name="Marker3D" type="Marker3D" parent="RotableObjects" unique_id=356501024]
 transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, -1.86265e-09, 0.058093)
@@ -222,7 +221,7 @@ debug_color = Color(0.113725, 0.517647, 0, 1)
 
 [node name="RayCast3D" type="RayCast3D" parent="RotableObjects" unique_id=1227919913]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
-target_position = Vector3(0, 0, 0.1)
+target_position = Vector3(0, 0, 0.15)
 
 [node name="StateMachine" type="Node" parent="." unique_id=124736546 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_v1cm4")

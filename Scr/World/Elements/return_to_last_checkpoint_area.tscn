@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dmbwcusxjbv7s"]
+
+[ext_resource type="Script" uid="uid://csw2hsa20glh7" path="res://Scr/World/Elements/return_to_last_checkpoint_area.gd" id="1_mqu8h"]
+
+[node name="ReturnToLastCheckpointArea" type="Area3D" unique_id=1603260039]
+collision_layer = 4
+collision_mask = 6
+script = ExtResource("1_mqu8h")
+
+[node name="CollisionShape2D" type="CollisionShape3D" parent="." unique_id=1685741631]
+debug_color = Color(0.25098, 1, 0.470588, 0.419608)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
