@@ -353,7 +353,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.640882, 0.216, -0.193518)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.402553, 0.216, 0.620494)
 
 [node name="Marker3D" type="Marker3D" parent="." unique_id=446973636]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06315, 1.19213)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68217397, 1.7044305)
 
 [node name="GridMap" type="GridMap" parent="." unique_id=547258925]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0989029, -0.224, -0.372023)

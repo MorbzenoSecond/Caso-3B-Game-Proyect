@@ -2,7 +2,7 @@ extends EventLogic
 
 func run(body: CharacterBody3D, markers: Array, dialogues: Array[DialogueResource]) -> void:
 	GameDataManager.MAIN.bars_control.play("Enter")
-	GameDataManager.MAIN.MainCharacter.is_active = false
+	GameDataManager.MAIN.MainCharacter.state_machine.change_state("InCutscene")
 	body.target_pos = null 
 	body.velocity = Vector3.ZERO
 	
@@ -12,6 +12,7 @@ func run(body: CharacterBody3D, markers: Array, dialogues: Array[DialogueResourc
 	
 	if not markers.is_empty():
 		body.target_pos = markers[0]
+		GameDataManager.MAIN.MainCharacter.target_pos = markers[0]
 		await body.nav_agent.target_reached
 		body.velocity = Vector3.ZERO
 
@@ -30,5 +31,5 @@ func run(body: CharacterBody3D, markers: Array, dialogues: Array[DialogueResourc
 			await body.nav_agent.target_reached
 
 		body.queue_free()
-	GameDataManager.MAIN.MainCharacter.is_active = true
+	GameDataManager.MAIN.MainCharacter.state_machine.change_state("Default")
 	GameDataManager.MAIN.bars_control.play_backwards("Enter")

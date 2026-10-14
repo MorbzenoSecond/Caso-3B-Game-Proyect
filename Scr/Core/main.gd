@@ -101,7 +101,7 @@ func _instanciate_fight(enemy_data : Dictionary, _scenary_fight_background, enem
 	await get_tree().process_frame
 	
 	pivote.global_position = fight_node.get_child(0).get_node("Marker3D").global_position
-	camera.initial_rotation.x = deg_to_rad(-40)
+	camera.rotation.x = deg_to_rad(-15)
 
 func finish_fight():
 	get_tree().paused = false
@@ -110,9 +110,10 @@ func finish_fight():
 	pivote.reparent(MainCharacter)
 	music_selector($WorldNode.get_child(0).scenary_music)
 	fight_node.get_child(0).global_position = Vector3(0,0,50)
-	pivote.position = Vector3(0, 0.579, 1.074)
+	pivote.position = Vector3(0, 0.27, 1)
+	camera.position = Vector3.ZERO
 	camera.projection = 0
-	camera.initial_rotation.x = deg_to_rad(-20)
+	camera.rotation.x = deg_to_rad(0)
 	$AnimationPlayer.play_backwards("new_animation")
 #endregion
 

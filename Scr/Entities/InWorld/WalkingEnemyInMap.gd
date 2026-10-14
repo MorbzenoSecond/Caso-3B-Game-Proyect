@@ -9,7 +9,6 @@ class_name WalkingEnemyInMap
 var enemy_dictionary_to_fight : Dictionary
 var enemies_nodes_involucrated : Array
 var _random_position = null
-var target_pos 
 var has_target : bool = false
 const JUMP_VELOCITY = 2.5
 

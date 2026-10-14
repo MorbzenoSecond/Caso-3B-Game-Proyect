@@ -1,8 +1,7 @@
 extends WalkingNPCInMap
 
-@onready var target_pos = $"../../MainCharacterWorld"
-
 func _ready() -> void:
+	target_pos = $"../../MainCharacterWorld"
 	super.set_sprite_frames()
 	super.create_map()
 

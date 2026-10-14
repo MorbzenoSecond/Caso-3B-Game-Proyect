@@ -541,6 +541,6 @@ func camera_control(new_position : Vector3 = Vector3.ZERO, new_size : float = 2,
 	camera_tween.set_trans(Tween.TRANS_CUBIC)
 	camera_tween.set_ease(Tween.EASE_OUT)    
 	
-	camera_tween.tween_property(GameDataManager.MAIN.camera, "position:y", new_position.y + 0.1, duration)
-	camera_tween.tween_property(GameDataManager.MAIN.camera, "position:x", new_position.x - 0.35, duration)
+	camera_tween.tween_property(GameDataManager.MAIN.camera, "position:y", new_position.y, duration)
+	camera_tween.tween_property(GameDataManager.MAIN.camera, "position:x", new_position.x, duration)
 	camera_tween.tween_property(GameDataManager.MAIN.camera, "size", new_size, duration)

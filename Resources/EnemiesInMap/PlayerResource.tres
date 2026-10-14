@@ -9,10 +9,8 @@
 [resource]
 script = ExtResource("2_f2kfa")
 character = ExtResource("2_el0j4")
-RUN_MAX_SPEED = 0.8
-ACCELERATION = 1.2
-SpecialActions = Array[ExtResource("1_wh4tj")]([])
-SmartEnemy = false
+RUN_MAX_SPEED = 0.2
+ACCELERATION = 1.0
 enemy_data = {
 "Enemies": [{
 "level": 2,
@@ -20,7 +18,5 @@ enemy_data = {
 }]
 }
 body_collision_type = ExtResource("2_bx3cb")
-body_collision_position = Vector3(0, 0, 0)
 character_area_collision_type = ExtResource("4_knus5")
-character_area_collision_position = Vector3(0, 0, 0)
 metadata/_custom_type_script = "uid://ba00fspq8q8te"

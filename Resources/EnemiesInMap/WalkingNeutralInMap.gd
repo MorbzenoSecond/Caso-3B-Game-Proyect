@@ -3,9 +3,6 @@ class_name WalkingNeutralInMap
 
 @export var EventKey : String
 
-var target_pos 
-
-
 func _ready() -> void:
 	super.set_sprite_frames()
 

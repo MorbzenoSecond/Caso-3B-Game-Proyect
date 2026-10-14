@@ -154,13 +154,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85284925, 0.08, 1.7013955)
 [node name="ChangeAreas" type="Node3D" parent="." unique_id=1931437716]
 
 [node name="ChangeArea" parent="ChangeAreas" unique_id=129081586 instance=ExtResource("11_jieit")]
-transform = Transform3D(0.047106426, 0, 0.99888986, 0, 1, 0, -0.99888986, 0, 0.047106426, 1.7911712, 0.589389, 0.4275763)
+transform = Transform3D(0.047106426, 0, 0.99888986, 0, 1, 0, -0.99888986, 0, 0.047106426, 1.7321774, 0.3625322, 0.35466123)
 collision_mask = 4
 new_room = "Exterior2"
 ColisionShape = ExtResource("12_55qbt")
 
 [node name="EventArea" parent="ChangeAreas" unique_id=1491146626 node_paths=PackedStringArray("markers") instance=ExtResource("14_s720p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.176019, 0.390827, 1.3427231)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.176019, 0.390827, 0.556358)
 event_logic_script = ExtResource("7_qxsas")
 dialogues = Array[ExtResource("8_hckga")]([ExtResource("20_hckga"), ExtResource("21_ggaug"), ExtResource("9_ggaug")])
 markers = [NodePath("Markers/Marker3D"), NodePath("Markers/Marker3D2"), NodePath("Markers/Marker3D3")]
@@ -170,18 +170,18 @@ TriggerKey = "evento1"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0062695, 0, 1.1254086)
 
 [node name="Marker3D" parent="ChangeAreas/EventArea/Markers" parent_id_path=PackedInt32Array(1491146626, 308621907) index="0" unique_id=1045578098]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.802, -0.1, 0.93)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8899374, -0.099999994, 1.5868167)
 
 [node name="Marker3D2" parent="ChangeAreas/EventArea/Markers" parent_id_path=PackedInt32Array(1491146626, 308621907) index="1" unique_id=1560676146]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.238, -0.1, 1.125)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17943013, -0.099999994, 1.9708582)
 
 [node name="Marker3D3" type="Marker3D" parent="ChangeAreas/EventArea/Markers" parent_id_path=PackedInt32Array(1491146626, 308621907) index="2" unique_id=668704081]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.681, -0.1, 0.949)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.681, -0.099999994, 1.6212043)
 
 [node name="NavigationLink3D" type="NavigationLink3D" parent="ChangeAreas" unique_id=1901849891]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.706418, 0.32399422, 0)
-start_position = Vector3(0.5459206, -0.18650538, 0.24752283)
-end_position = Vector3(-0.72391844, 0.21227914, 0.7088374)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.706418, 0.32399422, 0.34682775)
+start_position = Vector3(0.546, 0, 0)
+end_position = Vector3(-0.724, 0, 0)
 
 [node name="ReturnToLastCheckpointArea" parent="ChangeAreas" unique_id=1603260039 instance=ExtResource("20_qxsas")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2352135, -2.3065546, 1.5622921)

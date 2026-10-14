@@ -14,3 +14,4 @@ func _on_body_entered(body: Node3D) -> void:
 				markers, 
 				dialogues
 			)
+			call_deferred("set_monitoring", false)

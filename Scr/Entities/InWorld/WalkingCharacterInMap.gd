@@ -4,9 +4,14 @@ class_name WalkingCharacterInMap
 @export var stats : EnemiesInMapData
 @export var icon :CompressedTexture2D = load("res://Assets/Art/2DSprites/flecha.png")
 @onready var sprite : AnimatedSprite3D = $RotableObjects/AnimatedSprite3D
+@onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var original_position = global_position
 @onready var zone_node = get_parent().get_parent()
 var map_sprite = null
+
+var target_pos 
+
+@onready var CUSTOM_RUN_MAX_SPEED = stats.RUN_MAX_SPEED
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

@@ -9,6 +9,7 @@
 [resource]
 script = ExtResource("3_v2ufx")
 character = ExtResource("2_sdgnh")
+RUN_MAX_SPEED = 0.6
 enemy_data = null
 body_collision_type = ExtResource("2_v2ufx")
 character_area_collision_type = ExtResource("4_cnjy0")

@@ -6,18 +6,12 @@ extends Camera3D
 
 var trauma: float = 0.0
 var time: float = 0.0
-var initial_rotation: Vector3
-
-func _ready() -> void:
-	initial_rotation = rotation
 
 func _process(delta: float) -> void:
 	if trauma > 0.0:
 		trauma = max(trauma - trauma_decay * delta, 0.0)
 		time += delta * 30.0
 		_apply_shake()
-	else:
-		rotation = rotation.lerp(initial_rotation, delta * 10.0)
 
 # Llama a esta función para activar la sacudida (ej. add_trauma(0.8))
 func add_trauma(amount: float) -> void:
@@ -31,4 +25,4 @@ func _apply_shake() -> void:
 	h_offset = randf_range(-1.0, 1.0) * max_position_offset.x * shake
 	v_offset = randf_range(-1.0, 1.0) * max_position_offset.y * shake
 	
-	rotation.z = initial_rotation.z + randf_range(-1.0, 1.0) * max_rotation_offset.z * shake
+	rotation.z = randf_range(-1.0, 1.0) * max_rotation_offset.z * shake
